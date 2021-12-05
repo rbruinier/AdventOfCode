@@ -31,70 +31,92 @@ public struct Grid {
     }
 
     mutating func addLine(_ line: Line) {
-        if line.isHorizontal {
-            let yOffset = line.y1 * width
+        var xInc = 0
+        var yInc = 0
 
-            let startX = min(line.x1, line.x2)
-            let endX = max(line.x1, line.x2)
+        let drawHorizontal: Bool
 
-            for x in startX ... endX {
-                items[yOffset + x].counter += 1
+        switch line.orientation {
+        case .horizontal:
+            drawHorizontal = true
+        case .vertical:
+            drawHorizontal = false
+        case.diagonal:
+            if abs(line.x2 - line.x1) >= abs(line.y2 - line.y1) {
+                drawHorizontal = true
+
+                yInc = line.y2 > line.y1 ? 1 : -1
+            } else {
+                drawHorizontal = false
+
+                xInc = line.x2 > line.x1 ? 1 : -1
             }
-        } else if line.isVertical {
-            let xOffset = line.x1
 
-            let startY = min(line.y1, line.y2)
-            let endY = max(line.y1, line.y2)
+            break
+        }
 
-            for y in startY ... endY {
-                items[xOffset + (y * width)].counter += 1
-            }
-        } else {
-            let deltaX = abs(line.x2 - line.x1)
-            let deltaY = abs(line.y2 - line.y1)
-
+        if drawHorizontal {
             var startX = line.x1
             var endX = line.x2
+            var currentY = line.y1
+
+            if endX < startX {
+                startX = line.x2
+                endX = line.x1
+                currentY = line.y2
+
+                yInc = -yInc
+            }
+
+            for x in startX ... endX {
+                items[(currentY * width) + x].counter += 1
+
+                currentY += yInc
+            }
+        } else {
             var startY = line.y1
             var endY = line.y2
+            var currentX = line.x1
 
-            if deltaX >= deltaY {
-                if endX < startX {
-                    swap(&startX, &endX)
-                    swap(&startY, &endY)
-                }
+            if endY < startY {
+                startY = line.y2
+                endY = line.y1
+                currentX = line.x2
 
-                var currentY = startY
+                xInc = -xInc
+            }
 
-                for x in startX ... endX {
-                    items[(currentY * width) + x].counter += 1
+            for y in startY ... endY {
+                items[currentX + (y * width)].counter += 1
 
-                    currentY += (endY > startY) ? 1 : -1
-                }
-            } else {
-                if endY < startY {
-                    swap(&startX, &endX)
-                    swap(&startY, &endY)
-                }
-
-                var currentX = startX
-
-                for y in startY ... endY {
-                    items[currentX + (y * width)].counter += 1
-
-                    currentX += (endX > startX) ? 1 : -1
-                }
+                currentX += xInc
             }
         }
     }
 }
 
 public struct Line {
+    enum Orientation {
+        case horizontal
+        case vertical
+        case diagonal
+    }
+
     let x1: Int
     let y1: Int
 
     let x2: Int
     let y2: Int
+
+    var orientation: Orientation {
+        if y1 == y2 {
+            return .horizontal
+        } else if x1 == x2 {
+            return .vertical
+        } else {
+            return .diagonal
+        }
+    }
 
     var isHorizontal: Bool {
         return y1 == y2
@@ -106,8 +128,6 @@ public struct Line {
 }
 
 public func solutionFor(input: Input) -> Int {
-    print(input)
-
     var grid = Grid(width: input.gridWidth, height: input.gridHeight)
 
     for line in input.lines {
