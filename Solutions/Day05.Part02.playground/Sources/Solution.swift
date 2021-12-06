@@ -117,14 +117,6 @@ public struct Line {
             return .diagonal
         }
     }
-
-    var isHorizontal: Bool {
-        return y1 == y2
-    }
-
-    var isVertical: Bool {
-        return x1 == x2
-    }
 }
 
 public func solutionFor(input: Input) -> Int {
