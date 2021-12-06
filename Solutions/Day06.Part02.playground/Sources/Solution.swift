@@ -6,33 +6,25 @@ public struct Input {
 }
 
 public struct AgeGroup {
-    var nrOfFish: Int
+    var nrOfFish: Int = 0
 }
 
 public func solutionFor(input: Input) -> Int {
-    var ageGroups: [Int: AgeGroup] = [:]
-
-    for age in 0 ... 8 {
-        ageGroups[age] = AgeGroup(nrOfFish: 0)
-    }
+    var ageGroups: [AgeGroup] = Array(repeating: .init(), count: 9)
 
     for input in input.initialTimers {
-        ageGroups[input]!.nrOfFish += 1
+        ageGroups[input].nrOfFish += 1
     }
 
     for _ in 0 ..< input.days {
-        var newAgeGroups: [Int: AgeGroup] = [:]
-
-        for age in 0 ... 8 {
-            newAgeGroups[age] = AgeGroup(nrOfFish: 0)
-        }
+        var newAgeGroups: [AgeGroup] = Array(repeating: .init(), count: 9)
 
         for age in stride(from: 8, through: 0, by: -1) {
             if age >= 1 {
-                newAgeGroups[age - 1]!.nrOfFish = ageGroups[age]!.nrOfFish
+                newAgeGroups[age - 1].nrOfFish = ageGroups[age].nrOfFish
             } else {
-                newAgeGroups[8]!.nrOfFish = ageGroups[0]!.nrOfFish
-                newAgeGroups[6]!.nrOfFish += ageGroups[0]!.nrOfFish
+                newAgeGroups[8].nrOfFish = ageGroups[0].nrOfFish
+                newAgeGroups[6].nrOfFish += ageGroups[0].nrOfFish
             }
         }
 
@@ -40,6 +32,6 @@ public func solutionFor(input: Input) -> Int {
     }
 
     return ageGroups.reduce(0) { result, group in
-        result + group.value.nrOfFish
+        result + group.nrOfFish
     }
 }
