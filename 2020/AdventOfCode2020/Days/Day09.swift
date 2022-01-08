@@ -73,7 +73,7 @@ final class Day09Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let numbers = rawString.components(separatedBy: .newlines).compactMap { Int($0) }
+        let numbers = rawString.allLines().compactMap { Int($0) }
 
         input = .init(numbers: numbers)
     }

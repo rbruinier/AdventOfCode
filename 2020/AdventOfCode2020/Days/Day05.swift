@@ -69,7 +69,7 @@ final class Day05Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let seats = rawString.components(separatedBy: .newlines).filter { $0.isEmpty == false }
+        let seats = rawString.allLines()
         
         input = .init(seats: seats)
     }

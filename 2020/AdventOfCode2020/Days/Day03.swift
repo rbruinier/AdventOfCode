@@ -56,7 +56,7 @@ final class Day03Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let lines = rawString.components(separatedBy: .newlines).filter { $0.isEmpty == false }
+        let lines = rawString.allLines()
 
         let grid: [Bool] = lines.flatMap { $0.map { $0 == "#" ? true : false }}
 

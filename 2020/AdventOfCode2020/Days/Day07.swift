@@ -59,7 +59,7 @@ final class Day07Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let lines = rawString.components(separatedBy: .newlines).filter { $0.isEmpty == false }
+        let lines = rawString.allLines()
 
         var bags: [String: Bag] = [:]
 

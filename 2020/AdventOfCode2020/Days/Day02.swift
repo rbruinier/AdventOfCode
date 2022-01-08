@@ -39,7 +39,7 @@ final class Day02Solver: DaySolver {
         let capturePattern = #"([0-9]*)-([0-9]*) ([a-z]*): ([a-z]*)"#
         let captureRegex = try! NSRegularExpression(pattern: capturePattern, options: [])
 
-        let passwords: [Password] = rawString.components(separatedBy: .newlines).compactMap { line in
+        let passwords: [Password] = rawString.allLines().compactMap { line in
             guard let match = captureRegex.matches(in: line, options: [], range: NSRange(line.startIndex ..< line.endIndex, in: line)).first else {
                 return nil
             }

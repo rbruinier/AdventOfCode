@@ -38,8 +38,7 @@ final class Day06Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let lines = rawString.components(separatedBy: .newlines)
-
+        let lines = rawString.allLines(includeEmpty: true)
 
         var groups: [Group] = []
         var groupAnswers: [[String]] = []

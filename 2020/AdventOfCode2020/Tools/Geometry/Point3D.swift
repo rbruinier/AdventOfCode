@@ -11,3 +11,5 @@ extension Point3D: CustomStringConvertible {
         return "\(x), \(y), \(z)"
     }
 }
+
+extension Point3D: Hashable, Equatable { }

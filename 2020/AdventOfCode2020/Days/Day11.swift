@@ -164,7 +164,7 @@ final class Day11Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let lines = rawString.components(separatedBy: .newlines).filter { $0.isNotEmpty }
+        let lines = rawString.allLines()
 
         let states: [State] = rawString.compactMap {
             switch $0 {

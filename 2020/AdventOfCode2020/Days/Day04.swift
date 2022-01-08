@@ -80,7 +80,7 @@ final class Day04Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let lines = rawString.components(separatedBy: .newlines)
+        let lines = rawString.allLines(includeEmpty: true)
 
         var passports: [Passport] = []
         var cachedPassportItems: [Passport.Item: String] = [:]

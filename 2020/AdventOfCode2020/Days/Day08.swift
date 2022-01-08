@@ -87,7 +87,7 @@ final class Day08Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let instructions: [Instruction] = rawString.components(separatedBy: .newlines).filter { $0.isEmpty == false }.compactMap {
+        let instructions: [Instruction] = rawString.allLines().compactMap {
             let parts = $0.components(separatedBy: .whitespaces)
 
             guard let value = Int(parts[1]) else {

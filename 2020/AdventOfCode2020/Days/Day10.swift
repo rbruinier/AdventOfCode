@@ -67,7 +67,7 @@ final class Day10Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let adapters = rawString.components(separatedBy: .newlines).compactMap { Int($0) }
+        let adapters = rawString.allLines().compactMap { Int($0) }
 
         input = .init(adapters: adapters)
     }
