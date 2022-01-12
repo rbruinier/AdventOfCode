@@ -38,6 +38,10 @@ struct Point2D {
         case .twoSeventy: return .init(x: -y, y: x)
         }
     }
+
+    static func + (lhs: Point2D, rhs: Point2D) -> Point2D {
+        return .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
 }
 
 extension Point2D: CustomStringConvertible {
