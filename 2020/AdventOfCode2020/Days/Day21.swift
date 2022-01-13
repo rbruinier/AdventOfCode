@@ -22,8 +22,8 @@ final class Day21Solver: DaySolver {
 
         for food in input.foods {
             for allergen in food.allergens {
-                if let existingIngredientsForAllerggen = ingredientsPerAllergen[allergen] {
-                    ingredientsPerAllergen[allergen] = existingIngredientsForAllerggen.intersection(food.ingredients)
+                if let existingIngredientsForAllergen = ingredientsPerAllergen[allergen] {
+                    ingredientsPerAllergen[allergen] = existingIngredientsForAllergen.intersection(food.ingredients)
                 } else {
                     ingredientsPerAllergen[allergen] = Set(food.ingredients)
                 }
@@ -46,7 +46,7 @@ final class Day21Solver: DaySolver {
             remainingIngredients.remove(ingredient)
             ingredientsPerAllergen.removeValue(forKey: match.key)
 
-            ingredientsPerAllergen = ingredientsPerAllergen.mapValues {                
+            ingredientsPerAllergen = ingredientsPerAllergen.mapValues {
                 var values = $0
 
                 values.remove(ingredient)
