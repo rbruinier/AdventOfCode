@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Point2D {
+struct Point2D: Hashable, Equatable {
     enum Degrees: Int {
         case zero = 0
         case ninety = 90
