@@ -66,6 +66,7 @@
 		E1D01DFC2785A7E2009439E8 /* Point2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D01DFB2785A7E2009439E8 /* Point2D.swift */; };
 		E1D01DFF2785EEB7009439E8 /* Point3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D01DFE2785EEB7009439E8 /* Point3D.swift */; };
 		E1D01E022785F0B0009439E8 /* String+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D01E012785F0B0009439E8 /* String+Parsing.swift */; };
+		E1DAD5FE2792D0A100F7FBA8 /* LoopedLinkedListSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD5FD2792D0A100F7FBA8 /* LoopedLinkedListSet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -143,6 +144,7 @@
 		E1D01DFB2785A7E2009439E8 /* Point2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point2D.swift; sourceTree = "<group>"; };
 		E1D01DFE2785EEB7009439E8 /* Point3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point3D.swift; sourceTree = "<group>"; };
 		E1D01E012785F0B0009439E8 /* String+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Parsing.swift"; sourceTree = "<group>"; };
+		E1DAD5FD2792D0A100F7FBA8 /* LoopedLinkedListSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopedLinkedListSet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 		E1B71B93277721A200F6528A /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				E1DAD5FC2792D09000F7FBA8 /* Data Structures */,
 				E1D01E002785F096009439E8 /* Extensions */,
 				E1D01DFD2785EEA3009439E8 /* Geometry */,
 				E1B71B94277721C200F6528A /* Files.swift */,
@@ -284,6 +287,14 @@
 				E1D01E012785F0B0009439E8 /* String+Parsing.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E1DAD5FC2792D09000F7FBA8 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				E1DAD5FD2792D0A100F7FBA8 /* LoopedLinkedListSet.swift */,
+			);
+			path = "Data Structures";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +417,7 @@
 				E1B71B7E27771F4300F6528A /* main.swift in Sources */,
 				E1B71BF92778CA4700F6528A /* Day23.swift in Sources */,
 				E1B71B9A27772EFB00F6528A /* Timing.swift in Sources */,
+				E1DAD5FE2792D0A100F7FBA8 /* LoopedLinkedListSet.swift in Sources */,
 				E1B71B9C27774C4800F6528A /* Day02.swift in Sources */,
 				E1B71BE52778C99900F6528A /* Day13.swift in Sources */,
 				E1D01DFC2785A7E2009439E8 /* Point2D.swift in Sources */,
