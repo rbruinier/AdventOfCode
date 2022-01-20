@@ -56,7 +56,7 @@ final class Day08Solver: DaySolver {
                 index += 1
             }
 
-            print(line)
+//            print(line)
         }
 
         return "AURCY"

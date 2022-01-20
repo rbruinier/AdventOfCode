@@ -2,6 +2,10 @@
 
 import Foundation
 
+public func sign(_ value: Int) -> Int {
+    return value < 0 ? -1 : 1
+}
+
 public struct Point2D: Hashable, Equatable {
     public enum Degrees: Int {
         case zero = 0
@@ -50,10 +54,14 @@ public struct Point2D: Hashable, Equatable {
     public static func + (lhs: Point2D, rhs: Point2D) -> Point2D {
         return .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }
+
+    public static func - (lhs: Point2D, rhs: Point2D) -> Point2D {
+        return .init(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    }
 }
 
 extension Point2D: CustomStringConvertible {
     public var description: String {
-        return "\(x), \(y)"
+        return "(\(x), \(y))"
     }
 }
