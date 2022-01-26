@@ -127,6 +127,13 @@ final class IntcodeProcessor {
 
     private var state: State!
 
+    init() {
+    }
+
+    init(program: [Int]) {
+        state = State(memory: program)
+    }
+
     func executeProgram(_ originalProgram: [Int], input originalInput: [Int]) -> (output: [Int], memory: [Int]) {
         state = State(memory: originalProgram)
 
@@ -144,9 +151,9 @@ final class IntcodeProcessor {
         return (output: output, memory: state.memory)
     }
 
-    var currentMemoryContent: [Int] {
-        return state.memory
-    }
+//    var currentMemoryContent: [Int] {
+//        return state.memory
+//    }
 
     func executeProgramTillOutput(_ originalProgram: [Int], input originalInput: [Int]) -> Int? {
         state = State(memory: originalProgram)
@@ -156,6 +163,24 @@ final class IntcodeProcessor {
 
     func continueProgramTillOutput(input originalInput: [Int]) -> Int? {
         var input = originalInput
+        var output: [Int] = []
+
+        while let instruction = parseNextInstruction() {
+            let shouldContinue = executeInstruction(instruction, input: &input, output: &output)
+
+            if let outputValue = output.first {
+                return outputValue
+            }
+
+            guard shouldContinue else {
+                return nil
+            }
+        }
+
+        return nil
+    }
+
+    func continueProgramTillOutput(input: inout [Int]) -> Int? {
         var output: [Int] = []
 
         while let instruction = parseNextInstruction() {

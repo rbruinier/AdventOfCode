@@ -15,6 +15,9 @@ var package = Package(
         .executable(name: "Solutions2020", targets: ["Solutions2020"]),
         .executable(name: "Solutions2021", targets: ["Solutions2021"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0"))
+    ],
     targets: [
         .target(
             name: "Tools"
@@ -22,7 +25,8 @@ var package = Package(
         .executableTarget(
             name: "Solutions2019",
             dependencies: [
-                "Tools"
+                "Tools",
+                .product(name: "Collections", package: "swift-collections")
             ],
             path: "Sources/Solutions/2019",
             resources: [
