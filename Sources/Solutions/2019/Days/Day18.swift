@@ -163,7 +163,6 @@ final class Day18Solver: DaySolver {
     }
 
     func solvePart1() -> Any {
-//        return 0
         let tiles = input.tiles
 
 //        printTiles(tiles)
