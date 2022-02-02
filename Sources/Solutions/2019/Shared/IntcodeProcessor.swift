@@ -127,6 +127,8 @@ final class IntcodeProcessor {
 
     private var state: State!
 
+    private var continueInputTargetIndex: Value? = nil
+
     init() {
     }
 
@@ -151,14 +153,37 @@ final class IntcodeProcessor {
         return (output: output, memory: state.memory)
     }
 
-//    var currentMemoryContent: [Int] {
-//        return state.memory
-//    }
-
     func executeProgramTillOutput(_ originalProgram: [Int], input originalInput: [Int]) -> Int? {
         state = State(memory: originalProgram)
 
         return continueProgramTillOutput(input: originalInput)
+    }
+
+    func continueProgramTillOutputOrInput(input: inout [Int]) -> Int? {
+        var output: [Int] = []
+
+        if let targetIndex = continueInputTargetIndex, let inputValue = input.first {
+            input.removeFirst()
+
+            state.setValue(inputValue, at: targetIndex)
+
+            continueInputTargetIndex = nil
+        } else {
+        }
+
+        while let instruction = parseNextInstruction() {
+            let shouldContinue = executeInstruction(instruction, input: &input, output: &output)
+
+            if let outputValue = output.first {
+                return outputValue
+            }
+
+            guard shouldContinue else {
+                return nil
+            }
+        }
+
+        return nil
     }
 
     func continueProgramTillOutput(input originalInput: [Int]) -> Int? {
@@ -270,7 +295,15 @@ final class IntcodeProcessor {
 
             state.setValue(value1 * value2, at: targetIndex)
         case .input(let targetIndex):
-            state.setValue(input.removeFirst(), at: targetIndex)
+            if let inputValue = input.first {
+                input.removeFirst()
+
+                state.setValue(inputValue, at: targetIndex)
+            } else {
+                continueInputTargetIndex = targetIndex
+
+                return false
+            }
         case .output(let operand):
             output.append(state.value(at: operand))
         case .jumpIfTrue(let operand1, let operand2):

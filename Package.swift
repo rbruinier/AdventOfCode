@@ -16,7 +16,8 @@ var package = Package(
         .executable(name: "Solutions2021", targets: ["Solutions2021"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/mkrd/Swift-BigInt.git", branch: "master")
     ],
     targets: [
         .target(
@@ -26,7 +27,8 @@ var package = Package(
             name: "Solutions2019",
             dependencies: [
                 "Tools",
-                .product(name: "Collections", package: "swift-collections")
+                .product(name: "Collections", package: "swift-collections"),
+                .product(name: "BigNumber", package: "Swift-BigInt"),
             ],
             path: "Sources/Solutions/2019",
             resources: [
