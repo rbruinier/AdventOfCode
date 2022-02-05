@@ -24,6 +24,16 @@ var package = Package(
             name: "Tools"
         ),
         .executableTarget(
+            name: "Solutions2015",
+            dependencies: [
+                "Tools"
+            ],
+            path: "Sources/Solutions/2015",
+            resources: [
+                .copy("Input")
+            ]
+        ),
+        .executableTarget(
             name: "Solutions2019",
             dependencies: [
                 "Tools",
