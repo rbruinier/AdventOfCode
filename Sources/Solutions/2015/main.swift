@@ -5,9 +5,9 @@ print("Advent of Code 2015 🎄")
 
 let days: [DaySolver] = [
 //    Day01Solver(),
-    Day02Solver(),
+//    Day02Solver(),
 //    Day03Solver(),
-//    Day04Solver(),
+    Day04Solver(),
 //    Day05Solver(),
 //    Day06Solver(),
 //    Day07Solver(),
