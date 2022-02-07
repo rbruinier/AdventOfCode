@@ -26,7 +26,8 @@ var package = Package(
         .executableTarget(
             name: "Solutions2015",
             dependencies: [
-                "Tools"
+                "Tools",
+                .product(name: "Collections", package: "swift-collections")
             ],
             path: "Sources/Solutions/2015",
             resources: [
