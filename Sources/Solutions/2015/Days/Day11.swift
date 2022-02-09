@@ -6,10 +6,13 @@ final class Day11Solver: DaySolver {
 
     private var input: Input!
 
+    private let invalidCharacters: [UInt8] = [105, 108, 111] // i, l & o
+    private var cachedPart1Password: String! // we need it for part 2
+    
     private struct Input {
         let password: String
     }
-
+    
     func isValid(password: [UInt8]) -> Bool {
         var containsIncrementalSet = false
         
@@ -17,17 +20,11 @@ final class Day11Solver: DaySolver {
         
         var foundPairs: Set<UInt8> = []
         
-        guard password.contains { invalidCharacters.contains($0) } == false else {
+        guard password.contains(where: { invalidCharacters.contains($0) }) == false else {
             return false
         }
         
         for index in 1 ..< 8 {
-            /*
-             - Passwords must include one increasing straight of at least three letters, like abc, bcd, cde, and so on, up to xyz. They cannot skip letters; abd doesn't count.
-             - Passwords may not contain the letters i, o, or l, as these letters can be mistaken for other characters and are therefore confusing.
-             - Passwords must contain at least two different, non-overlapping pairs of letters, like aa, bb, or zz.
-             */
-            
             if password[index] == password[index - 1] + 1 {
                 incrementCount += 1
             } else {
@@ -45,8 +42,6 @@ final class Day11Solver: DaySolver {
         
         return containsIncrementalSet && foundPairs.count >= 2
     }
-
-    private let invalidCharacters: [UInt8] = [105, 108, 111]
 
     func increment(password: [UInt8]) -> [UInt8] {
         let a: UInt8 = 97
@@ -72,8 +67,6 @@ final class Day11Solver: DaySolver {
         
         return result
     }
-    
-    private var cachedPart1Password: String!
     
     func solvePart1() -> Any {
         var password: [UInt8] = input.password.map { $0.asciiValue! }
