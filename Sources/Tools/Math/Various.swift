@@ -44,3 +44,21 @@ public func leastCommonMultiplier(for values: [Int]) -> Int {
 
     return currentLcm
 }
+
+/// Sum of all proper divisors of a natural number
+///
+/// Source: https://www.geeksforgeeks.org/sum-of-all-proper-divisors-of-a-natural-number/
+/// Source: https://reference.wolfram.com/language/ref/DivisorSigma.html
+public func divisorSigma(n: Int) -> Int {
+    var sum = 0
+
+    for i in 1 ... max(1, Int(Double(n).squareRoot())) where n % i == 0 {
+        if i == n / i {
+            sum += i
+        } else {
+            sum += i + (n / i)
+        }
+    }
+
+    return sum
+}
