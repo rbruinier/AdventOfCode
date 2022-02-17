@@ -33,4 +33,26 @@ extension Array {
 
         return permutations
     }
+
+    public func subsets(minLength: Int, maxLength: Int) -> [[Element]] {
+        var subsets: [[Element]] = []
+
+        for length in minLength ... maxLength {
+            if length == 0 {
+                subsets.append([])
+            } else if length == 1 {
+                subsets.append(contentsOf: self.map { [$0] })
+            } else if length == 2 {
+                for startIndex in 0 ..< self.count - length {
+                    for item in self[startIndex + 1 ..< self.count] {
+                        subsets.append([self[startIndex], item])
+                    }
+                }
+            } else {
+                fatalError("Not yet implemented")
+            }
+        }
+
+        return subsets
+    }
 }
