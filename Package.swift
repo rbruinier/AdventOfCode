@@ -35,6 +35,17 @@ var package = Package(
             ]
         ),
         .executableTarget(
+            name: "Solutions2016",
+            dependencies: [
+                "Tools",
+                .product(name: "Collections", package: "swift-collections")
+            ],
+            path: "Sources/Solutions/2016",
+            resources: [
+                .copy("Input")
+            ]
+        ),
+        .executableTarget(
             name: "Solutions2019",
             dependencies: [
                 "Tools",
