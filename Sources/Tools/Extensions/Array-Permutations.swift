@@ -1,5 +1,31 @@
 import Foundation
 
+extension ArraySlice {
+    public func combinationsWithoutRepetition(length: Int) -> [[Element]] {
+        guard self.count >= length else {
+            return []
+        }
+
+        guard self.count >= length && length > 0 else {
+            return [[]]
+        }
+
+        if length == 1 {
+            return self.map { [$0] }
+        }
+
+        var combinations = [[Element]]()
+
+        for (index, element) in self.enumerated()  {
+            combinations += self.dropFirst(index + 1).combinationsWithoutRepetition(length: length - 1).map {
+                [element] + $0
+            }
+        }
+
+        return combinations
+    }
+}
+
 extension Array {
     /**
      Returns all permutations of an array.
@@ -54,5 +80,9 @@ extension Array {
         }
 
         return subsets
+    }
+
+    public func combinationsWithoutRepetition(length: Int) -> [[Element]] {
+        return ArraySlice(self).combinationsWithoutRepetition(length: length)
     }
 }
