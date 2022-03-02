@@ -19,13 +19,13 @@ final class Day07Solver: DaySolver {
         var hasMatch = false
 
         for (index, character) in ipAsAscii.enumerated() {
-            if character == Ascii.bracketOpen.rawValue {
+            if character == .openBracket {
                 inBracket = true
 
                 startIndex = index + 1
 
                 continue
-            } else if character == Ascii.bracketClose.rawValue {
+            } else if character == .closeBracket {
                 inBracket = false
 
                 startIndex = index + 1
@@ -57,13 +57,13 @@ final class Day07Solver: DaySolver {
         var foundABAs: Set<[UInt8]> = []
 
         for (index, character) in ipAsAscii.enumerated() {
-            if character == Ascii.bracketOpen.rawValue {
+            if character == .openBracket {
                 inBracket = true
 
                 startIndex = index + 1
 
                 continue
-            } else if character == Ascii.bracketClose.rawValue {
+            } else if character == .closeBracket {
                 inBracket = false
 
                 startIndex = index + 1

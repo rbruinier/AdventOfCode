@@ -1,6 +1,9 @@
 import Foundation
 
-public enum Ascii: UInt8 {
-    case bracketOpen = 91
-    case bracketClose = 93
+extension UInt8 {
+    public static let openParenthesis: UInt8 = 40
+    public static let closeParenthesis: UInt8 = 41
+
+    public static let openBracket: UInt8 = 91
+    public static let closeBracket: UInt8 = 93
 }
