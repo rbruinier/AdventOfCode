@@ -37,7 +37,35 @@ final class Day11Solver: DaySolver {
 		}
 	}
 	
-	private struct State: Hashable, CustomStringConvertible {
+	private struct State: Hashable {
+		struct Summary: Hashable {
+			var currentFloor: Int
+			
+			let generators0: Int
+			let generators1: Int
+			let generators2: Int
+			let generators3: Int
+			
+			let chips0: Int
+			let chips1: Int
+			let chips2: Int
+			let chips3: Int
+		}
+		
+		var summary: Summary {
+			return .init(
+				currentFloor: floor,
+				generators0: generatorsOnFloor(0).count,
+				generators1: generatorsOnFloor(1).count,
+				generators2: generatorsOnFloor(2).count,
+				generators3: generatorsOnFloor(3).count,
+				chips0: chipsOnFloor(0).count,
+				chips1: chipsOnFloor(1).count,
+				chips2: chipsOnFloor(2).count,
+				chips3: chipsOnFloor(3).count
+			)
+		}
+		
 		let floor: Int
 		
 		let elements: [Element]
@@ -72,7 +100,7 @@ final class Day11Solver: DaySolver {
 			return chipsOnFloor(floor).isEmpty && generatorsOnFloor(floor).isEmpty
 		}
 		
-		func validNextStates(handled: Set<State>) -> [State] {
+		func validNextStates() -> [State] {
 			var newStates: Set<State> = []
 			
 			for floor in (max(0, self.floor - 1) ... min(3, self.floor + 1)).reversed() where floor != self.floor {
@@ -92,7 +120,7 @@ final class Day11Solver: DaySolver {
 						if newElements != elements {
 							let newState = State(floor: floor, elements: newElements)
 							
-							if newState.isValid, handled.contains(newState) == false {
+							if newState.isValid {
 								newStates.insert(newState)
 							}
 						}
@@ -111,7 +139,7 @@ final class Day11Solver: DaySolver {
 						if newElements != elements {
 							let newState = State(floor: floor, elements: newElements)
 							
-							if newState.isValid, handled.contains(newState) == false {
+							if newState.isValid {
 								newStates.insert(newState)
 							}
 						}
@@ -128,7 +156,7 @@ final class Day11Solver: DaySolver {
 					if newElements != elements {
 						let newState = State(floor: floor, elements: newElements)
 						
-						if newState.isValid, handled.contains(newState) == false {
+						if newState.isValid {
 							newStates.insert(newState)
 						}
 					}
@@ -144,9 +172,9 @@ final class Day11Solver: DaySolver {
 			let nrOfSteps: Int
 			let state: State
 		}
-
+		
 		var queue: Deque<Step> = [.init(nrOfSteps: 0, state: originalState)]
-		var handledStates: Set<State> = []
+		var handledStates: Set<State.Summary> = []
 		var minimumSteps = Int.max
 
 		while let step = queue.popFirst() {
@@ -158,8 +186,8 @@ final class Day11Solver: DaySolver {
 				continue
 			}
 
-			for nextState in state.validNextStates(handled: handledStates) where handledStates.contains(nextState) == false {
-				handledStates.insert(nextState)
+			for nextState in state.validNextStates() where handledStates.contains(nextState.summary) == false {
+				handledStates.insert(nextState.summary)
 				
 				queue.append(.init(nrOfSteps: step.nrOfSteps + 1, state: nextState))
 			}
