@@ -55,3 +55,39 @@ extension Array where Iterator.Element: Hashable {
         return ArraySlice(self).leastCommonElement
     }
 }
+
+extension Array where Element == Bool {
+	public mutating func negate() {
+		for index in 0 ..< count {
+			self[index] = !self[index]
+		}
+	}
+
+	public func negated() -> [Bool] {
+		var newArray: [Bool] = Array(repeating: false, count: count)
+		
+		for index in 0 ..< count {
+			newArray[index] = !self[index]
+		}
+		
+		return newArray
+	}
+}
+
+extension ArraySlice where Element == Bool {
+	public mutating func negate() {
+		for index in 0 ..< count {
+			self[index] = !self[index]
+		}
+	}
+
+	public func negated() -> [Bool] {
+		var newArray: [Bool] = Array(repeating: false, count: count)
+		
+		for index in 0 ..< count {
+			newArray[index] = !self[index]
+		}
+		
+		return newArray
+	}
+}
