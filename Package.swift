@@ -77,5 +77,15 @@ var package = Package(
                 .copy("Input")
             ]
         ),
+		.executableTarget(
+			name: "Solutions2022",
+			dependencies: [
+				"Tools"
+			],
+			path: "Sources/Solutions/2022",
+			resources: [
+				.copy("Input")
+			]
+		),
     ]
 )

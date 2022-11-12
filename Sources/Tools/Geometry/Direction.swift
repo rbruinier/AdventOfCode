@@ -30,13 +30,4 @@ public enum Direction: Int, Equatable {
         case .west: return .east
         }
     }
-
-    public var mazeCode: Int {
-        switch self {
-        case .north: return 1
-        case .south: return 2
-        case .west: return 3
-        case .east: return 4
-        }
-    }
 }

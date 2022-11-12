@@ -1,6 +1,17 @@
 import Foundation
 import Tools
 
+extension Direction {
+	fileprivate var mazeCode: Int {
+		switch self {
+		case .north: return 1
+		case .south: return 2
+		case .west: return 3
+		case .east: return 4
+		}
+	}
+}
+
 final class Day15Solver: DaySolver {
     let dayNumber: Int = 15
 
