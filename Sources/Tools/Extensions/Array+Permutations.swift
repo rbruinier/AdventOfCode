@@ -69,7 +69,7 @@ extension Array {
             } else if length == 1 {
                 subsets.append(contentsOf: self.map { [$0] })
             } else if length == 2 {
-                for startIndex in 0 ..< self.count - length {
+                for startIndex in 0 ..< self.count - (length - 1) {
                     for item in self[startIndex + 1 ..< self.count] {
                         subsets.append([self[startIndex], item])
                     }

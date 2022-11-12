@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AsciiString {
+public struct AsciiString: Equatable, Hashable {
     private var characters: [UInt8]
     
     public var string: String {

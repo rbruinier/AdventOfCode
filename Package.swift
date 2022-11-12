@@ -11,9 +11,12 @@ var package = Package(
     ],
     products: [
         .library(name: "Tools", targets: ["Tools"]),
+		.executable(name: "Solutions2015", targets: ["Solutions2015"]),
+		.executable(name: "Solutions2016", targets: ["Solutions2016"]),
         .executable(name: "Solutions2019", targets: ["Solutions2019"]),
         .executable(name: "Solutions2020", targets: ["Solutions2020"]),
         .executable(name: "Solutions2021", targets: ["Solutions2021"]),
+		.executable(name: "Solutions2022", targets: ["Solutions2022"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0")),
@@ -23,6 +26,12 @@ var package = Package(
         .target(
             name: "Tools"
         ),
+		.testTarget(
+			name: "ToolsTests",
+			dependencies: [
+				"Tools"
+			]
+		),
         .executableTarget(
             name: "Solutions2015",
             dependencies: [
