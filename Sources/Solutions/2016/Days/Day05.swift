@@ -1,6 +1,6 @@
 import Foundation
 import Tools
-import CommonCrypto
+import CryptoKit
 
 final class Day05Solver: DaySolver {
     let dayNumber: Int = 5
@@ -12,26 +12,20 @@ final class Day05Solver: DaySolver {
     }
 
     // Optimized to only return the first 3 bytes of the hash (as we only need to check for five zero's)
-    private func md5First3Bytes(with string: String) -> Int {
-        // source: https://stackoverflow.com/a/32166735/898408
-        var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
-        let messageData = string.data(using:.utf8)!
+	private func md5First3Bytes(with string: String) -> Int {
+		let digest = Insecure.MD5.hash(data: string.data(using: .ascii)!)
 
-        _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
-            messageData.withUnsafeBytes { messageBytes -> UInt8 in
-                if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.bindMemory(to: UInt8.self).baseAddress {
-                    let messageLength = CC_LONG(messageData.count)
-
-                    CC_MD5(messageBytesBaseAddress, messageLength, digestBytesBlindMemory)
-                }
-
-                return 0
-            }
-        }
-
-        // just return the bytes we are interested in (first 3)
-        return Int(digestData[2]) << 16 | Int(digestData[1]) << 8 | Int(digestData[0])
-    }
+		var result = 0
+		for (index, value) in digest.makeIterator().enumerated() {
+			result |= Int(value) << (8 * index)
+			
+			if index == 2 {
+				break
+			}
+		}
+		
+		return result
+	}
 
     func solvePart1() -> Any {
         var password = ""
