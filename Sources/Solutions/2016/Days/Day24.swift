@@ -2,7 +2,7 @@ import Collections
 import Foundation
 import Tools
 
-/// Two step solution where we first find the distance between all numbers (paths) basically building a graph and then perform a second iteration to find the shortest path 
+/// Two step solution where we first find the distance between all numbers (paths) basically building a graph and then perform a second iteration to find the shortest path
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
@@ -129,30 +129,16 @@ final class Day24Solver: DaySolver {
 		var bestSolution: Solution?
 
 		while let solution = solutionQueue.popFirst() {
-			if returnToStart {
-				if solution.visitedNumbers.count == numbers.count + 1 {
-					if let currentBestSolution = bestSolution {
-						if solution.numberOfSteps < currentBestSolution.numberOfSteps {
-							bestSolution = solution
-						}
-					} else {
+			if solution.visitedNumbers.count == numbers.count + (returnToStart ? 1 : 0) {
+				if let currentBestSolution = bestSolution {
+					if solution.numberOfSteps < currentBestSolution.numberOfSteps {
 						bestSolution = solution
 					}
-
-					continue
+				} else {
+					bestSolution = solution
 				}
-			} else {
-				if solution.visitedNumbers.count == numbers.count {
-					if let currentBestSolution = bestSolution {
-						if solution.numberOfSteps < currentBestSolution.numberOfSteps {
-							bestSolution = solution
-						}
-					} else {
-						bestSolution = solution
-					}
 
-					continue
-				}
+				continue
 			}
 
 			var availableNumbers = numbers.filter { solution.visitedNumbers.contains($0) == false }
