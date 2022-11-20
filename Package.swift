@@ -13,6 +13,7 @@ var package = Package(
         .library(name: "Tools", targets: ["Tools"]),
 		.executable(name: "Solutions2015", targets: ["Solutions2015"]),
 		.executable(name: "Solutions2016", targets: ["Solutions2016"]),
+		.executable(name: "Solutions2017", targets: ["Solutions2017"]),
         .executable(name: "Solutions2019", targets: ["Solutions2019"]),
         .executable(name: "Solutions2020", targets: ["Solutions2020"]),
         .executable(name: "Solutions2021", targets: ["Solutions2021"]),
@@ -53,7 +54,18 @@ var package = Package(
             resources: [
                 .copy("Input")
             ]
-        ),
+		),
+		.executableTarget(
+			name: "Solutions2017",
+			dependencies: [
+				"Tools",
+				.product(name: "Collections", package: "swift-collections")
+			],
+			path: "Sources/Solutions/2017",
+			resources: [
+				.copy("Input")
+			]
+		),
         .executableTarget(
             name: "Solutions2019",
             dependencies: [
