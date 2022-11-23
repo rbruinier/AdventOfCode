@@ -25,7 +25,10 @@ var package = Package(
     ],
     targets: [
         .target(
-            name: "Tools"
+            name: "Tools",
+			dependencies: [
+				.product(name: "Collections", package: "swift-collections")
+			]
         ),
 		.testTarget(
 			name: "ToolsTests",

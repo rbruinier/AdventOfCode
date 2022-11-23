@@ -2,7 +2,8 @@ import Collections
 import Foundation
 import Tools
 
-/// Two step solution where we first find the distance between all numbers (paths) basically building a graph and then perform a second iteration to find the shortest path
+/// Two step solution where we first find the distance between all numbers (paths) basically building a graph and then perform a second iteration to find the shortest path through the graph.
+/// In both cases BFS is used.
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
@@ -20,13 +21,8 @@ final class Day24Solver: DaySolver {
 		case position(number: Int)
 	}
 
-	private struct Path: Hashable {
-		let a: Int
-		let b: Int
-	}
-
-	private var allPaths: [Path: Int]!
 	private var allNumbers: [Int]!
+	private var graph: WeightedGraph<Int>!
 
 	private func possibleNextPositions(for position: Point2D, grid: Grid) -> [Point2D] {
 		position.neighbors().filter { point in
@@ -41,64 +37,25 @@ final class Day24Solver: DaySolver {
 	}
 
 	private func minimumNumberOfRequiredSteps(from pointA: Point2D, to pointB: Point2D, in grid: Grid) -> Int {
-		struct Solution {
-			let currentPosition: Point2D
-			let numberOfSteps: Int
+		struct GridWrapper: Tools.BFSGrid {
+			let grid: Grid
+			
+			func reachableNeighborsAt(position: Point2D) -> [Point2D] {
+				position.neighbors().filter { point in
+					grid[point]! != .wall
+				}
+			}
+			
 		}
-
-		var solutionQueue: Deque<Solution> = [
-			.init(currentPosition: pointA, numberOfSteps: 0),
-		]
-
-		var bestSolution: Solution?
-
-		var visitedPoints: Set<Point2D> = [pointA]
-
-		while let solution = solutionQueue.popFirst() {
-			if solution.currentPosition == pointB {
-				if let currentBestSolution = bestSolution {
-					if solution.numberOfSteps < currentBestSolution.numberOfSteps {
-						bestSolution = solution
-					}
-				} else {
-					bestSolution = solution
-				}
-			}
-
-			if let currentBestSolution = bestSolution {
-				// optimization: no need to complete a path that is already equal or longer as best found path so far
-				if solution.numberOfSteps >= currentBestSolution.numberOfSteps {
-					continue
-				}
-			}
-
-			let possiblePoints = possibleNextPositions(for: solution.currentPosition, grid: grid)
-
-			for nextPoint in possiblePoints where visitedPoints.contains(nextPoint) == false {
-				visitedPoints.insert(nextPoint)
-
-				switch grid[nextPoint] {
-				case .none,
-				     .wall:
-					fatalError()
-				case .free,
-				     .position:
-					solutionQueue.append(
-						.init(
-							currentPosition: nextPoint,
-							numberOfSteps: solution.numberOfSteps + 1
-						)
-					)
-				}
-			}
-		}
-
-		return bestSolution!.numberOfSteps
+		
+		let bfsGrid = GridWrapper(grid: input.grid)
+		
+		return BFS.shortestPathInGrid(grid: bfsGrid, from: pointA, to: pointB)!.steps
 	}
 
-	private func allPaths(for numbers: [Int], in grid: Grid) -> [Path: Int] {
-		var paths: [Path: Int] = [:]
-
+	private func graph(for numbers: [Int], in grid: Grid) -> WeightedGraph<Int> {
+		var edges: [WeightedGraph<Int>.Edge] = []
+		
 		for i in 0 ..< numbers.count {
 			let pointA = position(of: numbers[i], in: grid)
 
@@ -107,64 +64,11 @@ final class Day24Solver: DaySolver {
 
 				let steps = minimumNumberOfRequiredSteps(from: pointA, to: pointB, in: grid)
 
-				paths[.init(a: numbers[i], b: numbers[j])] = steps
-				paths[.init(a: numbers[j], b: numbers[i])] = steps
+				edges.append(.init(a: i, b: j, weight: steps))
 			}
 		}
 
-		return paths
-	}
-
-	private func minimumNumberOfRequiredSteps(startingAt startNumber: Int, with numbers: [Int], paths: [Path: Int], returnToStart: Bool = false) -> Int {
-		struct Solution {
-			let currentNumber: Int
-			let visitedNumbers: [Int]
-			let numberOfSteps: Int
-		}
-
-		var solutionQueue: Deque<Solution> = [
-			.init(currentNumber: 0, visitedNumbers: [0], numberOfSteps: 0),
-		]
-
-		var bestSolution: Solution?
-
-		while let solution = solutionQueue.popFirst() {
-			if solution.visitedNumbers.count == numbers.count + (returnToStart ? 1 : 0) {
-				if let currentBestSolution = bestSolution {
-					if solution.numberOfSteps < currentBestSolution.numberOfSteps {
-						bestSolution = solution
-					}
-				} else {
-					bestSolution = solution
-				}
-
-				continue
-			}
-
-			var availableNumbers = numbers.filter { solution.visitedNumbers.contains($0) == false }
-
-			if returnToStart, availableNumbers.isEmpty {
-				availableNumbers.append(0)
-			}
-
-			for number in availableNumbers {
-				let steps = paths[.init(a: solution.currentNumber, b: number)]!
-
-				if let bestSolution, (solution.numberOfSteps + steps) >= bestSolution.numberOfSteps {
-					continue
-				}
-
-				solutionQueue.append(
-					.init(
-						currentNumber: number,
-						visitedNumbers: solution.visitedNumbers + [number],
-						numberOfSteps: solution.numberOfSteps + steps
-					)
-				)
-			}
-		}
-
-		return bestSolution!.numberOfSteps
+		return .init(elements: numbers, edges: edges)
 	}
 
 	func solvePart1() -> Any {
@@ -176,15 +80,15 @@ final class Day24Solver: DaySolver {
 			} else {
 				return nil
 			}
-		}
+		}.sorted()
 
-		allPaths = allPaths(for: allNumbers, in: grid)
-
-		return minimumNumberOfRequiredSteps(startingAt: 0, with: allNumbers, paths: allPaths)
+		graph = graph(for: allNumbers, in: grid)
+		
+		return BFS.visitAllElements(in: graph, returnToStart: false)!.pathWeight
 	}
 
 	func solvePart2() -> Any {
-		minimumNumberOfRequiredSteps(startingAt: 0, with: allNumbers, paths: allPaths, returnToStart: true)
+		return BFS.visitAllElements(in: graph, returnToStart: true)!.pathWeight
 	}
 
 	func parseInput(rawString: String) {
