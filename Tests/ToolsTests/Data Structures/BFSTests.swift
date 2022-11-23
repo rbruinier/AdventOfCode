@@ -17,9 +17,7 @@ final class BFSTests: XCTestCase {
 		
 		// A(0) (10) -> D(3) (10) -> B(1) -> C(2)
 
-		let sut = BFS(graph: graph)
-
-		let result = sut.visitAllElements()!
+		let result = BFS.visitAllElements(in: graph)!
 
 		XCTAssertEqual(result.pathIndices, [0, 3, 1, 2])
 		XCTAssertEqual(result.pathWeight, 30)
@@ -37,10 +35,8 @@ final class BFSTests: XCTestCase {
 			.init(a: 2, b: 3, weight: 10), // C - D = 30
 		])
 		
-		let sut = BFS(graph: graph)
-		
-		let result = sut.visitAllElements()!
-		
+		let result = BFS.visitAllElements(in: graph)!
+
 		XCTAssertEqual(result.pathIndices, [0, 1, 2, 3])
 		XCTAssertEqual(result.pathWeight, 30)
 	}

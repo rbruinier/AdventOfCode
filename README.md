@@ -72,6 +72,20 @@ For example x = 3, y = 5 move to .right with 3 steps will result in x = 6, y = 5
 
 Generic `LoopedLinkedListSet` is a not yet fully realized (but functional enough) looped linked list for unique values. 
  
+### WeightedGraph
+
+A type to store elements and edges of a graph.
+
+### BFS
+
+The BFS type wraps two solvers using the BFS algorithm.
+
+- visitAllElements(in: WeightedGraph, startingAtIndex: Int, returnToStart: Bool) tries to visit all elements in 
+a WeightedGraph at least once with the shortest possible path.
+- shortestPathInGrid(grid: some BFSGrid, from: Point2D, to: Point2D) will try to find the shortest possible path
+between two points in a 2D grid. It is up to the caller to implement the BFSGrid protocol so that it can provide
+available neighbors for a point in the grid.
+ 
 ## Array & ArraySlice Extensions
 
 - `mostCommonElement` -> Element: finds most common element in an array
