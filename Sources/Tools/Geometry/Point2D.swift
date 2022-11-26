@@ -29,6 +29,10 @@ public struct Point2D: Hashable, Equatable {
 	public var x: Int = 0
 	public var y: Int = 0
 
+	public static var zero: Point2D {
+		return .init(x: 0, y: 0)
+	}
+
 	public init() {}
 
 	public init(x: Int, y: Int) {

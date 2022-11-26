@@ -18,6 +18,15 @@
           "revision": "48254824bb4248676bf7ce56014ff57b142b77eb",
           "version": "1.0.2"
         }
+      },
+      {
+        "package": "MicroPNG",
+        "repositoryURL": "https://github.com/rbruinier/SwiftMicroPNG",
+        "state": {
+          "branch": "main",
+          "revision": "0a69ce9f10b8aeb3ec67abf26e7f292c40fc3ffe",
+          "version": null
+        }
       }
     ]
   },

@@ -216,6 +216,34 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Visualizer"
+               BuildableName = "Visualizer"
+               BlueprintName = "Visualizer"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "VisualizerTestApp"
+               BuildableName = "VisualizerTestApp"
+               BlueprintName = "VisualizerTestApp"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -250,9 +278,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Solutions2017"
-            BuildableName = "Solutions2017"
-            BlueprintName = "Solutions2017"
+            BlueprintIdentifier = "VisualizerTestApp"
+            BuildableName = "VisualizerTestApp"
+            BlueprintName = "VisualizerTestApp"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -276,9 +304,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Solutions2017"
-            BuildableName = "Solutions2017"
-            BlueprintName = "Solutions2017"
+            BlueprintIdentifier = "VisualizerTestApp"
+            BuildableName = "VisualizerTestApp"
+            BlueprintName = "VisualizerTestApp"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
