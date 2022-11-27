@@ -4,7 +4,7 @@ import Tools
 
 print("Test")
 
-let visualizer = Visualizer()
+let visualizer = VisualizationContext()
 
 visualizer.fillRect(.init(origin: .init(x: 12, y: 102), size: .init(width: 96, height: 96)), color: .init(0xFFFF0000))
 visualizer.fillRect(.init(origin: .init(x: 123, y: 123), size: .init(width: 94, height: 94)), color: .init(0xFF00FF00))
@@ -22,8 +22,12 @@ let pngData = try! encoder.encodeRGBUncompressed(data: visualizer.rawPixelData,
 												 width: UInt32(visualizer.dimensions.width),
 												 height: UInt32(visualizer.dimensions.height))
 
+let exportPath = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop/AdventOfCode/Test")
+
+try! FileManager.default.createDirectory(at: exportPath, withIntermediateDirectories: true)
+
 pngData.withUnsafeBytes { pointer in
 	let data = Data(bytes: pointer.baseAddress!, count: pointer.count)
 
-	try! data.write(to: URL(fileURLWithPath: "/Users/robert/Desktop/visualizer01.png"))
+	try! data.write(to: URL(fileURLWithPath: exportPath.appendingPathComponent("visualizer01.png").relativePath))
 }

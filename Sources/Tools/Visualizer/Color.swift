@@ -51,6 +51,6 @@ public struct Color {
 	}
 
 	public init(r: UInt8, g: UInt8, b: UInt8, a: UInt8 = 255) {
-		value = UInt32(a << 24) | UInt32(r << 16) | UInt32(g << 8) | UInt32(b)
+		value = UInt32(a) << 24 | UInt32(r) << 16 | UInt32(g) << 8 | UInt32(b)
 	}
 }

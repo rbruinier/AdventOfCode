@@ -1,6 +1,6 @@
+import Collections
 import Foundation
 import Tools
-import Collections
 
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
@@ -51,7 +51,7 @@ final class Day23Solver: DaySolver {
 			}
 		}
 	}
-	
+
 	private struct Room: Hashable {
 		let amphipod: Amphipod
 
@@ -79,7 +79,7 @@ final class Day23Solver: DaySolver {
 					return index
 				}
 			}
-			
+
 			return nil
 		}
 	}
@@ -93,28 +93,28 @@ final class Day23Solver: DaySolver {
 		let moves: [Move]
 
 		let cacheKey: UInt64
-		
+
 		let isComplete: Bool
-		
+
 		func hash(into hasher: inout Hasher) {
 			hasher.combine(hallway)
 			hasher.combine(rooms)
 		}
-		
+
 		static func == (_ lhs: GameState, _ rhs: GameState) -> Bool {
-			return lhs.hashValue == rhs.hashValue
+			lhs.hashValue == rhs.hashValue
 		}
-		
+
 		init(hallway: Hallway, rooms: [Room], totalCost: Int, moves: [Move]) {
 			self.hallway = hallway
 			self.rooms = rooms
 			self.totalCost = totalCost
 			self.moves = moves
-			
+
 			var cacheKey: UInt64 = 0
-			
+
 			// we only move to 0, 1, 3, 5, 7, 9, 10 so only need to include those in cache key
-			
+
 			cacheKey = (cacheKey * 5) + UInt64(hallway.cells[0].rawValue)
 			cacheKey = (cacheKey * 5) + UInt64(hallway.cells[1].rawValue)
 			cacheKey = (cacheKey * 5) + UInt64(hallway.cells[3].rawValue)
@@ -122,7 +122,7 @@ final class Day23Solver: DaySolver {
 			cacheKey = (cacheKey * 5) + UInt64(hallway.cells[7].rawValue)
 			cacheKey = (cacheKey * 5) + UInt64(hallway.cells[9].rawValue)
 			cacheKey = (cacheKey * 5) + UInt64(hallway.cells[10].rawValue)
-			
+
 			for roomIndex in 0 ..< 3 {
 				for cell in rooms[roomIndex].cells {
 					cacheKey = (cacheKey * 5) + UInt64(cell.rawValue)
@@ -130,7 +130,7 @@ final class Day23Solver: DaySolver {
 			}
 
 			self.cacheKey = cacheKey
-			
+
 			isComplete = rooms.allSatisfy(\.isComplete)
 		}
 	}
@@ -145,14 +145,14 @@ final class Day23Solver: DaySolver {
 
 		let from: Spot
 		let to: Spot
-		
+
 		let cost: Int
-		
+
 		init(who: Amphipod, from: Spot, to: Spot) {
 			self.who = who
 			self.from = from
 			self.to = to
-			
+
 			var hallwayFromPosition = 0
 			var hallwayToPosition = 0
 
@@ -179,7 +179,7 @@ final class Day23Solver: DaySolver {
 			cost = steps * who.stepCost
 		}
 	}
-	
+
 	private func possibleMovesFor(spot: Spot, gameState: GameState, container: inout [Move]) {
 		switch spot {
 		case .room(let currentRoomIndex, let cellIndex):
@@ -196,10 +196,10 @@ final class Day23Solver: DaySolver {
 			}
 
 			var foundRoomSpots = false
-			
+
 			for roomIndex in 0 ..< 4 where roomIndex != currentRoomIndex {
 				let toRoom = gameState.rooms[roomIndex]
-				
+
 				guard toRoom.isComplete == false, let targetCellIndex = toRoom.possibleMoveIndex(for: who) else {
 					continue
 				}
@@ -265,19 +265,19 @@ final class Day23Solver: DaySolver {
 
 		return .init(hallway: newHallway, rooms: newRooms, totalCost: gameState.totalCost + move.cost, moves: gameState.moves + [move])
 	}
-	
+
 	private func solve(with originalGameState: GameState, roomSize: Int = 2) -> GameState? {
 		var queue: Deque<GameState> = []
-		
+
 		queue.append(originalGameState)
-		
+
 		var bestGameState: GameState?
 		var bestCost = Int.max
 
 		var minimumCosts: [UInt64: Int] = [:]
-		
+
 		var possibleMoves: [Move] = Array()
-		
+
 		possibleMoves.reserveCapacity(100)
 
 		while let gameState = queue.popFirst() {
@@ -288,11 +288,11 @@ final class Day23Solver: DaySolver {
 					possibleMovesFor(spot: .room(index: roomIndex, cellIndex: cellIndex), gameState: gameState, container: &possibleMoves)
 				}
 			}
-	
+
 			for hallwayIndex in [0, 1, 3, 5, 7, 9, 10] {
 				possibleMovesFor(spot: .hallway(index: hallwayIndex), gameState: gameState, container: &possibleMoves)
 			}
-			
+
 			for move in possibleMoves where gameState.totalCost + move.cost < bestCost {
 				let newGameState = executeMove(move, on: gameState)
 
@@ -312,22 +312,22 @@ final class Day23Solver: DaySolver {
 						bestGameState = newGameState
 						bestCost = newGameState.totalCost
 					}
-					
+
 					continue
 				} else {
 					queue.insert(newGameState, at: 0)
 				}
 			}
 		}
-		
+
 		return bestGameState
 	}
-	
+
 	func solvePart1() -> Any {
 		let initialGameState = GameState(hallway: .init(), rooms: input.rooms, totalCost: 0, moves: [])
 
 		let bestGameState = solve(with: initialGameState)!
-		
+
 		return bestGameState.totalCost
 	}
 
@@ -344,10 +344,10 @@ final class Day23Solver: DaySolver {
 		rooms[3].cells.insert(.copper, at: 2)
 
 		let initialGameState = GameState(hallway: .init(), rooms: rooms, totalCost: 0, moves: [])
-		
+
 		let bestGameState = solve(with: initialGameState, roomSize: 4)!
-		
-		self.part2Solution = (startState: initialGameState, endState: bestGameState)
+
+		part2Solution = (startState: initialGameState, endState: bestGameState)
 
 		return bestGameState.totalCost
 	}
@@ -362,162 +362,181 @@ final class Day23Solver: DaySolver {
 	}
 }
 
-extension Day23Solver: Visualizable {
-	func createVisualizer() -> Visualizer {
-		Visualizer(dimensions: .init(width: 15 * 16, height: 9 * 16))
+extension Day23Solver {
+	func createVisualizer() -> Visualizer? {
+		StepsVisualizer(solver: self)
 	}
 
-	func visualizeState(with visualizer: Visualizer) -> VisualizableResult {
-		enum GridElement {
-			case wall
-			case path
-			case amphipod(Amphipod)
-			case empty
-		}
-		
-		enum MoveStage: Int {
-			case nothing
-			case highlightOld
-			case highlightNew
-			case move
+	final class StepsVisualizer: Visualizer {
+		let solver: DaySolver
+
+		var dimensions: Size {
+			.init(width: 15 * 16, height: 9 * 16)
 		}
 
-		var grid: [[GridElement]] = [
-			[.wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall],
-			[.wall, .empty, .path, .path, .path, .path, .path, .path, .path, .path, .path, .path, .wall],
-			[.wall, .wall, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .wall, .wall],
-			[.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
-			[.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
-			[.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
-			[.empty, .empty, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .empty, .empty],
-		]
-		
-		var gameState = part2Solution.startState
-		let endState = part2Solution.endState
-		
-		let moveStage = MoveStage(rawValue: visualizer.frameCounter % 4)!
-		let moveIndex = visualizer.frameCounter / 4
-				
-		var cost = 0
-		
-		let currentMove = endState.moves[moveIndex]
-		
-		for i in 0 ..< min(moveIndex, endState.moves.count) {
-			gameState = executeMove(endState.moves[i], on: gameState)
-			
-			cost += endState.moves[i].cost
-		}
-		
-		if moveStage == .move {
-			gameState = executeMove(currentMove, on: gameState)
-			
-			cost += currentMove.cost
+		var frameDescription: String?
+
+		var isCompleted: Bool = false
+
+		init(solver: Day23Solver) {
+			self.solver = solver
 		}
 
-		for (index, cell) in gameState.hallway.cells.enumerated() {
-			grid[1][1 + index] = .amphipod(cell)
-		}
-		
-		for (roomIndex, room) in gameState.rooms.enumerated() {
-			for (cellIndex, cell) in room.cells.enumerated() {
-				grid[2 + cellIndex][3 + (roomIndex * 2)] = .amphipod(cell)
+		func renderFrame(with context: VisualizationContext) {
+			context.startNewFrame()
+
+			enum GridElement {
+				case wall
+				case path
+				case amphipod(Amphipod)
+				case empty
 			}
-		}
 
-		let elementSize = 15
+			enum MoveStage: Int {
+				case nothing
+				case highlightOld
+				case highlightNew
+				case move
+			}
 
-		visualizer.startNewFrame()
+			var grid: [[GridElement]] = [
+				[.wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall],
+				[.wall, .empty, .path, .path, .path, .path, .path, .path, .path, .path, .path, .path, .wall],
+				[.wall, .wall, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .wall, .wall],
+				[.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
+				[.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
+				[.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
+				[.empty, .empty, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .empty, .empty],
+			]
 
-		func rectFor(rowIndex: Int, columnIndex: Int) -> Rect {
-			.init(
-				origin: .init(
-					x: columnIndex * (elementSize + 1),
-					y: rowIndex * (elementSize + 1)
-				),
-				size: .init(
-					width: elementSize,
-					height: elementSize
-				)
-			)
-		}
-		
-		for (rowIndex, row) in grid.enumerated() {
-			for (columnIndex, cell) in row.enumerated() {
-				let color: Color
+			let solver = solver as! Day23Solver
 
-				switch cell {
-				case .empty:
-					color = .black
-				case .path:
-					color = .dimGray
-				case .amphipod(let amphipod):
-					switch amphipod {
-					case .desert: color = .desert
-					case .amber: color = .amber
-					case .bronze: color = .bronze
-					case .copper: color = .copper
-					case .none: color = .dimGray
-					}
-				case .wall:
-					color = .white
-				}
+			let part2Solution = solver.part2Solution!
 
-				visualizer.fillRect(rectFor(rowIndex: rowIndex + 1, columnIndex: columnIndex + 1), color: color)
+			var gameState = part2Solution.startState
+			let endState = part2Solution.endState
 
-				let textPoint = Point2D(
-					x: (columnIndex + 1) * (elementSize + 1) + 5,
-					y: (rowIndex + 1) * (elementSize + 1) + 4
-				)
+			let moveStage = MoveStage(rawValue: context.frameCounter % 4)!
+			let moveIndex = context.frameCounter / 4
 
-				if case .amphipod(let amphipod) = cell {
-					switch amphipod {
-					case .desert: visualizer.drawText("D", at: textPoint, color: .black)
-					case .amber: visualizer.drawText("A", at: textPoint, color: .black)
-					case .bronze: visualizer.drawText("B", at: textPoint, color: .black)
-					case .copper: visualizer.drawText("C", at: textPoint, color: .black)
-					case .none: break
-					}
+			var cost = 0
+
+			let currentMove = endState.moves[moveIndex]
+
+			for i in 0 ..< min(moveIndex, endState.moves.count) {
+				gameState = solver.executeMove(endState.moves[i], on: gameState)
+
+				cost += endState.moves[i].cost
+			}
+
+			if moveStage == .move {
+				gameState = solver.executeMove(currentMove, on: gameState)
+
+				cost += currentMove.cost
+			}
+
+			for (index, cell) in gameState.hallway.cells.enumerated() {
+				grid[1][1 + index] = .amphipod(cell)
+			}
+
+			for (roomIndex, room) in gameState.rooms.enumerated() {
+				for (cellIndex, cell) in room.cells.enumerated() {
+					grid[2 + cellIndex][3 + (roomIndex * 2)] = .amphipod(cell)
 				}
 			}
-		}
 
-		visualizer.drawCenteredText("AoC Day 23 of 2021", atY: 4, color: .white)
-		visualizer.drawCenteredText("Total Cost: \(cost)", atY: visualizer.dimensions.height - 8 - 4, color: .white)
+			let elementSize = 15
 
-		var highlights: [(Int, Int)] = []
-		
-		switch moveStage {
-		case .move:
-			if moveIndex == endState.moves.count - 1 {
-				return .finished
+			func rectFor(rowIndex: Int, columnIndex: Int) -> Rect {
+				.init(
+					origin: .init(
+						x: columnIndex * (elementSize + 1),
+						y: rowIndex * (elementSize + 1)
+					),
+					size: .init(
+						width: elementSize,
+						height: elementSize
+					)
+				)
 			}
-			
-			fallthrough
-		case .highlightNew:
-			switch currentMove.to {
-			case .room(let index, let cellIndex):
-				highlights.append((2 + cellIndex, 3 + index * 2))
-			case .hallway(let index):
-				highlights.append((1, 1 + index))
+
+			for (rowIndex, row) in grid.enumerated() {
+				for (columnIndex, cell) in row.enumerated() {
+					let color: Color
+
+					switch cell {
+					case .empty:
+						color = .black
+					case .path:
+						color = .dimGray
+					case .amphipod(let amphipod):
+						switch amphipod {
+						case .desert: color = .desert
+						case .amber: color = .amber
+						case .bronze: color = .bronze
+						case .copper: color = .copper
+						case .none: color = .dimGray
+						}
+					case .wall:
+						color = .white
+					}
+
+					context.fillRect(rectFor(rowIndex: rowIndex + 1, columnIndex: columnIndex + 1), color: color)
+
+					let textPoint = Point2D(
+						x: (columnIndex + 1) * (elementSize + 1) + 5,
+						y: (rowIndex + 1) * (elementSize + 1) + 4
+					)
+
+					if case .amphipod(let amphipod) = cell {
+						switch amphipod {
+						case .desert: context.drawText("D", at: textPoint, color: .black)
+						case .amber: context.drawText("A", at: textPoint, color: .black)
+						case .bronze: context.drawText("B", at: textPoint, color: .black)
+						case .copper: context.drawText("C", at: textPoint, color: .black)
+						case .none: break
+						}
+					}
+				}
 			}
-			fallthrough
-		case .highlightOld:
-			switch currentMove.from {
-			case .room(let index, let cellIndex):
-				highlights.append(((2 + cellIndex), 3 + index * 2))
-			case .hallway(let index):
-				highlights.append((1, 1 + index))
+
+			frameDescription = "Total Cost: \(cost)"
+
+			var highlights: [(Int, Int)] = []
+
+			switch moveStage {
+			case .move:
+				if moveIndex == endState.moves.count - 1 {
+					isCompleted = true
+
+					return
+				}
+
+				fallthrough
+			case .highlightNew:
+				switch currentMove.to {
+				case .room(let index, let cellIndex):
+					highlights.append((2 + cellIndex, 3 + index * 2))
+				case .hallway(let index):
+					highlights.append((1, 1 + index))
+				}
+				fallthrough
+			case .highlightOld:
+				switch currentMove.from {
+				case .room(let index, let cellIndex):
+					highlights.append((2 + cellIndex, 3 + index * 2))
+				case .hallway(let index):
+					highlights.append((1, 1 + index))
+				}
+			case .nothing:
+				break
 			}
-		case .nothing:
-			break
+
+			for highlight in highlights {
+				let rect = rectFor(rowIndex: highlight.0 + 1, columnIndex: highlight.1 + 1)
+
+				context.drawRect(rect, width: 2, color: .hotPink)
+			}
 		}
-		
-		for highlight in highlights {
-			let rect = rectFor(rowIndex: highlight.0 + 1, columnIndex: highlight.1 + 1)
-			
-			visualizer.drawRect(rect, width: 2, color: .hotPink)
-		}
-		
-		return .ready
 	}
 }

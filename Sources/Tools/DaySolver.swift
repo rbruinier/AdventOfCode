@@ -3,11 +3,20 @@ import Darwin
 
 public protocol DaySolver {
     var dayNumber: Int { get }
+	var year: Int { get }
 
     func parseInput(rawString: String)
     
     func solvePart1() -> Any
     func solvePart2() -> Any
+	
+	func createVisualizer() -> Visualizer?
+}
+
+public extension DaySolver {
+	func createVisualizer() -> Visualizer? {
+		nil
+	}
 }
 
 public func solveDay(_ solver: DaySolver) {

@@ -3,6 +3,12 @@ import Tools
 
 print("Advent of Code 2017 🎄")
 
+extension DaySolver {
+	var year: Int {
+		2017
+	}
+}
+
 let days: [DaySolver] = [
 //    Day01Solver(),
 //    Day02Solver(),
