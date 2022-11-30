@@ -34,7 +34,7 @@ var package = Package(
 				.product(name: "MicroPNG", package: "SwiftMicroPNG"),
 			],
 			resources: [
-				.copy("Visualizer/Resources"),
+				.copy("Visualization/Resources"),
 			]
 
 		),
