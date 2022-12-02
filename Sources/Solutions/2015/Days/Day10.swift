@@ -1,6 +1,6 @@
+import Collections
 import Foundation
 import Tools
-import Collections
 
 final class Day10Solver: DaySolver {
     let dayNumber: Int = 10

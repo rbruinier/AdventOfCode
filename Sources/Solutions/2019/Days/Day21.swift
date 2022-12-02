@@ -12,18 +12,18 @@ final class Day21Solver: DaySolver {
 
     func solvePart1() -> Any {
         var metaProgram = """
-            # we certainly want to jump if the A (next item) is empty
-            NOT A J
+        # we certainly want to jump if the A (next item) is empty
+        NOT A J
 
-            # we also jump if C (3 steps) is ahead
-            NOT C T
-            OR  T J
+        # we also jump if C (3 steps) is ahead
+        NOT C T
+        OR  T J
 
-            # but we make sure D is safe to land to prevent early jumps
-            AND D J
+        # but we make sure D is safe to land to prevent early jumps
+        AND D J
 
-            WALK
-            """
+        WALK
+        """
 
         // this allows for including empty lines in program and using # for comment lines, easier to program
         metaProgram = metaProgram.allLines().filter { $0.starts(with: "#") == false }.joined(separator: "\n") + "\n"
@@ -43,28 +43,28 @@ final class Day21Solver: DaySolver {
 
     func solvePart2() -> Any {
         var metaProgram = """
-            # we certainly want to jump if the A (next item) is empty
-            NOT A J
+        # we certainly want to jump if the A (next item) is empty
+        NOT A J
 
-            # we also jump if B (2 steps) is ahead
-            NOT B T
-            OR  T J
+        # we also jump if B (2 steps) is ahead
+        NOT B T
+        OR  T J
 
-            # we also jump if C (3 steps) is ahead
-            NOT C T
-            OR  T J
+        # we also jump if C (3 steps) is ahead
+        NOT C T
+        OR  T J
 
-            # but we make sure D is safe to land to prevent early jumps
-            AND D J
+        # but we make sure D is safe to land to prevent early jumps
+        AND D J
 
-            # we also want to make sure that the spot after landing is not empty with another empty spot 4 spots ahead (#####.#.##...####)
-            OR  D T
-            AND E T
-            OR  H T
-            AND T J
+        # we also want to make sure that the spot after landing is not empty with another empty spot 4 spots ahead (#####.#.##...####)
+        OR  D T
+        AND E T
+        OR  H T
+        AND T J
 
-            RUN
-            """
+        RUN
+        """
 
         // this allows for including empty lines in program and using # for comment lines, easier to program
         metaProgram = metaProgram.allLines().filter { $0.starts(with: "#") == false }.joined(separator: "\n") + "\n"
@@ -89,7 +89,8 @@ final class Day21Solver: DaySolver {
             return result.output.last!
         }
 
-        return 0    }
+        return 0
+    }
 
     func parseInput(rawString: String) {
         input = .init(program: rawString.parseCommaSeparatedInts())

@@ -18,7 +18,7 @@ final class Day20Solver: DaySolver {
         (rotation: .zero, flip: .horizontal),
         (rotation: .ninety, flip: .horizontal),
         (rotation: .oneEighty, flip: .horizontal),
-        (rotation: .twoSeventy, flip: .horizontal),
+        (rotation: .twoSeventy, flip: .horizontal)
     ]
 
     private struct Input {
@@ -218,7 +218,8 @@ final class Day20Solver: DaySolver {
                     rotatePixels(rhs.pixels, width: 10, height: 10, degrees: combination.rotation),
                     width: 10,
                     height: 10,
-                    flip: combination.flip))
+                    flip: combination.flip
+                ))
 
                 if lhs.borders[side] == tile.borders[(side + 2) % 4] {
                     return tile
@@ -280,7 +281,7 @@ final class Day20Solver: DaySolver {
             .first { $0.value.count == 2
                 && (1 ... 2).contains($0.value[0].lhsSide)
                 && (1 ... 2).contains($0.value[1].lhsSide)
-             }
+            }
             .map { input.tiles[$0.key]! }!
 
         var finalTiles: [Tile] = []
@@ -339,7 +340,7 @@ final class Day20Solver: DaySolver {
             .init(x: 7, y: 2),
             .init(x: 10, y: 2),
             .init(x: 13, y: 2),
-            .init(x: 16, y: 2),
+            .init(x: 16, y: 2)
         ]
 
         let size = nrOfTilesPerDimension * 8

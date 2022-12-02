@@ -2,109 +2,109 @@ import Foundation
 import Tools
 
 final class Day02Solver: DaySolver {
-	let dayNumber: Int = 2
+    let dayNumber: Int = 2
 
-	private var input: Input!
+    private var input: Input!
 
-	private struct Input {
-		let games: [Game]
-	}
+    private struct Input {
+        let games: [Game]
+    }
 
-	private enum Hand {
-		case rock
-		case paper
-		case scissors
+    private enum Hand {
+        case rock
+        case paper
+        case scissors
 
-		var score: Int {
-			switch self {
-			case .rock: return 1
-			case .paper: return 2
-			case .scissors: return 3
-			}
-		}
+        var score: Int {
+            switch self {
+            case .rock: return 1
+            case .paper: return 2
+            case .scissors: return 3
+            }
+        }
 
-		var beats: Hand {
-			switch self {
-			case .rock: return .scissors
-			case .paper: return .rock
-			case .scissors: return .paper
-			}
-		}
+        var beats: Hand {
+            switch self {
+            case .rock: return .scissors
+            case .paper: return .rock
+            case .scissors: return .paper
+            }
+        }
 
-		var draws: Hand {
-			self
-		}
+        var draws: Hand {
+            self
+        }
 
-		var losesFrom: Hand {
-			switch self {
-			case .rock: return .paper
-			case .paper: return .scissors
-			case .scissors: return .rock
-			}
-		}
-	}
+        var losesFrom: Hand {
+            switch self {
+            case .rock: return .paper
+            case .paper: return .scissors
+            case .scissors: return .rock
+            }
+        }
+    }
 
-	private struct Game {
-		let a: Hand
-		let b: Hand
-	}
+    private struct Game {
+        let a: Hand
+        let b: Hand
+    }
 
-	func solvePart1() -> Any {
-		var score = 0
-		for game in input.games {
-			score += game.b.score
+    func solvePart1() -> Any {
+        var score = 0
+        for game in input.games {
+            score += game.b.score
 
-			if game.b.beats == game.a {
-				score += 6
-			} else if game.b.losesFrom == game.a {
-				score += 0
-			} else {
-				score += 3
-			}
-		}
+            if game.b.beats == game.a {
+                score += 6
+            } else if game.b.losesFrom == game.a {
+                score += 0
+            } else {
+                score += 3
+            }
+        }
 
-		return score
-	}
+        return score
+    }
 
-	func solvePart2() -> Any {
-		var score = 0
+    func solvePart2() -> Any {
+        var score = 0
 
-		for game in input.games {
-			switch game.b {
-			case .rock: // loose
-				score += game.a.beats.score
-			case .paper: // draws
-				score += game.a.draws.score + 3
-			case .scissors: // wins
-				score += game.a.losesFrom.score + 6
-			}
-		}
+        for game in input.games {
+            switch game.b {
+            case .rock: // loose
+                score += game.a.beats.score
+            case .paper: // draws
+                score += game.a.draws.score + 3
+            case .scissors: // wins
+                score += game.a.losesFrom.score + 6
+            }
+        }
 
-		return score
-	}
+        return score
+    }
 
-	func parseInput(rawString: String) {
-		input = .init(games: rawString.allLines().map { line in
-			let components = line.components(separatedBy: " ")
+    func parseInput(rawString: String) {
+        input = .init(games: rawString.allLines().map { line in
+            let components = line.components(separatedBy: " ")
 
-			let a: Hand
-			let b: Hand
+            let a: Hand
+            let b: Hand
 
-			switch components[0] {
-			case "A": a = .rock
-			case "B": a = .paper
-			case "C": a = .scissors
-			default: fatalError()
-			}
+            switch components[0] {
+            case "A": a = .rock
+            case "B": a = .paper
+            case "C": a = .scissors
+            default: fatalError()
+            }
 
-			switch components[1] {
-			case "X": b = .rock
-			case "Y": b = .paper
-			case "Z": b = .scissors
-			default: fatalError()
-			}
+            switch components[1] {
+            case "X": b = .rock
+            case "Y": b = .paper
+            case "Z": b = .scissors
+            default: fatalError()
+            }
 
-			return Game(a: a, b: b)
-		})
-	}
+            return Game(a: a, b: b)
+        })
+    }
 }

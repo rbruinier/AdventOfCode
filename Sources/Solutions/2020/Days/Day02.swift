@@ -29,11 +29,11 @@ final class Day02Solver: DaySolver {
     }
 
     func solvePart1() -> Any {
-        return input.passwords.filter { $0.isValidWithPolicy1 }.count
+        return input.passwords.filter(\.isValidWithPolicy1).count
     }
 
     func solvePart2() -> Any {
-        return input.passwords.filter { $0.isValidWithPolicy2 }.count
+        return input.passwords.filter(\.isValidWithPolicy2).count
     }
 
     func parseInput(rawString: String) {
@@ -50,7 +50,7 @@ final class Day02Solver: DaySolver {
             let policyCharacter = String(line[Range(match.range(at: 3), in: line)!])
             let password = String(line[Range(match.range(at: 4), in: line)!])
 
-            return .init(policyRange: (policyRangeLowerBounds ... policyRangeUpperBounds), policyCharacter: policyCharacter, password: password)
+            return .init(policyRange: policyRangeLowerBounds ... policyRangeUpperBounds, policyCharacter: policyCharacter, password: password)
         }
 
         input = .init(passwords: passwords)

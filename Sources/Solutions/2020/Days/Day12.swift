@@ -27,7 +27,7 @@ final class Day12Solver: DaySolver {
         case west = 270
 
         func turned(with degrees: Int) -> Orientation {
-            let orientationDegrees = (self.rawValue + degrees) % 360
+            let orientationDegrees = (rawValue + degrees) % 360
 
             return Orientation(rawValue: orientationDegrees)!
         }
@@ -83,7 +83,7 @@ final class Day12Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let actions: [Action] = rawString.components(separatedBy: .newlines).filter { $0.isNotEmpty }.compactMap { line in
+        let actions: [Action] = rawString.components(separatedBy: .newlines).filter(\.isNotEmpty).compactMap { line in
             let value = Int(line[line.index(line.startIndex, offsetBy: 1) ..< line.endIndex])!
 
             switch line.first! {

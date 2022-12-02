@@ -1,6 +1,6 @@
+import Collections
 import Foundation
 import Tools
-import Collections
 
 final class Day18Solver: DaySolver {
     let dayNumber: Int = 18
@@ -32,11 +32,11 @@ final class Day18Solver: DaySolver {
     }
 
     private func printTiles(_ tiles: [Point2D: Tile]) {
-        let minX = tiles.keys.map { $0.x }.min()!
-        let minY = tiles.keys.map { $0.y }.min()!
+        let minX = tiles.keys.map(\.x).min()!
+        let minY = tiles.keys.map(\.y).min()!
 
-        let maxX = tiles.keys.map { $0.x }.max()!
-        let maxY = tiles.keys.map { $0.y }.max()!
+        let maxX = tiles.keys.map(\.x).max()!
+        let maxY = tiles.keys.map(\.y).max()!
 
         for y in minY ... maxY {
             var line = ""
@@ -64,7 +64,7 @@ final class Day18Solver: DaySolver {
 
     private func allKeys(in tiles: [Point2D: Tile]) -> [String] {
         tiles.compactMap {
-            if case let .key(id) = $0.value {
+            if case .key(let id) = $0.value {
                 return id
             } else {
                 return nil
@@ -94,7 +94,7 @@ final class Day18Solver: DaySolver {
                 case .empty, .entrance:
                     tileQueue.append((point: neighborPoint, distance: tile.distance + 1, requiredKeys: tile.requiredKeys))
                 case .key(let id):
-                    if (neighborPoint == to) {
+                    if neighborPoint == to {
                         tileQueue.append((point: neighborPoint, distance: tile.distance + 1, requiredKeys: tile.requiredKeys))
                     } else {
                         tileQueue.append((point: neighborPoint, distance: tile.distance + 1, requiredKeys: tile.requiredKeys + [id]))
@@ -206,10 +206,10 @@ final class Day18Solver: DaySolver {
 
                 let isInQueue = queue.contains(exploredItem)
 
-                if explored.contains(exploredItem) == false && isInQueue == false {
+                if explored.contains(exploredItem) == false, isInQueue == false {
                     queue.append(exploredItem)
                     distanceByExplored[exploredItem] = newDistance
-                } else if isInQueue && distanceByExplored[exploredItem]! > newDistance {
+                } else if isInQueue, distanceByExplored[exploredItem]! > newDistance {
                     distanceByExplored[exploredItem] = newDistance
                 }
             }
@@ -234,9 +234,9 @@ final class Day18Solver: DaySolver {
             tiles[point] = .entrance
         }
 
-        tiles[originalEntrancePoint + .init(x:  0, y: 0)] = .wall
+        tiles[originalEntrancePoint + .init(x: 0, y: 0)] = .wall
         tiles[originalEntrancePoint + .init(x: -1, y: 0)] = .wall
-        tiles[originalEntrancePoint + .init(x:  1, y: 0)] = .wall
+        tiles[originalEntrancePoint + .init(x: 1, y: 0)] = .wall
         tiles[originalEntrancePoint + .init(x: 0, y: -1)] = .wall
         tiles[originalEntrancePoint + .init(x: 0, y: 1)] = .wall
 
@@ -308,10 +308,10 @@ final class Day18Solver: DaySolver {
 
                     let isInQueue = queue.contains(exploredItem)
 
-                    if explored.contains(exploredItem) == false && isInQueue == false {
+                    if explored.contains(exploredItem) == false, isInQueue == false {
                         queue.append(exploredItem)
                         distanceByExplored[exploredItem] = newDistance
-                    } else if isInQueue && distanceByExplored[exploredItem]! > newDistance {
+                    } else if isInQueue, distanceByExplored[exploredItem]! > newDistance {
                         distanceByExplored[exploredItem] = newDistance
                     }
                 }

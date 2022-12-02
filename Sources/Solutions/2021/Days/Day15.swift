@@ -46,7 +46,7 @@ final class Day15Solver: DaySolver {
                     let potential = minNeighborRisk + riskLevels[y * width + x]
 
                     if potential < minimumRiskGrid[(y * width) + x] {
-                        minimumRiskGrid[y * width + x]  = potential
+                        minimumRiskGrid[y * width + x] = potential
 
                         computing = true
                     }
@@ -89,7 +89,7 @@ final class Day15Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let height = rawString.filter { $0.isNewline }.count
+        let height = rawString.filter(\.isNewline).count
 
         let riskLevels: [Int] = rawString
             .compactMap { Int(String($0)) }

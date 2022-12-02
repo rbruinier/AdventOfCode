@@ -1,6 +1,6 @@
+import CryptoKit
 import Foundation
 import Tools
-import CryptoKit
 
 final class Day05Solver: DaySolver {
     let dayNumber: Int = 5
@@ -12,20 +12,20 @@ final class Day05Solver: DaySolver {
     }
 
     // Optimized to only return the first 3 bytes of the hash (as we only need to check for five zero's)
-	private func md5First3Bytes(with string: String) -> Int {
-		let digest = Insecure.MD5.hash(data: string.data(using: .ascii)!)
+    private func md5First3Bytes(with string: String) -> Int {
+        let digest = Insecure.MD5.hash(data: string.data(using: .ascii)!)
 
-		var result = 0
-		for (index, value) in digest.makeIterator().enumerated() {
-			result |= Int(value) << (8 * index)
-			
-			if index == 2 {
-				break
-			}
-		}
-		
-		return result
-	}
+        var result = 0
+        for (index, value) in digest.makeIterator().enumerated() {
+            result |= Int(value) << (8 * index)
+
+            if index == 2 {
+                break
+            }
+        }
+
+        return result
+    }
 
     func solvePart1() -> Any {
         var password = ""
@@ -44,7 +44,6 @@ final class Day05Solver: DaySolver {
                     return password
                 }
             }
-
         }
 
         fatalError()

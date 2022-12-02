@@ -41,7 +41,7 @@ final class Day17Solver: DaySolver {
                 return nil
             }
 
-            if (minX ... maxX).contains(origin.x) && (minY ... maxY).contains(origin.y) {
+            if (minX ... maxX).contains(origin.x), (minY ... maxY).contains(origin.y) {
                 return maximumY
             }
         }
@@ -62,7 +62,6 @@ final class Day17Solver: DaySolver {
                 }
             }
         }
-
 
         return bestMaximumY
     }

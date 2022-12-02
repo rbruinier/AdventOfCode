@@ -71,7 +71,7 @@ final class Day05Solver: DaySolver {
 
     func parseInput(rawString: String) {
         let seats = rawString.allLines()
-        
+
         input = .init(seats: seats)
     }
 }

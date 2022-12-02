@@ -1,6 +1,6 @@
+import Collections
 import Foundation
 import Tools
-import Collections
 
 final class Day19Solver: DaySolver {
     let dayNumber: Int = 19
@@ -41,11 +41,11 @@ final class Day19Solver: DaySolver {
 
                 let output = intcode.continueProgramTillOutput(input: [x, y])!
 
-                if output == 1 && startX == -1 {
+                if output == 1, startX == -1 {
                     startX = x
 
                     x += 100
-                } else if output == 0 && startX != -1 {
+                } else if output == 0, startX != -1 {
                     endX = x - 1
 
                     break
@@ -70,7 +70,6 @@ final class Day19Solver: DaySolver {
                     slidingWindow.removeFirst()
                 }
             }
-
         }
 
         fatalError()

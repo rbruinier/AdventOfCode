@@ -1,18 +1,18 @@
 import Foundation
 
-extension ArraySlice where Iterator.Element: Hashable {
-    public var mostCommonElement: Element? {
-        guard self.isNotEmpty else {
+public extension ArraySlice where Iterator.Element: Hashable {
+    var mostCommonElement: Element? {
+        guard isNotEmpty else {
             return nil
         }
 
         let uniqueElements = Set<Element>(self)
 
-        var mostCommonElement: Element? = nil
-        var maxCount: Int? = nil
+        var mostCommonElement: Element?
+        var maxCount: Int?
 
         for element in uniqueElements {
-            let count = self.filter { $0 == element }.count
+            let count = filter { $0 == element }.count
 
             if maxCount == nil || count > maxCount! {
                 mostCommonElement = element
@@ -23,18 +23,18 @@ extension ArraySlice where Iterator.Element: Hashable {
         return mostCommonElement!
     }
 
-    public var leastCommonElement: Element? {
-        guard self.isNotEmpty else {
+    var leastCommonElement: Element? {
+        guard isNotEmpty else {
             return nil
         }
 
         let uniqueElements = Set<Element>(self)
 
-        var leastCommonElement: Element? = nil
-        var maxCount: Int? = nil
+        var leastCommonElement: Element?
+        var maxCount: Int?
 
         for element in uniqueElements {
-            let count = self.filter { $0 == element }.count
+            let count = filter { $0 == element }.count
 
             if maxCount == nil || count < maxCount! {
                 leastCommonElement = element
@@ -46,48 +46,48 @@ extension ArraySlice where Iterator.Element: Hashable {
     }
 }
 
-extension Array where Iterator.Element: Hashable {
-    public var mostCommonElement: Element? {
+public extension Array where Iterator.Element: Hashable {
+    var mostCommonElement: Element? {
         return ArraySlice(self).mostCommonElement
     }
 
-    public var leastCommonElement: Element? {
+    var leastCommonElement: Element? {
         return ArraySlice(self).leastCommonElement
     }
 }
 
-extension Array where Element == Bool {
-	public mutating func negate() {
-		for index in 0 ..< count {
-			self[index] = !self[index]
-		}
-	}
+public extension [Bool] {
+    mutating func negate() {
+        for index in 0 ..< count {
+            self[index] = !self[index]
+        }
+    }
 
-	public func negated() -> [Bool] {
-		var newArray: [Bool] = Array(repeating: false, count: count)
-		
-		for index in 0 ..< count {
-			newArray[index] = !self[index]
-		}
-		
-		return newArray
-	}
+    func negated() -> [Bool] {
+        var newArray: [Bool] = Array(repeating: false, count: count)
+
+        for index in 0 ..< count {
+            newArray[index] = !self[index]
+        }
+
+        return newArray
+    }
 }
 
-extension ArraySlice where Element == Bool {
-	public mutating func negate() {
-		for index in 0 ..< count {
-			self[index] = !self[index]
-		}
-	}
+public extension ArraySlice where Element == Bool {
+    mutating func negate() {
+        for index in 0 ..< count {
+            self[index] = !self[index]
+        }
+    }
 
-	public func negated() -> [Bool] {
-		var newArray: [Bool] = Array(repeating: false, count: count)
-		
-		for index in 0 ..< count {
-			newArray[index] = !self[index]
-		}
-		
-		return newArray
-	}
+    func negated() -> [Bool] {
+        var newArray: [Bool] = Array(repeating: false, count: count)
+
+        for index in 0 ..< count {
+            newArray[index] = !self[index]
+        }
+
+        return newArray
+    }
 }

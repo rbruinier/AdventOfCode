@@ -53,39 +53,39 @@ final class Day25Solver: DaySolver {
             * shell
          */
 
-        let buffer: String = """
-            west
-            take hypercube
-            west
-            take space law space brochure
-            west
-            north
-            take shell
-            west
-            take mug
-            south
-            take festive hat
-            north
-            east
-            south
-            east
-            east
-            east
-            east
-            north
-            west
-            north
-            take whirled peas
-            west
-            west
-            take astronaut ice cream
-            south
-            drop whirled peas
-            drop space law space brochure
-            drop mug
-            south
+        let buffer = """
+        west
+        take hypercube
+        west
+        take space law space brochure
+        west
+        north
+        take shell
+        west
+        take mug
+        south
+        take festive hat
+        north
+        east
+        south
+        east
+        east
+        east
+        east
+        north
+        west
+        north
+        take whirled peas
+        west
+        west
+        take astronaut ice cream
+        south
+        drop whirled peas
+        drop space law space brochure
+        drop mug
+        south
 
-            """
+        """
 
         var asciiBuffer = buffer.map { Int($0.asciiValue!) }
 
@@ -93,7 +93,7 @@ final class Day25Solver: DaySolver {
         while true {
             let output = intcode.continueProgramTillOutputOrInput(input: &asciiBuffer)
 
-            if let output = output {
+            if let output {
                 if output == 10 {
 //                    print(line)
 

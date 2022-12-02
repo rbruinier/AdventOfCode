@@ -34,7 +34,7 @@ final class Day20Solver: DaySolver {
 
         subscript(row: Int, column: Int, default default: Int = 0) -> Int {
             get {
-                guard (0 ..< height).contains(row) && (0 ..< width).contains(column) else {
+                guard (0 ..< height).contains(row), (0 ..< width).contains(column) else {
                     return `default`
                 }
 
@@ -85,7 +85,7 @@ final class Day20Solver: DaySolver {
                         originalBitmap[originalY + 0, originalX + 1, default: defaultValue],
                         originalBitmap[originalY + 1, originalX - 1, default: defaultValue],
                         originalBitmap[originalY + 1, originalX + 0, default: defaultValue],
-                        originalBitmap[originalY + 1, originalX + 1, default: defaultValue],
+                        originalBitmap[originalY + 1, originalX + 1, default: defaultValue]
                     ]
 
                     var hash = 0

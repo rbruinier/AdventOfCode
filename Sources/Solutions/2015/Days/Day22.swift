@@ -7,7 +7,7 @@ final class Day22Solver: DaySolver {
 
     private var input: Input!
 
-    private var randomGenerator = SeededRandomNumberGenerator(seed: 0xdeadbeaf)
+    private var randomGenerator = SeededRandomNumberGenerator(seed: 0xDEAD_BEAF)
 
     private struct Input {
     }
@@ -48,14 +48,14 @@ final class Day22Solver: DaySolver {
         }
 
         func canCast(budget: Int) -> Bool {
-            return budget >= self.cost
+            return budget >= cost
         }
 
         func activate() {
             timer = startTimer
 
-            caster.mana -= self.cost
-            caster.spentMana += self.cost
+            caster.mana -= cost
+            caster.spentMana += cost
         }
 
         func execute() {
@@ -210,23 +210,23 @@ final class Day22Solver: DaySolver {
 
             var availableSpells: [Spell?] = []
 
-            if magicMissile.timer <= 1 && magicMissile.canCast(budget: player.mana) {
+            if magicMissile.timer <= 1, magicMissile.canCast(budget: player.mana) {
                 availableSpells.append(magicMissile)
             }
 
-            if drain.timer <= 1 && drain.canCast(budget: player.mana) {
+            if drain.timer <= 1, drain.canCast(budget: player.mana) {
                 availableSpells.append(drain)
             }
 
-            if shield.timer <= 1 && shield.canCast(budget: player.mana) {
+            if shield.timer <= 1, shield.canCast(budget: player.mana) {
                 availableSpells.append(shield)
             }
 
-            if poison.timer <= 1 && poison.canCast(budget: player.mana) {
+            if poison.timer <= 1, poison.canCast(budget: player.mana) {
                 availableSpells.append(poison)
             }
 
-            if recharge.timer <= 1 && recharge.canCast(budget: player.mana) {
+            if recharge.timer <= 1, recharge.canCast(budget: player.mana) {
                 availableSpells.append(recharge)
             }
 
@@ -238,7 +238,7 @@ final class Day22Solver: DaySolver {
                 result = playTurn(player: player, computer: computer, hardMode: hardMode, isPlayerTurn: true, activateSpells: [], activeSpells: &activeSpells)
             }
 
-            if let result = result {
+            if let result {
                 if result == .player {
                     return player.spentMana
                 } else {
@@ -248,7 +248,7 @@ final class Day22Solver: DaySolver {
 
             result = playTurn(player: player, computer: computer, hardMode: hardMode, isPlayerTurn: false, activateSpells: [], activeSpells: &activeSpells)
 
-            if let result = result {
+            if let result {
                 if result == .player {
                     return player.spentMana
                 } else {

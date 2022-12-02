@@ -1,11 +1,11 @@
+import Collections
 import Foundation
 import Tools
-import Collections
 
-extension Collection where Element == UInt8 {
+public extension Collection<UInt8> {
     @inline(__always)
-    public var asNibbles: [UInt8] {
-        var result = [UInt8](repeating: 0, count: self.count * 2)
+    var asNibbles: [UInt8] {
+        var result = [UInt8](repeating: 0, count: count * 2)
 
         var nibbleIndex = 0
         for byte in self {
@@ -22,8 +22,8 @@ extension Collection where Element == UInt8 {
     }
 
     @inline(__always)
-    public var bytesAsHexAscii: [UInt8] {
-        var result = [UInt8](repeating: 0, count: self.count * 2)
+    var bytesAsHexAscii: [UInt8] {
+        var result = [UInt8](repeating: 0, count: count * 2)
 
         var index = 0
         for byte in self {
@@ -84,7 +84,7 @@ final class Day14Solver: DaySolver {
         var repeatCount = 0
 
         for i in 0 ..< 32 {
-            if  hash[i] == character {
+            if hash[i] == character {
                 repeatCount += 1
             } else {
                 repeatCount = 0

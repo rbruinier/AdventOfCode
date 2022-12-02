@@ -37,7 +37,7 @@ final class Day23Solver: DaySolver {
         }
 
         mutating func executeNextInstruction() -> Bool {
-            guard ip >= 0 && ip < program.count else {
+            guard ip >= 0, ip < program.count else {
                 return false
             }
 
@@ -95,6 +95,7 @@ final class Day23Solver: DaySolver {
             return true
         }
     }
+
     func solvePart1() -> Any {
         var cpu = CPU(program: input.instructions)
 

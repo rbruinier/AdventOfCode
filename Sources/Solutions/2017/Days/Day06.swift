@@ -7,66 +7,65 @@ final class Day06Solver: DaySolver {
     private var input: Input!
 
     private struct Input {
-		let banks: [Int]
+        let banks: [Int]
     }
 
     func solvePart1() -> Any {
-		var banks = input.banks
-		
-		var previousBanks: Set<[Int]> = [banks]
-		
-		while true {
-			let maxIndex = banks.firstIndex(of: banks.max()!)!
-			
-			let blocks = banks[maxIndex]
-			
-			banks[maxIndex] = 0
-			
-			for bankIndex in maxIndex + 1 ... maxIndex + blocks {
-				banks[bankIndex % banks.count] += 1
-			}
-			
-			if previousBanks.contains(banks) {
-				break
-			}
-			
-			previousBanks.insert(banks)
-		}
-		
-		return previousBanks.count
+        var banks = input.banks
+
+        var previousBanks: Set<[Int]> = [banks]
+
+        while true {
+            let maxIndex = banks.firstIndex(of: banks.max()!)!
+
+            let blocks = banks[maxIndex]
+
+            banks[maxIndex] = 0
+
+            for bankIndex in maxIndex + 1 ... maxIndex + blocks {
+                banks[bankIndex % banks.count] += 1
+            }
+
+            if previousBanks.contains(banks) {
+                break
+            }
+
+            previousBanks.insert(banks)
+        }
+
+        return previousBanks.count
     }
 
     func solvePart2() -> Any {
-		var banks = input.banks
+        var banks = input.banks
 
-		var previousBanks: [[Int]: Int] = [:]
+        var previousBanks: [[Int]: Int] = [:]
 
-		var stepCounter = 0
-		while true {
-			let maxIndex = banks.firstIndex(of: banks.max()!)!
-			
-			let blocks = banks[maxIndex]
-			
-			banks[maxIndex] = 0
-			
-			for bankIndex in maxIndex + 1 ... maxIndex + blocks {
-				banks[bankIndex % banks.count] += 1
-			}
-			
-			stepCounter += 1
+        var stepCounter = 0
+        while true {
+            let maxIndex = banks.firstIndex(of: banks.max()!)!
 
-			if previousBanks.keys.contains(banks) {
-				return stepCounter - previousBanks[banks]!
-			}
-			
-			previousBanks[banks] = stepCounter
-			
-		}
-		
-		return previousBanks
-	}
+            let blocks = banks[maxIndex]
+
+            banks[maxIndex] = 0
+
+            for bankIndex in maxIndex + 1 ... maxIndex + blocks {
+                banks[bankIndex % banks.count] += 1
+            }
+
+            stepCounter += 1
+
+            if previousBanks.keys.contains(banks) {
+                return stepCounter - previousBanks[banks]!
+            }
+
+            previousBanks[banks] = stepCounter
+        }
+
+        return previousBanks
+    }
 
     func parseInput(rawString: String) {
-		input = .init(banks: rawString.allLines().first!.components(separatedBy: "\t").map { Int($0)! })
+        input = .init(banks: rawString.allLines().first!.components(separatedBy: "\t").map { Int($0)! })
     }
 }

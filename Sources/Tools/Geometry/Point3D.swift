@@ -51,4 +51,5 @@ extension Point3D: CustomStringConvertible {
     }
 }
 
-extension Point3D: Hashable, Equatable { }
+extension Point3D: Hashable, Equatable {
+}

@@ -1,23 +1,23 @@
 import Foundation
 
-extension ArraySlice {
-    public func combinationsWithoutRepetition(length: Int) -> [[Element]] {
-        guard self.count >= length else {
+public extension ArraySlice {
+    func combinationsWithoutRepetition(length: Int) -> [[Element]] {
+        guard count >= length else {
             return []
         }
 
-        guard self.count >= length && length > 0 else {
+        guard count >= length, length > 0 else {
             return [[]]
         }
 
         if length == 1 {
-            return self.map { [$0] }
+            return map { [$0] }
         }
 
         var combinations = [[Element]]()
 
-        for (index, element) in self.enumerated()  {
-            combinations += self.dropFirst(index + 1).combinationsWithoutRepetition(length: length - 1).map {
+        for (index, element) in enumerated() {
+            combinations += dropFirst(index + 1).combinationsWithoutRepetition(length: length - 1).map {
                 [element] + $0
             }
         }
@@ -26,20 +26,20 @@ extension ArraySlice {
     }
 }
 
-extension Array {
+public extension Array {
     /**
      Returns all permutations of an array.
 
      See: https://en.wikipedia.org/wiki/Heap%27s_algorithm
      */
-    public var permutations: [[Element]] {
-        var stack = [Int](repeating: 0, count: self.count)
+    var permutations: [[Element]] {
+        var stack = [Int](repeating: 0, count: count)
 
         var items = self
         var permutations: [[Element]] = [self]
 
         var i = 0
-        while i < self.count {
+        while i < count {
             if stack[i] < i {
                 if i & 1 == 0 {
                     items.swapAt(0, i)
@@ -60,17 +60,17 @@ extension Array {
         return permutations
     }
 
-    public func subsets(minLength: Int, maxLength: Int) -> [[Element]] {
+    func subsets(minLength: Int, maxLength: Int) -> [[Element]] {
         var subsets: [[Element]] = []
 
         for length in minLength ... maxLength {
             if length == 0 {
                 subsets.append([])
             } else if length == 1 {
-                subsets.append(contentsOf: self.map { [$0] })
+                subsets.append(contentsOf: map { [$0] })
             } else if length == 2 {
-                for startIndex in 0 ..< self.count - (length - 1) {
-                    for item in self[startIndex + 1 ..< self.count] {
+                for startIndex in 0 ..< count - (length - 1) {
+                    for item in self[startIndex + 1 ..< count] {
                         subsets.append([self[startIndex], item])
                     }
                 }
@@ -82,7 +82,7 @@ extension Array {
         return subsets
     }
 
-    public func combinationsWithoutRepetition(length: Int) -> [[Element]] {
+    func combinationsWithoutRepetition(length: Int) -> [[Element]] {
         return ArraySlice(self).combinationsWithoutRepetition(length: length)
     }
 }

@@ -27,7 +27,7 @@ final class Day01Solver: DaySolver {
                 return index + 1
             }
         }
-        
+
         return 0
     }
 

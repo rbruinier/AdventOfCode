@@ -4,46 +4,46 @@ import Tools
 print("Advent of Code 2021 🎄")
 
 extension DaySolver {
-	var year: Int {
-		2021
-	}
+    var year: Int {
+        2021
+    }
 }
 
 let day11Solver = Day11Solver()
 let day23Solver = Day23Solver()
 
 let days: [DaySolver] = [
-	//    Day01Solver(),
-	//    Day02Solver(),
-	//    Day03Solver(),
-	//    Day04Solver(),
-	//    Day05Solver(),
-	//    Day06Solver(),
-	//    Day07Solver(),
-	//    Day08Solver(),
-	//    Day09Solver(),
-	//    Day10Solver(),
-//	day11Solver,
-	//    Day12Solver(),
-	//    Day13Solver(),
-	//    Day14Solver(),
-	//    Day15Solver(),
-	//    Day16Solver(),
-	//    Day17Solver(),
-	//    Day18Solver(),
-	//    Day19Solver(),
-	//    Day20Solver(),
-	//    Day21Solver(),
-	//    Day22Solver(),
-	day23Solver,
-	//    Day24Solver(),
-	//    Day25Solver()
+    //    Day01Solver(),
+    //    Day02Solver(),
+    //    Day03Solver(),
+    //    Day04Solver(),
+    //    Day05Solver(),
+    //    Day06Solver(),
+    //    Day07Solver(),
+    //    Day08Solver(),
+    //    Day09Solver(),
+    //    Day10Solver(),
+    //	day11Solver,
+    //    Day12Solver(),
+    //    Day13Solver(),
+    //    Day14Solver(),
+    //    Day15Solver(),
+    //    Day16Solver(),
+    //    Day17Solver(),
+    //    Day18Solver(),
+    //    Day19Solver(),
+    //    Day20Solver(),
+    //    Day21Solver(),
+    //    Day22Solver(),
+    day23Solver
+    //    Day24Solver(),
+    //    Day25Solver()
 ]
 
 print("Parsing inputs")
 
 days.forEach { day in
-	day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: .module))
+    day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: .module))
 }
 
 print("Start solving days")
@@ -51,7 +51,7 @@ print("Start solving days")
 let startTime = mach_absolute_time()
 
 days.forEach { day in
-	solveDay(day)
+    solveDay(day)
 }
 
 let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
@@ -59,8 +59,8 @@ let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration:
 print("Total running duration is \(formattedDuration) seconds")
 
 visualize(
-	solver: day23Solver,
-	rootPath: FileManager.default
-		.homeDirectoryForCurrentUser
-		.appendingPathComponent("Desktop/AdventOfCode")
+    solver: day23Solver,
+    rootPath: FileManager.default
+        .homeDirectoryForCurrentUser
+        .appendingPathComponent("Desktop/AdventOfCode")
 )

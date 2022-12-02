@@ -41,7 +41,7 @@ final class Day10Solver: DaySolver {
                         continue
                     }
 
-                    guard sign(offset.x) == sign(subOffset.x) && sign(offset.y) == sign(subOffset.y) else {
+                    guard sign(offset.x) == sign(subOffset.x), sign(offset.y) == sign(subOffset.y) else {
                         continue
                     }
 
@@ -69,7 +69,7 @@ final class Day10Solver: DaySolver {
 
     func solvePart2() -> Any {
         func degrees(_ x: Double, _ y: Double) -> Double {
-            var degrees = Double.pi * 0.5 + (atan2(y, x)).remainder(dividingBy: Double.pi * 2.0)
+            var degrees = Double.pi * 0.5 + atan2(y, x).remainder(dividingBy: Double.pi * 2.0)
 
             if degrees < 0 {
                 degrees += Double.pi * 2.0

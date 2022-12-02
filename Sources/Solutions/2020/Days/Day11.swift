@@ -46,11 +46,11 @@ final class Day11Solver: DaySolver {
                     }
                 }
 
-                if originalStates[index] == .empty && sum == 0 {
+                if originalStates[index] == .empty, sum == 0 {
                     states[index] = .occupied
 
                     modified = true
-                } else if originalStates[index] == .occupied && sum >= 4 {
+                } else if originalStates[index] == .occupied, sum >= 4 {
                     states[index] = .empty
 
                     modified = true
@@ -97,7 +97,7 @@ final class Day11Solver: DaySolver {
                         currentX += direction.x
                         currentY += direction.y
 
-                        guard currentX >= 0 && currentY >= 0 && currentX < width && currentY < height else {
+                        guard currentX >= 0, currentY >= 0, currentX < width, currentY < height else {
                             break
                         }
 
@@ -111,11 +111,11 @@ final class Day11Solver: DaySolver {
                     }
                 }
 
-                if originalStates[index] == .empty && sum == 0 {
+                if originalStates[index] == .empty, sum == 0 {
                     states[index] = .occupied
 
                     modified = true
-                } else if originalStates[index] == .occupied && sum >= 5 {
+                } else if originalStates[index] == .occupied, sum >= 5 {
                     states[index] = .empty
 
                     modified = true

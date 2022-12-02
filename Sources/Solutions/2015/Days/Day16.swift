@@ -9,7 +9,7 @@ final class Day16Solver: DaySolver {
     private struct Input {
         let aunts: [Aunt]
     }
-    
+
     private struct Aunt {
         let name: String
         let items: [String: Int]
@@ -30,12 +30,12 @@ final class Day16Solver: DaySolver {
 
     func solvePart1() -> Any {
         var bestAunt: Aunt!
-        var bestScore: Int = Int.min
-        
+        var bestScore = Int.min
+
         for aunt in input.aunts {
             var fullMatchCount = 0
             var semiMatchCount = 0
-            
+
             for (item, number) in auntItems {
                 if let auntItemNumber = aunt.items[item] {
                     if number == auntItemNumber {
@@ -47,26 +47,26 @@ final class Day16Solver: DaySolver {
                     }
                 }
             }
-            
+
             let score = fullMatchCount + semiMatchCount
-            
+
             if score > bestScore {
                 bestAunt = aunt
                 bestScore = score
             }
         }
-        
+
         return Int(bestAunt.name.replacingOccurrences(of: "Sue ", with: ""))!
     }
 
     func solvePart2() -> Any {
         var bestAunt: Aunt!
-        var bestScore: Int = Int.min
-        
+        var bestScore = Int.min
+
         for aunt in input.aunts {
             var fullMatchCount = 0
             var semiMatchCount = 0
-            
+
             for (item, number) in auntItems {
                 if let auntItemNumber = aunt.items[item] {
                     if ["cats", "trees"].contains(item) {
@@ -88,16 +88,16 @@ final class Day16Solver: DaySolver {
                     }
                 }
             }
-            
+
             let score = fullMatchCount + semiMatchCount
-            
+
             if score > bestScore {
                 bestAunt = aunt
                 bestScore = score
             }
         }
-        
-        return Int(bestAunt.name.replacingOccurrences(of: "Sue ", with: ""))!        
+
+        return Int(bestAunt.name.replacingOccurrences(of: "Sue ", with: ""))!
     }
 
     func parseInput(rawString: String) {
@@ -106,19 +106,19 @@ final class Day16Solver: DaySolver {
 
             let items: [String: Int] = Dictionary(
                 uniqueKeysWithValues:
-                    components[1 ..< components.count]
-                        .joined(separator: ": ")
-                        .components(separatedBy: ", ")
-                        .map { itemString in
-                            let parts = itemString.components(separatedBy: ": ")
-                
-                            return (key: parts[0], value: Int(parts[1])!)
-                        }
+                components[1 ..< components.count]
+                    .joined(separator: ": ")
+                    .components(separatedBy: ", ")
+                    .map { itemString in
+                        let parts = itemString.components(separatedBy: ": ")
+
+                        return (key: parts[0], value: Int(parts[1])!)
+                    }
             )
-            
+
             return .init(name: components[0], items: items)
         }
-        
+
         input = .init(aunts: aunts)
     }
 }

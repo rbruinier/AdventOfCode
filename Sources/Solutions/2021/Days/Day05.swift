@@ -47,7 +47,7 @@ final class Day05Solver: DaySolver {
                 drawHorizontal = true
             case .vertical:
                 drawHorizontal = false
-            case.diagonal:
+            case .diagonal:
                 guard includeDiagonalLines else {
                     return
                 }
@@ -61,8 +61,6 @@ final class Day05Solver: DaySolver {
 
                     xInc = line.x2 > line.x1 ? 1 : -1
                 }
-
-                break
             }
 
             if drawHorizontal {
@@ -127,7 +125,6 @@ final class Day05Solver: DaySolver {
                 return .diagonal
             }
         }
-
     }
 
     func solvePart1() -> Any {
@@ -151,8 +148,8 @@ final class Day05Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        var largestX: Int = 0
-        var largestY: Int = 0
+        var largestX = 0
+        var largestY = 0
 
         let lines: [Line] = rawString
             .components(separatedBy: CharacterSet.newlines)

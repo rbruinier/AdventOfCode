@@ -1,46 +1,46 @@
 import Foundation
 
 public protocol Visualizer {
-	var solver: DaySolver { get }
-	
-	var dimensions: Size { get }
-		
-	var title: String { get }
-	var frameDescription: String? { get }
+    var solver: DaySolver { get }
 
-	var isCompleted: Bool { get }
-	
-	func renderFrame(with context: VisualizationContext)
+    var dimensions: Size { get }
+
+    var title: String { get }
+    var frameDescription: String? { get }
+
+    var isCompleted: Bool { get }
+
+    func renderFrame(with context: VisualizationContext)
 }
 
 public extension Visualizer {
-	var title: String {
-		"AoC Day \(solver.dayNumber) of \(solver.year)"
-	}
+    var title: String {
+        "AoC Day \(solver.dayNumber) of \(solver.year)"
+    }
 }
 
 public func visualize(solver: DaySolver, rootPath: URL) {
-	let year = solver.year
-	let day = solver.dayNumber
-	
-	let exportPath = rootPath.appendingPathComponent("\(year)/\(day)")
+    let year = solver.year
+    let day = solver.dayNumber
 
-	try? FileManager.default.removeItem(at: exportPath)
-	try! FileManager.default.createDirectory(at: exportPath, withIntermediateDirectories: true)
+    let exportPath = rootPath.appendingPathComponent("\(year)/\(day)")
 
-	let visualizer = solver.createVisualizer()!
+    try? FileManager.default.removeItem(at: exportPath)
+    try! FileManager.default.createDirectory(at: exportPath, withIntermediateDirectories: true)
 
-	let context = VisualizationContext(dimensions: visualizer.dimensions)
+    let visualizer = solver.createVisualizer()!
 
-	while visualizer.isCompleted == false {
-		visualizer.renderFrame(with: context)
-		
-		context.drawCenteredText(visualizer.title, atY: 4, color: .white)
-		
-		if let frameDescription = visualizer.frameDescription {
-			context.drawCenteredText(frameDescription, atY: visualizer.dimensions.height - 10, color: .white)
-		}
-		
-		context.exportFrameToPNG(rootPath: exportPath.relativePath, exportScale: 4)
-	}
+    let context = VisualizationContext(dimensions: visualizer.dimensions)
+
+    while visualizer.isCompleted == false {
+        visualizer.renderFrame(with: context)
+
+        context.drawCenteredText(visualizer.title, atY: 4, color: .white)
+
+        if let frameDescription = visualizer.frameDescription {
+            context.drawCenteredText(frameDescription, atY: visualizer.dimensions.height - 10, color: .white)
+        }
+
+        context.exportFrameToPNG(rootPath: exportPath.relativePath, exportScale: 4)
+    }
 }

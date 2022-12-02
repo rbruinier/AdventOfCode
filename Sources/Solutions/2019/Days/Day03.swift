@@ -59,7 +59,6 @@ final class Day03Solver: DaySolver {
                     } else {
                         points[point] = (lineIndex: lineIndex, steps: steps)
                     }
-
                 }
             }
         }
@@ -76,7 +75,7 @@ final class Day03Solver: DaySolver {
     }
 
     func solvePart2() -> Any {
-        return resultCache.map { $0.steps }.min()!
+        return resultCache.map(\.steps).min()!
     }
 
     func parseInput(rawString: String) {

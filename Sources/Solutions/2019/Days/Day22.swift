@@ -1,7 +1,7 @@
+import BigNumber
+import Collections
 import Foundation
 import Tools
-import Collections
-import BigNumber
 
 final class Day22Solver: DaySolver {
     let dayNumber: Int = 22

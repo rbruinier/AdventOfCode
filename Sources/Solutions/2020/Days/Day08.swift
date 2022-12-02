@@ -29,7 +29,7 @@ final class Day08Solver: DaySolver {
         }
 
         mutating func executeNextInstruction() -> Bool {
-            guard ip >= 0 && ip < program.count && executedIps.contains(ip) == false else {
+            guard ip >= 0, ip < program.count, executedIps.contains(ip) == false else {
                 return false
             }
 

@@ -1,6 +1,6 @@
+import Collections
 import Foundation
 import Tools
-import Collections
 
 final class Day20Solver: DaySolver {
     let dayNumber: Int = 20
@@ -16,8 +16,8 @@ final class Day20Solver: DaySolver {
         init(tiles: [Point2D: Tile]) {
             self.tiles = tiles
 
-            min = .init(x: tiles.keys.map { $0.x }.min()!, y: tiles.keys.map { $0.y }.min()!)
-            max = .init(x: tiles.keys.map { $0.x }.max()!, y: tiles.keys.map { $0.y }.max()!)
+            min = .init(x: tiles.keys.map(\.x).min()!, y: tiles.keys.map(\.y).min()!)
+            max = .init(x: tiles.keys.map(\.x).max()!, y: tiles.keys.map(\.y).max()!)
         }
     }
 
@@ -78,7 +78,7 @@ final class Day20Solver: DaySolver {
                 case .end: break
                 case .wall: break
                 case .portal(let id1, _):
-                    if case let .portal(id2, _) = tiles[.init(x: x + 1, y: y)] { // horizontal
+                    if case .portal(let id2, _) = tiles[.init(x: x + 1, y: y)] { // horizontal
                         let combinedId = id1 + id2
 
                         if tiles[.init(x: x + 2, y: y)] == .empty { // on the left
@@ -102,7 +102,7 @@ final class Day20Solver: DaySolver {
                         } else {
                             fatalError()
                         }
-                    } else if case let .portal(id2, _) = tiles[.init(x: x, y: y + 1)] { // vertical
+                    } else if case .portal(let id2, _) = tiles[.init(x: x, y: y + 1)] { // vertical
                         let combinedId = id1 + id2
 
                         if tiles[.init(x: x, y: y + 2)] == .empty {
@@ -151,7 +151,7 @@ final class Day20Solver: DaySolver {
         var pointsById: [String: [Point2D]] = [:]
 
         for (point, tile) in tiles {
-            if case let .portal(id, _) = tile {
+            if case .portal(let id, _) = tile {
                 pointsById[id, default: []] += [point]
             }
         }
@@ -292,7 +292,7 @@ final class Day20Solver: DaySolver {
                         tileQueue.append((point: neighborPoint, distance: tile.distance + 1, level: tile.level))
                     }
                 case .portal(let id, let side):
-                    if tile.level == 0 && side == .outer {
+                    if tile.level == 0, side == .outer {
                         break
                     }
 

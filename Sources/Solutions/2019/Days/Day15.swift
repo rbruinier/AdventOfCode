@@ -1,15 +1,15 @@
 import Foundation
 import Tools
 
-extension Direction {
-	fileprivate var mazeCode: Int {
-		switch self {
-		case .north: return 1
-		case .south: return 2
-		case .west: return 3
-		case .east: return 4
-		}
-	}
+private extension Direction {
+    var mazeCode: Int {
+        switch self {
+        case .north: return 1
+        case .south: return 2
+        case .west: return 3
+        case .east: return 4
+        }
+    }
 }
 
 final class Day15Solver: DaySolver {
@@ -32,17 +32,17 @@ final class Day15Solver: DaySolver {
     private var oxygenSystemPoint: Point2D!
 
     private func printGame(with tiles: [Point2D: Tile]) {
-        let minX = tiles.keys.map { $0.x }.min()!
-        let minY = tiles.keys.map { $0.y }.min()!
+        let minX = tiles.keys.map(\.x).min()!
+        let minY = tiles.keys.map(\.y).min()!
 
-        let maxX = tiles.keys.map { $0.x }.max()!
-        let maxY = tiles.keys.map { $0.y }.max()!
+        let maxX = tiles.keys.map(\.x).max()!
+        let maxY = tiles.keys.map(\.y).max()!
 
         for y in minY ... maxY {
             var line = ""
 
             for x in minX ... maxX {
-                if y == 0 && x == 0 {
+                if y == 0, x == 0 {
                     line += "S"
 
                     continue

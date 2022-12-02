@@ -12,14 +12,14 @@ final class Day08Solver: DaySolver {
 
     private func numberOfSuperfluousCharacters(in originalString: String) -> Int {
         var index = 1
-        
+
         var count = 2
         while index < originalString.count - 1 {
             let character = originalString[index ... index]
-            
+
             if character == "\\" {
                 let nextCharacter = originalString[index + 1 ... index + 1]
-                
+
                 if nextCharacter == "\\" || nextCharacter == "\"" {
                     count += 1
                     index += 1
@@ -28,7 +28,7 @@ final class Day08Solver: DaySolver {
                     index += 2
                 }
             }
-            
+
             index += 1
         }
 
@@ -39,7 +39,7 @@ final class Day08Solver: DaySolver {
         var count = 2
         for character in originalString {
             let character = String(character)
-            
+
             if character == "\\" || character == "\"" {
                 count += 1
             }
@@ -47,13 +47,13 @@ final class Day08Solver: DaySolver {
 
         return count
     }
-    
+
     func solvePart1() -> Any {
         var sumOfDifference = 0
         for string in input.strings {
             sumOfDifference += numberOfSuperfluousCharacters(in: string)
         }
-        
+
         return sumOfDifference
     }
 
@@ -62,7 +62,7 @@ final class Day08Solver: DaySolver {
         for string in input.strings {
             sumOfDifference += numberOfExtraEncodedCharacters(in: string)
         }
-        
+
         return sumOfDifference
     }
 

@@ -60,13 +60,13 @@ final class Day13Solver: DaySolver {
         // note: we might be able to calculate the intervals also with the Diophantine equation?
         for bus in busses[1 ..< busses.endIndex] {
             var departureTime = baseDepartureTime
-            var firstMatch: Int? = nil
+            var firstMatch: Int?
 
             while true {
                 departureTime += currentInterval
 
                 if matchingTime(time: departureTime, bus: bus) {
-                    if let firstMatch = firstMatch {
+                    if let firstMatch {
                         currentInterval = departureTime - firstMatch
 
                         break

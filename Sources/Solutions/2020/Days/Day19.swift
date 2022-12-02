@@ -30,7 +30,7 @@ final class Day19Solver: DaySolver {
                 if String(string.first!) == character {
                     remainingStrings.append(String(string[string.index(string.startIndex, offsetBy: 1) ..< string.endIndex]))
                 }
-            case.rule(let groups):
+            case .rule(let groups):
                 var count = 0
 
                 for group in groups {
@@ -119,6 +119,6 @@ final class Day19Solver: DaySolver {
             }
         }
 
-        input = .init(rules: rules, strings: lines.filter { $0.isNotEmpty })
+        input = .init(rules: rules, strings: lines.filter(\.isNotEmpty))
     }
 }

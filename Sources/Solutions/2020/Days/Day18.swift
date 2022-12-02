@@ -64,7 +64,7 @@ final class Day18Solver: DaySolver {
                 }
             case .addition:
                 switch operation {
-                case .add: multiplications[multiplications.count - 1] += operandValue //result += operandValue
+                case .add: multiplications[multiplications.count - 1] += operandValue // result += operandValue
                 case .product:
                     multiplications.append(operandValue)
                 }
@@ -80,11 +80,11 @@ final class Day18Solver: DaySolver {
     }
 
     func solvePart1() -> Any {
-        return input.equations.reduce(0, { $0 + solveEquation(equation: $1, precedence: .default)})
+        return input.equations.reduce(0) { $0 + solveEquation(equation: $1, precedence: .default) }
     }
 
     func solvePart2() -> Any {
-        return input.equations.reduce(0, { $0 + solveEquation(equation: $1, precedence: .addition)})
+        return input.equations.reduce(0) { $0 + solveEquation(equation: $1, precedence: .addition) }
     }
 
     func parseInput(rawString: String) {

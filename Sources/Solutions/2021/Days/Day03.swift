@@ -3,7 +3,7 @@ import Tools
 
 final class Day03Solver: DaySolver {
     let dayNumber: Int = 3
-    
+
     private var input: Input!
 
     private struct Input {
@@ -23,7 +23,7 @@ final class Day03Solver: DaySolver {
             gammaRate |= (bitIsSet ? 1 : 0) << digitIndex
         }
 
-        let epsilonRate = gammaRate ^ 0b111111111111
+        let epsilonRate = gammaRate ^ 0b1111_1111_1111
 
         return gammaRate * epsilonRate
     }
@@ -65,7 +65,7 @@ final class Day03Solver: DaySolver {
         let oxygenGeneratorRating = oxygenGeneratorItems.first!
         let co2ScrubberRating = co2ScrubbingItems.first!
 
-        return oxygenGeneratorRating * co2ScrubberRating        
+        return oxygenGeneratorRating * co2ScrubberRating
     }
 
     func parseInput(rawString: String) {

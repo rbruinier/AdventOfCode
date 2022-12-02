@@ -60,7 +60,7 @@ final class Day01Solver: DaySolver {
     func parseInput(rawString: String) {
         let steps: [Step] = rawString
             .components(separatedBy: ",")
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines ) }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .map { item in
                 if item[0] == "L" {
                     return .left(count: Int(item[1 ..< item.count])!)

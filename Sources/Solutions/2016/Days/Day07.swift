@@ -35,7 +35,7 @@ final class Day07Solver: DaySolver {
                 continue
             }
 
-            if ipAsAscii[index - 3] == character && ipAsAscii[index - 2] == ipAsAscii[index - 1] && ipAsAscii[index - 1] != character {
+            if ipAsAscii[index - 3] == character, ipAsAscii[index - 2] == ipAsAscii[index - 1], ipAsAscii[index - 1] != character {
                 if inBracket {
                     return false
                 }
@@ -73,7 +73,7 @@ final class Day07Solver: DaySolver {
                 continue
             }
 
-            if ipAsAscii[index - 2] == ipAsAscii[index] && ipAsAscii[index - 2] != ipAsAscii[index - 1] {
+            if ipAsAscii[index - 2] == ipAsAscii[index], ipAsAscii[index - 2] != ipAsAscii[index - 1] {
                 if inBracket {
                     foundBABs.insert(Array(ipAsAscii[index - 2 ... index]))
                 } else {

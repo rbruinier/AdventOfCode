@@ -14,7 +14,7 @@ final class Day18Solver: DaySolver {
         var segments: [Segment]
 
         public var description: String {
-            segments.map { $0.description }.joined()
+            segments.map(\.description).joined()
         }
 
         var nextExplodingPair: Block? {
@@ -132,7 +132,7 @@ final class Day18Solver: DaySolver {
         }
 
         var description: String {
-            let joinedSegments = segments.map { $0.description }.joined()
+            let joinedSegments = segments.map(\.description).joined()
 
             return "Block\n range: \(startIndex) ..< \(endIndex)\n segments: \(joinedSegments)"
         }
@@ -181,7 +181,7 @@ final class Day18Solver: DaySolver {
             switch nextSegment {
             case .openBracket:
                 subNodeA = Node(segments: &segments)
-            case.number(let number):
+            case .number(let number):
                 subNodeA = .number(number: number)
 
                 segments.removeFirst()
@@ -198,7 +198,7 @@ final class Day18Solver: DaySolver {
             switch nextSegment {
             case .openBracket:
                 subNodeB = Node(segments: &segments)
-            case.number(let number):
+            case .number(let number):
                 subNodeB = .number(number: number)
 
                 segments.removeFirst()
@@ -298,7 +298,7 @@ final class Day18Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let rawLines: [[Character]] = rawString.components(separatedBy: CharacterSet.newlines).compactMap { $0.isEmpty == false ? $0 : nil }.map { $0.map { $0} }
+        let rawLines: [[Character]] = rawString.components(separatedBy: CharacterSet.newlines).compactMap { $0.isEmpty == false ? $0 : nil }.map { $0.map { $0 } }
 
         var lines: [Line] = []
 

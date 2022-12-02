@@ -45,7 +45,8 @@ final class Day22Solver: DaySolver {
                 || rhs.minPoint.y > maxPoint.y
                 || rhs.maxPoint.y < minPoint.y
                 || rhs.minPoint.z > maxPoint.z
-                || rhs.maxPoint.z < minPoint.z {
+                || rhs.maxPoint.z < minPoint.z
+            {
                 return false
             }
 
@@ -56,17 +57,18 @@ final class Day22Solver: DaySolver {
             let intersectionMinPoint = Point(
                 x: max(minPoint.x, rhs.minPoint.x),
                 y: max(minPoint.y, rhs.minPoint.y),
-                z: max(minPoint.z, rhs.minPoint.z))
+                z: max(minPoint.z, rhs.minPoint.z)
+            )
 
             let intersectionMaxPoint = Point(
                 x: min(maxPoint.x, rhs.maxPoint.x),
                 y: min(maxPoint.y, rhs.maxPoint.y),
-                z: min(maxPoint.z, rhs.maxPoint.z))
+                z: min(maxPoint.z, rhs.maxPoint.z)
+            )
 
             return .init(minPoint: intersectionMinPoint, maxPoint: intersectionMaxPoint, sign: -sign)
         }
     }
-
 
     private func addBox(_ box: Box, isOn: Bool, to boxes: [Box]) -> [Box] {
         var newBoxes: [Box] = boxes
@@ -128,7 +130,7 @@ final class Day22Solver: DaySolver {
             return result + (box.numberOfCubes * box.sign)
         }
 
-        return count        
+        return count
     }
 
     func parseInput(rawString: String) {

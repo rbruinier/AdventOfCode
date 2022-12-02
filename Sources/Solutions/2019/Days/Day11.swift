@@ -53,11 +53,11 @@ final class Day11Solver: DaySolver {
 
         let points = panels.keys
 
-        let minX = points.map { $0.x }.min()!
-        let minY = points.map { $0.y }.min()!
+        let minX = points.map(\.x).min()!
+        let minY = points.map(\.y).min()!
 
-        let maxX = points.map { $0.x }.max()!
-        let maxY = points.map { $0.y }.max()!
+        let maxX = points.map(\.x).max()!
+        let maxY = points.map(\.y).max()!
 
         for y in minY ... maxY {
             var line = ""

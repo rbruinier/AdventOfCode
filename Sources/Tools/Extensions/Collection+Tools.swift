@@ -2,8 +2,8 @@
 
 import Foundation
 
-extension Collection {
-    public var isNotEmpty: Bool {
+public extension Collection {
+    var isNotEmpty: Bool {
         return !isEmpty
     }
 }

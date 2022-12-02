@@ -53,7 +53,7 @@ final class Day14Solver: DaySolver {
             shifters.removeFirst()
 
             let version1 = base | (1 << shifter) // force 1
-            let version2 = base & (0b11111111_11111111_11111111_11111111_1111 ^ (1 << shifter))
+            let version2 = base & (0b1111_1111_1111_1111_1111_1111_1111_1111_1111 ^ (1 << shifter))
 
             return [version1, version2]
                 + createAllVariations(base: version1, instruction: instruction, bitShifters: shifters)

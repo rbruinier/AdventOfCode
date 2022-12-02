@@ -90,7 +90,7 @@ final class IntcodeProcessor {
             let index: Int
 
             switch operand {
-            case .immediate(_): fatalError("Cannot output to immediate")
+            case .immediate: fatalError("Cannot output to immediate")
             case .position(let absoluteIndex): index = absoluteIndex
             case .relative(let offset): index = relativeBase + offset
             }
@@ -127,7 +127,7 @@ final class IntcodeProcessor {
 
     private var state: State!
 
-    private var continueInputTargetIndex: Value? = nil
+    private var continueInputTargetIndex: Value?
 
     init() {
     }

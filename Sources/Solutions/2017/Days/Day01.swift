@@ -2,45 +2,45 @@ import Foundation
 import Tools
 
 final class Day01Solver: DaySolver {
-	let dayNumber: Int = 1
+    let dayNumber: Int = 1
 
-	private var input: Input!
+    private var input: Input!
 
-	private struct Input {
-		let digits: [Int]
-	}
+    private struct Input {
+        let digits: [Int]
+    }
 
-	func solvePart1() -> Any {
-		var digits = input.digits
+    func solvePart1() -> Any {
+        var digits = input.digits
 
-		digits.append(digits.first!)
+        digits.append(digits.first!)
 
-		var sum = 0
-		for i in 0 ..< (digits.count - 1) {
-			sum += (digits[i] == digits[i + 1]) ? digits[i] : 0
-		}
+        var sum = 0
+        for i in 0 ..< (digits.count - 1) {
+            sum += (digits[i] == digits[i + 1]) ? digits[i] : 0
+        }
 
-		return sum
-	}
+        return sum
+    }
 
-	func solvePart2() -> Any {
-		let digits = input.digits
+    func solvePart2() -> Any {
+        let digits = input.digits
 
-		let halfIndex = digits.count / 2
+        let halfIndex = digits.count / 2
 
-		var sum = 0
-		for i in 0 ..< digits.count {
-			sum += (digits[i] == digits[(i + halfIndex) % digits.count]) ? digits[i] : 0
-		}
+        var sum = 0
+        for i in 0 ..< digits.count {
+            sum += (digits[i] == digits[(i + halfIndex) % digits.count]) ? digits[i] : 0
+        }
 
-		return sum
-	}
+        return sum
+    }
 
-	func parseInput(rawString: String) {
-		let digits: [Int] = rawString.allLines().first!.map {
-			Int(String($0))!
-		}
+    func parseInput(rawString: String) {
+        let digits: [Int] = rawString.allLines().first!.map {
+            Int(String($0))!
+        }
 
-		input = .init(digits: digits)
-	}
+        input = .init(digits: digits)
+    }
 }

@@ -3,7 +3,7 @@ import Tools
 
 final class Day03Solver: DaySolver {
     let dayNumber: Int = 3
-    
+
     private var input: Input!
 
     private struct Input {
@@ -34,7 +34,7 @@ final class Day03Solver: DaySolver {
             (x: 3, y: 1),
             (x: 5, y: 1),
             (x: 7, y: 1),
-            (x: 1, y: 2),
+            (x: 1, y: 2)
         ]
 
         var combined = 1

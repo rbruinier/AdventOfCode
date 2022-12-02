@@ -78,11 +78,11 @@ final class Day10Solver: DaySolver {
                     let score: Int
 
                     switch character {
-                        case "(": score = 1
-                        case "[": score = 2
-                        case "{": score = 3
-                        case "<": score = 4
-                        default: fatalError("Unexpected character")
+                    case "(": score = 1
+                    case "[": score = 2
+                    case "{": score = 3
+                    case "<": score = 4
+                    default: fatalError("Unexpected character")
                     }
 
                     return (result! * 5) + score

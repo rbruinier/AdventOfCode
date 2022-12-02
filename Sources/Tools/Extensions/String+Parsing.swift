@@ -1,17 +1,17 @@
 import Foundation
 
-extension String {
-    public func allLines(includeEmpty: Bool = false) -> [String] {
+public extension String {
+    func allLines(includeEmpty: Bool = false) -> [String] {
         var lines = components(separatedBy: .newlines)
 
         if includeEmpty == false {
-            lines = lines.filter { $0.isNotEmpty }
+            lines = lines.filter(\.isNotEmpty)
         }
 
         return lines
     }
 
-    public func parseCommaSeparatedInts(filterInvalid: Bool = true) -> [Int] {
+    func parseCommaSeparatedInts(filterInvalid: Bool = true) -> [Int] {
         let items = components(separatedBy: ",")
 
         if filterInvalid {

@@ -61,7 +61,6 @@ final class Day07Solver: DaySolver {
                         } else {
                             break iterationLoop
                         }
-
                     }
 
                     maxThrusterSignal = max(maxThrusterSignal, currentInput)

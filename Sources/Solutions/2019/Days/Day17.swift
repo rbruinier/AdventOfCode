@@ -19,11 +19,11 @@ final class Day17Solver: DaySolver {
     private var tiles: [Point2D: Tile] = [:]
 
     private func printGame(with tiles: [Point2D: Tile]) {
-        let minX = tiles.keys.map { $0.x }.min()!
-        let minY = tiles.keys.map { $0.y }.min()!
+        let minX = tiles.keys.map(\.x).min()!
+        let minY = tiles.keys.map(\.y).min()!
 
-        let maxX = tiles.keys.map { $0.x }.max()!
-        let maxY = tiles.keys.map { $0.y }.max()!
+        let maxX = tiles.keys.map(\.x).max()!
+        let maxY = tiles.keys.map(\.y).max()!
 
         for y in minY ... maxY {
             var line = ""
@@ -89,11 +89,11 @@ final class Day17Solver: DaySolver {
 
 //        printGame(with: tiles)
 
-        let minX = tiles.keys.map { $0.x }.min()!
-        let minY = tiles.keys.map { $0.y }.min()!
+        let minX = tiles.keys.map(\.x).min()!
+        let minY = tiles.keys.map(\.y).min()!
 
-        let maxX = tiles.keys.map { $0.x }.max()!
-        let maxY = tiles.keys.map { $0.y }.max()!
+        let maxX = tiles.keys.map(\.x).max()!
+        let maxY = tiles.keys.map(\.y).max()!
 
         var sum = 0
         for y in minY ..< maxY {
@@ -207,15 +207,15 @@ final class Day17Solver: DaySolver {
 
         let intcode = IntcodeProcessor(program: program)
 
-        let buffer: String = """
-            A,B,A,B,C,A,B,C,A,C
-            R,6,L,10,R,8
-            R,8,R,12,L,8,L,8
-            L,10,R,6,R,6,L,8
+        let buffer = """
+        A,B,A,B,C,A,B,C,A,C
+        R,6,L,10,R,8
+        R,8,R,12,L,8,L,8
+        L,10,R,6,R,6,L,8
 
-            n
+        n
 
-            """
+        """
 
         var asciiBuffer = buffer.map { Int($0.asciiValue!) }
 

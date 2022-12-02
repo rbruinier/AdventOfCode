@@ -7,14 +7,14 @@ final class Day24Solver: DaySolver {
     private var input: Input!
 
     /*
-     I first looked at the input script and copy pasted the code for each input in an spreadsheet column. There
-     I noticed the ops are all the same for each input and there are only three constants for ops 5, 6 and 16 that are
-     different for each input.
+      I first looked at the input script and copy pasted the code for each input in an spreadsheet column. There
+      I noticed the ops are all the same for each input and there are only three constants for ops 5, 6 and 16 that are
+      different for each input.
 
-     And if you look closer to the actual instructions it becomes clear that only the z register is carried over. x & y are
-     reset before being used and w is immediately set to the input. Therefore the only relevant state to keep
-     track of is z.
-    */
+      And if you look closer to the actual instructions it becomes clear that only the z register is carried over. x & y are
+      reset before being used and w is immediately set to the input. Therefore the only relevant state to keep
+      track of is z.
+     */
 
     private struct Step {
         let operandA: Int

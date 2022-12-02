@@ -82,7 +82,7 @@ final class Day16Solver: DaySolver {
     func solvePart2() -> Any {
         // solved with some help from: https://www.reddit.com/r/adventofcode/comments/ebf5cy/2019_day_16_part_2_understanding_how_to_come_up/
 
-        let initialOffset = Int(input.digits[0 ..< 7].map { String($0 )}.joined())!
+        let initialOffset = Int(input.digits[0 ..< 7].map { String($0) }.joined())!
 
         let totalDigitCount = input.digits.count * 10_000
         let length = totalDigitCount - initialOffset

@@ -83,7 +83,7 @@ final class Day07Solver: DaySolver {
                 subBags[containedBagId] = quantity
             }
 
-            bags[bagId]  = .init(id: bagId, subBags: subBags)
+            bags[bagId] = .init(id: bagId, subBags: subBags)
         }
 
         input = .init(bags: bags)

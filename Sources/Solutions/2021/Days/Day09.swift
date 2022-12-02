@@ -84,10 +84,11 @@ final class Day09Solver: DaySolver {
             for x in 0 ..< input.width {
                 let height = heightMap[index]
 
-                if ((x == 0) || (heightMap[index - 1] > height))
-                    && ((x == (input.width - 1)) || (heightMap[index + 1] > height))
-                    && ((y == 0) || (heightMap[index - input.width] > height))
-                    && ((y == (input.height - 1)) || (heightMap[index + input.width] > height)) {
+                if (x == 0) || (heightMap[index - 1] > height),
+                   (x == (input.width - 1)) || (heightMap[index + 1] > height),
+                   (y == 0) || (heightMap[index - input.width] > height),
+                   (y == (input.height - 1)) || (heightMap[index + input.width] > height)
+                {
                     lowPoints.append(.init(x: x, y: y))
                 }
 
@@ -104,7 +105,6 @@ final class Day09Solver: DaySolver {
         let heights = lowPoints.map { input.heightMap[$0.y * input.width + $0.x] }
 
         return heights.reduce(0) { result, height in result + height + 1 }
-
     }
 
     func solvePart2() -> Any {
@@ -126,9 +126,9 @@ final class Day09Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let height = rawString.filter { $0.isNewline }.count
+        let height = rawString.filter(\.isNewline).count
 
-        let heights: [Int] = rawString .compactMap { Int(String($0)) }
+        let heights: [Int] = rawString.compactMap { Int(String($0)) }
 
         let width = heights.count / height
 

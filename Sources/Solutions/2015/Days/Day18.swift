@@ -13,7 +13,7 @@ final class Day18Solver: DaySolver {
         let height: Int = 100
     }
 
-    private func updateGrid(_ grid: [Bool], width: Int, height: Int)  -> [Bool] {
+    private func updateGrid(_ grid: [Bool], width: Int, height: Int) -> [Bool] {
         var result = grid
 
         var index = 0
@@ -23,7 +23,7 @@ final class Day18Solver: DaySolver {
 
                 for innerY in max(0, y - 1) ... min(height - 1, y + 1) {
                     for innerX in max(0, x - 1) ... min(width - 1, x + 1) {
-                        if innerY == y && innerX == x {
+                        if innerY == y, innerX == x {
                             continue
                         }
 
@@ -57,7 +57,6 @@ final class Day18Solver: DaySolver {
 
         return grid.filter { $0 }.count
     }
-
 
     func solvePart2() -> Any {
         var grid = input.grid

@@ -1,7 +1,7 @@
 import Foundation
 import Tools
 
-// todo: improve performance by implementing a stack as removeFirst is slow
+// TODO: improve performance by implementing a stack as removeFirst is slow
 
 final class Day22Solver: DaySolver {
     let dayNumber: Int = 22
@@ -29,7 +29,7 @@ final class Day22Solver: DaySolver {
         var cards2 = player2Cards
 
         var round = 1
-        while cards1.isNotEmpty && cards2.isNotEmpty {
+        while cards1.isNotEmpty, cards2.isNotEmpty {
             let gameState = GameState(player1Cards: cards1, player2Cards: cards2)
 
             guard gameStates.contains(gameState) == false else {
@@ -43,7 +43,7 @@ final class Day22Solver: DaySolver {
 
             let winner: Int
 
-            if allowRecursion, cards1.count >= player1Card && cards2.count >= player2Card {
+            if allowRecursion, cards1.count >= player1Card, cards2.count >= player2Card {
                 // branch
                 let newGameCards1 = Array(cards1[0 ..< player1Card])
                 let newGameCards2 = Array(cards2[0 ..< player2Card])

@@ -8,11 +8,11 @@ final class Day08Solver: DaySolver {
 
     private struct Input {
         let instructions: [Instruction]
-        
+
         let width = 50
         let height = 6
     }
-    
+
     private enum Instruction {
         case rect(width: Int, height: Int)
         case rotateRow(y: Int, by: Int)
@@ -20,16 +20,16 @@ final class Day08Solver: DaySolver {
     }
 
     private var solvedGrid: [Bool]!
-    
+
     func solvePart1() -> Any {
         let width = input.width
         let height = input.height
 
         var grid: [Bool] = Array(repeating: false, count: width * height)
-        
+
         for instruction in input.instructions {
             var newGrid = grid
-            
+
             switch instruction {
             case .rect(let rectWidth, let rectHeight):
                 for y in 0 ..< rectHeight {
@@ -46,12 +46,12 @@ final class Day08Solver: DaySolver {
                     newGrid[((y + count) % height) * width + x] = grid[y * width + x]
                 }
             }
-            
+
             grid = newGrid
         }
-        
+
         solvedGrid = grid
-        
+
         return grid.filter { $0 }.count
     }
 
@@ -59,18 +59,18 @@ final class Day08Solver: DaySolver {
         var index = 0
         for _ in 0 ..< input.height {
             var result = ""
-            
+
             for _ in 0 ..< input.width {
                 result += solvedGrid[index] ? " # " : "   "
-                
+
                 index += 1
             }
-            
+
 //            print(result)
         }
-        
+
         // taken from printed output
-        
+
         return "UPOJFLBCEZ"
     }
 

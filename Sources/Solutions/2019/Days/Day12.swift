@@ -57,7 +57,7 @@ final class Day12Solver: DaySolver {
             moons = updateMoons(moons: moons)
         }
 
-        return moons.map { $0.energy }.reduce(0, +)
+        return moons.map(\.energy).reduce(0, +)
     }
 
     func solvePart2() -> Any {
@@ -94,15 +94,15 @@ final class Day12Solver: DaySolver {
                 }
             }
 
-            if allXSameState && stateXCounter == 0 {
+            if allXSameState, stateXCounter == 0 {
                 stateXCounter = counter
             }
 
-            if allYSameState && stateYCounter == 0 {
+            if allYSameState, stateYCounter == 0 {
                 stateYCounter = counter
             }
 
-            if allZSameState && stateZCounter == 0 {
+            if allZSameState, stateZCounter == 0 {
                 stateZCounter = counter
             }
 

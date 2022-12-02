@@ -14,7 +14,7 @@ final class Day08Solver: DaySolver {
         case a, b, c, d, e, f, g
 
         var debugDescription: String {
-            return self.rawValue
+            return rawValue
         }
     }
 
@@ -36,13 +36,13 @@ final class Day08Solver: DaySolver {
     }
 
     private func segments(in a: Digit, butNotIn b: [Digit]) -> [Segment] {
-        let bSegments: Set<Segment> = Set(b.flatMap { $0.segments })
+        let bSegments: Set<Segment> = Set(b.flatMap(\.segments))
 
         return a.segments.filter { bSegments.contains($0) == false }
     }
 
     private func segments(in a: Digit, andIn b: [Digit]) -> [Segment] {
-        let bSegments: Set<Segment> = Set(b.flatMap { $0.segments })
+        let bSegments: Set<Segment> = Set(b.flatMap(\.segments))
 
         return a.segments.filter { bSegments.contains($0) }
     }
@@ -74,13 +74,13 @@ final class Day08Solver: DaySolver {
     }
 
     func solvePart2() -> Any {
-        var result: Int = 0
+        var result = 0
 
         for entry in input.entries {
-            let mustBeOne = entry.uniqueDigits.first(where: { $0.nrOfSegments == 2 } )!
-            let mustBeFour = entry.uniqueDigits.first(where: { $0.nrOfSegments == 4 } )!
-            let mustBeSeven = entry.uniqueDigits.first(where: { $0.nrOfSegments == 3 } )!
-            let mustBeEight = entry.uniqueDigits.first(where: { $0.nrOfSegments == 7 } )!
+            let mustBeOne = entry.uniqueDigits.first(where: { $0.nrOfSegments == 2 })!
+            let mustBeFour = entry.uniqueDigits.first(where: { $0.nrOfSegments == 4 })!
+            let mustBeSeven = entry.uniqueDigits.first(where: { $0.nrOfSegments == 3 })!
+            let mustBeEight = entry.uniqueDigits.first(where: { $0.nrOfSegments == 7 })!
 
             let cAndFSegment = Array(mustBeOne.segments)
             let bAndDSegment = segments(in: mustBeFour, butNotIn: [mustBeOne])

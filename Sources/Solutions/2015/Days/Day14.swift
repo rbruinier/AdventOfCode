@@ -61,7 +61,7 @@ final class Day14Solver: DaySolver {
             scores[best.name, default: 0] += 1
         }
 
-        return scores.sorted(by: { $0.value > $1.value } ).first!.value
+        return scores.sorted(by: { $0.value > $1.value }).first!.value
     }
 
     func parseInput(rawString: String) {

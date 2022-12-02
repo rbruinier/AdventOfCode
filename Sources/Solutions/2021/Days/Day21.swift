@@ -76,7 +76,8 @@ final class Day21Solver: DaySolver {
                         currentPlayerScore: otherPlayerScore,
                         otherPlayerStartPosition: newPosition,
                         otherPlayerScore: newScore,
-                        cache: &cache).swapped
+                        cache: &cache
+                    ).swapped
                 }
             }
         }
@@ -90,8 +91,8 @@ final class Day21Solver: DaySolver {
         var position1 = input.startPosition1 - 1
         var position2 = input.startPosition2 - 1
 
-        var score1: Int = 0
-        var score2: Int = 0
+        var score1 = 0
+        var score2 = 0
 
         var diceCount = 0
 

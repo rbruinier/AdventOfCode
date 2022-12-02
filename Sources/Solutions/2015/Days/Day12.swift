@@ -26,19 +26,19 @@ final class Day12Solver: DaySolver {
                 sum += sumOfAllDigits(in: value, exludeRed: exludeRed)
             }
         }
-        
+
         return sum
     }
 
     func solvePart1() -> Any {
         let content = try! JSONSerialization.jsonObject(with: input.json.data(using: .ascii)!, options: [])
-        
+
         return sumOfAllDigits(in: content)
     }
 
     func solvePart2() -> Any {
         let content = try! JSONSerialization.jsonObject(with: input.json.data(using: .ascii)!, options: [])
-        
+
         return sumOfAllDigits(in: content, exludeRed: true)
     }
 

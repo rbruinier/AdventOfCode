@@ -83,7 +83,7 @@ final class Day04Solver: DaySolver {
     func solvePart2() -> Any {
         var boards = input.boards
 
-        var lastWinningScore: Int = 0
+        var lastWinningScore = 0
 
         for number in input.drawnNumbers {
             for boardIndex in 0 ..< boards.count {
@@ -91,9 +91,9 @@ final class Day04Solver: DaySolver {
             }
 
             boards
-                .filter { $0.isCompleted }
+                .filter(\.isCompleted)
                 .forEach { lastWinningScore = number * $0.score
-            }
+                }
 
             boards.removeAll { $0.isCompleted }
         }

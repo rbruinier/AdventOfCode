@@ -5,112 +5,111 @@ import Tools
 /// Two step solution where we first find the distance between all numbers (paths) basically building a graph and then perform a second iteration to find the shortest path through the graph.
 /// In both cases BFS is used.
 final class Day24Solver: DaySolver {
-	let dayNumber: Int = 24
+    let dayNumber: Int = 24
 
-	private var input: Input!
+    private var input: Input!
 
-	private typealias Grid = [Point2D: Node]
+    private typealias Grid = [Point2D: Node]
 
-	private struct Input {
-		let grid: Grid
-	}
+    private struct Input {
+        let grid: Grid
+    }
 
-	private enum Node: Equatable {
-		case wall
-		case free
-		case position(number: Int)
-	}
+    private enum Node: Equatable {
+        case wall
+        case free
+        case position(number: Int)
+    }
 
-	private var allNumbers: [Int]!
-	private var graph: WeightedGraph<Int>!
+    private var allNumbers: [Int]!
+    private var graph: WeightedGraph<Int>!
 
-	private func possibleNextPositions(for position: Point2D, grid: Grid) -> [Point2D] {
-		position.neighbors().filter { point in
-			grid[point] != .wall
-		}
-	}
+    private func possibleNextPositions(for position: Point2D, grid: Grid) -> [Point2D] {
+        position.neighbors().filter { point in
+            grid[point] != .wall
+        }
+    }
 
-	private func position(of number: Int, in grid: Grid) -> Point2D {
-		grid.first(where: { _, value in
-			value == .position(number: number)
-		})!.key
-	}
+    private func position(of number: Int, in grid: Grid) -> Point2D {
+        grid.first(where: { _, value in
+            value == .position(number: number)
+        })!.key
+    }
 
-	private func minimumNumberOfRequiredSteps(from pointA: Point2D, to pointB: Point2D, in grid: Grid) -> Int {
-		struct GridWrapper: Tools.BFSGrid {
-			let grid: Grid
-			
-			func reachableNeighborsAt(position: Point2D) -> [Point2D] {
-				position.neighbors().filter { point in
-					grid[point]! != .wall
-				}
-			}
-			
-		}
-		
-		let bfsGrid = GridWrapper(grid: input.grid)
-		
-		return BFS.shortestPathInGrid(grid: bfsGrid, from: pointA, to: pointB)!.steps
-	}
+    private func minimumNumberOfRequiredSteps(from pointA: Point2D, to pointB: Point2D, in grid: Grid) -> Int {
+        struct GridWrapper: Tools.BFSGrid {
+            let grid: Grid
 
-	private func graph(for numbers: [Int], in grid: Grid) -> WeightedGraph<Int> {
-		var edges: [WeightedGraph<Int>.Edge] = []
-		
-		for i in 0 ..< numbers.count {
-			let pointA = position(of: numbers[i], in: grid)
+            func reachableNeighborsAt(position: Point2D) -> [Point2D] {
+                position.neighbors().filter { point in
+                    grid[point]! != .wall
+                }
+            }
+        }
 
-			for j in i + 1 ..< numbers.count {
-				let pointB = position(of: numbers[j], in: grid)
+        let bfsGrid = GridWrapper(grid: input.grid)
 
-				let steps = minimumNumberOfRequiredSteps(from: pointA, to: pointB, in: grid)
+        return BFS.shortestPathInGrid(grid: bfsGrid, from: pointA, to: pointB)!.steps
+    }
 
-				edges.append(.init(a: i, b: j, weight: steps))
-			}
-		}
+    private func graph(for numbers: [Int], in grid: Grid) -> WeightedGraph<Int> {
+        var edges: [WeightedGraph<Int>.Edge] = []
 
-		return .init(elements: numbers, edges: edges)
-	}
+        for i in 0 ..< numbers.count {
+            let pointA = position(of: numbers[i], in: grid)
 
-	func solvePart1() -> Any {
-		let grid = input.grid
+            for j in i + 1 ..< numbers.count {
+                let pointB = position(of: numbers[j], in: grid)
 
-		allNumbers = grid.compactMap { _, value in
-			if case .position(let number) = value {
-				return number
-			} else {
-				return nil
-			}
-		}.sorted()
+                let steps = minimumNumberOfRequiredSteps(from: pointA, to: pointB, in: grid)
 
-		graph = graph(for: allNumbers, in: grid)
-		
-		return BFS.visitAllElements(in: graph, returnToStart: false)!.pathWeight
-	}
+                edges.append(.init(a: i, b: j, weight: steps))
+            }
+        }
 
-	func solvePart2() -> Any {
-		return BFS.visitAllElements(in: graph, returnToStart: true)!.pathWeight
-	}
+        return .init(elements: numbers, edges: edges)
+    }
 
-	func parseInput(rawString: String) {
-		var grid: [Point2D: Node] = [:]
+    func solvePart1() -> Any {
+        let grid = input.grid
 
-		for (y, line) in rawString.allLines().enumerated() {
-			for (x, field) in line.enumerated() {
-				let node: Node
+        allNumbers = grid.compactMap { _, value in
+            if case .position(let number) = value {
+                return number
+            } else {
+                return nil
+            }
+        }.sorted()
 
-				switch field {
-				case "#":
-					node = .wall
-				case ".":
-					node = .free
-				default:
-					node = .position(number: Int(String(field))!)
-				}
+        graph = graph(for: allNumbers, in: grid)
 
-				grid[.init(x: x, y: y)] = node
-			}
-		}
+        return BFS.visitAllElements(in: graph, returnToStart: false)!.pathWeight
+    }
 
-		input = .init(grid: grid)
-	}
+    func solvePart2() -> Any {
+        return BFS.visitAllElements(in: graph, returnToStart: true)!.pathWeight
+    }
+
+    func parseInput(rawString: String) {
+        var grid: [Point2D: Node] = [:]
+
+        for (y, line) in rawString.allLines().enumerated() {
+            for (x, field) in line.enumerated() {
+                let node: Node
+
+                switch field {
+                case "#":
+                    node = .wall
+                case ".":
+                    node = .free
+                default:
+                    node = .position(number: Int(String(field))!)
+                }
+
+                grid[.init(x: x, y: y)] = node
+            }
+        }
+
+        input = .init(grid: grid)
+    }
 }

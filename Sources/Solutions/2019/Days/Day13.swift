@@ -19,11 +19,11 @@ final class Day13Solver: DaySolver {
     }
 
     private func printGame(with tiles: [Point2D: Tile]) {
-        let minX = tiles.keys.map { $0.x }.min()!
-        let minY = tiles.keys.map { $0.y }.min()!
+        let minX = tiles.keys.map(\.x).min()!
+        let minY = tiles.keys.map(\.y).min()!
 
-        let maxX = tiles.keys.map { $0.x }.max()!
-        let maxY = tiles.keys.map { $0.y }.max()!
+        let maxX = tiles.keys.map(\.x).max()!
+        let maxY = tiles.keys.map(\.y).max()!
 
         for y in minY ... maxY {
             var line = ""
@@ -92,7 +92,7 @@ final class Day13Solver: DaySolver {
             } else {
                 input = 0
             }
-            
+
             if let output = intcode.continueProgramTillOutput(input: [input]) {
                 if output == -1 {
                     _ = intcode.continueProgramTillOutput(input: [])!

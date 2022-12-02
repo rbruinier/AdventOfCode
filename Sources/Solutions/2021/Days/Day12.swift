@@ -24,7 +24,7 @@ final class Day12Solver: DaySolver {
         var connectedNodes: [Node]
 
         public var debugDescription: String {
-            return "\(name), connects to: [\(connectedNodes.map { $0.name })]"
+            return "\(name), connects to: [\(connectedNodes.map(\.name))]"
         }
 
         public init(name: String, isBig: Bool, connectedNodes: [Node]) {
@@ -61,8 +61,9 @@ final class Day12Solver: DaySolver {
             for connectingNode in lastNode.connectedNodes {
                 if connectingNode.isBig
                     || path.contains(connectingNode) == false
-                    || (connectingNode.canVisitTwice &&  path.filter({ $0 == connectingNode }).count < 2) {
-                        stack.append(path + [connectingNode])
+                    || (connectingNode.canVisitTwice && path.filter { $0 == connectingNode }.count < 2)
+                {
+                    stack.append(path + [connectingNode])
                 }
             }
         }
@@ -135,5 +136,6 @@ final class Day12Solver: DaySolver {
         let startNode = uniqueNodes.first(where: { $0.name == "start" })!
         let endNode = uniqueNodes.first(where: { $0.name == "end" })!
 
-        input = .init(uniqueNodes: uniqueNodes, startNode: startNode, endNode: endNode)    }
+        input = .init(uniqueNodes: uniqueNodes, startNode: startNode, endNode: endNode)
+    }
 }

@@ -90,14 +90,14 @@ final class Day21Solver: DaySolver {
                 .init(name: "Shortsword", cost: 10, damage: 5, armor: 0),
                 .init(name: "Warhammer", cost: 25, damage: 6, armor: 0),
                 .init(name: "Longsword", cost: 40, damage: 7, armor: 0),
-                .init(name: "Greataxe", cost: 74, damage: 8, armor: 0),
+                .init(name: "Greataxe", cost: 74, damage: 8, armor: 0)
             ],
             armors: [
                 .init(name: "Leather", cost: 13, damage: 0, armor: 1),
                 .init(name: "Chainmail", cost: 31, damage: 0, armor: 2),
                 .init(name: "Splintmail", cost: 53, damage: 0, armor: 3),
                 .init(name: "Bandedmail", cost: 75, damage: 0, armor: 4),
-                .init(name: "Platemail", cost: 102, damage: 0, armor: 5),
+                .init(name: "Platemail", cost: 102, damage: 0, armor: 5)
             ],
             rings: [
                 .init(name: "Damage +1", cost: 25, damage: 1, armor: 0),
@@ -105,7 +105,7 @@ final class Day21Solver: DaySolver {
                 .init(name: "Damage +3", cost: 100, damage: 3, armor: 0),
                 .init(name: "Defense +1", cost: 20, damage: 0, armor: 1),
                 .init(name: "Defense +2", cost: 40, damage: 0, armor: 2),
-                .init(name: "Defense +3", cost: 80, damage: 0, armor: 3),
+                .init(name: "Defense +3", cost: 80, damage: 0, armor: 3)
             ]
         )
     }

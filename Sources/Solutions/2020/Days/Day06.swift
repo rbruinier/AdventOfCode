@@ -18,7 +18,7 @@ final class Day06Solver: DaySolver {
         }
 
         var sharedAnswers: [String] {
-            let uniqueAnswers = self.uniqueAnswers
+            let uniqueAnswers = uniqueAnswers
 
             return uniqueAnswers.filter { uniqueAnswer in
                 return answers.filter { $0.contains(uniqueAnswer) }.count == answers.count

@@ -67,7 +67,7 @@ final class Day09Solver: DaySolver {
                 currentTailIndex += 1
             }
 
-            guard currentHeadIndex < numbers.count && currentTailIndex < numbers.count else {
+            guard currentHeadIndex < numbers.count, currentTailIndex < numbers.count else {
                 return 0
             }
         }

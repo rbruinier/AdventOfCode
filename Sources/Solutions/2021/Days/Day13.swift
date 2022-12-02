@@ -163,6 +163,6 @@ final class Day13Solver: DaySolver {
         let width = coordinates.map(\.x).max()! + 1
         let height = coordinates.map(\.y).max()! + 1
 
-        input = .init(coordinates: coordinates, folds: folds, width: width, height: height)        
+        input = .init(coordinates: coordinates, folds: folds, width: width, height: height)
     }
 }

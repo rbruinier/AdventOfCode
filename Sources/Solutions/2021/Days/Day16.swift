@@ -33,7 +33,7 @@ final class Day16Solver: DaySolver {
 
     private func parseNumber(_ bits: inout [Int]) -> Int {
         var isLastGroup = false
-        var number: Int = 0
+        var number = 0
 
         while isLastGroup == false {
             isLastGroup = parseBits(&bits, count: 1) == 0 ? true : false
@@ -68,13 +68,13 @@ final class Day16Solver: DaySolver {
         let value: Int
         switch packetId {
         case 0: // sum
-            value = subPackets.reduce(0) { result, item in result + item.value}
+            value = subPackets.reduce(0) { result, item in result + item.value }
         case 1: // product
-            value = subPackets.reduce(1) { result, item in result * item.value}
+            value = subPackets.reduce(1) { result, item in result * item.value }
         case 2: // minimum
-            value = subPackets.map { $0.value }.min()!
+            value = subPackets.map(\.value).min()!
         case 3: // maximum
-            value = subPackets.map { $0.value }.max()!
+            value = subPackets.map(\.value).max()!
         case 5: // greater than
             value = subPackets[0].value > subPackets[1].value ? 1 : 0
         case 6: // smaller than

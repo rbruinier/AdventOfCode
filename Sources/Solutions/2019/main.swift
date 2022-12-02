@@ -4,9 +4,9 @@ import Tools
 print("Advent of Code 2019 🎄")
 
 extension DaySolver {
-	var year: Int {
-		2019
-	}
+    var year: Int {
+        2019
+    }
 }
 
 let days: [DaySolver] = [

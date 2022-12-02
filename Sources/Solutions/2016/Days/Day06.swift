@@ -17,7 +17,7 @@ final class Day06Solver: DaySolver {
         for index in 0 ..< length {
             result += input.strings.map { $0[index] }.mostCommonElement!
         }
-        
+
         return result
     }
 

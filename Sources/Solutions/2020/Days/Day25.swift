@@ -61,6 +61,5 @@ final class Day25Solver: DaySolver {
 
     func parseInput(rawString: String) {
         input = .init(cardPublicKey: 6929599, doorPublicKey: 2448427)
-
     }
 }

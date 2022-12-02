@@ -12,14 +12,14 @@ final class Day15Solver: DaySolver {
 
     private struct Ingredient {
         let name: String
-        
+
         let capacity: Int
         let durability: Int
         let flavor: Int
         let texture: Int
         let calories: Int
     }
-    
+
     private struct Scoring {
         var capacity: Int = 0
         var durability: Int = 0
@@ -27,49 +27,49 @@ final class Day15Solver: DaySolver {
         var texture: Int = 0
         var calories: Int = 0
     }
-    
+
     private func getScoresForIngredients(ingredients: [Ingredient], remainingTeaspoons: Int, currentScoring: Scoring, filterOnCalories: Bool) -> Int {
-        if ingredients.count == 0 {
-            if filterOnCalories && currentScoring.calories != 500 {
+        if ingredients.isEmpty {
+            if filterOnCalories, currentScoring.calories != 500 {
                 return Int.min
             }
-            
+
             return max(0, currentScoring.capacity)
                 * max(0, currentScoring.durability)
                 * max(0, currentScoring.flavor)
                 * max(0, currentScoring.texture)
         }
-        
-        var bestScore: Int = Int.min
-        
+
+        var bestScore = Int.min
+
         let currentIngredient = ingredients.first!
 
         for firstIngredientTeaspoonCount in 0 ... remainingTeaspoons {
             var scoring = currentScoring
-            
+
             scoring.capacity += currentIngredient.capacity * firstIngredientTeaspoonCount
             scoring.durability += currentIngredient.durability * firstIngredientTeaspoonCount
             scoring.flavor += currentIngredient.flavor * firstIngredientTeaspoonCount
             scoring.texture += currentIngredient.texture * firstIngredientTeaspoonCount
             scoring.calories += currentIngredient.calories * firstIngredientTeaspoonCount
-            
+
             let newRemainingTeaspoons = remainingTeaspoons - firstIngredientTeaspoonCount
-            
+
             let score = getScoresForIngredients(
                 ingredients: Array(ingredients[1 ..< ingredients.count]),
                 remainingTeaspoons: newRemainingTeaspoons,
                 currentScoring: scoring,
                 filterOnCalories: filterOnCalories
             )
-            
+
             if score > bestScore {
                 bestScore = score
             }
         }
-        
+
         return bestScore
     }
-    
+
     func solvePart1() -> Any {
         let numberOfTeaspoons = 100
 

@@ -102,7 +102,6 @@ final class Day24Solver: DaySolver {
         return grids
     }
 
-
     private func calculateBiodiversityRating(for grid: [Point2D: Bool]) -> Int {
         var rating = 0
 

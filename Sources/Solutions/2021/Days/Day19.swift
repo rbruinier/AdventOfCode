@@ -8,19 +8,19 @@ final class Day19Solver: DaySolver {
 
     private lazy var matrices: [Matrix] = {
         // base matrices
-        let unitMatrix = Matrix(rows: [[ 1,  0,  0], [ 0,  1,  0], [ 0,  0,  1]])
+        let unitMatrix = Matrix(rows: [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 
-        let z90Matrix  = Matrix(rows: [[ 0, -1,  0], [ 1,  0,  0], [ 0,  0,  1]])
-        let z180Matrix = Matrix(rows: [[-1,  0,  0], [ 0, -1,  0], [ 0,  0,  1]])
-        let z270Matrix = Matrix(rows: [[ 0,  1,  0], [-1,  0,  0], [ 0,  0,  1]])
+        let z90Matrix = Matrix(rows: [[0, -1, 0], [1, 0, 0], [0, 0, 1]])
+        let z180Matrix = Matrix(rows: [[-1, 0, 0], [0, -1, 0], [0, 0, 1]])
+        let z270Matrix = Matrix(rows: [[0, 1, 0], [-1, 0, 0], [0, 0, 1]])
 
-        let y90Matrix  = Matrix(rows: [[ 0,  0,  1], [ 0,  1,  0], [-1,  0,  0]])
-        let y180Matrix = Matrix(rows: [[-1,  0,  0], [ 0,  1,  0], [ 0,  0, -1]])
-        let y270Matrix = Matrix(rows: [[ 0,  0, -1], [ 0,  1,  0], [ 1,  0,  0]])
+        let y90Matrix = Matrix(rows: [[0, 0, 1], [0, 1, 0], [-1, 0, 0]])
+        let y180Matrix = Matrix(rows: [[-1, 0, 0], [0, 1, 0], [0, 0, -1]])
+        let y270Matrix = Matrix(rows: [[0, 0, -1], [0, 1, 0], [1, 0, 0]])
 
-        let x90Matrix  = Matrix(rows: [[ 1,  0,  0], [ 0,  0, -1], [ 0,  1,  0]])
-        let x180Matrix = Matrix(rows: [[ 1,  0,  0], [ 0, -1,  0], [ 0,  0, -1]])
-        let x270Matrix = Matrix(rows: [[ 1,  0,  0], [ 0,  0,  1], [ 0, -1,  0]])
+        let x90Matrix = Matrix(rows: [[1, 0, 0], [0, 0, -1], [0, 1, 0]])
+        let x180Matrix = Matrix(rows: [[1, 0, 0], [0, -1, 0], [0, 0, -1]])
+        let x270Matrix = Matrix(rows: [[1, 0, 0], [0, 0, 1], [0, -1, 0]])
 
         return [
             unitMatrix,
@@ -46,7 +46,7 @@ final class Day19Solver: DaySolver {
             x270Matrix * y270Matrix,
             y90Matrix * x270Matrix,
             y90Matrix * z270Matrix,
-            z270Matrix * y270Matrix,
+            z270Matrix * y270Matrix
         ]
     }()
 
@@ -179,7 +179,7 @@ final class Day19Solver: DaySolver {
         return nil
     }
 
-    private func transformInfoForScannerIndex(scannerIndex: Int, from relations: Set<Relation>, scanners: [Scanner]) -> (scanner: Point, beacons: [Beacon])  {
+    private func transformInfoForScannerIndex(scannerIndex: Int, from relations: Set<Relation>, scanners: [Scanner]) -> (scanner: Point, beacons: [Beacon]) {
         guard scannerIndex != 0 else {
             return (scanner: .init(), beacons: [])
         }

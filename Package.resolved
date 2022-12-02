@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "SwiftFormat",
+        "repositoryURL": "https://github.com/nicklockwood/SwiftFormat",
+        "state": {
+          "branch": null,
+          "revision": "ce821205ea1bb4de67817c2dbec99f881d0e50d4",
+          "version": "0.50.5"
+        }
+      },
+      {
         "package": "MicroPNG",
         "repositoryURL": "https://github.com/rbruinier/SwiftMicroPNG",
         "state": {

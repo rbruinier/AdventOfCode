@@ -72,7 +72,7 @@ final class Day04Solver: DaySolver {
         input = .init(entries: rawString.allLines().map { line in
             let values = line.getCapturedValues(pattern: #"([a-z-]*)\-([0-9]*)\[([a-z]*)\]"#)!
 
-            let name = values[0] //.replacingOccurrences(of: "-", with: "")
+            let name = values[0] // .replacingOccurrences(of: "-", with: "")
 
             return .init(name: name, sectorId: Int(values[1])!, checksum: values[2])
         })

@@ -94,10 +94,10 @@ final class Day23Solver: DaySolver {
             computers.append(Computer(address: address, intcode: IntcodeProcessor(program: input.program)))
         }
 
-        var natX: Int = 0
-        var natY: Int = 0
+        var natX = 0
+        var natY = 0
 
-        var lastSentY: Int = 0
+        var lastSentY = 0
 
         while true {
             var isIdle = true

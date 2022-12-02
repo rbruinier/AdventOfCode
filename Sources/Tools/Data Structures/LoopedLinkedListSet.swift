@@ -29,8 +29,8 @@ public final class LoopedLinkedListSet<Element: Hashable & Equatable> {
     // quick lookup of a node instead of enumerating through all items
     private var nodeByValue: [Element: Node] = [:]
 
-    private var rootNode: Node? = nil
-    private var lastNode: Node? = nil
+    private var rootNode: Node?
+    private var lastNode: Node?
 
     @_specialize(exported: true, kind: full, where Element == Int)
     public init(values: [Element] = []) {
@@ -43,7 +43,7 @@ public final class LoopedLinkedListSet<Element: Hashable & Equatable> {
     public func append(_ value: Element) {
         let node = Node(value: value, next: rootNode)
 
-        if let lastNode = lastNode {
+        if let lastNode {
             lastNode.next = node
         } else {
             rootNode = node

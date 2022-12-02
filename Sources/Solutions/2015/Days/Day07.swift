@@ -9,12 +9,12 @@ final class Day07Solver: DaySolver {
     private struct Input {
         let instructions: [Instruction]
     }
-    
+
     private enum Operand {
         case constant(value: Int)
         case register(id: String)
     }
-    
+
     private enum Instruction {
         case mov(value: Operand, targetRegisterId: String)
         case and(lhs: Operand, rhs: Operand, targetRegisterId: String)
@@ -22,7 +22,7 @@ final class Day07Solver: DaySolver {
         case shl(lhs: Operand, rhs: Operand, targetRegisterId: String)
         case shr(lhs: Operand, rhs: Operand, targetRegisterId: String)
         case not(registerId: String, targetRegisterId: String)
-        
+
         var targetRegisterId: String {
             switch self {
             case .mov(_, let registerId): return registerId
@@ -34,7 +34,7 @@ final class Day07Solver: DaySolver {
             }
         }
     }
-    
+
     private func valueFor(operand: Operand, registers: [String: Int]) -> Int? {
         switch operand {
         case .constant(let value):
@@ -43,25 +43,25 @@ final class Day07Solver: DaySolver {
             return registers[registerId]
         }
     }
-    
+
     private func execute(instructions originalInstructions: [Instruction], registers originalRegisters: [String: Int]) -> [String: Int] {
         var registers = originalRegisters
         var instructions = originalInstructions
-        
+
         while true {
             var remainingInstructions: [Instruction] = []
 
             for instruction in instructions {
                 let targetRegisterId = instruction.targetRegisterId
-                
+
                 switch instruction {
                 case .mov(let operand, _):
                     guard let value = valueFor(operand: operand, registers: registers) else {
                         remainingInstructions.append(instruction)
-                        
+
                         continue
                     }
-                    
+
                     registers[targetRegisterId] = value
                 case .and(let lhs, let rhs, _):
                     guard
@@ -72,7 +72,7 @@ final class Day07Solver: DaySolver {
 
                         continue
                     }
-                    
+
                     registers[targetRegisterId] = lhs & rhs
                 case .or(let lhs, let rhs, _):
                     guard
@@ -83,7 +83,7 @@ final class Day07Solver: DaySolver {
 
                         continue
                     }
-                    
+
                     registers[targetRegisterId] = lhs | rhs
                 case .shl(let lhs, let rhs, _):
                     guard
@@ -94,7 +94,7 @@ final class Day07Solver: DaySolver {
 
                         continue
                     }
-                    
+
                     registers[targetRegisterId] = lhs << rhs
                 case .shr(let lhs, let rhs, _):
                     guard
@@ -105,7 +105,7 @@ final class Day07Solver: DaySolver {
 
                         continue
                     }
-                    
+
                     registers[targetRegisterId] = lhs >> rhs
                 case .not(let registerId, _):
                     guard let value = registers[registerId] else {
@@ -113,24 +113,24 @@ final class Day07Solver: DaySolver {
 
                         continue
                     }
-                    
+
                     registers[targetRegisterId] = value ^ 0xFFFF
                 }
             }
-            
+
             if remainingInstructions.isEmpty {
                 break
             }
-            
+
             instructions = remainingInstructions
         }
-        
+
         return registers
     }
 
     func solvePart1() -> Any {
         let registers = execute(instructions: input.instructions, registers: [:])
-        
+
         return registers["a"]!
     }
 
@@ -159,24 +159,24 @@ final class Day07Solver: DaySolver {
                     return .register(id: string)
                 }
             }
-            
-            if let arguments = line.getCapturedValues(pattern:  #"([a-zA-Z0-9]*) AND ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+
+            if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) AND ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
                 return .and(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern:  #"([a-zA-Z0-9]*) OR ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) OR ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
                 return .or(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern:  #"([a-zA-Z0-9]*) LSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) LSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
                 return .shl(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern:  #"([a-zA-Z0-9]*) RSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) RSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
                 return .shr(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern:  #"NOT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+            } else if let arguments = line.getCapturedValues(pattern: #"NOT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
                 return .not(registerId: arguments[0], targetRegisterId: arguments[1])
-            } else if let arguments = line.getCapturedValues(pattern:  #"([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
                 return .mov(value: operand(from: arguments[0]), targetRegisterId: arguments[1])
             }
-            
+
             fatalError()
         }
-        
+
         input = .init(instructions: instructions)
     }
 }

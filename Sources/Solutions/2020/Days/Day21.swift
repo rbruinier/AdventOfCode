@@ -71,7 +71,7 @@ final class Day21Solver: DaySolver {
         let solution = solve(with: input.foods)
 
         return solution.matches.sorted(by: { $0.key < $1.key })
-            .map { $0.value }
+            .map(\.value)
             .joined(separator: ",")
     }
 

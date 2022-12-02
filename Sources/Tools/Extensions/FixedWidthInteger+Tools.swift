@@ -1,13 +1,13 @@
 import Foundation
 
-extension FixedWidthInteger {
+public extension FixedWidthInteger {
     @inline(__always)
-    public var isEven: Bool {
+    var isEven: Bool {
         self & 1 == 0
     }
 
     @inline(__always)
-    public var isOdd: Bool {
+    var isOdd: Bool {
         self & 1 == 1
     }
 }
