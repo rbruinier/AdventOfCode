@@ -10,8 +10,8 @@ extension DaySolver {
 }
 
 let days: [DaySolver] = [
-    Day01Solver(),
-//    Day02Solver(),
+//    Day01Solver(),
+    Day02Solver(),
 //    Day03Solver(),
 //    Day04Solver(),
 //    Day05Solver(),

@@ -27,7 +27,8 @@ final class Day01Solver: DaySolver {
 
 	func solvePart2() -> Any {
 		input.elves
-			.sorted(by: { $0.total < $1.total })[input.elves.count - 3 ..< input.elves.count]
+			.sorted(by: { $0.total < $1.total })
+			.suffix(3)
 			.reduce(0) { $0 + $1.total }
 	}
 
@@ -43,10 +44,6 @@ final class Day01Solver: DaySolver {
 			} else {
 				items.append(Int(line)!)
 			}
-		}
-
-		if items.isNotEmpty {
-			elves.append(.init(items: items))
 		}
 
 		input = .init(elves: elves)
