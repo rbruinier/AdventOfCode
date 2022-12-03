@@ -7,17 +7,75 @@ final class Day03Solver: DaySolver {
     private var input: Input!
 
     private struct Input {
+        let rucksacks: [Rucksack]
+    }
+
+    private struct Item: Hashable {
+        let value: AsciiCharacter
+
+        var priority: Int {
+            if value.isLowerCase {
+                return 1 + Int(value - AsciiCharacter.a)
+            } else {
+                return 27 + Int(value - AsciiCharacter.A)
+            }
+        }
+    }
+
+    private struct Rucksack {
+        let aItems: [Item]
+        let bItems: [Item]
+
+        var allUniqueItems: [Item] {
+            return Array(Set(aItems + bItems))
+        }
+
+        var sharedItems: [Item] {
+            let a = Set(aItems)
+            let b = Set(bItems)
+
+            return Array(a.intersection(b))
+        }
     }
 
     func solvePart1() -> Any {
-        return 0
+        input.rucksacks.reduce(0) {
+            $0 + $1.sharedItems.map(\.priority).reduce(0, +)
+        }
     }
 
     func solvePart2() -> Any {
-        return 0
+        let nrOfGroups = input.rucksacks.count / 3
+
+        var prioritySum = 0
+        for groupIndex in 0 ..< nrOfGroups {
+            let startIndex = groupIndex * 3
+            let endIndex = startIndex + 3
+
+            let rucksacks = input.rucksacks[startIndex ..< endIndex]
+
+            var countByItem: [Item: Int] = [:]
+            for rucksack in rucksacks {
+                for item in rucksack.allUniqueItems {
+                    countByItem[item, default: 0] += 1
+                }
+            }
+
+            prioritySum += countByItem.first(where: { $1 == 3 })!.key.priority
+        }
+
+        return prioritySum
     }
 
     func parseInput(rawString: String) {
-        input = .init()
+        input = .init(rucksacks: rawString.allLines().map { line in
+            let lineA = String(line[0 ..< line.count / 2])
+            let lineB = String(line[line.count / 2 ..< line.count])
+
+            return Rucksack(
+                aItems: lineA.map { Item(value: AsciiCharacter($0)!) },
+                bItems: lineB.map { Item(value: AsciiCharacter($0)!) }
+            )
+        })
     }
 }

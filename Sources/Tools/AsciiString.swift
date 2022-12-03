@@ -10,6 +10,22 @@ public extension AsciiCharacter {
 
         self = value
     }
+
+    init?(_ character: String.Element) {
+        guard let value = character.asciiValue else {
+            return nil
+        }
+
+        self = value
+    }
+
+    var isLowerCase: Bool {
+        (97 ... 122).contains(self)
+    }
+
+    var isUpperCase: Bool {
+        (65 ... 90).contains(self)
+    }
 }
 
 public struct AsciiString: Equatable, Hashable {

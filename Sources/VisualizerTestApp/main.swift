@@ -2,8 +2,6 @@ import Foundation
 import MicroPNG
 import Tools
 
-print("Test")
-
 let visualizer = VisualizationContext()
 
 visualizer.fillRect(.init(origin: .init(x: 12, y: 42), size: .init(width: 96, height: 96)), color: .init(0xFFFF_0000))
