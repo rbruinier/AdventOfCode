@@ -1,0 +1,16 @@
+# format options
+
+--swiftversion 5.7
+--indent 4
+--trimwhitespace always
+--self remove
+--ranges spaced
+--commas inline
+--emptybraces linebreak
+--decimalgrouping ignore
+--patternlet inline
+--disable redundantReturn,unusedArguments
+
+# rules
+
+--enable isEmpty
