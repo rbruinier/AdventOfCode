@@ -11,17 +11,9 @@ final class Day06Solver: DaySolver {
     }
 
     private func scan(buffer: String, count: Int) -> Int {
-        var lastCharacters: [String] = []
-
-        for i in 0 ..< input.buffer.count {
-            if lastCharacters.count == count {
-                lastCharacters.removeFirst()
-            }
-
-            lastCharacters.append(input.buffer[i])
-
-            if Set(lastCharacters).count == count {
-                return 1 + i
+        for i in 0 ..< buffer.count {
+            if Set(buffer[i ..< i + count]).count == count {
+                return i + count
             }
         }
 
