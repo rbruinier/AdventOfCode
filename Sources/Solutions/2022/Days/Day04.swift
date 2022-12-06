@@ -24,11 +24,11 @@ final class Day04Solver: DaySolver {
     }
 
     func solvePart1() -> Any {
-        input.pairs.filter(\.hasFullyContainedRange).count
+        input.pairs.count(\.hasFullyContainedRange)
     }
 
     func solvePart2() -> Any {
-        input.pairs.filter(\.hasOverlappingRange).count
+        input.pairs.count(\.hasOverlappingRange)
     }
 
     func parseInput(rawString: String) {

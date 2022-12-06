@@ -1,5 +1,11 @@
 import Foundation
 
+public extension Array {
+    @inlinable func count(_ isIncluded: (Element) throws -> Bool) rethrows -> Int {
+        try filter(isIncluded).count
+    }
+}
+
 public extension ArraySlice where Iterator.Element: Hashable {
     var mostCommonElement: Element? {
         guard isNotEmpty else {
