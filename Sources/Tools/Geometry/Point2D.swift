@@ -82,6 +82,12 @@ public struct Point2D: Hashable, Equatable {
         }
     }
 
+    public func manhattanDistance(from rhs: Point2D) -> Int {
+        let difference = rhs - self
+
+        return abs(difference.x) + abs(difference.y)
+    }
+
     public static func + (lhs: Point2D, rhs: Point2D) -> Point2D {
         .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }

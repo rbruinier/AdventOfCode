@@ -9,6 +9,8 @@ extension DaySolver {
     }
 }
 
+let day11Solver = Day11Solver()
+
 let days: [DaySolver] = [
     //    Day01Solver(),
 //    Day02Solver(),
@@ -18,9 +20,9 @@ let days: [DaySolver] = [
 //    Day06Solver(),
 //    Day07Solver(),
 //    Day08Solver(),
-    Day09Solver()
+//    Day09Solver()
 //    Day10Solver(),
-//    Day11Solver(),
+    day11Solver
 //    Day12Solver(),
 //    Day13Solver(),
 //    Day14Solver(),
@@ -54,3 +56,10 @@ days.forEach { day in
 let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
 print("Total running duration is \(formattedDuration) seconds")
+//
+// visualize(
+//	solver: day11Solver,
+//	rootPath: FileManager.default
+//		.homeDirectoryForCurrentUser
+//		.appendingPathComponent("Desktop/AdventOfCode")
+// )

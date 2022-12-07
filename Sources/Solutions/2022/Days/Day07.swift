@@ -7,17 +7,183 @@ final class Day07Solver: DaySolver {
     private var input: Input!
 
     private struct Input {
+        let terminalLines: [TerminalLine]
+    }
+
+    private enum Command: CustomStringConvertible {
+        case cdRoot
+        case cdBack
+        case cd(folder: String)
+        case ls
+
+        var description: String {
+            switch self {
+            case .cdRoot: return "cd /"
+            case .cdBack: return "cd .."
+            case .cd(let folder): return "cd \(folder)"
+            case .ls: return "ls"
+            }
+        }
+    }
+
+    private enum Listing: CustomStringConvertible {
+        case dir(name: String)
+        case file(name: String, size: Int)
+
+        var description: String {
+            switch self {
+            case .dir(let name): return "dir \(name)"
+            case .file(let name, let size): return "\(name) \(size)"
+            }
+        }
+    }
+
+    private enum TerminalLine: CustomStringConvertible {
+        case command(command: Command)
+        case listing(listing: Listing)
+
+        var description: String {
+            switch self {
+            case .command(let command): return command.description
+            case .listing(let listing): return listing.description
+            }
+        }
+    }
+
+    private struct File {
+        let name: String
+        let size: Int
+    }
+
+    private class FileNode {
+        var name: String
+
+        var parentNode: FileNode?
+
+        var directories: [FileNode] = []
+        var files: [File] = []
+
+        private var cachedSize: Int?
+
+        init(name: String, parentNode: FileNode?) {
+            self.name = name
+            self.parentNode = parentNode
+        }
+
+        func size(recursive: Bool = true) -> Int {
+            if let cachedSize {
+                return cachedSize
+            }
+
+            cachedSize = files.map(\.size).reduce(0, +) + directories.reduce(0) { $0 + $1.size(recursive: recursive) }
+
+            return cachedSize!
+        }
+    }
+
+    private func createFileStructure(fromTerminalLines terminalLines: [TerminalLine]) -> FileNode {
+        let rootNode = FileNode(name: "/", parentNode: nil)
+
+        var currentNode = rootNode
+
+        for terminalLine in input.terminalLines {
+            switch terminalLine {
+            case .command(let command):
+                switch command {
+                case .cdRoot:
+                    currentNode = rootNode
+                case .cdBack:
+                    currentNode = currentNode.parentNode!
+                case .cd(let name):
+                    currentNode = currentNode.directories.first(where: { $0.name == name })!
+                case .ls:
+                    break
+                }
+            case .listing(let listing):
+                switch listing {
+                case .dir(let name):
+                    currentNode.directories.append(.init(name: name, parentNode: currentNode))
+                case .file(let name, let size):
+                    currentNode.files.append(.init(name: name, size: size))
+                }
+            }
+        }
+
+        return rootNode
     }
 
     func solvePart1() -> Any {
-        return 0
+        let rootNode = createFileStructure(fromTerminalLines: input.terminalLines)
+
+        func findDirectoriesWithMaximumSize(startNode: FileNode, result: inout Int) {
+            for directory in startNode.directories {
+                let size = directory.size(recursive: true)
+
+                if size < 100_000 {
+                    result += size
+                }
+
+                findDirectoriesWithMaximumSize(startNode: directory, result: &result)
+            }
+        }
+
+        var sum = 0
+
+        findDirectoriesWithMaximumSize(startNode: rootNode, result: &sum)
+
+        return sum
     }
 
     func solvePart2() -> Any {
-        return 0
+        let rootNode = createFileStructure(fromTerminalLines: input.terminalLines)
+
+        let totalDiskSpace = 70_000_000
+        let freeSpaceRequired = 30_000_000
+        let currentFreeSpace = totalDiskSpace - rootNode.size(recursive: true)
+        let minimumDirectorySize = freeSpaceRequired - currentFreeSpace
+
+        func findBestDirectorySizeToDelete(startNode: FileNode, result: inout Int) {
+            for directory in startNode.directories {
+                let size = directory.size(recursive: true)
+
+                if size < minimumDirectorySize {
+                    continue
+                }
+
+                if size < result {
+                    result = size
+                }
+
+                findBestDirectorySizeToDelete(startNode: directory, result: &result)
+            }
+        }
+
+        var bestSize = Int.max
+
+        findBestDirectorySizeToDelete(startNode: rootNode, result: &bestSize)
+
+        return bestSize
     }
 
     func parseInput(rawString: String) {
-        input = .init()
+        let terminalLines: [TerminalLine] = rawString.allLines().map { line in
+            if line == "$ cd /" {
+                return .command(command: .cdRoot)
+            } else if line == "$ cd .." {
+                return .command(command: .cdBack)
+            } else if line == "$ ls" {
+                return .command(command: .ls)
+            } else if let values = line.getCapturedValues(pattern: #"\$ cd (.*)"#) {
+                return .command(command: .cd(folder: values[0]))
+            } else if let values = line.getCapturedValues(pattern: #"dir (.*)"#) {
+                return .listing(listing: .dir(name: values[0]))
+            } else if let values = line.getCapturedValues(pattern: #"([0-9]*) (.*)"#) {
+                return .listing(listing: .file(name: values[1], size: Int(values[0])!))
+            } else {
+                fatalError()
+            }
+        }
+
+        input = .init(terminalLines: terminalLines)
     }
 }

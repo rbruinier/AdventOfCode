@@ -14,6 +14,12 @@ public struct Point3D {
         self.z = z
     }
 
+    public func manhattanDistance(from rhs: Point3D) -> Int {
+        let difference = rhs - self
+
+        return abs(difference.x) + abs(difference.y) + abs(difference.z)
+    }
+
     public static func + (lhs: Point3D, rhs: Point3D) -> Point3D {
         return .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
     }
