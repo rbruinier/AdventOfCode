@@ -14,14 +14,12 @@ final class Day07Solver: DaySolver {
         case cdRoot
         case cdBack
         case cd(folder: String)
-        case ls
 
         var description: String {
             switch self {
             case .cdRoot: return "cd /"
             case .cdBack: return "cd .."
             case .cd(let folder): return "cd \(folder)"
-            case .ls: return "ls"
             }
         }
     }
@@ -96,8 +94,6 @@ final class Day07Solver: DaySolver {
                     currentNode = currentNode.parentNode!
                 case .cd(let name):
                     currentNode = currentNode.directories.first(where: { $0.name == name })!
-                case .ls:
-                    break
                 }
             case .listing(let listing):
                 switch listing {
@@ -166,13 +162,13 @@ final class Day07Solver: DaySolver {
     }
 
     func parseInput(rawString: String) {
-        let terminalLines: [TerminalLine] = rawString.allLines().map { line in
+        let terminalLines: [TerminalLine] = rawString.allLines().compactMap { line in
             if line == "$ cd /" {
                 return .command(command: .cdRoot)
             } else if line == "$ cd .." {
                 return .command(command: .cdBack)
             } else if line == "$ ls" {
-                return .command(command: .ls)
+				return nil
             } else if let values = line.getCapturedValues(pattern: #"\$ cd (.*)"#) {
                 return .command(command: .cd(folder: values[0]))
             } else if let values = line.getCapturedValues(pattern: #"dir (.*)"#) {
