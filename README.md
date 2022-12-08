@@ -2,12 +2,16 @@
 
 Why not join the fun 🎄
 
-Done so far in order of completion:
+Links to the solutions:
 
- * 2021 - finished on 25-12-2021
- * 2020 - finished on 15-01-2022
- * 2019 - finished on 02-02-2022
- * 2015 - finished on 20-02-2022
+ * [2022](Sources/Solutions/2022/Days) - work in progress
+ * [2021](Sources/Solutions/2021/Days) - finished on 25-12-2021
+ * [2020](Sources/Solutions/2020/Days) - finished on 15-01-2022
+ * [2019](Sources/Solutions/2019/Days) - finished on 02-02-2022
+ * 2018 - not yet started
+ * [2017](Sources/Solutions/2017/Days) - work in progress
+ * [2016](Sources/Solutions/2016/Days) - finished on 20-11-2022
+ * [2015](Sources/Solutions/2015/Days) - finished on 20-02-2022
  
 # 3rd party frameworks
 
@@ -95,5 +99,3 @@ available neighbors for a point in the grid.
 for example `[1,2,3,4,5], length 4` = [[1, 2, 3, 4], [1, 2, 3, 5], [1, 2, 4, 5], [1, 3, 4, 5], [2, 3, 4, 5]]
 - `permutations` -> [[Element]]: Returns all permutations of an array using the heap algorithm.
 - `subsets(minLength: Int, maxLength: Int)` -> [[Element]]: Returns all subsets of given lengths of an array.
-
-
