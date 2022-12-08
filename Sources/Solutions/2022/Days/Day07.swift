@@ -168,7 +168,7 @@ final class Day07Solver: DaySolver {
             } else if line == "$ cd .." {
                 return .command(command: .cdBack)
             } else if line == "$ ls" {
-				return nil
+                return nil
             } else if let values = line.getCapturedValues(pattern: #"\$ cd (.*)"#) {
                 return .command(command: .cd(folder: values[0]))
             } else if let values = line.getCapturedValues(pattern: #"dir (.*)"#) {
