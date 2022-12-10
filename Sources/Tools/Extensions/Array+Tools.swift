@@ -4,14 +4,14 @@ public extension Array {
     @inlinable func count(_ isIncluded: (Element) throws -> Bool) rethrows -> Int {
         try filter(isIncluded).count
     }
-	
-	subscript(safe index: Int) -> Element? {
-		guard index >= 0, index < endIndex else {
-			return nil
-		}
 
-		return self[index]
-	}
+    subscript(safe index: Int) -> Element? {
+        guard index >= 0, index < endIndex else {
+            return nil
+        }
+
+        return self[index]
+    }
 }
 
 public extension ArraySlice where Iterator.Element: Hashable {

@@ -15,22 +15,22 @@ final class Day09Solver: DaySolver {
         let steps: Int
     }
 
-	private func updateKnot(at: Point2D, withHead head: Point2D) -> Point2D {
-		var newKnotPoint = at
-		
-		if abs(head.x - newKnotPoint.x) >= 2 || abs(head.y - newKnotPoint.y) >= 2 {
-			if head.x != newKnotPoint.x {
-				newKnotPoint.x += head.x > newKnotPoint.x ? 1 : -1
-			}
+    private func updateKnot(at: Point2D, withHead head: Point2D) -> Point2D {
+        var newKnotPoint = at
 
-			if head.y != newKnotPoint.y {
-				newKnotPoint.y += head.y > newKnotPoint.y ? 1 : -1
-			}
-		}
-		
-		return newKnotPoint
-	}
-	
+        if abs(head.x - newKnotPoint.x) >= 2 || abs(head.y - newKnotPoint.y) >= 2 {
+            if head.x != newKnotPoint.x {
+                newKnotPoint.x += head.x > newKnotPoint.x ? 1 : -1
+            }
+
+            if head.y != newKnotPoint.y {
+                newKnotPoint.y += head.y > newKnotPoint.y ? 1 : -1
+            }
+        }
+
+        return newKnotPoint
+    }
+
     func solvePart1() -> Any {
         var visitedPoints: Set<Point2D> = []
 
@@ -41,7 +41,7 @@ final class Day09Solver: DaySolver {
             for _ in 0 ..< move.steps {
                 currentH = currentH.moved(to: move.direction)
 
-				currentT = updateKnot(at: currentT, withHead: currentH)
+                currentT = updateKnot(at: currentT, withHead: currentH)
 
                 visitedPoints.insert(currentT)
             }
@@ -64,7 +64,7 @@ final class Day09Solver: DaySolver {
                     var currentT = allT[pointIndex]
                     let relativeHead = allT[safe: pointIndex - 1] ?? currentH
 
-					currentT = updateKnot(at: currentT, withHead: relativeHead)
+                    currentT = updateKnot(at: currentT, withHead: relativeHead)
 
                     allT[pointIndex] = currentT
                 }
