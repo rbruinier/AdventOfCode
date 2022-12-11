@@ -17,10 +17,10 @@ let days: [DaySolver] = [
 //    Day05Solver()
 //    Day06Solver()
 //    Day07Solver()
-    Day08Solver()
-//    Day09Solver(),
-//    Day10Solver(),
-//    Day11Solver(),
+//    Day08Solver()
+//    Day09Solver()
+//    Day10Solver()
+    Day11Solver()
 //    Day12Solver(),
 //    Day13Solver(),
 //    Day14Solver(),
