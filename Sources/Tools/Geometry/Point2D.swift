@@ -41,6 +41,13 @@ public struct Point2D: Hashable, Equatable {
         self.y = y
     }
 
+    public init(commaSeparatedString: String) {
+        let components = commaSeparatedString.components(separatedBy: ",")
+
+        x = Int(components[0])!
+        y = Int(components[1])!
+    }
+
     public func turned(degrees: Degrees) -> Point2D {
         switch degrees {
         case .zero,
