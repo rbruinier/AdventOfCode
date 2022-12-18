@@ -11,7 +11,7 @@ import Tools
 /// Details of memoization cache key can be found at the documentation of the `getMaximumOutput` function.
 ///
 /// The two player works serially. It first runs every possible path of player 1 and when the time is up it will do the same for player 2. Serial or parallel doesn't matter
-/// for the end result as long as we keep the startig (zero rate) path included so we always have a state where elephant reaches a valve before player 1.
+/// for the end result as long as we keep the starting (zero rate) path included so we always have a state where elephant reaches a valve before player 1.
 final class Day16Solver: DaySolver {
     let dayNumber: Int = 16
 

@@ -2,7 +2,7 @@ import Collections
 import Foundation
 import Tools
 
-/// Part 2 is solved by calculating the bounding around the points with 1 empty row added in all dimensions. From the min point we perform a flood fill to fill all empty space
+/// Part 2 is solved by calculating the bounding box around the points with 1 empty row added in all dimensions. From the min point we perform a flood fill to fill all empty space
 /// and immediately count the walls for each of these empty cells. BFS used to visit all nodes.
 final class Day18Solver: DaySolver {
     let dayNumber: Int = 18
