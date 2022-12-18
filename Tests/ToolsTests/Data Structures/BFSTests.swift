@@ -6,7 +6,7 @@ final class BFSTests: XCTestCase {
     func testShortestDistance() {
         let items: [String] = ["A", "B", "C", "D"]
 
-        let graph = WeightedGraph(elements: items, edges: [
+        let graph = WeightedGraph(elementsCount: items.count, edges: [
             .init(a: 0, b: 1, weight: 60), // A - B = 60
             .init(a: 0, b: 2, weight: 60), // A - C = 60
             .init(a: 0, b: 3, weight: 10), // A - D = 10
@@ -26,7 +26,7 @@ final class BFSTests: XCTestCase {
     func testIdenticalWeightsShortestDistance() {
         let items: [String] = ["A", "B", "C", "D"]
 
-        let graph = WeightedGraph(elements: items, edges: [
+        let graph = WeightedGraph(elementsCount: items.count, edges: [
             .init(a: 0, b: 1, weight: 10), // A - B = 10
             .init(a: 0, b: 2, weight: 10), // A - C = 10
             .init(a: 0, b: 3, weight: 10), // A - D = 10

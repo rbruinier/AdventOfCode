@@ -91,7 +91,7 @@ public extension BFS {
     ///   - rootIndex: The index of the element to start at.
     ///   - returnToStart: Include the start element as a last element (path becomes a loop)
     /// - Returns: The result if available.
-    static func visitAllElements(in graph: WeightedGraph<some Any>, startingAtIndex rootIndex: Int = 0, returnToStart: Bool = false) -> VisitAllElementsResult? {
+    static func visitAllElements(in graph: WeightedGraph, startingAtIndex rootIndex: Int = 0, returnToStart: Bool = false) -> VisitAllElementsResult? {
         var solutionQueue: Deque<VisitAllElementsQueueNode> = [
             .init(index: rootIndex, visitedIndices: [rootIndex], combinedWeight: 0)
         ]
@@ -143,5 +143,138 @@ public extension BFS {
         }
 
         return .init(pathIndices: bestSolution.visitedIndices, pathWeight: bestSolution.combinedWeight)
+    }
+}
+
+public extension BFS {
+    struct ShortestPathInUnweightedGraphResult {
+        /// The full path from point A to point B.
+        public let pathIndices: [UnweightedGraph.ElementIndex]
+
+        /// The total number of steps required to get from point A to point B in the grid.
+        public var steps: Int {
+            pathIndices.count - 1
+        }
+    }
+
+    private struct ShortestPathInUnweightedGraphQueueNode {
+        let index: Int
+        let visitedIndices: [UnweightedGraph.ElementIndex]
+
+        var steps: Int {
+            visitedIndices.count - 1
+        }
+    }
+
+    /// Tries to find the shortest path in a grid from point A to B.
+    /// - Parameters:
+    ///   - grid: The grid to find the path in.
+    ///   - pointA: Starting point in the grid. Should be an accessible grid point.
+    ///   - pointB: End point in the grid. Should be an accessible grid point.
+    /// - Returns: The solution when available.
+    static func shortestPathInUnweightedGraph(_ graph: UnweightedGraph, from a: Int, to b: Int) -> ShortestPathInUnweightedGraphResult? {
+        var solutionQueue: Deque<ShortestPathInUnweightedGraphQueueNode> = [
+            .init(index: a, visitedIndices: [a])
+        ]
+
+        var bestSolution: ShortestPathInUnweightedGraphQueueNode?
+
+        var visitedPoints: Set<Int> = [a]
+
+        while let solution = solutionQueue.popFirst() {
+            if solution.index == b {
+                bestSolution = solution
+
+                break
+            }
+
+            let edges = graph.directionalEdges(from: solution.index)
+
+            for edge in edges where visitedPoints.contains(edge.b) == false {
+                visitedPoints.insert(edge.b)
+
+                solutionQueue.append(
+                    .init(
+                        index: edge.b,
+                        visitedIndices: solution.visitedIndices + [edge.b]
+                    )
+                )
+            }
+        }
+
+        guard let bestSolution else {
+            return nil
+        }
+
+        return .init(pathIndices: bestSolution.visitedIndices)
+    }
+}
+
+public extension BFS {
+    struct ShortestPathInWeightedGraphResult {
+        /// The full path from point A to point B.
+        public let pathIndices: [UnweightedGraph.ElementIndex]
+
+        public let weight: Int
+    }
+
+    private struct ShortestPathInWeightedGraphQueueNode {
+        let index: Int
+        let visitedIndices: [UnweightedGraph.ElementIndex]
+        let weight: Int
+
+        var steps: Int {
+            visitedIndices.count - 1
+        }
+    }
+
+    /// Tries to find the shortest path in a grid from point A to B.
+    /// - Parameters:
+    ///   - grid: The grid to find the path in.
+    ///   - pointA: Starting point in the grid. Should be an accessible grid point.
+    ///   - pointB: End point in the grid. Should be an accessible grid point.
+    /// - Returns: The solution when available.
+    static func shortestPathInWeightedGraph(_ graph: WeightedGraph, from a: Int, to b: Int) -> ShortestPathInWeightedGraphResult? {
+        var solutionQueue: Deque<ShortestPathInWeightedGraphQueueNode> = [
+            .init(index: a, visitedIndices: [a], weight: 0)
+        ]
+
+        var bestSolution: ShortestPathInWeightedGraphQueueNode?
+
+        while let solution = solutionQueue.popFirst() {
+            if solution.index == b {
+                if let currentBestSolution = bestSolution {
+                    if solution.weight < currentBestSolution.weight {
+                        bestSolution = solution
+                    }
+                } else {
+                    bestSolution = solution
+                }
+
+                continue
+            }
+
+            let edges = graph.directionalEdges(from: solution.index)
+
+            for edge in edges where solution.visitedIndices.contains(edge.b) == false {
+                if let bestSolution, (solution.weight + edge.weight) >= bestSolution.weight {
+                    continue
+                }
+
+                solutionQueue.append(
+                    .init(
+                        index: edge.b,
+                        visitedIndices: solution.visitedIndices + [edge.b],
+                        weight: solution.weight + edge.weight
+                    )
+                )
+            }
+        }
+
+        guard let bestSolution else {
+            return nil
+        }
+
+        return .init(pathIndices: bestSolution.visitedIndices, weight: bestSolution.weight)
     }
 }

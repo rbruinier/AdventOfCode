@@ -1,10 +1,10 @@
 import Foundation
 
-public struct WeightedGraph<Element> {
+public struct WeightedGraph {
     public typealias ElementIndex = Int
     public typealias Weight = Int
 
-    public struct Edge {
+    public struct Edge: Equatable, Hashable {
         public let weight: WeightedGraph.Weight
 
         public let a: ElementIndex
@@ -22,12 +22,11 @@ public struct WeightedGraph<Element> {
         }
     }
 
-    public let elements: [Element]
-
     internal let edgesByElement: [ElementIndex: [Edge]]
+    internal let elementsCount: Int
 
-    public init(elements: [Element], edges: [Edge]) {
-        self.elements = elements
+    public init(elementsCount: Int, edges: [Edge]) {
+        self.elementsCount = elementsCount
 
         var edgesByElement: [ElementIndex: [Edge]] = [:]
 
@@ -47,6 +46,6 @@ public struct WeightedGraph<Element> {
     }
 
     public var count: Int {
-        elements.count
+        elementsCount
     }
 }
