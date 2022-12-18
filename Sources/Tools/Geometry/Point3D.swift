@@ -14,22 +14,41 @@ public struct Point3D {
         self.z = z
     }
 
+    public init(commaSeparatedString: String) {
+        let components = commaSeparatedString.components(separatedBy: ",")
+
+        x = Int(components[0])!
+        y = Int(components[1])!
+        z = Int(components[2])!
+    }
+
     public func manhattanDistance(from rhs: Point3D) -> Int {
         let difference = rhs - self
 
         return abs(difference.x) + abs(difference.y) + abs(difference.z)
     }
 
+    public func neighbors() -> [Point3D] {
+        [
+            .init(x: x - 1, y: y, z: z),
+            .init(x: x + 1, y: y, z: z),
+            .init(x: x, y: y - 1, z: z),
+            .init(x: x, y: y + 1, z: z),
+            .init(x: x, y: y, z: z - 1),
+            .init(x: x, y: y, z: z + 1)
+        ]
+    }
+
     public static func + (lhs: Point3D, rhs: Point3D) -> Point3D {
-        return .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
+        .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
     }
 
     public static func - (lhs: Point3D, rhs: Point3D) -> Point3D {
-        return .init(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
+        .init(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
     }
 
     public static func * (lhs: Point3D, rhs: Point3D) -> Point3D {
-        return .init(x: lhs.x * rhs.x, y: lhs.y * rhs.y, z: lhs.z * rhs.z)
+        .init(x: lhs.x * rhs.x, y: lhs.y * rhs.y, z: lhs.z * rhs.z)
     }
 
     public static func += (lhs: inout Point3D, rhs: Point3D) {
@@ -53,7 +72,7 @@ public struct Point3D {
 
 extension Point3D: CustomStringConvertible {
     public var description: String {
-        return "\(x), \(y), \(z)"
+        "\(x), \(y), \(z)"
     }
 }
 
