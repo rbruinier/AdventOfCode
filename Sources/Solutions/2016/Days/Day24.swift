@@ -22,7 +22,7 @@ final class Day24Solver: DaySolver {
     }
 
     private var allNumbers: [Int]!
-    private var graph: WeightedGraph<Int>!
+    private var graph: WeightedGraph!
 
     private func possibleNextPositions(for position: Point2D, grid: Grid) -> [Point2D] {
         position.neighbors().filter { point in
@@ -52,8 +52,8 @@ final class Day24Solver: DaySolver {
         return BFS.shortestPathInGrid(grid: bfsGrid, from: pointA, to: pointB)!.steps
     }
 
-    private func graph(for numbers: [Int], in grid: Grid) -> WeightedGraph<Int> {
-        var edges: [WeightedGraph<Int>.Edge] = []
+    private func graph(for numbers: [Int], in grid: Grid) -> WeightedGraph {
+        var edges: [WeightedGraph.Edge] = []
 
         for i in 0 ..< numbers.count {
             let pointA = position(of: numbers[i], in: grid)
@@ -67,7 +67,7 @@ final class Day24Solver: DaySolver {
             }
         }
 
-        return .init(elements: numbers, edges: edges)
+		return .init(elementsCount: numbers.count, edges: edges)
     }
 
     func solvePart1() -> Any {
