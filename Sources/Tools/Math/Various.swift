@@ -1,5 +1,11 @@
 import Foundation
 
+public func mod(_ a: Int, _ n: Int) -> Int {
+    let r = a % n
+
+    return r >= 0 ? r : r + n
+}
+
 public func sign(_ value: Int) -> Int {
     if value < 0 {
         return -1

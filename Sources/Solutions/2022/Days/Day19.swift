@@ -1,6 +1,23 @@
 import Foundation
 import Tools
 
+/// With the lessons learned during the struggle of day 16 this was quite doable altough at the moment it takes significant time (~107 seconds) in total.
+///
+/// Memoization is used once again... all input could be packed in an 64 bit int so that is used as a key. Sadly the space is too big to initialize an
+/// array with the full size like at day 16 so instead a dictionary is used, which is much slower.
+///
+/// The parameter ranges have been analysed by printing out max values for all key components. Same for the memoization capacity reservation which helps a bit with performance.
+///
+/// Some implemented pruning rules for the tree:
+///  * if we can build a geode bot always build that and don't try anything else
+///  * if we can always build a geode bot (the robot output is greater or equal than required resources) always try to build one
+///  * else if time remaining is less than 5 only attempt to build a obsidian bot; this can probably be fine tuned further
+///  * else go through all possible combinations of robot building priorities (not really pruning this step)
+///  * if we can always build a geode or obsidian both (based on robots) we don't test the path where we don't build anything
+///
+/// There are more pruning rules to be discovered but it is sometimes hard to make sure these work for all input and not just mine.
+///
+/// Multithreading could also be a path to be explored as each blueprint can be examined in parallel, but RAM is needed. 4 GB is reserved for memoization at the moment.
 final class Day19Solver: DaySolver {
     let dayNumber: Int = 19
 
@@ -112,14 +129,6 @@ final class Day19Solver: DaySolver {
         // 2. collect
         // 3. robot is ready
 
-        //		if robots.geode < maxGeodeRobotsPerMinute[timeRemaining, default: 0] {
-        //			memoization[cacheKey] = 0
-//
-        //			return 0
-        //		}
-//
-        //		maxGeodeRobotsPerMinute[timeRemaining] = robots.geode
-
         var newInventory = inventory
 
         newInventory.ore += robots.ore
@@ -141,33 +150,20 @@ final class Day19Solver: DaySolver {
             // in case we get enough resources per turn to build a geode robot we can skip all other permutations
             robotPriorityPermutations = [[.geode]]
         } else if timeRemaining < 5 {
-            var possibleRobots: [Robot] = Array()
-
-            possibleRobots.reserveCapacity(4)
-
             if canMakeObsidian {
-                possibleRobots.append(.obsidian)
+                robotPriorityPermutations = [[.obsidian]]
+            } else {
+                robotPriorityPermutations = []
             }
-
-            robotPriorityPermutations = possibleRobots.permutations
         } else {
-            var possibleRobots: [Robot] = Array()
-
-            possibleRobots.reserveCapacity(4)
-
-            if canMakeObsidian {
-                possibleRobots.append(.obsidian)
-            }
-
-            if canMakeOre {
-                possibleRobots.append(.ore)
-            }
-
-            if canMakeClay {
-                possibleRobots.append(.clay)
-            }
-
-            robotPriorityPermutations = possibleRobots.permutations
+            robotPriorityPermutations = [
+                [.obsidian, .clay, .ore],
+                [.obsidian, .ore, .clay],
+                [.clay, .obsidian, .ore],
+                [.clay, .ore, .obsidian],
+                [.ore, .obsidian, .clay],
+                [.ore, .clay, .obsidian]
+            ]
         }
 
         var maxScore = 0
@@ -175,7 +171,7 @@ final class Day19Solver: DaySolver {
             robotLoop: for robot in robotPriority {
                 switch robot {
                 case .geode:
-                    if inventory.obsidian >= blueprint.geodeRobotObsidianCost, inventory.ore >= blueprint.geodeRobotOreCost {
+                    if canMakeGeode {
                         var adjustedInventory = newInventory
                         var adjustedRobots = robots
 
@@ -192,7 +188,7 @@ final class Day19Solver: DaySolver {
                         break robotLoop
                     }
                 case .obsidian:
-                    if inventory.clay >= blueprint.obsidianRobotClayCost, inventory.ore >= blueprint.obsidianRobotOreCost {
+                    if canMakeObsidian {
                         var adjustedInventory = newInventory
                         var adjustedRobots = robots
 
@@ -209,7 +205,7 @@ final class Day19Solver: DaySolver {
                         break robotLoop
                     }
                 case .clay:
-                    if inventory.ore >= blueprint.clayRobotOreCost {
+                    if canMakeClay {
                         var adjustedInventory = newInventory
                         var adjustedRobots = robots
 
@@ -225,7 +221,7 @@ final class Day19Solver: DaySolver {
                         break robotLoop
                     }
                 case .ore:
-                    if inventory.ore >= blueprint.oreRobotOreCost {
+                    if canMakeOre {
                         var adjustedInventory = newInventory
                         var adjustedRobots = robots
 
@@ -244,13 +240,8 @@ final class Day19Solver: DaySolver {
             }
         }
 
-        //		if robotWasBuilt == false {
-        //		if timeRemainin
-
-        //		 do not do an empty run if we generate enough resources already to always buy a robot
-        if canAlwaysMakeGeode || canAlwaysMakeObsidian // || canMakeOre || canAlwaysMakeObsidian || canAlwaysMakeClay
-        {
-        } else {
+        //		 do not do an empty run if we generate enough resources already to always buy a geode or obsidian
+        if !canAlwaysMakeGeode, !canAlwaysMakeObsidian {
             maxScore = max(
                 maxScore,
                 bestScore(blueprint: blueprint, timeRemaining: timeRemaining - 1, robots: robots, inventory: newInventory)
@@ -265,12 +256,16 @@ final class Day19Solver: DaySolver {
     func solvePart1() -> Any {
         var sumOfQualityLevels = 0
 
+        var maxMemoizationSize = 0
+
+        memoization.reserveCapacity(50_000_000)
+
         for blueprint in input.blueprints {
             if logEnabled {
                 print("Solving \(blueprint.id)")
             }
 
-            memoization = [:]
+            memoization.removeAll(keepingCapacity: true)
             maxGeodesPerMinute = [:]
 
             let score = bestScore(blueprint: blueprint, timeRemaining: 23, robots: .init(ore: 1), inventory: .zero)
@@ -280,6 +275,12 @@ final class Day19Solver: DaySolver {
             }
 
             sumOfQualityLevels += score * blueprint.id
+
+            maxMemoizationSize = max(maxMemoizationSize, memoization.count)
+        }
+
+        if logEnabled {
+            print(maxMemoizationSize)
         }
 
         return sumOfQualityLevels
@@ -288,12 +289,16 @@ final class Day19Solver: DaySolver {
     func solvePart2() -> Any {
         var product = 1
 
+        var maxMemoizationSize = 0
+
+        memoization.reserveCapacity(150_000_000)
+
         for blueprint in input.blueprints.prefix(3) {
             if logEnabled {
                 print("Solving \(blueprint.id)")
             }
 
-            memoization = [:]
+            memoization.removeAll(keepingCapacity: true)
             maxGeodesPerMinute = [:]
 
             let score = bestScore(blueprint: blueprint, timeRemaining: 31, robots: .init(ore: 1), inventory: .zero)
@@ -302,7 +307,13 @@ final class Day19Solver: DaySolver {
                 print(" score = \(score)")
             }
 
+            maxMemoizationSize = max(maxMemoizationSize, memoization.count)
+
             product *= score
+        }
+
+        if logEnabled {
+            print(maxMemoizationSize)
         }
 
         return product
