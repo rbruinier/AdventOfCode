@@ -67,7 +67,7 @@ final class Day24Solver: DaySolver {
             }
         }
 
-		return .init(elementsCount: numbers.count, edges: edges)
+        return .init(elementsCount: numbers.count, edges: edges)
     }
 
     func solvePart1() -> Any {
