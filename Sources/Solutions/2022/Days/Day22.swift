@@ -1,7 +1,7 @@
 import Foundation
 import Tools
 
-/// For part I made a small cube out of paper. Each side with an identifier and A, B, C and D side markings (in the 2D map orientation). Using this map hardcoded
+/// For part 2 I made a small cube out of paper. Each side with an identifier and A, B, C and D side markings (in the 2D map orientation). Using this map hardcoded
 /// transformations are configured for when a point should move to a new side.
 ///
 /// Probably could be solved more elegantly but it works (for this input)
