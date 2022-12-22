@@ -135,16 +135,7 @@ final class Day22Solver: DaySolver {
                 point = newPoint
             }
 
-            switch move.turn {
-            case .twoSeventy:
-                direction = direction.left
-            case .ninety:
-                direction = direction.right
-            case .zero:
-                break
-            default:
-                fatalError()
-            }
+            direction = direction.turned(degrees: move.turn)
         }
 
         return scoreFor(point: point, direction: direction)
@@ -240,17 +231,7 @@ final class Day22Solver: DaySolver {
 
                     newPoint = newSide.transform(point - currentSideBoundingBox.topLeft, newSideBoundingBox.size.width - 1) + newSideBoundingBox.topLeft
 
-                    switch newSide.rotate {
-                    case .twoSeventy:
-                        newDirection = direction.left
-                    case .ninety:
-                        newDirection = direction.right
-                    case .oneEighty:
-                        newDirection = direction.opposite
-                    case .zero,
-                         .threeSixty:
-                        break
-                    }
+                    newDirection = direction.turned(degrees: newSide.rotate)
                 }
 
                 if tiles[newPoint] == .wall {
@@ -261,16 +242,7 @@ final class Day22Solver: DaySolver {
                 direction = newDirection
             }
 
-            switch move.turn {
-            case .twoSeventy:
-                direction = direction.left
-            case .ninety:
-                direction = direction.right
-            case .zero:
-                break
-            default:
-                fatalError()
-            }
+            direction = direction.turned(degrees: move.turn)
         }
 
         return scoreFor(point: point, direction: direction)

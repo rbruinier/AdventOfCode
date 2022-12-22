@@ -30,4 +30,14 @@ public enum Direction: Int, Equatable, CaseIterable {
         case .west: return .east
         }
     }
+
+    public func turned(degrees: Point2D.Degrees) -> Direction {
+        switch degrees {
+        case .zero,
+             .threeSixty: return self
+        case .ninety: return right
+        case .oneEighty: return opposite
+        case .twoSeventy: return left
+        }
+    }
 }
