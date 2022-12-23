@@ -50,21 +50,21 @@ private func solveDay(_ solver: any DaySolver) {
 }
 
 public func solveDays(_ days: [any DaySolver], bundle: Bundle) {
-	print("Parsing inputs")
+    print("Parsing inputs")
 
-	days.forEach { day in
-		day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
-	}
+    days.forEach { day in
+        day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
+    }
 
-	print("Start solving days")
+    print("Start solving days")
 
-	let startTime = mach_absolute_time()
+    let startTime = mach_absolute_time()
 
-	days.forEach { day in
-		solveDay(day)
-	}
+    days.forEach { day in
+        solveDay(day)
+    }
 
-	let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
+    let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
-	print("Total running duration is \(formattedDuration) seconds")
+    print("Total running duration is \(formattedDuration) seconds")
 }

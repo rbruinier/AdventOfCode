@@ -74,13 +74,11 @@ final class Day23Solver: TestableDaySolver {
                         }
                     }
 
-                    if !isAvailable {
-                        continue
+                    if isAvailable {
+                        proposedMoves[elf] = proposedMove
+
+                        break
                     }
-
-                    proposedMoves[elf] = proposedMove
-
-                    break
                 }
             }
 
@@ -103,7 +101,6 @@ final class Day23Solver: TestableDaySolver {
                     } else {
                         newElves.insert(elf)
                     }
-
                 } else {
                     newElves.insert(elf)
                 }
@@ -130,7 +127,6 @@ final class Day23Solver: TestableDaySolver {
         //			for x in minX ... maxX {
         //				line += currentElves.contains(.init(x: x, y: y)) ? "#" : "."
         //			}
-//
         //			print(line)
         //		}
 
