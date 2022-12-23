@@ -3,7 +3,7 @@ import Tools
 
 /// First I tried to solve part 2 by brute forcing a million values for humn (x from now on) but that did not work. Using the debugger I looked at which part changes when x changes
 /// and figured out the B operand of the root equate is constant. Then I printed out the A operand equation and replaced humn value with "x". After that I used https://quickmath.com/
-/// to solve the equation RHS VALUE = LHS EQUATION and this website than gives you the value for X.
+/// to solve the equation RHS VALUE = LHS EQUATION and this website then gives you the value for X.
 ///
 /// I guess we could also collapse most of the equation and then do this by hand or even brute force, not sure about that.
 final class Day21Solver: DaySolver {

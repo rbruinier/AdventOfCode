@@ -1,7 +1,7 @@
 import Foundation
 import Tools
 
-/// With the lessons learned during the struggle of day 16 this was quite doable altough at the moment it takes significant time (~107 seconds) in total.
+/// With the lessons learned during the struggle of day 16 this was quite doable although at the moment it takes significant time (~107 seconds) in total.
 ///
 /// Memoization is used once again... all input could be packed in an 64 bit int so that is used as a key. Sadly the space is too big to initialize an
 /// array with the full size like at day 16 so instead a dictionary is used, which is much slower.
