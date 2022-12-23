@@ -18,7 +18,7 @@ final class Day07Solver: DaySolver {
 
     private var rootProgramID: String!
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         let programs = input.programs
 
         for subProgramID in programs.keys {
@@ -98,7 +98,7 @@ final class Day07Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let programs = input.programs
 
         let rootNode = Node(program: programs[rootProgramID]!, allPrograms: programs)

@@ -100,7 +100,7 @@ final class Day13Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var grid = Grid(width: input.width, height: input.height)
 
         for coordinate in input.coordinates {
@@ -112,7 +112,7 @@ final class Day13Solver: DaySolver {
         return grid.items.filter { $0 }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         var grid = Grid(width: input.width, height: input.height)
 
         for coordinate in input.coordinates {

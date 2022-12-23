@@ -52,7 +52,7 @@ final class Day08Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var cpu = CPU(program: input.program)
 
         while cpu.executeNextInstruction() {
@@ -61,7 +61,7 @@ final class Day08Solver: DaySolver {
         return cpu.accumulator
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         for ip in 0 ..< input.program.count {
             var program = input.program
 

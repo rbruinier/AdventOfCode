@@ -10,7 +10,7 @@ final class Day20Solver: DaySolver {
         let numberOfPresents = 34_000_000
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         // I first implemented a brute force algo and looked at the sequence and googled the sequence and found this: http://sequencedb.net/s/A000203
         //
         // Then I looked for an efficient way to calculate the div sum
@@ -29,7 +29,7 @@ final class Day20Solver: DaySolver {
         fatalError()
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var house = 1
         while true {
             var presents = 0

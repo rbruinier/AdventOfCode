@@ -128,13 +128,13 @@ final class Day07Solver: DaySolver {
         return registers
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let registers = execute(instructions: input.instructions, registers: [:])
 
         return registers["a"]!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var registers = execute(instructions: input.instructions, registers: [:])
 
         let newInstructions: [Instruction] = input.instructions.map { instruction in

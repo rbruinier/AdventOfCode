@@ -49,7 +49,7 @@ final class Day02Solver: DaySolver {
 //        return program[0]
 //    }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var program = input.program
 
         program[1] = 12
@@ -60,7 +60,7 @@ final class Day02Solver: DaySolver {
         return intcode.executeProgram(program, input: []).memory[0]
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let intcode = IntcodeProcessor()
 
         var program = input.program

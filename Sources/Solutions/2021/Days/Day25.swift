@@ -78,7 +78,7 @@ final class Day25Solver: DaySolver {
         return (cells: newCells, didMove: didMove)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var cells = input.cells
         var didMove = true
         var stepCount = 0
@@ -103,7 +103,7 @@ final class Day25Solver: DaySolver {
         return stepCount
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         return "Merry Christmas 🎄"
     }
 

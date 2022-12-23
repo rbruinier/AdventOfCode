@@ -63,7 +63,7 @@ final class Day12Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var cpu = CPU(instructions: input.instructions)
 
         while cpu.isFinished == false {
@@ -73,7 +73,7 @@ final class Day12Solver: DaySolver {
         return cpu.registers["a"]!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var cpu = CPU(instructions: input.instructions)
 
         cpu.registers["c"] = 1

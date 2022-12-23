@@ -28,7 +28,7 @@ final class Day04Solver: DaySolver {
         return result
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         for i in cachedStartIndex ..< 1_000_000 {
             let number = md5First3Bytes(with: input.key + String(i))
 
@@ -42,7 +42,7 @@ final class Day04Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         for i in cachedStartIndex ..< 10_000_000 {
             let number = md5First3Bytes(with: input.key + String(i))
 

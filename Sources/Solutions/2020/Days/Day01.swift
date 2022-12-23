@@ -10,7 +10,7 @@ final class Day01Solver: DaySolver {
         let numbers: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let numbers = input.numbers
 
         for i in 0 ..< numbers.count {
@@ -24,7 +24,7 @@ final class Day01Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let numbers = input.numbers
 
         for i in 0 ..< numbers.count {

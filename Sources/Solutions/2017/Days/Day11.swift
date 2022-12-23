@@ -10,7 +10,7 @@ final class Day11Solver: DaySolver {
         let steps: [HexDirection]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var point = HexPoint.zero
 
         for step in input.steps {
@@ -20,7 +20,7 @@ final class Day11Solver: DaySolver {
         return point.manhattanDistance(from: .zero)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var point = HexPoint.zero
         var maxDistance = 0
 

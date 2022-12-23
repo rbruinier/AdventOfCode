@@ -37,7 +37,7 @@ final class Day25Solver: DaySolver {
         return value
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         guard
             let cardLoopSize = loopSizeFor(publicKey: input.cardPublicKey),
             let doorLoopSize = loopSizeFor(publicKey: input.doorPublicKey)
@@ -55,7 +55,7 @@ final class Day25Solver: DaySolver {
         return cardEncryptionKey
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         return "Merry Christmas 🎄"
     }
 

@@ -10,13 +10,13 @@ final class Day09Solver: DaySolver {
         let program: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intcode = IntcodeProcessor()
 
         return intcode.executeProgram(input.program, input: [1]).output.first!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let intcode = IntcodeProcessor()
 
         return intcode.executeProgram(input.program, input: [2]).output.first!

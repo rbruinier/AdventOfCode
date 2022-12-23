@@ -54,11 +54,11 @@ final class Day09Solver: DaySolver {
         return (sum: sum, nrOfCancelled: nrOfCancelled)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         solve(text: input.text).sum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         solve(text: input.text).nrOfCancelled
     }
 

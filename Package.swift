@@ -127,5 +127,11 @@ var package = Package(
 				.copy("Input"),
 			]
 		),
+		.testTarget(
+			name: "Solutions2022Tests",
+			dependencies: [
+				"Solutions2022"
+			]
+		),
 	]
 )

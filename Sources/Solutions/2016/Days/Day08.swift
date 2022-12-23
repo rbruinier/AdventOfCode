@@ -21,7 +21,7 @@ final class Day08Solver: DaySolver {
 
     private var solvedGrid: [Bool]!
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let width = input.width
         let height = input.height
 
@@ -55,7 +55,7 @@ final class Day08Solver: DaySolver {
         return grid.filter { $0 }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         var index = 0
         for _ in 0 ..< input.height {
             var result = ""

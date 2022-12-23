@@ -27,7 +27,7 @@ final class Day11Solver: DaySolver {
         var test: Test
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var monkeys = input.monkeys
 
         var inspectionCounter: [Int: Int] = [:]
@@ -67,7 +67,7 @@ final class Day11Solver: DaySolver {
         return inspectionCounter.values.sorted().suffix(2).reduce(1, *)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var monkeys = input.monkeys
 
         var inspectionCounter: [Int: Int] = [:]

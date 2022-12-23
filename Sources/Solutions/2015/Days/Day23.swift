@@ -96,7 +96,7 @@ final class Day23Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var cpu = CPU(program: input.instructions)
 
         while cpu.executeNextInstruction() {
@@ -105,7 +105,7 @@ final class Day23Solver: DaySolver {
         return cpu.b
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var cpu = CPU(program: input.instructions)
 
         cpu.a = 1

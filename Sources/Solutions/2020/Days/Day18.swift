@@ -79,11 +79,11 @@ final class Day18Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.equations.reduce(0) { $0 + solveEquation(equation: $1, precedence: .default) }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return input.equations.reduce(0) { $0 + solveEquation(equation: $1, precedence: .addition) }
     }
 

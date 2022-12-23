@@ -11,7 +11,7 @@ final class Day13Solver: DaySolver {
         let busIds: [Int?]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var bestBusId = 0
         var bestInterval = Int.max
 
@@ -33,7 +33,7 @@ final class Day13Solver: DaySolver {
         return bestBusId * bestInterval
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         struct Bus {
             let minuteOffset: Int
             let interval: Int

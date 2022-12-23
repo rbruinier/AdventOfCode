@@ -10,7 +10,7 @@ final class Day06Solver: DaySolver {
         let banks: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var banks = input.banks
 
         var previousBanks: Set<[Int]> = [banks]
@@ -36,7 +36,7 @@ final class Day06Solver: DaySolver {
         return previousBanks.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var banks = input.banks
 
         var previousBanks: [[Int]: Int] = [:]
@@ -62,7 +62,7 @@ final class Day06Solver: DaySolver {
             previousBanks[banks] = stepCounter
         }
 
-        return previousBanks
+        return previousBanks.count
     }
 
     func parseInput(rawString: String) {

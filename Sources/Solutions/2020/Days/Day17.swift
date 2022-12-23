@@ -119,7 +119,7 @@ final class Day17Solver: DaySolver {
         return Grid(points: newPoints, dimensions: grid.dimensions)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var points: Set<[Int]> = Set()
 
         for (index, item) in input.items.enumerated() {
@@ -142,7 +142,7 @@ final class Day17Solver: DaySolver {
         return currentGrid.points.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var points: Set<[Int]> = Set()
 
         for (index, item) in input.items.enumerated() {

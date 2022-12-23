@@ -10,7 +10,7 @@ final class Day03Solver: DaySolver {
         let directions: [Direction]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var point = Point2D()
 
         var points: Set<Point2D> = Set([point])
@@ -24,7 +24,7 @@ final class Day03Solver: DaySolver {
         return points.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var robot = Point2D()
         var santa = Point2D()
 

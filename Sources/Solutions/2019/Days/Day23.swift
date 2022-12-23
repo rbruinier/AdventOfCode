@@ -45,7 +45,7 @@ final class Day23Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var computers: [Computer] = []
 
         for address in 0 ..< 50 {
@@ -87,7 +87,7 @@ final class Day23Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var computers: [Computer] = []
 
         for address in 0 ..< 50 {

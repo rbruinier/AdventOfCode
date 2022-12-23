@@ -38,13 +38,13 @@ final class Day03Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         input.rucksacks.reduce(0) {
             $0 + $1.sharedItems.map(\.priority).reduce(0, +)
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let nrOfGroups = input.rucksacks.count / 3
 
         var prioritySum = 0

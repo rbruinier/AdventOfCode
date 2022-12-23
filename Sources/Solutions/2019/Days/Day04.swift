@@ -10,7 +10,7 @@ final class Day04Solver: DaySolver {
         let range: ClosedRange<Int>
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let aLowerBound = input.range.lowerBound / 100_000
         let aUpperBound = input.range.upperBound / 100_000
 
@@ -37,7 +37,7 @@ final class Day04Solver: DaySolver {
         return possiblePasswords.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let aLowerBound = input.range.lowerBound / 100_000
         let aUpperBound = input.range.upperBound / 100_000
 

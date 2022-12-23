@@ -20,11 +20,11 @@ final class Day06Solver: DaySolver {
         fatalError()
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         scan(buffer: input.buffer, count: 4)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         scan(buffer: input.buffer, count: 14)
     }
 

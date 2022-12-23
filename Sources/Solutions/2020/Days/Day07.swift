@@ -47,13 +47,13 @@ final class Day07Solver: DaySolver {
         return sum
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.bags.values.filter {
             bag($0, canContain: "shiny gold bag", allBags: input.bags)
         }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let bag = input.bags["shiny gold bag"]!
 
         return subBagCountFor(bag: bag, allBags: input.bags)

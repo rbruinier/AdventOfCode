@@ -56,13 +56,13 @@ final class Day04Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         validEntries = input.entries.filter(\.isValid)
 
         return validEntries.map(\.sectorId).reduce(0, +)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let entries = validEntries.map(\.nameShifted)
 
         return entries.first(where: { $0.name == "northpole-object-storage" })!.sectorId

@@ -48,7 +48,7 @@ final class Day08Solver: DaySolver {
         return count
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var sumOfDifference = 0
         for string in input.strings {
             sumOfDifference += numberOfSuperfluousCharacters(in: string)
@@ -57,7 +57,7 @@ final class Day08Solver: DaySolver {
         return sumOfDifference
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var sumOfDifference = 0
         for string in input.strings {
             sumOfDifference += numberOfExtraEncodedCharacters(in: string)

@@ -262,7 +262,7 @@ final class Day20Solver: DaySolver {
         return false
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let matchesByTile: [Int: [Match]] = allMatchesByTile()
 
         let cornerTiles = matchesByTile
@@ -274,7 +274,7 @@ final class Day20Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let matchesByTile: [Int: [Match]] = allMatchesByTile()
 
         let topLeftCorner = matchesByTile

@@ -162,7 +162,7 @@ final class Day18Solver: DaySolver {
         return reachableKeys
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let tiles = input.tiles
 
 //        printTiles(tiles)
@@ -218,7 +218,7 @@ final class Day18Solver: DaySolver {
         fatalError()
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var tiles = input.tiles
 
         let originalEntrancePoint = pointForTile(.entrance, tiles: tiles)!

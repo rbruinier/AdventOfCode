@@ -58,7 +58,7 @@ final class Day19Solver: DaySolver {
         return remainingStrings
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var validCount = 0
         for stringIndex in 0 ..< input.strings.count {
             let string = input.strings[stringIndex]
@@ -71,7 +71,7 @@ final class Day19Solver: DaySolver {
         return validCount
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var rules = input.rules
 
         rules[8] = .rule(groups: [[42], [42, 8]])

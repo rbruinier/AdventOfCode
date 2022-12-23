@@ -126,7 +126,7 @@ final class Day11Solver: DaySolver {
         return (states: states, modified: modified)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var states = input.states
 
         var stepCount = 0
@@ -145,7 +145,7 @@ final class Day11Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var states = input.states
 
         var stepCount = 0

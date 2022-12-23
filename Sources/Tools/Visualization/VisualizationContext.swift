@@ -247,6 +247,74 @@ public final class VisualizationContext {
         }
     }
 
+    public func drawAALine(from pointA: Vector2, to pointB: Vector2, color: Color) {
+        let deltaX = pointB.x - pointA.x
+        let deltaY = pointB.y - pointA.y
+
+        let startPoint: Vector2
+        let endPoint: Vector2
+
+        if abs(deltaX) > abs(deltaY) {
+            if deltaX >= 0 {
+                startPoint = pointA
+                endPoint = pointB
+            } else {
+                startPoint = pointB
+                endPoint = pointA
+            }
+
+            let stepY = deltaY / deltaX
+            var currentY = Double(startPoint.y)
+
+            for x in Int(floor(startPoint.x)) ..< Int(floor(endPoint.x)) {
+                let y1 = Int(floor(currentY))
+                let y2 = y1 + 1
+
+                let fade1 = Int((currentY - Double(y1)) * 255.0)
+                let fade2 = 255 - fade1
+
+                if frameRect.contains(point: .init(x: x, y: y1)) {
+                    frame.data[y1 * dimensions.width + x] = color.mixed(with: Color(frame.data[y1 * dimensions.width + x]), factor: fade1).value
+                }
+
+                if frameRect.contains(point: .init(x: x, y: y2)) {
+                    frame.data[y2 * dimensions.width + x] = color.mixed(with: Color(frame.data[y2 * dimensions.width + x]), factor: fade2).value
+                }
+
+                currentY += stepY
+            }
+        } else {
+            if deltaY >= 0 {
+                startPoint = pointA
+                endPoint = pointB
+            } else {
+                startPoint = pointB
+                endPoint = pointA
+            }
+
+            let stepX = deltaX / deltaY
+            var currentX = Double(startPoint.x)
+
+            for y in Int(floor(startPoint.y)) ..< Int(floor(endPoint.y)) {
+                let x1 = Int(floor(currentX))
+                let x2 = x1 + 1
+
+                let fade1 = Int((currentX - Double(x1)) * 255.0)
+                let fade2 = 255 - fade1
+
+                if frameRect.contains(point: .init(x: x1, y: y)) {
+                    frame.data[y * dimensions.width + x1] = color.mixed(with: Color(frame.data[y * dimensions.width + x1]), factor: fade1).value
+                }
+
+                if frameRect.contains(point: .init(x: x2, y: y)) {
+                    frame.data[y * dimensions.width + x2] = color.mixed(with: Color(frame.data[y * dimensions.width + x2]), factor: fade2).value
+                }
+
+                currentX += stepX
+            }
+        }
+    }
+
     public func exportFrameToPNG(rootPath: String, exportScale: Int = 1) {
         var scaledFrameData: [UInt32] = frame.data
         var scaledDimensions = dimensions

@@ -38,7 +38,7 @@ final class Day13Solver: DaySolver {
         return score
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let pairs = input.pairs
         let names: [String] = Array(pairs.keys)
 
@@ -53,7 +53,7 @@ final class Day13Solver: DaySolver {
         return bestScore
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var pairs = input.pairs
         var names: [String] = Array(pairs.keys)
 

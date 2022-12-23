@@ -53,7 +53,7 @@ final class Day06Solver: DaySolver {
         return path
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var result = 0
 
         for node in input.orbits.values {
@@ -65,7 +65,7 @@ final class Day06Solver: DaySolver {
         return result
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let allOrbits = input.orbits
 
         let pathToSan = pathTo(objectId: "SAN", allOrbits: allOrbits)

@@ -26,13 +26,13 @@ final class Day06Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.groups.reduce(0) { result, group in
             result + group.uniqueAnswers.count
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return input.groups.reduce(0) { result, group in
             result + group.sharedAnswers.count
         }

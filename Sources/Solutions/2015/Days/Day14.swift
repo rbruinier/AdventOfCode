@@ -26,7 +26,7 @@ final class Day14Solver: DaySolver {
         return ((nrOfCompleteCycles * reindeer.duration) + min(cycleRemainder, reindeer.duration)) * reindeer.speed
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let time = 2503
 
         var best: (name: String, distance: Int) = (name: "", distance: Int.min)
@@ -39,10 +39,10 @@ final class Day14Solver: DaySolver {
             }
         }
 
-        return best
+        return best.distance
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let time = 2503
 
         var scores: [String: Int] = [:]

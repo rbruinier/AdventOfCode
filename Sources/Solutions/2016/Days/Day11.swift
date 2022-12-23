@@ -196,7 +196,7 @@ final class Day11Solver: DaySolver {
         return minimumSteps
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let state = State(floor: 0, elements: [
             .init(id: "polonium", generatorFloor: 0, chipFloor: 0),
             .init(id: "thulium", generatorFloor: 0, chipFloor: 0),
@@ -208,7 +208,7 @@ final class Day11Solver: DaySolver {
         return solve(with: state)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let state = State(floor: 0, elements: [
             .init(id: "elerium", generatorFloor: 0, chipFloor: 0),
             .init(id: "dilithium", generatorFloor: 0, chipFloor: 0),

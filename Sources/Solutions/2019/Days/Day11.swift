@@ -44,11 +44,11 @@ final class Day11Solver: DaySolver {
         return panels
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return runProgram(startPanels: [:]).keys.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         let panels = runProgram(startPanels: [.init(x: 0, y: 0): 1])
 
         let points = panels.keys

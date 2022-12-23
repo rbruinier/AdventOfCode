@@ -50,7 +50,7 @@ final class Day12Solver: DaySolver {
         return updatedMoons
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var moons = input.moons
 
         for _ in 0 ..< 1000 {
@@ -60,7 +60,7 @@ final class Day12Solver: DaySolver {
         return moons.map(\.energy).reduce(0, +)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var moons = input.moons
 
         // the axis do not influence each other so we can focus on individual axis and find the least common multiplier for the 3 counters to see where they align

@@ -108,7 +108,7 @@ final class Day07Solver: DaySolver {
         return rootNode
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let rootNode = createFileStructure(fromTerminalLines: input.terminalLines)
 
         func findDirectoriesWithMaximumSize(startNode: FileNode, result: inout Int) {
@@ -130,7 +130,7 @@ final class Day07Solver: DaySolver {
         return sum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let rootNode = createFileStructure(fromTerminalLines: input.terminalLines)
 
         let totalDiskSpace = 70_000_000

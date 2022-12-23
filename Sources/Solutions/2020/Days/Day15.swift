@@ -10,7 +10,7 @@ final class Day15Solver: DaySolver {
         let numbers: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var numbers: [Int] = input.numbers
 
         // brute force works fine here
@@ -27,7 +27,7 @@ final class Day15Solver: DaySolver {
         return numbers.last!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         // memory hungry but efficient (< 1 sec)
         let roundCount = 30_000_000
 

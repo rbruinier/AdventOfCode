@@ -57,11 +57,11 @@ final class Day15Solver: DaySolver {
         return minimumRiskGrid.last!
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return solve(riskLevels: input.riskLevels, width: input.width, height: input.height)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var riskLevels: [Int] = Array(repeating: 0, count: input.riskLevels.count * 25)
 
         let width = input.width * 5

@@ -52,11 +52,11 @@ final class Day20Solver: DaySolver {
         return sum
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         runDecryption(on: input.digits, rounds: 1, multiplier: 1)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         runDecryption(on: input.digits, rounds: 10, multiplier: 811589153)
     }
 

@@ -10,7 +10,7 @@ final class Day05Solver: DaySolver {
         let program: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intcode = IntcodeProcessor()
 
         let output = intcode.executeProgram(input.program, input: [1]).output
@@ -18,7 +18,7 @@ final class Day05Solver: DaySolver {
         return output.last!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let intcode = IntcodeProcessor()
 
         let output = intcode.executeProgram(input.program, input: [5]).output

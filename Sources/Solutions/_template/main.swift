@@ -1,9 +1,9 @@
 import Foundation
 import Tools
 
-print("Advent of Code 2019 🎄")
+print("Advent of Code [year] 🎄")
 
-let days: [DaySolver] = [
+let days: [any DaySolver] = [
     Day01Solver(),
     Day02Solver(),
     Day03Solver(),

@@ -26,7 +26,7 @@ final class Day24Solver: DaySolver {
         return []
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let weights = input.weights
 
         let totalWeight = weights.reduce(0, +)
@@ -39,7 +39,7 @@ final class Day24Solver: DaySolver {
         }.sorted().first!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let weights = input.weights
 
         let totalWeight = weights.reduce(0, +)

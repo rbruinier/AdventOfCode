@@ -38,7 +38,7 @@ final class Day17Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         var paths: [String] = []
 
         findPath(position: Point2D(x: 0, y: 0), pathSoFar: "", paths: &paths)
@@ -46,7 +46,7 @@ final class Day17Solver: DaySolver {
         return paths.min(by: { $0.count < $1.count }) ?? "NOT FOUND"
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var paths: [String] = []
 
         findPath(position: Point2D(x: 0, y: 0), pathSoFar: "", paths: &paths)

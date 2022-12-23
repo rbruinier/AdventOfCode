@@ -11,7 +11,7 @@ final class Day19Solver: DaySolver {
         let numberOfElves: Int
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         // first elf is always taking next elf items, so next elf always is removed
         // use a deque for quickly removing first and appending last items
 
@@ -28,7 +28,7 @@ final class Day19Solver: DaySolver {
         return currentElvesWithPresent.first!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         // removing items in the center of a deque is slow, we split it in two instead
 
         let halfCount = (input.numberOfElves / 2)

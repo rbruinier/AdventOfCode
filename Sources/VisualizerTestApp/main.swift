@@ -34,6 +34,10 @@ visualizer.drawCircle(at: .init(x: 130, y: 230), radius: 17, color: .white)
 
 visualizer.drawText("Lines & Circles", at: .init(x: 30, y: 270), color: .white)
 
+visualizer.drawAALine(from: .init(x: 300, y: 200), to: .init(x: 390, y: 210), color: .white)
+visualizer.drawAALine(from: .init(x: 390, y: 210), to: .init(x: 370, y: 290), color: .white)
+visualizer.drawAALine(from: .init(x: 370, y: 290), to: .init(x: 300, y: 200), color: .white)
+
 let encoder = MicroPNG()
 
 let pngData = try! encoder.encodeRGBUncompressed(data: visualizer.rawPixelData,

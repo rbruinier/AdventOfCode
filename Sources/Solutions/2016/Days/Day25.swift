@@ -84,7 +84,7 @@ final class Day25Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         // brute force works fine
         for startValue in 0 ..< 10000 {
             var cpu = CPU(instructions: input.instructions)
@@ -110,8 +110,8 @@ final class Day25Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
-        0
+    func solvePart2() -> String {
+        return "Merry Christmas 🎄"
     }
 
     func parseInput(rawString: String) {

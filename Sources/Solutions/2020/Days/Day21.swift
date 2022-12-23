@@ -59,7 +59,7 @@ final class Day21Solver: DaySolver {
         return (matches: matches, remainingIngredients: remainingIngredients, countPerIngredient: countPerIngredient)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let solution = solve(with: input.foods)
 
         return solution.remainingIngredients.reduce(0) { result, ingredient in
@@ -67,7 +67,7 @@ final class Day21Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         let solution = solve(with: input.foods)
 
         return solution.matches.sorted(by: { $0.key < $1.key })

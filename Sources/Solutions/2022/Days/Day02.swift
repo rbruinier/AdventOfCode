@@ -49,7 +49,7 @@ final class Day02Solver: DaySolver {
         let b: Hand
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var score = 0
         for game in input.games {
             score += game.b.score
@@ -66,7 +66,7 @@ final class Day02Solver: DaySolver {
         return score
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var score = 0
 
         for game in input.games {

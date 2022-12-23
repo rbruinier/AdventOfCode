@@ -59,7 +59,7 @@ final class Day15Solver: DaySolver {
         return mergedBoundaries
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let inspectY = 2_000_000
 
         let mergedBoundaries = mergedBoundariesForY(inspectY, sensors: input.sensors)
@@ -67,7 +67,7 @@ final class Day15Solver: DaySolver {
         return mergedBoundaries.map { $0.upperBound - $0.lowerBound }.reduce(0, +)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let maxCoordinate = 4_000_000
 
         for inspectY in 0 ... maxCoordinate {

@@ -68,7 +68,7 @@ final class Day11Solver: DaySolver {
         return result
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         var password: [UInt8] = input.password.map { $0.asciiValue! }
 
         while true {
@@ -84,7 +84,7 @@ final class Day11Solver: DaySolver {
         return cachedPart1Password!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         var password: [UInt8] = cachedPart1Password.map { $0.asciiValue! }
 
         password = increment(password: password)

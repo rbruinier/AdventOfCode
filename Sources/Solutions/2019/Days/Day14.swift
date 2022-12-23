@@ -51,7 +51,7 @@ final class Day14Solver: DaySolver {
         return oreSum
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var storage: [String: Int] = [:]
 
         let oreQuantity = make(chemical: "FUEL", minimumQuantity: 1, reactions: input.reactions, storage: &storage)
@@ -59,7 +59,7 @@ final class Day14Solver: DaySolver {
         return oreQuantity
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var storage: [String: Int] = [:]
 
         // binary search

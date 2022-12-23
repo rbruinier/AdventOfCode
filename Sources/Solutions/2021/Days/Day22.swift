@@ -84,7 +84,7 @@ final class Day22Solver: DaySolver {
         return newBoxes
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let steps = input.steps.filter {
             guard
                 (-50 ... 50).contains($0.box.minPoint.x),
@@ -116,7 +116,7 @@ final class Day22Solver: DaySolver {
         return count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var boxes: [Box] = [input.steps[0].box]
 
         var stepIndex = 2

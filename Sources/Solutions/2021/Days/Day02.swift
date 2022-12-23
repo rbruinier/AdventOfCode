@@ -16,7 +16,7 @@ final class Day02Solver: DaySolver {
         case up
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var result: (x: Int, depth: Int) = (0, 0)
 
         result = input.movements.reduce(into: result) { result, movement in
@@ -30,7 +30,7 @@ final class Day02Solver: DaySolver {
         return result.x * result.depth
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var result: (x: Int, depth: Int, aim: Int) = (0, 0, 0)
 
         result = input.movements.reduce(into: result) { result, movement in

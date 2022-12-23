@@ -253,7 +253,7 @@ final class Day19Solver: DaySolver {
         return maxScore
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var sumOfQualityLevels = 0
 
         var maxMemoizationSize = 0
@@ -286,7 +286,7 @@ final class Day19Solver: DaySolver {
         return sumOfQualityLevels
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var product = 1
 
         var maxMemoizationSize = 0

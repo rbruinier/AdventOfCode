@@ -31,7 +31,7 @@ final class Day09Solver: DaySolver {
         return newKnotPoint
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var visitedPoints: Set<Point2D> = []
 
         var currentH = Point2D()
@@ -50,7 +50,7 @@ final class Day09Solver: DaySolver {
         return visitedPoints.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var visitedPoints: Set<Point2D> = []
 
         var currentH = Point2D()

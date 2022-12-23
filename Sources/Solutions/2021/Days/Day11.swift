@@ -68,7 +68,7 @@ final class Day11Solver: DaySolver {
         return numberOfFlashes
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var octopi = input.octopi
 
         var totalNumberOfFlashes = 0
@@ -80,7 +80,7 @@ final class Day11Solver: DaySolver {
         return totalNumberOfFlashes
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var octopi = input.octopi
 
         for step in 0 ..< Int.max {
@@ -135,7 +135,7 @@ extension Day11Solver {
 
         var isCompleted: Bool = false
 
-        let solver: DaySolver
+        let solver: any DaySolver
 
         init(solver: Day11Solver) {
             self.solver = solver

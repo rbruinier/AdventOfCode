@@ -51,13 +51,13 @@ final class Day09Solver: DaySolver {
         return result
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let asciiString = AsciiString(string: input.string)
 
         return decompressedLength(for: asciiString)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let asciiString = AsciiString(string: input.string)
 
         return decompressedLength(for: asciiString, recursive: true)

@@ -196,7 +196,7 @@ final class Day20Solver: DaySolver {
         return pairs
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var tiles = input.tiles
 
         tiles = processTiles(tiles, min: input.min, max: input.max)
@@ -251,7 +251,7 @@ final class Day20Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var tiles = input.tiles
 
         tiles = processTiles(tiles, min: input.min, max: input.max)

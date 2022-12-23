@@ -10,7 +10,7 @@ final class Day04Solver: DaySolver {
         let passphrases: [String]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var validPhrases = 0
 
         mainLoop: for passphrase in input.passphrases {
@@ -28,7 +28,7 @@ final class Day04Solver: DaySolver {
         return validPhrases
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var validPhrases = 0
 
         mainLoop: for passphrase in input.passphrases {

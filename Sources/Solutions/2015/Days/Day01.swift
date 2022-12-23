@@ -10,11 +10,11 @@ final class Day01Solver: DaySolver {
         let line: String
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.line.filter { $0 == "(" }.count - input.line.filter { $0 == ")" }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var level = 0
         for (index, character) in input.line.enumerated() {
             if character == "(" {

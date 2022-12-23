@@ -45,7 +45,7 @@ final class Day22Solver: DaySolver {
         return newDeck
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var deck: [Int] = []
 
         for i in 0 ... 10006 {
@@ -68,7 +68,7 @@ final class Day22Solver: DaySolver {
         return deck.firstIndex(of: 2019)!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> BInt {
         // source: https://www.reddit.com/r/adventofcode/comments/ee0rqi/2019_day_22_solutions/fbnifwk/
 
         func modPower(_ x: BInt, _ y: BInt, _ m: BInt) -> BInt {

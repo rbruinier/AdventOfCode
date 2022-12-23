@@ -48,7 +48,7 @@ final class Day21Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let weapons = input.weapons
         let armors: [Item?] = input.armors + [nil]
         let rings = input.rings
@@ -79,7 +79,7 @@ final class Day21Solver: DaySolver {
         return minimumCost
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return maximumLoosingCost
     }
 

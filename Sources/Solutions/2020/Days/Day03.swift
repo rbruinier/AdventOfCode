@@ -13,7 +13,7 @@ final class Day03Solver: DaySolver {
         let height: Int
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var x = 0
         var y = 0
 
@@ -28,7 +28,7 @@ final class Day03Solver: DaySolver {
         return counter
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let slopes: [(x: Int, y: Int)] = [
             (x: 1, y: 1),
             (x: 3, y: 1),

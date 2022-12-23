@@ -47,7 +47,7 @@ final class Day17Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let minX = input.targetArea[0]
         let maxX = input.targetArea[1]
         let minY = input.targetArea[2]
@@ -66,7 +66,7 @@ final class Day17Solver: DaySolver {
         return bestMaximumY
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let minX = input.targetArea[0]
         let maxX = input.targetArea[1]
         let minY = input.targetArea[2]

@@ -9,7 +9,7 @@ extension DaySolver {
     }
 }
 
-let days: [DaySolver] = [
+let days: [any DaySolver] = [
     Day01Solver(),
     Day02Solver(),
     Day03Solver(),
@@ -37,20 +37,4 @@ let days: [DaySolver] = [
     Day25Solver()
 ]
 
-print("Parsing inputs")
-
-days.forEach { day in
-    day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: .module))
-}
-
-print("Start solving days")
-
-let startTime = mach_absolute_time()
-
-days.forEach { day in
-    solveDay(day)
-}
-
-let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
-
-print("Total running duration is \(formattedDuration) seconds")
+solveDays(days, bundle: .module)

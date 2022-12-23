@@ -33,7 +33,7 @@ final class Day22Solver: DaySolver {
         return viableTargets
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var viablePairs = 0
 
         for (pointA, nodeA) in input.nodes where nodeA.used > 0 {
@@ -43,7 +43,7 @@ final class Day22Solver: DaySolver {
         return viablePairs
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         // this one needs to be solved by hand (confirmed this by checking AoC reddit):
 
         // 1. print the complete maze, mark empty nodes and nodes that can't be moved so they stand out

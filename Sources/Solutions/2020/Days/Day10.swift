@@ -38,7 +38,7 @@ final class Day10Solver: DaySolver {
         return sum
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let adapters = input.adapters.sorted()
 
         var sum = adapters[0] + 3
@@ -59,7 +59,7 @@ final class Day10Solver: DaySolver {
         return joltCount[1]! * joltCount[3]!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var cache: [Int: Int] = [:]
 
         let adapters = [0] + input.adapters.sorted()

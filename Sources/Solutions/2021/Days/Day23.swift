@@ -323,7 +323,7 @@ final class Day23Solver: DaySolver {
         return bestGameState
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let initialGameState = GameState(hallway: .init(), rooms: input.rooms, totalCost: 0, moves: [])
 
         let bestGameState = solve(with: initialGameState)!
@@ -331,7 +331,7 @@ final class Day23Solver: DaySolver {
         return bestGameState.totalCost
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var rooms = input.rooms
 
         rooms[0].cells.insert(.desert, at: 1)
@@ -368,7 +368,7 @@ extension Day23Solver {
     }
 
     final class StepsVisualizer: Visualizer {
-        let solver: DaySolver
+        let solver: any DaySolver
 
         var dimensions: Size {
             .init(width: 15 * 16, height: 9 * 16)

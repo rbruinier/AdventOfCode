@@ -247,7 +247,7 @@ final class Day19Solver: DaySolver {
         return (scanner: scannerLocation, beacons: beacons)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let scanners = input.scanners
 
         var relations: Set<Relation> = Set()
@@ -281,7 +281,7 @@ final class Day19Solver: DaySolver {
         return uniqueBeacons.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let scanners = input.scanners
 
         var scannerLocations: [Point] = []

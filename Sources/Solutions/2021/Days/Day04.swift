@@ -64,7 +64,7 @@ final class Day04Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var boards = input.boards
 
         for number in input.drawnNumbers {
@@ -80,7 +80,7 @@ final class Day04Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var boards = input.boards
 
         var lastWinningScore = 0

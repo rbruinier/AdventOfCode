@@ -15,7 +15,7 @@ final class Day08Solver: DaySolver {
         case dec(register: String, amount: Int, conditionRegister: String, conditionConstant: Int, conditional: (_ a: Int, _ b: Int) -> Bool)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var registers: [String: Int] = [:]
 
         for instruction in input.instructions {
@@ -30,7 +30,7 @@ final class Day08Solver: DaySolver {
         return registers.values.max()!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var highestValue = Int.min
 
         var registers: [String: Int] = [:]

@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol Visualizer {
-    var solver: DaySolver { get }
+    var solver: any DaySolver { get }
 
     var dimensions: Size { get }
 
@@ -19,7 +19,7 @@ public extension Visualizer {
     }
 }
 
-public func visualize(solver: DaySolver, rootPath: URL) {
+public func visualize(solver: any DaySolver, rootPath: URL) {
     let year = solver.year
     let day = solver.dayNumber
 
@@ -41,6 +41,6 @@ public func visualize(solver: DaySolver, rootPath: URL) {
             context.drawCenteredText(frameDescription, atY: visualizer.dimensions.height - 10, color: .white)
         }
 
-        context.exportFrameToPNG(rootPath: exportPath.relativePath, exportScale: 4)
+        context.exportFrameToPNG(rootPath: exportPath.relativePath, exportScale: 1)
     }
 }

@@ -65,11 +65,11 @@ final class Day18Solver: DaySolver {
         return safeSum
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         solve(with: input.firstRow, count: 40)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         solve(with: input.firstRow, count: 400_000)
     }
 

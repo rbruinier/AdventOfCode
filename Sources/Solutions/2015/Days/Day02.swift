@@ -10,7 +10,7 @@ final class Day02Solver: DaySolver {
         let boxes: [Point3D]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var total = 0
 
         for box in input.boxes {
@@ -26,7 +26,7 @@ final class Day02Solver: DaySolver {
         return total
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var total = 0
 
         for box in input.boxes {

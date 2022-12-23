@@ -244,7 +244,7 @@ final class Day18Solver: DaySolver {
         return rootNode.magnitude
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var sumLine: Line = input.lines.first!
 
         for originalLine in input.lines[1 ..< input.lines.endIndex] {
@@ -278,7 +278,7 @@ final class Day18Solver: DaySolver {
         return rootNode.magnitude
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var maxMagnitude = Int.min
 
         for aIndex in 0 ..< input.lines.count {

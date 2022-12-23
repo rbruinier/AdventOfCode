@@ -17,7 +17,7 @@ final class Day01Solver: DaySolver {
 
     private var firstTwiceVisitedPoint: Point2D?
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var point = Point2D()
         var direction = Direction.north
 
@@ -53,7 +53,7 @@ final class Day01Solver: DaySolver {
         return abs(point.x) + abs(point.y)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return abs(firstTwiceVisitedPoint!.x) + abs(firstTwiceVisitedPoint!.y)
     }
 

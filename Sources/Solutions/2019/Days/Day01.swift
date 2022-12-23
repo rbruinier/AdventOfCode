@@ -14,13 +14,13 @@ final class Day01Solver: DaySolver {
         return (mass / 3) - 2
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.masses.reduce(0) { result, mass in
             result + calculateFuel(for: mass)
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return input.masses.reduce(0) { result, mass in
             var sum = 0
             var remainingMass = mass

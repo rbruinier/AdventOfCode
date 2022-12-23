@@ -70,7 +70,7 @@ final class Day24Solver: DaySolver {
         return .init(elementsCount: numbers.count, edges: edges)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let grid = input.grid
 
         allNumbers = grid.compactMap { _, value in
@@ -86,7 +86,7 @@ final class Day24Solver: DaySolver {
         return BFS.visitAllElements(in: graph, returnToStart: false)!.pathWeight
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return BFS.visitAllElements(in: graph, returnToStart: true)!.pathWeight
     }
 

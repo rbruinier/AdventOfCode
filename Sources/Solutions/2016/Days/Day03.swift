@@ -20,11 +20,11 @@ final class Day03Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         input.triangles.filter(\.isValid).count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let triangles = input.triangles
         var newTriangles: [Triangle] = []
 

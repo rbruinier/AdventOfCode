@@ -27,7 +27,7 @@ final class Day05Solver: DaySolver {
         return result
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         var password = ""
 
         for i in 0 ..< 100_000_000 {
@@ -49,7 +49,7 @@ final class Day05Solver: DaySolver {
         fatalError()
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         var password = "________"
         var placedCount = 0
 

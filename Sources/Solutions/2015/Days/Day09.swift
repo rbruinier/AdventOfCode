@@ -53,7 +53,7 @@ final class Day09Solver: DaySolver {
         return (min: minimumDistance, max: maximumDistance)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let routes = input.routes
 
         var nodes: [String: Node] = [:]
@@ -77,7 +77,7 @@ final class Day09Solver: DaySolver {
         return minimumDistance
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return maximumDistance
     }
 

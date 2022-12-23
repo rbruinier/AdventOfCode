@@ -33,7 +33,7 @@ final class Day13Solver: DaySolver {
         return count.isOdd
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var visitedPoints: Set<Point2D> = []
 
         var queue: Deque<Step> = [.init(point: Point2D(x: 1, y: 1), nrOfSteps: 0)]
@@ -59,7 +59,7 @@ final class Day13Solver: DaySolver {
         return shortestSteps
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var reachablePoints: Set<Point2D> = []
 
         for y in (0 ... 51).reversed() {

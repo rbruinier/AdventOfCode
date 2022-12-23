@@ -9,7 +9,7 @@ final class Day25Solver: DaySolver {
     private struct Input {
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         func startNumberForColumn(_ column: Int) -> Int { // triangular number sequence
             return (column * (column + 1)) / 2
         }
@@ -42,7 +42,7 @@ final class Day25Solver: DaySolver {
         return valueForColumn(3029, row: 2947)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return 0
     }
 

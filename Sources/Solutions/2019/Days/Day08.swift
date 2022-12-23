@@ -13,7 +13,7 @@ final class Day08Solver: DaySolver {
         let height: Int
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var minLayer: [Int] = input.layers.first!
         var minNumberOfZeros = minLayer.filter { $0 == 0 }.count
 
@@ -29,7 +29,7 @@ final class Day08Solver: DaySolver {
         return minLayer.filter { $0 == 1 }.count * minLayer.filter { $0 == 2 }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         let transparent = 2
 
         var finalPixels: [Int] = Array(repeating: transparent, count: input.width * input.height)

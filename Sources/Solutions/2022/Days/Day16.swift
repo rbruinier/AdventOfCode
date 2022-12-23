@@ -185,7 +185,7 @@ final class Day16Solver: DaySolver {
         return maxScore
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         memoization = Array(repeating: -1, count: 68_000_000)
 
         let valveNetwork = generateValveNetwork(valves: input.valves, startMinutes: 30)
@@ -199,7 +199,7 @@ final class Day16Solver: DaySolver {
         )
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         memoization = Array(repeating: -1, count: 68_000_000)
 
         let valveNetwork = generateValveNetwork(valves: input.valves, startMinutes: 26)

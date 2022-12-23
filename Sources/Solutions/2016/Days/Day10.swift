@@ -81,13 +81,13 @@ final class Day10Solver: DaySolver {
         return (bots: bots, outputs: outputs)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let (bots, _) = solve(instructions: input.instructions)
 
         return bots.first(where: { $0.value.low == 17 && $0.value.high == 61 })!.key
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let (_, outputs) = solve(instructions: input.instructions)
 
         return outputs[0]! * outputs[1]! * outputs[2]!

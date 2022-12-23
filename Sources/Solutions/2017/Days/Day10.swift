@@ -10,7 +10,7 @@ final class Day10Solver: DaySolver {
         let lengths: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var numbers: [Int] = (0 ... 255).map { $0 }
 
         var skipSize = 0
@@ -31,7 +31,7 @@ final class Day10Solver: DaySolver {
         return numbers[0] * numbers[1]
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         var lengths = input.lengths
             .map { String(describing: $0) }
             .joined(separator: ",")

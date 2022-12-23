@@ -18,14 +18,14 @@ final class Day01Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         input.elves
             .sorted(by: { $0.total < $1.total })
             .last!
             .total
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         input.elves
             .sorted(by: { $0.total < $1.total })
             .suffix(3)

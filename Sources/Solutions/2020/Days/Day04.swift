@@ -18,7 +18,7 @@ final class Day04Solver: DaySolver {
         let items: [Item: String]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let requiredItems: [Passport.Item] = [.ecl, .pid, .eyr, .hcl, .byr, .iyr, .hgt]
 
         let validPassports = input.passports.filter { passport in
@@ -34,7 +34,7 @@ final class Day04Solver: DaySolver {
         return validPassports.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let validPassports = input.passports.filter { passport in
             guard
                 let byr = Int(passport.items[.byr] ?? "-"),

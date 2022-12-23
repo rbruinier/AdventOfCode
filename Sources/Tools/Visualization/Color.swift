@@ -53,4 +53,24 @@ public struct Color {
     public init(r: UInt8, g: UInt8, b: UInt8, a: UInt8 = 255) {
         value = UInt32(a) << 24 | UInt32(r) << 16 | UInt32(g) << 8 | UInt32(b)
     }
+
+    // factor runs from 0 ... 255 where 0 means 0% of self and 255 means 100% self
+    public func faded(factor: Int) -> Color {
+        Color(
+            r: UInt8((Int(r) * factor) >> 8),
+            g: UInt8((Int(g) * factor) >> 8),
+            b: UInt8((Int(b) * factor) >> 8)
+        )
+    }
+
+    // factor runs from 0 ... 255 where 0 means 100% self and 255 means 0% self
+    public func mixed(with rhs: Color, factor: Int) -> Color {
+        let inverseFactor = 255 - factor
+
+        return Color(
+            r: UInt8((Int(r) * inverseFactor) >> 8) + UInt8((Int(rhs.r) * factor) >> 8),
+            g: UInt8((Int(g) * inverseFactor) >> 8) + UInt8((Int(rhs.g) * factor) >> 8),
+            b: UInt8((Int(b) * inverseFactor) >> 8) + UInt8((Int(rhs.b) * factor) >> 8)
+        )
+    }
 }

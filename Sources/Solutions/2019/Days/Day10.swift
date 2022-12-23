@@ -16,7 +16,7 @@ final class Day10Solver: DaySolver {
     private var matchesPerAsteroid: [Point2D: [Point2D]]!
     private var bestMatch: Point2D!
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         matchesPerAsteroid = [:]
 
         bestMatch = input.asteroids.first!
@@ -67,7 +67,7 @@ final class Day10Solver: DaySolver {
         return matchesPerAsteroid[bestMatch]!.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         func degrees(_ x: Double, _ y: Double) -> Double {
             var degrees = Double.pi * 0.5 + atan2(y, x).remainder(dividingBy: Double.pi * 2.0)
 

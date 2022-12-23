@@ -70,7 +70,7 @@ final class Day15Solver: DaySolver {
         return bestScore
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let numberOfTeaspoons = 100
 
         return getScoresForIngredients(
@@ -81,7 +81,7 @@ final class Day15Solver: DaySolver {
         )
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let numberOfTeaspoons = 100
 
         return getScoresForIngredients(

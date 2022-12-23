@@ -33,7 +33,7 @@ final class Day12Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var orientation: Orientation = .east
 
         var ship = Point2D()
@@ -59,7 +59,7 @@ final class Day12Solver: DaySolver {
         return abs(ship.x) + abs(ship.y)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var ship = Point2D()
         var waypoint = Point2D(x: 10, y: 1)
 

@@ -52,7 +52,7 @@ final class Day24Solver: DaySolver {
         return ((z / step.operandA) * 26) + input + step.operandC
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         // As we know the result is completely z and digit input driven we just care about z states and their max values
         //
         // Brute force through all possible z values for each step and digit
@@ -88,7 +88,7 @@ final class Day24Solver: DaySolver {
         return cachedResults.max
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return cachedResults.min
     }
 

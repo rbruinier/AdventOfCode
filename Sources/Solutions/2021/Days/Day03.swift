@@ -10,7 +10,7 @@ final class Day03Solver: DaySolver {
         let items: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var gammaRate = 0
 
         for digitIndex in 0 ..< 12 {
@@ -28,7 +28,7 @@ final class Day03Solver: DaySolver {
         return gammaRate * epsilonRate
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var oxygenGeneratorItems = input.items
         var co2ScrubbingItems = input.items
 

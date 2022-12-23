@@ -17,7 +17,7 @@ final class Day02Solver: DaySolver {
         case left = "L"
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         let digits: [Point2D: Int] = [
             .init(x: -1, y: -1): 1,
             .init(x: 0, y: -1): 2,
@@ -55,7 +55,7 @@ final class Day02Solver: DaySolver {
         return code
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         let digits: [Point2D: String] = [
             .init(x: 0, y: -2): "1",
             .init(x: -1, y: -1): "2",

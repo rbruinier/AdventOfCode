@@ -19,7 +19,7 @@ final class Day14Solver: DaySolver {
         let value: Int64
     }
 
-    public func solvePart1() -> Any {
+    public func solvePart1() -> Int64 {
         var memory: [Int: Int64] = [:]
 
         for instruction in input.instructions {
@@ -42,7 +42,7 @@ final class Day14Solver: DaySolver {
         return memory.values.reduce(0, +)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int64 {
         func createAllVariations(base: Int64, instruction: Instruction, bitShifters: [Int64]) -> [Int64] {
             var shifters = bitShifters
 

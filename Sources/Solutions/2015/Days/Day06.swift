@@ -16,7 +16,7 @@ final class Day06Solver: DaySolver {
         case toggle(from: Point2D, to: Point2D)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var grid: [Bool] = Array(repeating: false, count: 1_000 * 1_000)
 
         for instruction in input.instructions {
@@ -55,7 +55,7 @@ final class Day06Solver: DaySolver {
         return grid.filter { $0 }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var grid: [Int] = Array(repeating: 0, count: 1_000 * 1_000)
 
         for instruction in input.instructions {

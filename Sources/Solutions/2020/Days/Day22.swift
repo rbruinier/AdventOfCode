@@ -73,7 +73,7 @@ final class Day22Solver: DaySolver {
         }
     }
 
-    public func solvePart1() -> Any {
+    public func solvePart1() -> Int {
         var gameId = 1
 
         let winnerCards = playGame(player1Cards: input.player1.cards, player2Cards: input.player2.cards, gameId: &gameId, allowRecursion: false).winnerCards
@@ -86,7 +86,7 @@ final class Day22Solver: DaySolver {
         return score
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var gameId = 1
 
         let winnerCards = playGame(player1Cards: input.player1.cards, player2Cards: input.player2.cards, gameId: &gameId, allowRecursion: true).winnerCards

@@ -38,13 +38,13 @@ final class Day03Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let point = spiralPoint(for: input.squareID)
 
         return abs(point.x) + abs(point.y)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var sumsPerPoint: [Point2D: Int] = [:]
 
         for n in 1 ... 100 {

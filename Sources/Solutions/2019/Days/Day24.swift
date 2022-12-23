@@ -119,7 +119,7 @@ final class Day24Solver: DaySolver {
         return rating
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var grid = input.grid
 
         var pastHashes: Set<Int> = Set()
@@ -136,7 +136,7 @@ final class Day24Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var grids: [Int: [Point2D: Bool]] = [0: input.grid]
 
         for _ in 0 ..< 200 {

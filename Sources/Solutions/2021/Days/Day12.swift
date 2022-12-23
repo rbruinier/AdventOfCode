@@ -71,13 +71,13 @@ final class Day12Solver: DaySolver {
         return allPaths
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let completedPaths = iteratePath(startNode: input.startNode, endNode: input.endNode)
 
         return completedPaths.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let smallNodes = input.uniqueNodes.filter {
             $0.isBig == false && $0 != input.startNode && $0 != input.endNode
         }

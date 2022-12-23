@@ -48,7 +48,7 @@ final class Day18Solver: DaySolver {
         return result
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var grid = input.grid
 
         for _ in 0 ..< 100 {
@@ -58,7 +58,7 @@ final class Day18Solver: DaySolver {
         return grid.filter { $0 }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var grid = input.grid
 
         for step in 0 ... 100 {

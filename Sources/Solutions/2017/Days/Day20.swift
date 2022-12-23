@@ -9,11 +9,11 @@ final class Day20Solver: DaySolver {
     private struct Input {
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return 0
     }
 

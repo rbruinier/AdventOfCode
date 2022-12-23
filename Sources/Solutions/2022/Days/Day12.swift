@@ -30,13 +30,13 @@ final class Day12Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let bfsGrid = GridWrapper(heightMap: input.heightMap)
 
         return BFS.shortestPathInGrid(grid: bfsGrid, from: input.start, to: input.end)!.steps
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let bfsGrid = GridWrapper(heightMap: input.heightMap)
 
         let allZeroHeightPoints = input.heightMap.filter { $0.value == 0 }

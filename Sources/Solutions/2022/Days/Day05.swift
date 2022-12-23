@@ -17,7 +17,7 @@ final class Day05Solver: DaySolver {
         let toStack: Int
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         var stacks = input.stacks
 
         for move in input.moves {
@@ -31,7 +31,7 @@ final class Day05Solver: DaySolver {
         return stacks.reduce("") { $0 + ($1.last ?? "") }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         var stacks = input.stacks
 
         for move in input.moves {

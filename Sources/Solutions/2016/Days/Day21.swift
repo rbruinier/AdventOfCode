@@ -135,11 +135,11 @@ final class Day21Solver: DaySolver {
         return password
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         performOperations(input.operations, on: input.password).description
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         performReversedOperations(input.operations.reversed(), on: input.scrambledPassword).description
     }
 

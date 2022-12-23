@@ -41,13 +41,13 @@ final class Day20Solver: DaySolver {
         return result
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let ranges = collapseRanges(input.ranges)
 
-        return ranges[0].upperBound + 1
+        return Int(ranges[0].upperBound + 1)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let ranges = collapseRanges(input.ranges)
 
         var numberOfAvailableNumbers: UInt32 = 0
@@ -58,7 +58,7 @@ final class Day20Solver: DaySolver {
 
         numberOfAvailableNumbers += UInt32.max - ranges.last!.upperBound
 
-        return numberOfAvailableNumbers
+        return Int(numberOfAvailableNumbers)
     }
 
     func parseInput(rawString: String) {

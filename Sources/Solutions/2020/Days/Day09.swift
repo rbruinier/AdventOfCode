@@ -10,7 +10,7 @@ final class Day09Solver: DaySolver {
         let numbers: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let scanSize = 25
 
         var window = Array(input.numbers[0 ..< scanSize])
@@ -43,7 +43,7 @@ final class Day09Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let numbers = input.numbers
         let numberToFind = 556543474
 

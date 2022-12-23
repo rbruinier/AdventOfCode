@@ -10,7 +10,7 @@ final class Day25Solver: DaySolver {
         let program: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intcode = IntcodeProcessor(program: input.program)
 
         /*
@@ -107,7 +107,7 @@ final class Day25Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         return "Merry Christmas 🎄"
     }
 

@@ -127,7 +127,7 @@ final class Day05Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var grid = Grid(width: input.gridWidth, height: input.gridHeight)
 
         for line in input.lines {
@@ -137,7 +137,7 @@ final class Day05Solver: DaySolver {
         return grid.numberOfItemsWithMinimumCounter(2)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var grid = Grid(width: input.gridWidth, height: input.gridHeight)
 
         for line in input.lines {

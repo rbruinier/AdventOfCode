@@ -10,7 +10,7 @@ final class Day21Solver: DaySolver {
         let program: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var metaProgram = """
         # we certainly want to jump if the A (next item) is empty
         NOT A J
@@ -41,7 +41,7 @@ final class Day21Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var metaProgram = """
         # we certainly want to jump if the A (next item) is empty
         NOT A J

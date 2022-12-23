@@ -93,11 +93,11 @@ final class Day07Solver: DaySolver {
         return false
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.strings.filter { supportsTLS(ip: $0) }.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return input.strings.filter { supportsSSL(ip: $0) }.count
     }
 

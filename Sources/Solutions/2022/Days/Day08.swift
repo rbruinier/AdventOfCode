@@ -13,7 +13,7 @@ final class Day08Solver: DaySolver {
     private func isVisibleFromAnEdge(at point: Point2D, heights: [Point2D: Int]) -> Bool {
         let treeHeight = heights[point]!
 
-        directionLoop: for direction in Direction.allCases {
+        directionLoop: for direction in Direction.allStraight {
             var currentPoint = point.moved(to: direction)
 
             while let otherHeight = heights[currentPoint] {
@@ -35,7 +35,7 @@ final class Day08Solver: DaySolver {
 
         var scenicScore = 1
 
-        for direction in Direction.allCases {
+        for direction in Direction.allStraight {
             var currentPoint = point.moved(to: direction)
 
             var visibleDistance = 0
@@ -56,7 +56,7 @@ final class Day08Solver: DaySolver {
         return scenicScore
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var isVisibleFromAnEdgeCounter = 0
 
         for point in input.heights.keys {
@@ -66,7 +66,7 @@ final class Day08Solver: DaySolver {
         return isVisibleFromAnEdgeCounter
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var maxScenicScore = 0
 
         for point in input.heights.keys {

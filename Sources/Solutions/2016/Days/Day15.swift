@@ -16,7 +16,7 @@ final class Day15Solver: DaySolver {
         var position: Int
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let discs = input.discs
 
         for loop in 0 ..< 1_000_000 {
@@ -40,7 +40,7 @@ final class Day15Solver: DaySolver {
         fatalError()
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var discs = input.discs
 
         discs.append(.init(nrOfPositions: 11, position: 0))

@@ -66,7 +66,7 @@ final class Day03Solver: DaySolver {
         return intersections
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intersections = intersections(for: input.lines)
 
         resultCache = intersections
@@ -74,7 +74,7 @@ final class Day03Solver: DaySolver {
         return intersections.map { abs($0.point.x) + abs($0.point.y) }.min()!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return resultCache.map(\.steps).min()!
     }
 

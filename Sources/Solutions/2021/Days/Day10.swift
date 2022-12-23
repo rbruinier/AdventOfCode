@@ -47,7 +47,7 @@ final class Day10Solver: DaySolver {
         return stack.isEmpty ? .valid : .incomplete(remainingStack: stack)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let validations: [Validation] = input.lines.map(validateLine)
 
         let score = validations.reduce(0) { result, validation in
@@ -68,7 +68,7 @@ final class Day10Solver: DaySolver {
         return score
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let validations: [Validation] = input.lines.map(validateLine)
 
         let scores: [Int] = validations.compactMap { validation in

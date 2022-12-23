@@ -68,11 +68,11 @@ final class Day14Solver: DaySolver {
         return highestElementOccurence - lowestElementOccurence
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return solveForSteps(10)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return solveForSteps(40)
     }
 

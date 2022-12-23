@@ -103,7 +103,7 @@ final class Day16Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var bits = input.hexString.map { Int(String($0), radix: 16)! }.reduce(into: [Int]()) { result, value in
             result.append(value >> 3 & 1)
             result.append(value >> 2 & 1)
@@ -127,7 +127,7 @@ final class Day16Solver: DaySolver {
         return versionSum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var bits = input.hexString.map { Int(String($0), radix: 16)! }.reduce(into: [Int]()) { result, value in
             result.append(value >> 3 & 1)
             result.append(value >> 2 & 1)

@@ -53,7 +53,7 @@ final class Day08Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let occurencesOfOne = input.entries.reduce(0) { result, entry in
             result + entry.outputDigits.filter { $0.segments.count == 2 }.count
         }
@@ -73,7 +73,7 @@ final class Day08Solver: DaySolver {
         return occurencesOfOne + occurencesOfFour + occurencesOfSeven + occurencesOfEight
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var result = 0
 
         for entry in input.entries {

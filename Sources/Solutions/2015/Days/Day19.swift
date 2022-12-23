@@ -40,7 +40,7 @@ final class Day19Solver: DaySolver {
         return steps
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var combinations: Set<String> = []
 
         for (original, replacements) in input.replacements {
@@ -58,7 +58,7 @@ final class Day19Solver: DaySolver {
         return combinations.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var reverseMatches: [String: String] = [:]
 
         for (original, replacements) in input.replacements {

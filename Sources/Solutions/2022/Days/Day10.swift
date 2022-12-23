@@ -66,7 +66,7 @@ final class Day10Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var cpu = CPU(instructions: input.instructions)
 
         var sum = 0
@@ -81,7 +81,7 @@ final class Day10Solver: DaySolver {
         return sum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         func printPixels(pixels: [[Bool]]) {
             for row in pixels {
                 var line = ""

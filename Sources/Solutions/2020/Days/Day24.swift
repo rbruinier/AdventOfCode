@@ -41,7 +41,7 @@ final class Day24Solver: DaySolver {
         return point
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var blackTiles: Set<Point2D> = Set()
 
         for line in input.lines {
@@ -72,7 +72,7 @@ final class Day24Solver: DaySolver {
         return points
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var blackTiles: Set<Point2D> = Set()
 
         for line in input.lines {

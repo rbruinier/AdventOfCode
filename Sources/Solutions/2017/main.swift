@@ -11,18 +11,18 @@ extension DaySolver {
 
 let day11Solver = Day11Solver()
 
-let days: [DaySolver] = [
-    //    Day01Solver(),
-//    Day02Solver(),
-//    Day03Solver(),
-//    Day04Solver(),
-//    Day05Solver(),
-//    Day06Solver(),
-//    Day07Solver(),
-//    Day08Solver(),
-//    Day09Solver()
-//    Day10Solver(),
-//    day11Solver
+let days: [any DaySolver] = [
+    Day01Solver(),
+    Day02Solver(),
+    Day03Solver(),
+    Day04Solver(),
+    Day05Solver(),
+    Day06Solver(),
+    Day07Solver(),
+    Day08Solver(),
+    Day09Solver(),
+    Day10Solver(),
+    day11Solver
 //    Day12Solver(),
 //    Day13Solver(),
 //    Day14Solver(),
@@ -39,24 +39,8 @@ let days: [DaySolver] = [
 //    Day25Solver()
 ]
 
-print("Parsing inputs")
+solveDays(days, bundle: .module)
 
-days.forEach { day in
-    day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: .module))
-}
-
-print("Start solving days")
-
-let startTime = mach_absolute_time()
-
-days.forEach { day in
-    solveDay(day)
-}
-
-let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
-
-print("Total running duration is \(formattedDuration) seconds")
-//
 // visualize(
 //	solver: day11Solver,
 //	rootPath: FileManager.default

@@ -10,7 +10,7 @@ final class Day16Solver: DaySolver {
         let digits: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         // 0, 1, 0, -1
         var originalDigits = input.digits
 
@@ -79,7 +79,7 @@ final class Day16Solver: DaySolver {
         return originalDigits[0 ..< 8].map { String($0) }.joined()
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         // solved with some help from: https://www.reddit.com/r/adventofcode/comments/ebf5cy/2019_day_16_part_2_understanding_how_to_come_up/
 
         let initialOffset = Int(input.digits[0 ..< 7].map { String($0) }.joined())!

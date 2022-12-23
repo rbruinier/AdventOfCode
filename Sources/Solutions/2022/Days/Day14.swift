@@ -36,7 +36,7 @@ final class Day14Solver: DaySolver {
         return blockedPoints
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let sandStartPoint = Point2D(x: 500, y: 0)
 
         var blockedPoints = blockedPoints(with: input.paths)
@@ -85,7 +85,7 @@ final class Day14Solver: DaySolver {
         return grainsOfSand
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let sandStartPoint = Point2D(x: 500, y: 0)
 
         var blockedPoints = blockedPoints(with: input.paths)

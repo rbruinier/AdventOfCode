@@ -10,7 +10,7 @@ final class Day06Solver: DaySolver {
         let strings: [String]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         let length = input.strings.first!.count
 
         var result = ""
@@ -21,7 +21,7 @@ final class Day06Solver: DaySolver {
         return result
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         let length = input.strings.first!.count
 
         var result = ""

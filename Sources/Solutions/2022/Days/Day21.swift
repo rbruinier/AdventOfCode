@@ -119,11 +119,11 @@ final class Day21Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         solvePart1ForId("root", monkeys: input.monkeys)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var monkeys = input.monkeys
 
         let rootOperands = monkeys["root"]!.operands!

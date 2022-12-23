@@ -62,13 +62,13 @@ final class Day23Solver: DaySolver {
         return finalResult
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let cups = LoopedLinkedListSet<Int>(values: input.cups)
 
         return play(moves: 100, with: cups, maxValue: 9)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var cupValues = input.cups
 
         for index in (input.cups.count + 1) ... 1_000_000 {

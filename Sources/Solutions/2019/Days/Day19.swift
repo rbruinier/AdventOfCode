@@ -11,7 +11,7 @@ final class Day19Solver: DaySolver {
         let program: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var counter = 0
         for y in 0 ..< 50 {
             for x in 0 ..< 50 {
@@ -28,7 +28,7 @@ final class Day19Solver: DaySolver {
         return counter
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var slidingWindow: Deque<(y: Int, startX: Int, endX: Int)> = []
 
         for y in 1100 ..< 10_000 {

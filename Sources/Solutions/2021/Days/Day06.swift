@@ -41,11 +41,11 @@ final class Day06Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return runFor(iterations: 80)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return runFor(iterations: 256)
     }
 

@@ -42,7 +42,7 @@ final class Day05Solver: DaySolver {
         return lowRow * 8 + lowSeat
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var highestSeatId = 0
 
         for seatCode in input.seats {
@@ -54,7 +54,7 @@ final class Day05Solver: DaySolver {
         return highestSeatId
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let seatIds: [Int] = input.seats.map { getSeatId(from: $0) }
 
         let lowestSeatId = seatIds.min()!

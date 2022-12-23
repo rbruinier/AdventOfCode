@@ -28,11 +28,11 @@ final class Day02Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.passwords.filter(\.isValidWithPolicy1).count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return input.passwords.filter(\.isValidWithPolicy2).count
     }
 

@@ -145,7 +145,7 @@ final class Day17Solver: DaySolver {
         return .init(occupiedPositions: occupiedPositions, dataPerRock: dataPerRock, heightPerDroppedRock: heightPerDroppedRock)
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let result = runGame(withRockCount: 2022, shapes: input.shapes, jetDirections: input.jetDirections)
 
         let minY = result.occupiedPositions.map(\.y).min()!
@@ -153,7 +153,7 @@ final class Day17Solver: DaySolver {
         return -minY
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let result = runGame(withRockCount: 10000, shapes: input.shapes, jetDirections: input.jetDirections)
 
         var repetition: (startIndex: Int, size: Int)?

@@ -10,7 +10,7 @@ final class Day07Solver: DaySolver {
         let program: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intcode = IntcodeProcessor()
 
         let permutations = [0, 1, 2, 3, 4].permutations
@@ -30,7 +30,7 @@ final class Day07Solver: DaySolver {
         return maxThrusterSignal
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let permutations = [5, 6, 7, 8, 9].permutations
 
         var maxThrusterSignal = 0

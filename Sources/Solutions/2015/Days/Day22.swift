@@ -258,7 +258,7 @@ final class Day22Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var minMana = Int.max
 
         for _ in 0 ..< 100_000 {
@@ -270,7 +270,7 @@ final class Day22Solver: DaySolver {
         return minMana
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var minMana = Int.max
 
         for _ in 0 ..< 100_000 {

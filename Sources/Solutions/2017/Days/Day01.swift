@@ -10,7 +10,7 @@ final class Day01Solver: DaySolver {
         let digits: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var digits = input.digits
 
         digits.append(digits.first!)
@@ -23,7 +23,7 @@ final class Day01Solver: DaySolver {
         return sum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let digits = input.digits
 
         let halfIndex = digits.count / 2

@@ -98,7 +98,7 @@ final class Day14Solver: DaySolver {
         return false
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var hashQueue: Deque<Hash> = []
 
         var index = 0
@@ -132,7 +132,7 @@ final class Day14Solver: DaySolver {
         }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         func calcHash(for string: String) -> Hash {
             var value = md5AsBytes(with: [UInt8](string.data(using: .ascii)!))
 

@@ -39,7 +39,7 @@ final class Day10Solver: DaySolver {
 
     private var cachedCurrentNumbers: [Int]!
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var currentNumbers: [Int] = input.string.map { Int(String($0))! }
 
         for _ in 0 ..< 40 {
@@ -51,7 +51,7 @@ final class Day10Solver: DaySolver {
         return currentNumbers.count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var currentNumbers = cachedCurrentNumbers!
 
         for _ in 40 ..< 50 {

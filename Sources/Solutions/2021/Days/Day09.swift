@@ -99,7 +99,7 @@ final class Day09Solver: DaySolver {
         return lowPoints
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let lowPoints = getLowPoints(from: input)
 
         let heights = lowPoints.map { input.heightMap[$0.y * input.width + $0.x] }
@@ -107,7 +107,7 @@ final class Day09Solver: DaySolver {
         return heights.reduce(0) { result, height in result + height + 1 }
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let lowPoints = getLowPoints(from: input)
 
         var allBasinSizes: [Int] = []

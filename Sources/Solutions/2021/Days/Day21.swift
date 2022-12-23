@@ -87,7 +87,7 @@ final class Day21Solver: DaySolver {
         return wins
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var position1 = input.startPosition1 - 1
         var position2 = input.startPosition2 - 1
 
@@ -121,7 +121,7 @@ final class Day21Solver: DaySolver {
         return diceCount * min(score1, score2)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let position1 = input.startPosition1 - 1
         let position2 = input.startPosition2 - 1
 

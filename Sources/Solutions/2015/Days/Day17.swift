@@ -25,7 +25,7 @@ final class Day17Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var solutionsPerContainers: [Int: Int] = [:]
 
         fill(containers: input.containers, amount: 150, numberOfContainers: 0, solutionsPerContainers: &solutionsPerContainers)
@@ -33,7 +33,7 @@ final class Day17Solver: DaySolver {
         return solutionsPerContainers.values.reduce(0, +)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var solutionsPerContainers: [Int: Int] = [:]
 
         fill(containers: input.containers, amount: 150, numberOfContainers: 0, solutionsPerContainers: &solutionsPerContainers)

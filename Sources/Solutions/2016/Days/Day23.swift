@@ -116,7 +116,7 @@ final class Day23Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var cpu = CPU(instructions: input.instructions)
 
         cpu.registers["a"] = 7
@@ -128,7 +128,7 @@ final class Day23Solver: DaySolver {
         return cpu.registers["a"]!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         /*
          This solution required me to reverse engineer some of the assembly code. First a counter per instruction was kept and
          printed after letting it run for a few seconds. This gave insight in what instructions are the hotspots to focus on. This

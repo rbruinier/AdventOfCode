@@ -69,11 +69,11 @@ final class Day05Solver: DaySolver {
         return foundMatchingPair && foundRepeatingLetter
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         return input.strings.filter(isNicePart1(string:)).count
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         return input.strings.filter(isNicePart2(string:)).count
     }
 

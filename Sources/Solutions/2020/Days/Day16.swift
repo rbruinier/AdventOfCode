@@ -23,7 +23,7 @@ final class Day16Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var invalidValuesSum = 0
 
         for nearbyTicket in input.nearbyTickets {
@@ -37,7 +37,7 @@ final class Day16Solver: DaySolver {
         return invalidValuesSum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         // get valid tickets
         let validTickets = input.nearbyTickets.filter {
             for value in $0 {

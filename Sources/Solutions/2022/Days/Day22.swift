@@ -5,8 +5,16 @@ import Tools
 /// transformations are configured for when a point should move to a new side.
 ///
 /// Probably could be solved more elegantly but it works (for this input)
-final class Day22Solver: DaySolver {
+final class Day22Solver: TestableDaySolver {
     let dayNumber: Int = 22
+
+    var expectedPart1Result: Int {
+        43466
+    }
+
+    var expectedPart2Result: Int {
+        162155
+    }
 
     private var input: Input!
 
@@ -97,12 +105,13 @@ final class Day22Solver: DaySolver {
         case .south: facingPoints = 1
         case .west: facingPoints = 2
         case .north: facingPoints = 3
+        default: fatalError()
         }
 
         return (point.y + 1) * 1000 + (point.x + 1) * 4 + facingPoints
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let tiles = input.tiles
         let moves = input.moves
 
@@ -125,6 +134,8 @@ final class Day22Solver: DaySolver {
                         newPoint.y = mapData.rangesPerX[newPoint.x]!.upperBound
                     case .south:
                         newPoint.y = mapData.rangesPerX[newPoint.x]!.lowerBound
+                    default:
+                        fatalError()
                     }
                 }
 
@@ -141,7 +152,7 @@ final class Day22Solver: DaySolver {
         return scoreFor(point: point, direction: direction)
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         let a = 0
         let b = 1
         let c = 2
@@ -224,6 +235,7 @@ final class Day22Solver: DaySolver {
                     case .east: sideIndex = c
                     case .west: sideIndex = b
                     case .south: sideIndex = d
+                    default: fatalError()
                     }
 
                     let newSide = sideMappings[.init(currentSide, sideIndex)]!

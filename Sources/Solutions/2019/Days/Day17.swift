@@ -39,13 +39,14 @@ final class Day17Solver: DaySolver {
                     case .west: line += "<"
                     case .east: line += ">"
                     case .south: line += "v"
+                    default: fatalError()
                     }
                 }
             }
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intcode = IntcodeProcessor(program: input.program)
 
         var position = Point2D()
@@ -115,7 +116,7 @@ final class Day17Solver: DaySolver {
         return sum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var position: Point2D!
         var direction: Direction = .north
 

@@ -44,14 +44,14 @@ final class Day16Solver: DaySolver {
         return Array(values[0 ..< length])
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> String {
         let values = fillDisc(startingWith: input.values, length: input.desiredLengthPart1)
         let checksum = checksum(for: values)
 
         return checksum.map { $0 ? "1" : "0" }.joined()
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> String {
         let values = fillDisc(startingWith: input.values, length: input.desiredLengthPart2)
         let checksum = checksum(for: values)
 

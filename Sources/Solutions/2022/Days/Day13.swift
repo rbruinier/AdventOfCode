@@ -72,7 +72,7 @@ final class Day13Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var sum = 0
 
         for (index, pair) in input.pairs.enumerated() {
@@ -82,7 +82,7 @@ final class Day13Solver: DaySolver {
         return sum
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var packets: [Packet] = input.pairs.reduce([]) {
             $0 + [$1.a, $1.b]
         }

@@ -10,7 +10,7 @@ final class Day07Solver: DaySolver {
         let positions: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let sortedPositions = input.positions.sorted()
 
         let median = sortedPositions[input.positions.count >> 1]
@@ -22,7 +22,7 @@ final class Day07Solver: DaySolver {
         return fuelUsage
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         // possible optimization: group by unique positions with count but this already currently performs well enough
 
         let minimumPosition = input.positions.min()!

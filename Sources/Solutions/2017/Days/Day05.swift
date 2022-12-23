@@ -10,7 +10,7 @@ final class Day05Solver: DaySolver {
         let jumps: [Int]
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var jumps = input.jumps
 
         var steps = 0
@@ -31,7 +31,7 @@ final class Day05Solver: DaySolver {
         return steps
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var jumps = input.jumps
 
         var steps = 0

@@ -8,6 +8,7 @@ private extension Direction {
         case .south: return 2
         case .west: return 3
         case .east: return 4
+        default: fatalError()
         }
     }
 }
@@ -60,7 +61,7 @@ final class Day15Solver: DaySolver {
         }
     }
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         let intcode = IntcodeProcessor(program: input.program)
 
         var position = Point2D()
@@ -74,6 +75,7 @@ final class Day15Solver: DaySolver {
             case .east: newPosition += .init(x: 1, y: 0)
             case .south: newPosition += .init(x: 0, y: 1)
             case .west: newPosition += .init(x: -1, y: 0)
+            default: fatalError()
             }
 
             let output = intcode.continueProgramTillOutput(input: [direction.mazeCode])!
@@ -139,7 +141,7 @@ final class Day15Solver: DaySolver {
         return 0
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         // flood fill
         var cellQueue: [(point: Point2D, distance: Int)] = []
 

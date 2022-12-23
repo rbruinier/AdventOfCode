@@ -28,7 +28,7 @@ final class Day16Solver: DaySolver {
         "perfumes": 1
     ]
 
-    func solvePart1() -> Any {
+    func solvePart1() -> Int {
         var bestAunt: Aunt!
         var bestScore = Int.min
 
@@ -59,7 +59,7 @@ final class Day16Solver: DaySolver {
         return Int(bestAunt.name.replacingOccurrences(of: "Sue ", with: ""))!
     }
 
-    func solvePart2() -> Any {
+    func solvePart2() -> Int {
         var bestAunt: Aunt!
         var bestScore = Int.min
 
