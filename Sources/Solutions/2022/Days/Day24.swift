@@ -2,6 +2,10 @@ import Collections
 import Foundation
 import Tools
 
+/// Pre calculate all possible blizzard configurations (width x height). After this everything starts repeating. We also precalculate the hash value for this
+/// because calculating hashes for sets appears to be slow.
+///
+/// After that keep track of visited hashes of position + blizzard state so we don't explore same setup multiple times.
 final class Day24Solver: DaySolver {
     let dayNumber: Int = 24
 
@@ -47,61 +51,63 @@ final class Day24Solver: DaySolver {
         return newBlizzards
     }
 
-    private func shortestPath(from: Point2D, to: Point2D, startSteps: Int, cachedBlizzardStates: inout [Int: [Point2D: [Direction]]]) -> Int {
+    private func generateCachedBlizzards() -> [Int: (points: Set<Point2D>, hash: Int)] {
+        var blizzards = input.blizzards
+        var cachedBlizzards: [Int: (points: Set<Point2D>, hash: Int)] = [:]
+
+        for step in 0 ..< input.areaSize.width * input.areaSize.height {
+            let asSet = Set(blizzards.keys)
+
+            cachedBlizzards[step] = (points: asSet, hash: asSet.hashValue)
+
+            blizzards = moveBlizzards(blizzards, areaSize: input.areaSize)
+        }
+
+        return cachedBlizzards
+    }
+
+    private func shortestPath(from: Point2D, to: Point2D, startSteps: Int, cachedBlizzards: [Int: (points: Set<Point2D>, hash: Int)]) -> Int {
         struct State {
             let position: Point2D
             let steps: Int
+        }
+
+        func hashFor(position: Point2D, blizzards: Int) -> Int {
+            var hasher = Hasher()
+
+            hasher.combine(position)
+            hasher.combine(blizzards)
+
+            return hasher.finalize()
         }
 
         var queue: Deque<State> = [
             .init(position: from, steps: startSteps)
         ]
 
-        func hashFor(position: Point2D, blizzards: [Point2D: [Direction]]) -> Int {
-            let blizzardPoints = Set(blizzards.keys)
+        let cacheSize = input.areaSize.width * input.areaSize.height
 
-            var hasher = Hasher()
-
-            hasher.combine(position)
-            hasher.combine(blizzardPoints)
-
-            return hasher.finalize()
-        }
-
-        var visitedHashes: Set<Int> = [hashFor(position: from, blizzards: cachedBlizzardStates[startSteps]!)]
+        var visitedHashes: Set<Int> = [hashFor(position: from, blizzards: cachedBlizzards[startSteps % cacheSize]!.hash)]
 
         while let state = queue.popFirst() {
             let nextStep = state.steps + 1
 
-            let nextBlizzards: [Point2D: [Direction]]
-
-            if cachedBlizzardStates[nextStep] != nil {
-                nextBlizzards = cachedBlizzardStates[nextStep]!
-            } else {
-                nextBlizzards = moveBlizzards(
-                    cachedBlizzardStates[state.steps]!,
-                    areaSize: input.areaSize
-                )
-
-                cachedBlizzardStates[nextStep] = nextBlizzards
-            }
+            let blizzards = cachedBlizzards[nextStep % cacheSize]!
 
             for nextPoint in state.position.neighbors() {
                 if nextPoint == to {
-                    print(visitedHashes.count)
-
-                    return state.steps + 1
+                    return nextStep
                 }
 
                 guard
                     (0 ..< input.areaSize.width).contains(nextPoint.x),
                     (0 ..< input.areaSize.height).contains(nextPoint.y),
-                    nextBlizzards[nextPoint] == nil
+                    blizzards.points.contains(nextPoint) == false
                 else {
                     continue
                 }
 
-                let hash = hashFor(position: nextPoint, blizzards: nextBlizzards)
+                let hash = hashFor(position: nextPoint, blizzards: blizzards.hash)
 
                 guard visitedHashes.contains(hash) == false else {
                     continue
@@ -117,7 +123,7 @@ final class Day24Solver: DaySolver {
                 )
             }
 
-            if nextBlizzards[state.position] == nil {
+            if blizzards.points.contains(state.position) == false {
                 queue.append(
                     .init(
                         position: state.position,
@@ -131,18 +137,18 @@ final class Day24Solver: DaySolver {
     }
 
     func solvePart1() -> Int {
-        var cachedBlizzardStates: [Int: [Point2D: [Direction]]] = [0: input.blizzards]
+        let cachedBlizzards = generateCachedBlizzards()
 
-        return shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, cachedBlizzardStates: &cachedBlizzardStates)
+        return shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, cachedBlizzards: cachedBlizzards)
     }
 
     func solvePart2() -> Int {
-        var cachedBlizzardStates: [Int: [Point2D: [Direction]]] = [0: input.blizzards]
+        let cachedBlizzards = generateCachedBlizzards()
 
-        var steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, cachedBlizzardStates: &cachedBlizzardStates)
+        var steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, cachedBlizzards: cachedBlizzards)
 
-        steps = shortestPath(from: input.endPoint, to: input.startPoint, startSteps: steps, cachedBlizzardStates: &cachedBlizzardStates)
-        steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: steps, cachedBlizzardStates: &cachedBlizzardStates)
+        steps = shortestPath(from: input.endPoint, to: input.startPoint, startSteps: steps, cachedBlizzards: cachedBlizzards)
+        steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: steps, cachedBlizzards: cachedBlizzards)
 
         return steps
     }
