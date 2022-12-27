@@ -7,17 +7,54 @@ final class Day12Solver: DaySolver {
     private var input: Input!
 
     private struct Input {
+        let pipes: [Int: [Int]]
+    }
+
+    private func visitAllFromStartId(_ startId: Int, allPipes: [Int: [Int]], visitedPipes: inout Set<Int>) {
+        guard visitedPipes.contains(startId) == false else {
+            return
+        }
+
+        visitedPipes.insert(startId)
+
+        for toId in allPipes[startId]! {
+            visitAllFromStartId(toId, allPipes: allPipes, visitedPipes: &visitedPipes)
+        }
     }
 
     func solvePart1() -> Int {
-        return 0
+        var visitedPipes: Set<Int> = []
+
+        visitAllFromStartId(0, allPipes: input.pipes, visitedPipes: &visitedPipes)
+
+        return visitedPipes.count
     }
 
     func solvePart2() -> Int {
-        return 0
+        var combinedVisitedPipes: Set<Int> = []
+
+        var groupCount = 0
+        for startPipeId in input.pipes.keys where combinedVisitedPipes.contains(startPipeId) == false {
+            var visitedPipes: Set<Int> = []
+
+            visitAllFromStartId(startPipeId, allPipes: input.pipes, visitedPipes: &visitedPipes)
+
+            combinedVisitedPipes = combinedVisitedPipes.union(visitedPipes)
+
+            groupCount += 1
+        }
+
+        return groupCount
     }
 
     func parseInput(rawString: String) {
-        input = .init()
+        input = .init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
+            let components = line.components(separatedBy: " <-> ")
+
+            let start = Int(components[0])!
+            let to = components[1].components(separatedBy: ", ").map { Int($0)! }
+
+            result[start] = to
+        })
     }
 }
