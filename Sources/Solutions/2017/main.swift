@@ -24,7 +24,7 @@ let days: [any DaySolver] = [
 //    Day10Solver(),
 //    day11Solver,
 //    Day12Solver()
-    Day13Solver()
+//    Day13Solver()
 //    Day14Solver(),
 //    Day15Solver(),
 //    Day16Solver(),
@@ -34,7 +34,7 @@ let days: [any DaySolver] = [
 //    Day20Solver(),
 //    Day21Solver(),
 //    Day22Solver(),
-//    Day23Solver(),
+    Day23Solver()
 //    Day24Solver(),
 //    Day25Solver()
 ]

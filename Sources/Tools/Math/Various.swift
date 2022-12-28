@@ -16,6 +16,27 @@ public func sign(_ value: Int) -> Int {
     return 0
 }
 
+public func isPrime(_ value: Int) -> Bool {
+    if value <= 1 {
+        return false
+    }
+
+    if value <= 3 {
+        return true
+    }
+
+    var i = 2
+    while i * i <= value {
+        if value % i == 0 {
+            return false
+        }
+
+        i = i + 1
+    }
+
+    return true
+}
+
 public func greatestCommonFactor(_ x: Int, _ y: Int) -> Int {
     var a = 0
     var b = max(x, y)
