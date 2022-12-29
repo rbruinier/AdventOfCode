@@ -5,6 +5,8 @@ public struct Point3D {
     public var y: Int = 0
     public var z: Int = 0
 
+    public static let zero = Point3D(x: 0, y: 0, z: 0)
+
     public init() {
     }
 
