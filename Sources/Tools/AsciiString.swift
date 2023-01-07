@@ -19,12 +19,24 @@ public extension AsciiCharacter {
         self = value
     }
 
+    func caseInsensitiveEqualTo(_ rhs: AsciiCharacter) -> Bool {
+        upperCased == rhs.upperCased
+    }
+
+    var upperCased: AsciiCharacter {
+        guard isLowerCase else {
+            return self
+        }
+
+        return self - .a + .A
+    }
+
     var isLowerCase: Bool {
-        (97 ... 122).contains(self)
+        (.a ... .z).contains(self)
     }
 
     var isUpperCase: Bool {
-        (65 ... 90).contains(self)
+        (.A ... .Z).contains(self)
     }
 }
 
