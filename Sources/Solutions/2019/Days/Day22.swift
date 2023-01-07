@@ -6,6 +6,9 @@ import Tools
 final class Day22Solver: DaySolver {
     let dayNumber: Int = 22
 
+    let expectedPart1Result = 5169
+    let expectedPart2Result = "74258074061935"
+
     private var input: Input!
 
     private struct Input {
@@ -68,7 +71,7 @@ final class Day22Solver: DaySolver {
         return deck.firstIndex(of: 2019)!
     }
 
-    func solvePart2() -> BInt {
+    func solvePart2() -> String {
         // source: https://www.reddit.com/r/adventofcode/comments/ee0rqi/2019_day_22_solutions/fbnifwk/
 
         func modPower(_ x: BInt, _ y: BInt, _ m: BInt) -> BInt {
@@ -115,7 +118,7 @@ final class Day22Solver: DaySolver {
         let A: BInt = (Y - Z) * modInverse(X - Y, deckSize) % deckSize
         let B: BInt = (Y - A * X) % deckSize
 
-        return (modPower(A, loopSize, deckSize) * X + (modPower(A, loopSize, deckSize) - 1) * modInverse(A - 1, deckSize) * B) % deckSize
+        return String((modPower(A, loopSize, deckSize) * X + (modPower(A, loopSize, deckSize) - 1) * modInverse(A - 1, deckSize) * B) % deckSize)
     }
 
     func parseInput(rawString: String) {

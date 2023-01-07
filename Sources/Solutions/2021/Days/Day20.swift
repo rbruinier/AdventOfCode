@@ -4,6 +4,9 @@ import Tools
 final class Day20Solver: DaySolver {
     let dayNumber: Int = 20
 
+    let expectedPart1Result = 5326
+    let expectedPart2Result = 17096
+
     private var input: Input!
 
     private struct Input {
@@ -85,7 +88,7 @@ final class Day20Solver: DaySolver {
                         originalBitmap[originalY + 0, originalX + 1, default: defaultValue],
                         originalBitmap[originalY + 1, originalX - 1, default: defaultValue],
                         originalBitmap[originalY + 1, originalX + 0, default: defaultValue],
-                        originalBitmap[originalY + 1, originalX + 1, default: defaultValue]
+                        originalBitmap[originalY + 1, originalX + 1, default: defaultValue],
                     ]
 
                     var hash = 0

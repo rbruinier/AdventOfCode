@@ -4,6 +4,9 @@ import Tools
 final class Day23Solver: DaySolver {
     let dayNumber: Int = 23
 
+    let expectedPart1Result = 26354798
+    let expectedPart2Result = 166298218695
+
     private var input: Input!
 
     private struct Input {
@@ -16,7 +19,7 @@ final class Day23Solver: DaySolver {
         let nodes: [LoopedLinkedListSet<Int>.Node] = [
             cups.removeNextNode(of: currentCupNode),
             cups.removeNextNode(of: currentCupNode),
-            cups.removeNextNode(of: currentCupNode)
+            cups.removeNextNode(of: currentCupNode),
         ]
 
         var newCupValue = currentCupValue

@@ -1,6 +1,14 @@
 import Foundation
 
 public extension Array {
+    init(reservedCapacity: Int) {
+        self.init()
+
+        reserveCapacity(reservedCapacity)
+    }
+}
+
+public extension Array {
     @inlinable func count(_ isIncluded: (Element) throws -> Bool) rethrows -> Int {
         try filter(isIncluded).count
     }

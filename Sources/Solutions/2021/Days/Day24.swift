@@ -4,6 +4,9 @@ import Tools
 final class Day24Solver: DaySolver {
     let dayNumber: Int = 24
 
+    let expectedPart1Result = 93959993429899
+    let expectedPart2Result = 11815671117121
+
     private var input: Input!
 
     /*
@@ -107,7 +110,7 @@ final class Day24Solver: DaySolver {
             .init(operandA: 26, operandB: -4, operandC: 7),
             .init(operandA: 1, operandB: 10, operandC: 6),
             .init(operandA: 26, operandB: -5, operandC: 9),
-            .init(operandA: 26, operandB: -12, operandC: 9)
+            .init(operandA: 26, operandB: -12, operandC: 9),
         ])
     }
 }

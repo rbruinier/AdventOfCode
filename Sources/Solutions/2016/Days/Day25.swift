@@ -4,6 +4,9 @@ import Tools
 final class Day25Solver: DaySolver {
     let dayNumber: Int = 25
 
+    let expectedPart1Result = 182
+    let expectedPart2Result = "Merry Christmas 🎄"
+
     private var input: Input!
 
     private struct Input {
@@ -111,7 +114,7 @@ final class Day25Solver: DaySolver {
     }
 
     func solvePart2() -> String {
-        return "Merry Christmas 🎄"
+        "Merry Christmas 🎄"
     }
 
     func parseInput(rawString: String) {

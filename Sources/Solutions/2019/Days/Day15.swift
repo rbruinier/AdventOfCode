@@ -16,6 +16,9 @@ private extension Direction {
 final class Day15Solver: DaySolver {
     let dayNumber: Int = 15
 
+    let expectedPart1Result = 244
+    let expectedPart2Result = 278
+
     private var input: Input!
 
     private struct Input {
@@ -123,7 +126,7 @@ final class Day15Solver: DaySolver {
                 cell.point + Point2D(x: 0, y: -1),
                 cell.point + Point2D(x: 1, y: 0),
                 cell.point + Point2D(x: 0, y: 1),
-                cell.point + Point2D(x: -1, y: 0)
+                cell.point + Point2D(x: -1, y: 0),
             ]
 
             for neighborPoint in neighborPoints {
@@ -159,7 +162,7 @@ final class Day15Solver: DaySolver {
                 cell.point + Point2D(x: 0, y: -1),
                 cell.point + Point2D(x: 1, y: 0),
                 cell.point + Point2D(x: 0, y: 1),
-                cell.point + Point2D(x: -1, y: 0)
+                cell.point + Point2D(x: -1, y: 0),
             ]
 
             for neighborPoint in neighborPoints {

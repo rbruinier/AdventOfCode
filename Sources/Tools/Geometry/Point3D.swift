@@ -37,7 +37,7 @@ public struct Point3D {
             .init(x: x, y: y - 1, z: z),
             .init(x: x, y: y + 1, z: z),
             .init(x: x, y: y, z: z - 1),
-            .init(x: x, y: y, z: z + 1)
+            .init(x: x, y: y, z: z + 1),
         ]
     }
 

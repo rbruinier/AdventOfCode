@@ -5,6 +5,9 @@ import Tools
 final class Day22Solver: DaySolver {
     let dayNumber: Int = 22
 
+    let expectedPart1Result = 953
+    let expectedPart2Result = 1289
+
     private var input: Input!
 
     private var randomGenerator = SeededRandomNumberGenerator(seed: 0xDEAD_BEAF)

@@ -4,6 +4,9 @@ import Tools
 final class Day02Solver: DaySolver {
     let dayNumber: Int = 2
 
+    let expectedPart1Result = 14827
+    let expectedPart2Result = 13889
+
     private var input: Input!
 
     private struct Input {
@@ -47,6 +50,9 @@ final class Day02Solver: DaySolver {
     private struct Game {
         let a: Hand
         let b: Hand
+    }
+
+    init() {
     }
 
     func solvePart1() -> Int {

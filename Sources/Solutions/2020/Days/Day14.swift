@@ -4,6 +4,9 @@ import Tools
 final class Day14Solver: DaySolver {
     let dayNumber: Int = 14
 
+    let expectedPart1Result = 11501064782628
+    let expectedPart2Result = 5142195937660
+
     private var input: Input!
 
     private struct Input {
@@ -19,7 +22,7 @@ final class Day14Solver: DaySolver {
         let value: Int64
     }
 
-    public func solvePart1() -> Int64 {
+    public func solvePart1() -> Int {
         var memory: [Int: Int64] = [:]
 
         for instruction in input.instructions {
@@ -39,10 +42,10 @@ final class Day14Solver: DaySolver {
             memory[instruction.memoryId] = result
         }
 
-        return memory.values.reduce(0, +)
+        return Int(memory.values.reduce(0, +))
     }
 
-    func solvePart2() -> Int64 {
+    func solvePart2() -> Int {
         func createAllVariations(base: Int64, instruction: Instruction, bitShifters: [Int64]) -> [Int64] {
             var shifters = bitShifters
 
@@ -82,7 +85,7 @@ final class Day14Solver: DaySolver {
             }
         }
 
-        return memory.values.reduce(0, +)
+        return Int(memory.values.reduce(0, +))
     }
 
     func parseInput(rawString: String) {

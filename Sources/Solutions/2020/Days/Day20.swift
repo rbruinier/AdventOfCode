@@ -4,6 +4,9 @@ import Tools
 final class Day20Solver: DaySolver {
     let dayNumber: Int = 20
 
+    let expectedPart1Result = 60145080587029
+    let expectedPart2Result = 1901
+
     private var input: Input!
 
     private let combinations: [(rotation: Point2D.Degrees, flip: Flip)] = [
@@ -18,7 +21,7 @@ final class Day20Solver: DaySolver {
         (rotation: .zero, flip: .horizontal),
         (rotation: .ninety, flip: .horizontal),
         (rotation: .oneEighty, flip: .horizontal),
-        (rotation: .twoSeventy, flip: .horizontal)
+        (rotation: .twoSeventy, flip: .horizontal),
     ]
 
     private struct Input {
@@ -46,7 +49,7 @@ final class Day20Solver: DaySolver {
                 (startIndex: 0, inc: 1, side: .north),
                 (startIndex: 9, inc: 10, side: .east),
                 (startIndex: 90, inc: 1, side: .south),
-                (startIndex: 0, inc: 10, side: .west)
+                (startIndex: 0, inc: 10, side: .west),
             ]
 
             for borderIndex in borderIndices {
@@ -340,7 +343,7 @@ final class Day20Solver: DaySolver {
             .init(x: 7, y: 2),
             .init(x: 10, y: 2),
             .init(x: 13, y: 2),
-            .init(x: 16, y: 2)
+            .init(x: 16, y: 2),
         ]
 
         let size = nrOfTilesPerDimension * 8

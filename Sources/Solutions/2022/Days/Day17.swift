@@ -10,6 +10,9 @@ import Tools
 final class Day17Solver: DaySolver {
     let dayNumber: Int = 17
 
+    let expectedPart1Result = 3067
+    let expectedPart2Result = 1514369501484
+
     private var input: Input!
 
     private struct Input {
@@ -90,6 +93,9 @@ final class Day17Solver: DaySolver {
         let occupiedPositions: Set<Point2D>
         let dataPerRock: [Int: RockData]
         let heightPerDroppedRock: [Int: Int]
+    }
+
+    init() {
     }
 
     private func runGame(withRockCount maxRockCount: Int, shapes: [Shape], jetDirections: [JetDirection]) -> GameResult {
@@ -209,34 +215,34 @@ final class Day17Solver: DaySolver {
                 .init(x: 0, y: 0),
                 .init(x: 1, y: 0),
                 .init(x: 2, y: 0),
-                .init(x: 3, y: 0)
+                .init(x: 3, y: 0),
             ]),
             .init(points: [
                 .init(x: 1, y: 0),
                 .init(x: 0, y: 1),
                 .init(x: 1, y: 1),
                 .init(x: 2, y: 1),
-                .init(x: 1, y: 2)
+                .init(x: 1, y: 2),
             ]),
             .init(points: [
                 .init(x: 2, y: 0),
                 .init(x: 2, y: 1),
                 .init(x: 0, y: 2),
                 .init(x: 1, y: 2),
-                .init(x: 2, y: 2)
+                .init(x: 2, y: 2),
             ]),
             .init(points: [
                 .init(x: 0, y: 0),
                 .init(x: 0, y: 1),
                 .init(x: 0, y: 2),
-                .init(x: 0, y: 3)
+                .init(x: 0, y: 3),
             ]),
             .init(points: [
                 .init(x: 0, y: 0),
                 .init(x: 1, y: 0),
                 .init(x: 0, y: 1),
-                .init(x: 1, y: 1)
-            ])
+                .init(x: 1, y: 1),
+            ]),
         ]
 
         let jetDirections: [JetDirection] = rawString.compactMap {

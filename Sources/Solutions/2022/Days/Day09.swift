@@ -4,6 +4,9 @@ import Tools
 final class Day09Solver: DaySolver {
     let dayNumber: Int = 9
 
+    let expectedPart1Result = 6090
+    let expectedPart2Result = 2566
+
     private var input: Input!
 
     private struct Input {
@@ -13,6 +16,9 @@ final class Day09Solver: DaySolver {
     private struct Move {
         let direction: Direction
         let steps: Int
+    }
+
+    init() {
     }
 
     private func updateKnot(at: Point2D, withHead head: Point2D) -> Point2D {

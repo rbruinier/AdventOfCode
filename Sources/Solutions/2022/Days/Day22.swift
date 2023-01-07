@@ -5,16 +5,11 @@ import Tools
 /// transformations are configured for when a point should move to a new side.
 ///
 /// Probably could be solved more elegantly but it works (for this input)
-final class Day22Solver: TestableDaySolver {
+final class Day22Solver: DaySolver {
     let dayNumber: Int = 22
 
-    var expectedPart1Result: Int {
-        43466
-    }
-
-    var expectedPart2Result: Int {
-        162155
-    }
+    let expectedPart1Result = 43466
+    let expectedPart2Result = 162155
 
     private var input: Input!
 
@@ -65,6 +60,9 @@ final class Day22Solver: TestableDaySolver {
             self.rotate = rotate
             self.transform = transform ?? { p, _ in p }
         }
+    }
+
+    init() {
     }
 
     private func createMapData(from tiles: [Point2D: Tile]) -> MapData {
@@ -187,7 +185,7 @@ final class Day22Solver: TestableDaySolver {
             .init(5, a): .init(4, d, .zero),
             .init(5, b): .init(0, a, .twoSeventy, transform: { p, width in Point2D(x: p.y, y: 0) }),
             .init(5, c): .init(3, d, .twoSeventy, transform: { p, width in Point2D(x: p.y, y: width) }),
-            .init(5, d): .init(1, a, .zero, transform: { p, width in Point2D(x: p.x, y: 0) })
+            .init(5, d): .init(1, a, .zero, transform: { p, width in Point2D(x: p.x, y: 0) }),
         ]
 
         let size = 50
@@ -200,7 +198,7 @@ final class Day22Solver: TestableDaySolver {
             .init(origin: .init(x: 1 * size, y: 1 * size), size: sideSize),
             .init(origin: .init(x: 1 * size, y: 2 * size), size: sideSize),
             .init(origin: .init(x: 0 * size, y: 2 * size), size: sideSize),
-            .init(origin: .init(x: 0 * size, y: 3 * size), size: sideSize)
+            .init(origin: .init(x: 0 * size, y: 3 * size), size: sideSize),
         ]
 
         func sideIndexForPoint(_ point: Point2D) -> Int {

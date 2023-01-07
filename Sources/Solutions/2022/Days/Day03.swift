@@ -4,6 +4,9 @@ import Tools
 final class Day03Solver: DaySolver {
     let dayNumber: Int = 3
 
+    let expectedPart1Result = 8176
+    let expectedPart2Result = 2689
+
     private var input: Input!
 
     private struct Input {
@@ -36,6 +39,9 @@ final class Day03Solver: DaySolver {
 
             return Array(a.intersection(b))
         }
+    }
+
+    init() {
     }
 
     func solvePart1() -> Int {

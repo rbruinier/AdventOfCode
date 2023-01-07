@@ -8,6 +8,9 @@ import Tools
 final class Day20Solver: DaySolver {
     let dayNumber: Int = 20
 
+    let expectedPart1Result = 5498
+    let expectedPart2Result = 3390007892081
+
     private var input: Input!
 
     private struct Pair: Hashable {
@@ -17,6 +20,9 @@ final class Day20Solver: DaySolver {
 
     private struct Input {
         let digits: [Pair]
+    }
+
+    init() {
     }
 
     private func runDecryption(on digits: [Pair], rounds: Int, multiplier: Int) -> Int {

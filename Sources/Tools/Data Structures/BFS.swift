@@ -34,7 +34,7 @@ public extension BFS {
     /// - Returns: The solution when available.
     static func shortestPathInGrid(grid: some BFSGrid, from pointA: Point2D, to pointB: Point2D) -> ShortestPathInGridResult? {
         var solutionQueue: Deque<ShortestPathInGridQueueNode> = [
-            .init(position: pointA, visitedPoints: [pointA], steps: 0)
+            .init(position: pointA, visitedPoints: [pointA], steps: 0),
         ]
 
         var bestSolution: ShortestPathInGridQueueNode?
@@ -93,7 +93,7 @@ public extension BFS {
     /// - Returns: The result if available.
     static func visitAllElements(in graph: WeightedGraph, startingAtIndex rootIndex: Int = 0, returnToStart: Bool = false) -> VisitAllElementsResult? {
         var solutionQueue: Deque<VisitAllElementsQueueNode> = [
-            .init(index: rootIndex, visitedIndices: [rootIndex], combinedWeight: 0)
+            .init(index: rootIndex, visitedIndices: [rootIndex], combinedWeight: 0),
         ]
 
         var bestSolution: VisitAllElementsQueueNode?
@@ -174,7 +174,7 @@ public extension BFS {
     /// - Returns: The solution when available.
     static func shortestPathInUnweightedGraph(_ graph: UnweightedGraph, from a: Int, to b: Int) -> ShortestPathInUnweightedGraphResult? {
         var solutionQueue: Deque<ShortestPathInUnweightedGraphQueueNode> = [
-            .init(index: a, visitedIndices: [a])
+            .init(index: a, visitedIndices: [a]),
         ]
 
         var bestSolution: ShortestPathInUnweightedGraphQueueNode?
@@ -236,7 +236,7 @@ public extension BFS {
     /// - Returns: The solution when available.
     static func shortestPathInWeightedGraph(_ graph: WeightedGraph, from a: Int, to b: Int) -> ShortestPathInWeightedGraphResult? {
         var solutionQueue: Deque<ShortestPathInWeightedGraphQueueNode> = [
-            .init(index: a, visitedIndices: [a], weight: 0)
+            .init(index: a, visitedIndices: [a], weight: 0),
         ]
 
         var bestSolution: ShortestPathInWeightedGraphQueueNode?

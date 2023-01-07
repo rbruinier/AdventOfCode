@@ -4,6 +4,9 @@ import Tools
 final class Day08Solver: DaySolver {
     let dayNumber: Int = 8
 
+    let expectedPart1Result = 449
+    let expectedPart2Result = 968175
+
     private var input: Input!
 
     private struct Input {
@@ -141,7 +144,7 @@ final class Day08Solver: DaySolver {
             }!
 
             let mappedDigits: [Digit] = [
-                mustBeZero, mustBeOne, mustBeTwo, mustBeThree, mustBeFour, mustBeFive, mustBeSix, mustBeSeven, mustBeEight, mustBeNine
+                mustBeZero, mustBeOne, mustBeTwo, mustBeThree, mustBeFour, mustBeFive, mustBeSix, mustBeSeven, mustBeEight, mustBeNine,
             ]
 
             let number = entry.outputDigits.reduce(0) { result, digit in

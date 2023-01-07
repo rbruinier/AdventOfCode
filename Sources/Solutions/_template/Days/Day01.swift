@@ -1,7 +1,7 @@
 import Foundation
 import Tools
 
-final class Day01Solver: TestableDaySolver {
+final class Day01Solver: DaySolver {
     let dayNumber: Int = 1
 
 	let expectedPart1Result = 0

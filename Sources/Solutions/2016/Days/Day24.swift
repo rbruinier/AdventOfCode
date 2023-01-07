@@ -7,6 +7,9 @@ import Tools
 final class Day24Solver: DaySolver {
     let dayNumber: Int = 24
 
+    let expectedPart1Result = 462
+    let expectedPart2Result = 676
+
     private var input: Input!
 
     private typealias Grid = [Point2D: Node]

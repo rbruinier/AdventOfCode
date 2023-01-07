@@ -5,6 +5,9 @@ import Tools
 final class Day11Solver: DaySolver {
     let dayNumber = 11
 
+    let expectedPart1Result = 47
+    let expectedPart2Result = 71
+
     private var input: Input!
 
     private struct Input {
@@ -202,7 +205,7 @@ final class Day11Solver: DaySolver {
             .init(id: "thulium", generatorFloor: 0, chipFloor: 0),
             .init(id: "ruthenium", generatorFloor: 0, chipFloor: 0),
             .init(id: "polonium", generatorFloor: 0, chipFloor: 1),
-            .init(id: "promethium", generatorFloor: 0, chipFloor: 1)
+            .init(id: "promethium", generatorFloor: 0, chipFloor: 1),
         ])
 
         return solve(with: state)
@@ -216,7 +219,7 @@ final class Day11Solver: DaySolver {
             .init(id: "thulium", generatorFloor: 0, chipFloor: 0),
             .init(id: "ruthenium", generatorFloor: 0, chipFloor: 0),
             .init(id: "polonium", generatorFloor: 0, chipFloor: 1),
-            .init(id: "promethium", generatorFloor: 0, chipFloor: 1)
+            .init(id: "promethium", generatorFloor: 0, chipFloor: 1),
         ])
 
         return solve(with: state)

@@ -90,14 +90,14 @@ public struct Point2D: Hashable, Equatable {
                 moved(to: .northWest),
                 moved(to: .northEast),
                 moved(to: .southWest),
-                moved(to: .southEast)
+                moved(to: .southEast),
             ]
         } else {
             return [
                 moved(to: .north),
                 moved(to: .east),
                 moved(to: .south),
-                moved(to: .west)
+                moved(to: .west),
             ]
         }
     }

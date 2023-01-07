@@ -4,6 +4,9 @@ import Tools
 final class Day04Solver: DaySolver {
     let dayNumber: Int = 4
 
+    let expectedPart1Result = 507
+    let expectedPart2Result = 897
+
     private var input: Input!
 
     private struct Input {
@@ -21,6 +24,9 @@ final class Day04Solver: DaySolver {
         var hasOverlappingRange: Bool {
             a.overlaps(b) || b.overlaps(a)
         }
+    }
+
+    init() {
     }
 
     func solvePart1() -> Int {

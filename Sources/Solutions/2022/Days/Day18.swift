@@ -7,10 +7,16 @@ import Tools
 final class Day18Solver: DaySolver {
     let dayNumber: Int = 18
 
+    let expectedPart1Result = 3374
+    let expectedPart2Result = 2010
+
     private var input: Input!
 
     private struct Input {
         let points: Set<Point3D>
+    }
+
+    init() {
     }
 
     func solvePart1() -> Int {

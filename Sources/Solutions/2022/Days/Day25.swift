@@ -1,7 +1,7 @@
 import Foundation
 import Tools
 
-final class Day25Solver: TestableDaySolver {
+final class Day25Solver: DaySolver {
     let dayNumber: Int = 25
 
     let expectedPart1Result = "2----0=--1122=0=0021"
@@ -11,6 +11,9 @@ final class Day25Solver: TestableDaySolver {
 
     private struct Input {
         let numbers: [String]
+    }
+
+    init() {
     }
 
     private func snafuToInt(_ snafu: String) -> Int {

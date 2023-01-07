@@ -15,6 +15,9 @@ import Tools
 final class Day16Solver: DaySolver {
     let dayNumber: Int = 16
 
+    let expectedPart1Result = 1792
+    let expectedPart2Result = 2587
+
     private var input: Input!
 
     private var memoization: [Int] = [] // space is reserved in solvers
@@ -38,6 +41,9 @@ final class Day16Solver: DaySolver {
         let pathWeights: [Edge: Int]
         let valveOutputs: [Int]
         let startMinutes: Int
+    }
+
+    init() {
     }
 
     private func resolvePathsBetweenStartAndValvesWithOutputs(valves: [Valve], startValveIndex: Int) -> [Edge: [Int]] {

@@ -4,6 +4,9 @@ import Tools
 final class Day14Solver: DaySolver {
     let dayNumber: Int = 14
 
+    let expectedPart1Result = 913
+    let expectedPart2Result = 30762
+
     private var input: Input!
 
     private struct Input {
@@ -12,6 +15,9 @@ final class Day14Solver: DaySolver {
 
     private struct Path {
         let points: [Point2D]
+    }
+
+    init() {
     }
 
     private func blockedPoints(with paths: [Path]) -> Set<Point2D> {

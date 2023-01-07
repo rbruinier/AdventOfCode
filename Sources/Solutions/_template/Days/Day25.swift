@@ -17,7 +17,7 @@ final class Day25Solver: DaySolver {
     }
 
     func solvePart2() -> String {
-		return "Merry Christmas 🎄"
+		"Merry Christmas 🎄"
     }
 
     func parseInput(rawString: String) {

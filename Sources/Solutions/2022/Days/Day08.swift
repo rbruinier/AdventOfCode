@@ -4,10 +4,16 @@ import Tools
 final class Day08Solver: DaySolver {
     let dayNumber: Int = 8
 
+    let expectedPart1Result = 1859
+    let expectedPart2Result = 332640
+
     private var input: Input!
 
     private struct Input {
         let heights: [Point2D: Int]
+    }
+
+    init() {
     }
 
     private func isVisibleFromAnEdge(at point: Point2D, heights: [Point2D: Int]) -> Bool {

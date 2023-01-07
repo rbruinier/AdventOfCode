@@ -4,6 +4,9 @@ import Tools
 final class Day19Solver: DaySolver {
     let dayNumber: Int = 19
 
+    let expectedPart1Result = 450
+    let expectedPart2Result = 13184
+
     private var input: Input!
 
     private lazy var matrices: [Matrix] = {
@@ -46,7 +49,7 @@ final class Day19Solver: DaySolver {
             x270Matrix * y270Matrix,
             y90Matrix * x270Matrix,
             y90Matrix * z270Matrix,
-            z270Matrix * y270Matrix
+            z270Matrix * y270Matrix,
         ]
     }()
 

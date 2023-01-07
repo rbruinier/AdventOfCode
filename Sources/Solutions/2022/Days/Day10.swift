@@ -4,6 +4,9 @@ import Tools
 final class Day10Solver: DaySolver {
     let dayNumber: Int = 10
 
+    let expectedPart1Result = 17020
+    let expectedPart2Result = "RLEZFLGE"
+
     private var input: Input!
 
     private struct Input {
@@ -64,6 +67,9 @@ final class Day10Solver: DaySolver {
                 cycleCallback(clockCycle, xRegister)
             }
         }
+    }
+
+    init() {
     }
 
     func solvePart1() -> Int {

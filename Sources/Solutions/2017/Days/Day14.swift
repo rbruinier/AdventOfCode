@@ -6,6 +6,9 @@ import Tools
 final class Day14Solver: DaySolver {
     let dayNumber: Int = 14
 
+    let expectedPart1Result = 8250
+    let expectedPart2Result = 1113
+
     private var input: Input!
 
     // cache result of part 1 for part 2

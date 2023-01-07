@@ -4,6 +4,9 @@ import Tools
 final class Day24Solver: DaySolver {
     let dayNumber: Int = 24
 
+    let expectedPart1Result = 293
+    let expectedPart2Result = 3967
+
     private var input: Input!
 
     private struct Input {
@@ -66,7 +69,7 @@ final class Day24Solver: DaySolver {
             point + Point2D(x: isEven ? -1 : 0, y: -1),
             point + Point2D(x: isEven ? 0 : 1, y: -1),
             point + Point2D(x: isEven ? -1 : 0, y: 1),
-            point + Point2D(x: isEven ? 0 : 1, y: 1)
+            point + Point2D(x: isEven ? 0 : 1, y: 1),
         ]
 
         return points

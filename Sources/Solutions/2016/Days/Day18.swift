@@ -1,16 +1,11 @@
 import Foundation
 import Tools
 
-extension Array {
-    init(reservedCapacity: Int) {
-        self.init()
-
-        reserveCapacity(reservedCapacity)
-    }
-}
-
 final class Day18Solver: DaySolver {
     let dayNumber: Int = 18
+
+    let expectedPart1Result = 1956
+    let expectedPart2Result = 19995121
 
     private var input: Input!
 

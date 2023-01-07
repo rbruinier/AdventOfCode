@@ -4,6 +4,9 @@ import Tools
 final class Day11Solver: DaySolver {
     let dayNumber: Int = 11
 
+    let expectedPart1Result = "cqjxxyzz"
+    let expectedPart2Result = "cqkaabcc"
+
     private var input: Input!
 
     private let invalidCharacters: [UInt8] = [105, 108, 111] // i, l & o

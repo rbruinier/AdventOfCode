@@ -1,4 +1,4 @@
-extension RangeReplaceableCollection {
+public extension RangeReplaceableCollection {
     func rotatingLeft(positions: Int) -> SubSequence {
         let index = index(startIndex, offsetBy: positions, limitedBy: endIndex) ?? endIndex
 
@@ -8,7 +8,7 @@ extension RangeReplaceableCollection {
     func rotatingRight(positions: Int) -> SubSequence {
         let index = index(startIndex, offsetBy: positions, limitedBy: endIndex) ?? endIndex
 
-        return self[startIndex ..< index] + self[index ..< endIndex]
+        return self[index ..< endIndex] + self[startIndex ..< index]
     }
 
     mutating func rotateLeft(positions: Int) {

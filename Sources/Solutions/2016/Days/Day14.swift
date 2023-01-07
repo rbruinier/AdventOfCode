@@ -2,57 +2,11 @@ import Collections
 import Foundation
 import Tools
 
-public extension Collection<UInt8> {
-    @inline(__always)
-    var asNibbles: [UInt8] {
-        var result = [UInt8](repeating: 0, count: count * 2)
-
-        var nibbleIndex = 0
-        for byte in self {
-            result[nibbleIndex] = byte >> 4
-
-            nibbleIndex += 1
-
-            result[nibbleIndex] = byte & 0xF
-
-            nibbleIndex += 1
-        }
-
-        return result
-    }
-
-    @inline(__always)
-    var bytesAsHexAscii: [UInt8] {
-        var result = [UInt8](repeating: 0, count: count * 2)
-
-        var index = 0
-        for byte in self {
-            let highByte = byte >> 4
-            let lowByte = byte & 0xF
-
-            if highByte <= 9 {
-                result[index] = highByte + 48 // 0 ... 9
-            } else {
-                result[index] = highByte + 87 // a ... f
-            }
-
-            index += 1
-
-            if lowByte <= 9 {
-                result[index] = lowByte + 48 // 0 ... 9
-            } else {
-                result[index] = lowByte + 87 // a ... f
-            }
-
-            index += 1
-        }
-
-        return result
-    }
-}
-
 final class Day14Solver: DaySolver {
     let dayNumber: Int = 14
+
+    let expectedPart1Result = 15035
+    let expectedPart2Result = 19968
 
     private var input: Input!
 

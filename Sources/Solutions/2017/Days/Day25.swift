@@ -2,7 +2,7 @@ import Foundation
 import Tools
 
 /// Hardcoded the input, couldn't be bothered to write a parser for such few instructions.
-final class Day25Solver: TestableDaySolver {
+final class Day25Solver: DaySolver {
     let dayNumber: Int = 25
 
     let expectedPart1Result = 3578
@@ -89,28 +89,28 @@ final class Day25Solver: TestableDaySolver {
             instructions: [
                 .a: [
                     .init(write: 1, move: .right, nextState: .b),
-                    .init(write: 0, move: .left, nextState: .b)
+                    .init(write: 0, move: .left, nextState: .b),
                 ],
                 .b: [
                     .init(write: 1, move: .left, nextState: .c),
-                    .init(write: 0, move: .right, nextState: .e)
+                    .init(write: 0, move: .right, nextState: .e),
                 ],
                 .c: [
                     .init(write: 1, move: .right, nextState: .e),
-                    .init(write: 0, move: .left, nextState: .d)
+                    .init(write: 0, move: .left, nextState: .d),
                 ],
                 .d: [
                     .init(write: 1, move: .left, nextState: .a),
-                    .init(write: 1, move: .left, nextState: .a)
+                    .init(write: 1, move: .left, nextState: .a),
                 ],
                 .e: [
                     .init(write: 0, move: .right, nextState: .a),
-                    .init(write: 0, move: .right, nextState: .f)
+                    .init(write: 0, move: .right, nextState: .f),
                 ],
                 .f: [
                     .init(write: 1, move: .right, nextState: .e),
-                    .init(write: 1, move: .right, nextState: .a)
-                ]
+                    .init(write: 1, move: .right, nextState: .a),
+                ],
             ]
         )
     }

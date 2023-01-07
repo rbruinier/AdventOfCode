@@ -4,6 +4,9 @@ import Tools
 final class Day07Solver: DaySolver {
     let dayNumber: Int = 7
 
+    let expectedPart1Result = 919137
+    let expectedPart2Result = 2877389
+
     private var input: Input!
 
     private struct Input {
@@ -77,6 +80,9 @@ final class Day07Solver: DaySolver {
 
             return cachedSize!
         }
+    }
+
+    init() {
     }
 
     private func createFileStructure(fromTerminalLines terminalLines: [TerminalLine]) -> FileNode {

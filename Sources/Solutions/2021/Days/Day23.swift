@@ -5,6 +5,9 @@ import Tools
 final class Day23Solver: DaySolver {
     let dayNumber: Int = 23
 
+    let expectedPart1Result = 18195
+    let expectedPart2Result = 50265
+
     private var input: Input!
 
     // cache solution to facilitate visualizer
@@ -357,7 +360,7 @@ final class Day23Solver: DaySolver {
             .init(amphipod: .amber, cells: [.amber, .desert]),
             .init(amphipod: .bronze, cells: [.copper, .desert]),
             .init(amphipod: .copper, cells: [.bronze, .bronze]),
-            .init(amphipod: .desert, cells: [.amber, .copper])
+            .init(amphipod: .desert, cells: [.amber, .copper]),
         ])
     }
 }
@@ -406,7 +409,7 @@ extension Day23Solver {
                 [.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
                 [.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
                 [.empty, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .wall, .empty, .empty],
-                [.empty, .empty, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .empty, .empty]
+                [.empty, .empty, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .wall, .empty, .empty],
             ]
 
             let solver = solver as! Day23Solver

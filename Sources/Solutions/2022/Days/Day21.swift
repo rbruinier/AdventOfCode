@@ -9,6 +9,9 @@ import Tools
 final class Day21Solver: DaySolver {
     let dayNumber: Int = 21
 
+    let expectedPart1Result = 364367103397416
+    let expectedPart2Result = 3782852515583
+
     private var input: Input!
 
     private struct Input {
@@ -39,6 +42,9 @@ final class Day21Solver: DaySolver {
                 return (a: a, b: b)
             }
         }
+    }
+
+    init() {
     }
 
     private func solvePart1ForId(_ id: String, monkeys: [String: Operation]) -> Int {

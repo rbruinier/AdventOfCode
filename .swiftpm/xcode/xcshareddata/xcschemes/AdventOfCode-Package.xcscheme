@@ -244,6 +244,34 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AdventOfCode_Solutions2018"
+               BuildableName = "AdventOfCode_Solutions2018"
+               BlueprintName = "AdventOfCode_Solutions2018"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Solutions2018"
+               BuildableName = "Solutions2018"
+               BlueprintName = "Solutions2018"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -288,9 +316,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "VisualizerTestApp"
-            BuildableName = "VisualizerTestApp"
-            BlueprintName = "VisualizerTestApp"
+            BlueprintIdentifier = "Solutions2018"
+            BuildableName = "Solutions2018"
+            BlueprintName = "Solutions2018"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -314,9 +342,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "VisualizerTestApp"
-            BuildableName = "VisualizerTestApp"
-            BlueprintName = "VisualizerTestApp"
+            BlueprintIdentifier = "Solutions2018"
+            BuildableName = "Solutions2018"
+            BlueprintName = "Solutions2018"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>

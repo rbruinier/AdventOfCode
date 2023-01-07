@@ -4,6 +4,9 @@ import Tools
 final class Day05Solver: DaySolver {
     let dayNumber: Int = 5
 
+    let expectedPart1Result = 6666
+    let expectedPart2Result = 19081
+
     private var input: Input!
 
     private struct Input {

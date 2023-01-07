@@ -5,7 +5,7 @@
 --trimwhitespace always
 --self remove
 --ranges spaced
---commas inline
+--commas always
 --emptybraces linebreak
 --decimalgrouping ignore
 --patternlet inline

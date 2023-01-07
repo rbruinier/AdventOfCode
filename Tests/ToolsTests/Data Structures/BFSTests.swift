@@ -12,7 +12,7 @@ final class BFSTests: XCTestCase {
             .init(a: 0, b: 3, weight: 10), // A - D = 10
             .init(a: 1, b: 2, weight: 10), // B - C = 60
             .init(a: 1, b: 3, weight: 10), // B - D = 10
-            .init(a: 2, b: 3, weight: 60) // C - D = 10
+            .init(a: 2, b: 3, weight: 60), // C - D = 10
         ])
 
         // A(0) (10) -> D(3) (10) -> B(1) -> C(2)
@@ -32,7 +32,7 @@ final class BFSTests: XCTestCase {
             .init(a: 0, b: 3, weight: 10), // A - D = 10
             .init(a: 1, b: 2, weight: 10), // B - C = 10
             .init(a: 1, b: 3, weight: 10), // B - D = 20
-            .init(a: 2, b: 3, weight: 10) // C - D = 30
+            .init(a: 2, b: 3, weight: 10), // C - D = 30
         ])
 
         let result = BFS.visitAllElements(in: graph)!

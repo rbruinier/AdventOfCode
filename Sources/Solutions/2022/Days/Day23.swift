@@ -1,7 +1,7 @@
 import Foundation
 import Tools
 
-final class Day23Solver: TestableDaySolver {
+final class Day23Solver: DaySolver {
     let dayNumber: Int = 23
 
     private var input: Input!
@@ -11,6 +11,9 @@ final class Day23Solver: TestableDaySolver {
 
     private struct Input {
         let elves: Set<Point2D>
+    }
+
+    init() {
     }
 
     func performAlgorithm(elves: Set<Point2D>, maxRounds: Int?) -> (rounds: Int, emptyTiles: Int) {

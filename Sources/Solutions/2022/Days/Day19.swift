@@ -21,6 +21,9 @@ import Tools
 final class Day19Solver: DaySolver {
     let dayNumber: Int = 19
 
+    let expectedPart1Result = 2160
+    let expectedPart2Result = 13340
+
     private var input: Input!
 
     private struct Input {
@@ -65,6 +68,9 @@ final class Day19Solver: DaySolver {
     private var maxGeodesPerMinute: [Int: Int] = [:]
 
     private let logEnabled = false
+
+    init() {
+    }
 
     private func bestScore(blueprint: Blueprint, timeRemaining: Int, robots: CountByMaterial, inventory: CountByMaterial) -> Int {
         if timeRemaining <= 0 {
@@ -162,7 +168,7 @@ final class Day19Solver: DaySolver {
                 [.clay, .obsidian, .ore],
                 [.clay, .ore, .obsidian],
                 [.ore, .obsidian, .clay],
-                [.ore, .clay, .obsidian]
+                [.ore, .clay, .obsidian],
             ]
         }
 

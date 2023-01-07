@@ -13,14 +13,14 @@ public enum Direction: Int, Equatable {
         .north,
         .east,
         .south,
-        .west
+        .west,
     ]
 
     public static let allDiagonal: [Direction] = [
         .northWest,
         .northEast,
         .southEast,
-        .southWest
+        .southWest,
     ]
 
     public static let all: [Direction] = [
@@ -31,7 +31,7 @@ public enum Direction: Int, Equatable {
         .northWest,
         .northEast,
         .southEast,
-        .southWest
+        .southWest,
     ]
 
     public var left: Direction {

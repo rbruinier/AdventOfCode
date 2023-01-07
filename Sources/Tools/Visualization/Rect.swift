@@ -39,4 +39,11 @@ public struct Rect: Equatable {
     public func contains(point: Point2D) -> Bool {
         (topLeft.x ..< bottomRight.x).contains(point.x) && (topLeft.y ..< bottomRight.y).contains(point.y)
     }
+
+    public func intersects(_ rhs: Rect) -> Bool {
+        (topLeft.x <= rhs.bottomRight.x)
+            && (rhs.topLeft.x <= bottomRight.x)
+            && (topLeft.y <= rhs.bottomRight.y)
+            && (rhs.topLeft.y <= bottomRight.y)
+    }
 }

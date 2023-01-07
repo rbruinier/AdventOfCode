@@ -3,7 +3,7 @@ import Tools
 
 /// Part 2 is optimized by reducing all tiles back to 3x3 groups of tiles because the cycle is 3, 2, 2 for every 3 iterations. This saves a lot of effort in maintaining
 /// huge sets.
-final class Day21Solver: TestableDaySolver {
+final class Day21Solver: DaySolver {
     let dayNumber: Int = 21
 
     let expectedPart1Result = 179
@@ -157,7 +157,7 @@ final class Day21Solver: TestableDaySolver {
             .init(x: 2, y: 1),
             .init(x: 0, y: 2),
             .init(x: 1, y: 2),
-            .init(x: 2, y: 2)
+            .init(x: 2, y: 2),
         ]
 
         var sizeTwoMappings: [Mapping] = []

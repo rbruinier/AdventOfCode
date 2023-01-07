@@ -4,6 +4,9 @@ import Tools
 final class Day15Solver: DaySolver {
     let dayNumber: Int = 15
 
+    let expectedPart1Result = 5525847
+    let expectedPart2Result = 13340867187704
+
     private var input: Input!
 
     private struct Input {
@@ -34,6 +37,9 @@ final class Day15Solver: DaySolver {
 
             return (position.x - xDistance) ... (position.x + xDistance)
         }
+    }
+
+    init() {
     }
 
     private func mergedBoundariesForY(_ y: Int, sensors: [Sensor]) -> [ClosedRange<Int>] {

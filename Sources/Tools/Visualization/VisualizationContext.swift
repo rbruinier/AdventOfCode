@@ -119,7 +119,7 @@ public final class VisualizationContext {
                 .init(x: point.x + y, y: point.y + x),
                 .init(x: point.x - y, y: point.y + x),
                 .init(x: point.x + y, y: point.y - x),
-                .init(x: point.x - y, y: point.y - x)
+                .init(x: point.x - y, y: point.y - x),
             ]
 
             for drawingPoint in drawingPoints where frameRect.contains(point: drawingPoint) {
@@ -155,7 +155,7 @@ public final class VisualizationContext {
                 .init(x: point.x + y, y: point.y + x),
                 .init(x: point.x - y, y: point.y + x),
                 .init(x: point.x + y, y: point.y - x),
-                .init(x: point.x - y, y: point.y - x)
+                .init(x: point.x - y, y: point.y - x),
             ]
 
             for drawingPoint in drawingPoints {

@@ -9,6 +9,9 @@ import Tools
 final class Day24Solver: DaySolver {
     let dayNumber: Int = 24
 
+    let expectedPart1Result = 249
+    let expectedPart2Result = 735
+
     private var input: Input!
 
     private struct Input {
@@ -23,6 +26,9 @@ final class Day24Solver: DaySolver {
     private enum Tile {
         case floor
         case wall
+    }
+
+    init() {
     }
 
     private func moveBlizzards(_ blizzards: [Point2D: [Direction]], areaSize: Size) -> [Point2D: [Direction]] {
@@ -82,7 +88,7 @@ final class Day24Solver: DaySolver {
         }
 
         var queue: Deque<State> = [
-            .init(position: from, steps: startSteps)
+            .init(position: from, steps: startSteps),
         ]
 
         let cacheSize = input.areaSize.width * input.areaSize.height

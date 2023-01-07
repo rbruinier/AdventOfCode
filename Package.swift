@@ -85,6 +85,17 @@ var package = Package(
 			]
 		),
 		.executableTarget(
+			name: "Solutions2018",
+			dependencies: [
+				"Tools",
+				.product(name: "Collections", package: "swift-collections"),
+			],
+			path: "Sources/Solutions/2018",
+			resources: [
+				.copy("Input"),
+			]
+		),
+		.executableTarget(
 			name: "Solutions2019",
 			dependencies: [
 				"Tools",
@@ -125,12 +136,6 @@ var package = Package(
 			path: "Sources/Solutions/2022",
 			resources: [
 				.copy("Input"),
-			]
-		),
-		.testTarget(
-			name: "Solutions2022Tests",
-			dependencies: [
-				"Solutions2022"
 			]
 		),
 	]

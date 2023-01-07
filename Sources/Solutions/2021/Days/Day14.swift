@@ -4,6 +4,9 @@ import Tools
 final class Day14Solver: DaySolver {
     let dayNumber: Int = 14
 
+    let expectedPart1Result = 3009
+    let expectedPart2Result = 3459822539451
+
     private var input: Input!
 
     private struct Input {
@@ -40,7 +43,7 @@ final class Day14Solver: DaySolver {
         let insertionRules: [Pair: [Pair]] = input.insertionRules.reduce(into: [Pair: [Pair]]()) { result, item in
             result[Pair(a: item.elements[0], b: item.elements[1])] = [
                 Pair(a: item.elements[0], b: item.result),
-                Pair(a: item.result, b: item.elements[1])
+                Pair(a: item.result, b: item.elements[1]),
             ]
         }
 

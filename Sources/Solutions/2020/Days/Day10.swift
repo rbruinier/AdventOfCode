@@ -4,6 +4,9 @@ import Tools
 final class Day10Solver: DaySolver {
     let dayNumber: Int = 10
 
+    let expectedPart1Result = 2046
+    let expectedPart2Result = 1157018619904
+
     private var input: Input!
 
     private struct Input {
@@ -45,7 +48,7 @@ final class Day10Solver: DaySolver {
         var joltCount: [Int: Int] = [
             adapters[0]: 1,
             2: 0,
-            3: 1
+            3: 1,
         ]
 
         for index in 1 ..< adapters.count {
