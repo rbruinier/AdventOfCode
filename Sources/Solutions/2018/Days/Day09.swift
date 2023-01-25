@@ -30,7 +30,7 @@ final class Day09Solver: DaySolver {
                 marbles.rotate(steps: -1)
             } else {
                 marbles.rotate(steps: -1)
-				
+
                 marbles.append(marble)
             }
         }
