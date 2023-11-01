@@ -20,6 +20,7 @@ var package = Package(
 		.executable(name: "Solutions2020", targets: ["Solutions2020"]),
 		.executable(name: "Solutions2021", targets: ["Solutions2021"]),
 		.executable(name: "Solutions2022", targets: ["Solutions2022"]),
+		.executable(name: "Solutions2023", targets: ["Solutions2023"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0")),
@@ -134,6 +135,16 @@ var package = Package(
 				"Tools",
 			],
 			path: "Sources/Solutions/2022",
+			resources: [
+				.copy("Input"),
+			]
+		),
+		.executableTarget(
+			name: "Solutions2023",
+			dependencies: [
+				"Tools",
+			],
+			path: "Sources/Solutions/2023",
 			resources: [
 				.copy("Input"),
 			]

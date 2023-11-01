@@ -8,7 +8,7 @@ Links to the solutions:
  * [2021](Sources/Solutions/2021/Days) - finished on 25-12-2021 (runs in 33.50 seconds)
  * [2020](Sources/Solutions/2020/Days) - finished on 15-01-2022 (runs in 12.29 seconds)
  * [2019](Sources/Solutions/2019/Days) - finished on 02-02-2022 (runs in 4.71 seconds)
- * 2018 - not yet started
+ * [2018](Sources/Solutions/2018/Days) - work in progress; day 1 to 13 finished
  * [2017](Sources/Solutions/2017/Days) - finished on 31-12-2022 (runs in 18.89 seconds)
  * [2016](Sources/Solutions/2016/Days) - finished on 20-11-2022 (runs in 83.53 seconds)
  * [2015](Sources/Solutions/2015/Days) - finished on 20-02-2022 (runs in 4.99 seconds)
