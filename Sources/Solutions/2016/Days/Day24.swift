@@ -52,7 +52,7 @@ final class Day24Solver: DaySolver {
 
         let bfsGrid = GridWrapper(grid: input.grid)
 
-        return BFS.shortestPathInGrid(grid: bfsGrid, from: pointA, to: pointB)!.steps
+        return BFS.shortestPathInGrid(bfsGrid, from: pointA, to: pointB)!.steps
     }
 
     private func graph(for numbers: [Int], in grid: Grid) -> WeightedGraph {
@@ -86,11 +86,11 @@ final class Day24Solver: DaySolver {
 
         graph = graph(for: allNumbers, in: grid)
 
-        return BFS.visitAllElements(in: graph, returnToStart: false)!.pathWeight
+        return BFS.visitAllElementsInGraph(graph, returnToStart: false)!.pathWeight
     }
 
     func solvePart2() -> Int {
-        return BFS.visitAllElements(in: graph, returnToStart: true)!.pathWeight
+        return BFS.visitAllElementsInGraph(graph, returnToStart: true)!.pathWeight
     }
 
     func parseInput(rawString: String) {

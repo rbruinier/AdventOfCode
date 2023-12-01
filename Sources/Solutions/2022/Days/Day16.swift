@@ -74,7 +74,7 @@ final class Day16Solver: DaySolver {
 
         for i in 0 ..< relevantValves.count {
             for j in i + 1 ..< relevantValves.count {
-                let path = BFS.shortestPathInUnweightedGraph(graph, from: relevantValves[i], to: relevantValves[j])!
+                let path = BFS.shortestPathInGraph(graph, from: relevantValves[i], to: relevantValves[j])!
 
                 shortestPathFromAToB[.init(a: relevantValves[i], b: relevantValves[j])] = path.pathIndices
                 shortestPathFromAToB[.init(a: relevantValves[j], b: relevantValves[i])] = path.pathIndices.reversed()

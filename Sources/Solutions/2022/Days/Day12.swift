@@ -39,7 +39,7 @@ final class Day12Solver: DaySolver {
     func solvePart1() -> Int {
         let bfsGrid = GridWrapper(heightMap: input.heightMap)
 
-        return BFS.shortestPathInGrid(grid: bfsGrid, from: input.start, to: input.end)!.steps
+        return BFS.shortestPathInGrid(bfsGrid, from: input.start, to: input.end)!.steps
     }
 
     func solvePart2() -> Int {
@@ -49,7 +49,7 @@ final class Day12Solver: DaySolver {
 
         var minimumSteps = Int.max
         for startPoint in allZeroHeightPoints.keys {
-            if let steps = BFS.shortestPathInGrid(grid: bfsGrid, from: startPoint, to: input.end)?.steps {
+            if let steps = BFS.shortestPathInGrid(bfsGrid, from: startPoint, to: input.end)?.steps {
                 minimumSteps = min(minimumSteps, steps)
             }
         }

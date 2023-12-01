@@ -4,6 +4,7 @@ Why not join the fun 🎄
 
 Links to the solutions:
 
+ * [2023](Sources/Solutions/2023/Days) - work in progress
  * [2022](Sources/Solutions/2022/Days) - finished on 25-12-2022 (runs in 121.72 seconds)
  * [2021](Sources/Solutions/2021/Days) - finished on 25-12-2021 (runs in 33.50 seconds)
  * [2020](Sources/Solutions/2020/Days) - finished on 15-01-2022 (runs in 12.29 seconds)
@@ -72,6 +73,12 @@ For example x = 3, y = 5 move to .right with 3 steps will result in x = 6, y = 5
  
  Currently does not have much more functionality. Can be expanded when needed.
  
+ ## HexPoint & HexDirection
+ 
+ A type that supports coordinates and navigation on a grid made out of hexagons.
+ 
+ * `q`, `r` and `s` are the coordinates
+ 
 ## Data Structures
 
 ### Looped Linked List Set
@@ -86,8 +93,12 @@ A type to store elements and edges of a graph.
 
 The BFS type wraps two solvers using the BFS algorithm.
 
-- visitAllElements(in: WeightedGraph, startingAtIndex: Int, returnToStart: Bool) tries to visit all elements in 
+- visitAllElementsInGraph(graph: WeightedGraph, startingAtIndex: Int, returnToStart: Bool) tries to visit all elements in 
 a WeightedGraph at least once with the shortest possible path.
+- shortestPathInGraph(graph: UnweightedGraph, from a: Int, to b: Int) tries to find the shortest path in a 
+graph between two points.
+- shortestPathInGraph(graph: WeightedGraph, from a: Int, to b: Int) tries to find the path with the lowest weight
+in a graph between two points.
 - shortestPathInGrid(grid: some BFSGrid, from: Point2D, to: Point2D) will try to find the shortest possible path
 between two points in a 2D grid. It is up to the caller to implement the BFSGrid protocol so that it can provide
 available neighbors for a point in the grid.
