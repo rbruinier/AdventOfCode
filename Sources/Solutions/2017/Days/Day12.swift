@@ -2,62 +2,62 @@ import Foundation
 import Tools
 
 final class Day12Solver: DaySolver {
-    let dayNumber: Int = 12
+	let dayNumber: Int = 12
 
-    let expectedPart1Result = 134
-    let expectedPart2Result = 193
+	let expectedPart1Result = 134
+	let expectedPart2Result = 193
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let pipes: [Int: [Int]]
-    }
+	private struct Input {
+		let pipes: [Int: [Int]]
+	}
 
-    private func visitAllFromStartId(_ startId: Int, allPipes: [Int: [Int]], visitedPipes: inout Set<Int>) {
-        guard visitedPipes.contains(startId) == false else {
-            return
-        }
+	private func visitAllFromStartID(_ startID: Int, allPipes: [Int: [Int]], visitedPipes: inout Set<Int>) {
+		guard visitedPipes.contains(startID) == false else {
+			return
+		}
 
-        visitedPipes.insert(startId)
+		visitedPipes.insert(startID)
 
-        for toId in allPipes[startId]! {
-            visitAllFromStartId(toId, allPipes: allPipes, visitedPipes: &visitedPipes)
-        }
-    }
+		for toID in allPipes[startID]! {
+			visitAllFromStartID(toID, allPipes: allPipes, visitedPipes: &visitedPipes)
+		}
+	}
 
-    func solvePart1() -> Int {
-        var visitedPipes: Set<Int> = []
+	func solvePart1() -> Int {
+		var visitedPipes: Set<Int> = []
 
-        visitAllFromStartId(0, allPipes: input.pipes, visitedPipes: &visitedPipes)
+		visitAllFromStartID(0, allPipes: input.pipes, visitedPipes: &visitedPipes)
 
-        return visitedPipes.count
-    }
+		return visitedPipes.count
+	}
 
-    func solvePart2() -> Int {
-        var combinedVisitedPipes: Set<Int> = []
+	func solvePart2() -> Int {
+		var combinedVisitedPipes: Set<Int> = []
 
-        var groupCount = 0
-        for startPipeId in input.pipes.keys where combinedVisitedPipes.contains(startPipeId) == false {
-            var visitedPipes: Set<Int> = []
+		var groupCount = 0
+		for startPipeID in input.pipes.keys where combinedVisitedPipes.contains(startPipeID) == false {
+			var visitedPipes: Set<Int> = []
 
-            visitAllFromStartId(startPipeId, allPipes: input.pipes, visitedPipes: &visitedPipes)
+			visitAllFromStartID(startPipeID, allPipes: input.pipes, visitedPipes: &visitedPipes)
 
-            combinedVisitedPipes = combinedVisitedPipes.union(visitedPipes)
+			combinedVisitedPipes = combinedVisitedPipes.union(visitedPipes)
 
-            groupCount += 1
-        }
+			groupCount += 1
+		}
 
-        return groupCount
-    }
+		return groupCount
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
-            let components = line.components(separatedBy: " <-> ")
+	func parseInput(rawString: String) {
+		input = .init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
+			let components = line.components(separatedBy: " <-> ")
 
-            let start = Int(components[0])!
-            let to = components[1].components(separatedBy: ", ").map { Int($0)! }
+			let start = Int(components[0])!
+			let to = components[1].components(separatedBy: ", ").map { Int($0)! }
 
-            result[start] = to
-        })
-    }
+			result[start] = to
+		})
+	}
 }

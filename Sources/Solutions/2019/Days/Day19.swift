@@ -3,82 +3,82 @@ import Foundation
 import Tools
 
 final class Day19Solver: DaySolver {
-    let dayNumber: Int = 19
+	let dayNumber: Int = 19
 
-    let expectedPart1Result = 158
-    let expectedPart2Result = 6191165
+	let expectedPart1Result = 158
+	let expectedPart2Result = 6191165
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let program: [Int]
-    }
+	private struct Input {
+		let program: [Int]
+	}
 
-    func solvePart1() -> Int {
-        var counter = 0
-        for y in 0 ..< 50 {
-            for x in 0 ..< 50 {
-                let intcode = IntcodeProcessor(program: input.program)
+	func solvePart1() -> Int {
+		var counter = 0
+		for y in 0 ..< 50 {
+			for x in 0 ..< 50 {
+				let intcode = IntcodeProcessor(program: input.program)
 
-                guard let output = intcode.continueProgramTillOutput(input: [x, y]) else {
-                    break
-                }
+				guard let output = intcode.continueProgramTillOutput(input: [x, y]) else {
+					break
+				}
 
-                counter += output
-            }
-        }
+				counter += output
+			}
+		}
 
-        return counter
-    }
+		return counter
+	}
 
-    func solvePart2() -> Int {
-        var slidingWindow: Deque<(y: Int, startX: Int, endX: Int)> = []
+	func solvePart2() -> Int {
+		var slidingWindow: Deque<(y: Int, startX: Int, endX: Int)> = []
 
-        for y in 1100 ..< 10_000 {
-            var startX: Int = -1
-            var endX: Int = -1
+		for y in 1100 ..< 10_000 {
+			var startX: Int = -1
+			var endX: Int = -1
 
-            var x = 350
-            while x < 1_000 {
-                let intcode = IntcodeProcessor(program: input.program)
+			var x = 350
+			while x < 1_000 {
+				let intcode = IntcodeProcessor(program: input.program)
 
-                let output = intcode.continueProgramTillOutput(input: [x, y])!
+				let output = intcode.continueProgramTillOutput(input: [x, y])!
 
-                if output == 1, startX == -1 {
-                    startX = x
+				if output == 1, startX == -1 {
+					startX = x
 
-                    x += 100
-                } else if output == 0, startX != -1 {
-                    endX = x - 1
+					x += 100
+				} else if output == 0, startX != -1 {
+					endX = x - 1
 
-                    break
-                }
+					break
+				}
 
-                x += 1
-            }
+				x += 1
+			}
 
-            if (endX - startX) + 1 >= 100 {
-                slidingWindow.append((y: y, startX: startX, endX: endX))
-            } else {
-                slidingWindow.removeAll()
-            }
+			if (endX - startX) + 1 >= 100 {
+				slidingWindow.append((y: y, startX: startX, endX: endX))
+			} else {
+				slidingWindow.removeAll()
+			}
 
-            if slidingWindow.count == 100 {
-                let bottomLeftStartX = slidingWindow.last!.startX
-                let topRightEndX = slidingWindow.first!.endX
+			if slidingWindow.count == 100 {
+				let bottomLeftStartX = slidingWindow.last!.startX
+				let topRightEndX = slidingWindow.first!.endX
 
-                if (topRightEndX - bottomLeftStartX + 1) >= 100 {
-                    return (bottomLeftStartX * 10_000) + slidingWindow.first!.y
-                } else {
-                    slidingWindow.removeFirst()
-                }
-            }
-        }
+				if (topRightEndX - bottomLeftStartX + 1) >= 100 {
+					return (bottomLeftStartX * 10_000) + slidingWindow.first!.y
+				} else {
+					slidingWindow.removeFirst()
+				}
+			}
+		}
 
-        fatalError()
-    }
+		fatalError()
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(program: rawString.parseCommaSeparatedInts())
-    }
+	func parseInput(rawString: String) {
+		input = .init(program: rawString.parseCommaSeparatedInts())
+	}
 }

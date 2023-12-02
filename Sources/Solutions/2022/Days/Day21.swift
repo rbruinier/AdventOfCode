@@ -7,174 +7,173 @@ import Tools
 ///
 /// I guess we could also collapse most of the equation and then do this by hand or even brute force, not sure about that.
 final class Day21Solver: DaySolver {
-    let dayNumber: Int = 21
+	let dayNumber: Int = 21
 
-    let expectedPart1Result = 364367103397416
-    let expectedPart2Result = 3782852515583
+	let expectedPart1Result = 364367103397416
+	let expectedPart2Result = 3782852515583
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let monkeys: [String: Operation]
-    }
+	private struct Input {
+		let monkeys: [String: Operation]
+	}
 
-    private enum Operation {
-        case value(Int)
-        case add(a: String, b: String)
-        case sub(a: String, b: String)
-        case mul(a: String, b: String)
-        case div(a: String, b: String)
-        case equate(a: String, b: String)
+	private enum Operation {
+		case value(Int)
+		case add(a: String, b: String)
+		case sub(a: String, b: String)
+		case mul(a: String, b: String)
+		case div(a: String, b: String)
+		case equate(a: String, b: String)
 
-        var operands: (a: String, b: String)? {
-            switch self {
-            case .value:
-                return nil
-            case .add(let a, let b):
-                return (a: a, b: b)
-            case .sub(let a, let b):
-                return (a: a, b: b)
-            case .mul(let a, let b):
-                return (a: a, b: b)
-            case .div(let a, let b):
-                return (a: a, b: b)
-            case .equate(let a, let b):
-                return (a: a, b: b)
-            }
-        }
-    }
+		var operands: (a: String, b: String)? {
+			switch self {
+			case .value:
+				nil
+			case .add(let a, let b):
+				(a: a, b: b)
+			case .sub(let a, let b):
+				(a: a, b: b)
+			case .mul(let a, let b):
+				(a: a, b: b)
+			case .div(let a, let b):
+				(a: a, b: b)
+			case .equate(let a, let b):
+				(a: a, b: b)
+			}
+		}
+	}
 
-    init() {
-    }
+	init() {}
 
-    private func solvePart1ForId(_ id: String, monkeys: [String: Operation]) -> Int {
-        guard let operation = monkeys[id] else {
-            fatalError()
-        }
+	private func solvePart1ForID(_ id: String, monkeys: [String: Operation]) -> Int {
+		guard let operation = monkeys[id] else {
+			fatalError()
+		}
 
-        switch operation {
-        case .value(let value):
-            return value
-        case .add(let a, let b):
-            return solvePart1ForId(a, monkeys: monkeys) + solvePart1ForId(b, monkeys: monkeys)
-        case .sub(let a, let b):
-            return solvePart1ForId(a, monkeys: monkeys) - solvePart1ForId(b, monkeys: monkeys)
-        case .mul(let a, let b):
-            return solvePart1ForId(a, monkeys: monkeys) * solvePart1ForId(b, monkeys: monkeys)
-        case .div(let a, let b):
-            return solvePart1ForId(a, monkeys: monkeys) / solvePart1ForId(b, monkeys: monkeys)
-        case .equate:
-            fatalError("Not supported in part 1")
-        }
-    }
+		switch operation {
+		case .value(let value):
+			return value
+		case .add(let a, let b):
+			return solvePart1ForID(a, monkeys: monkeys) + solvePart1ForID(b, monkeys: monkeys)
+		case .sub(let a, let b):
+			return solvePart1ForID(a, monkeys: monkeys) - solvePart1ForID(b, monkeys: monkeys)
+		case .mul(let a, let b):
+			return solvePart1ForID(a, monkeys: monkeys) * solvePart1ForID(b, monkeys: monkeys)
+		case .div(let a, let b):
+			return solvePart1ForID(a, monkeys: monkeys) / solvePart1ForID(b, monkeys: monkeys)
+		case .equate:
+			fatalError("Not supported in part 1")
+		}
+	}
 
-    private func solvePart2ForId(_ id: String, monkeys: [String: Operation]) -> Int {
-        guard let operation = monkeys[id] else {
-            fatalError()
-        }
+	private func solvePart2ForID(_ id: String, monkeys: [String: Operation]) -> Int {
+		guard let operation = monkeys[id] else {
+			fatalError()
+		}
 
-        switch operation {
-        case .value(let value):
-            return value
-        case .add(let a, let b):
-            return solvePart2ForId(a, monkeys: monkeys) + solvePart2ForId(b, monkeys: monkeys)
-        case .sub(let a, let b):
-            return solvePart2ForId(a, monkeys: monkeys) - solvePart2ForId(b, monkeys: monkeys)
-        case .mul(let a, let b):
-            return solvePart2ForId(a, monkeys: monkeys) * solvePart2ForId(b, monkeys: monkeys)
-        case .div(let a, let b):
-            return solvePart2ForId(a, monkeys: monkeys) / solvePart2ForId(b, monkeys: monkeys)
-        case .equate(let a, let b):
-            let lhs = solvePart2ForId(a, monkeys: monkeys)
-            let rhs = solvePart2ForId(b, monkeys: monkeys)
+		switch operation {
+		case .value(let value):
+			return value
+		case .add(let a, let b):
+			return solvePart2ForID(a, monkeys: monkeys) + solvePart2ForID(b, monkeys: monkeys)
+		case .sub(let a, let b):
+			return solvePart2ForID(a, monkeys: monkeys) - solvePart2ForID(b, monkeys: monkeys)
+		case .mul(let a, let b):
+			return solvePart2ForID(a, monkeys: monkeys) * solvePart2ForID(b, monkeys: monkeys)
+		case .div(let a, let b):
+			return solvePart2ForID(a, monkeys: monkeys) / solvePart2ForID(b, monkeys: monkeys)
+		case .equate(let a, let b):
+			let lhs = solvePart2ForID(a, monkeys: monkeys)
+			let rhs = solvePart2ForID(b, monkeys: monkeys)
 
-            return lhs == rhs ? 1 : 0
-        }
-    }
+			return lhs == rhs ? 1 : 0
+		}
+	}
 
-    private func equationStringForId(_ id: String, monkeys: [String: Operation]) -> String {
-        guard let operation = monkeys[id] else {
-            fatalError()
-        }
+	private func equationStringForID(_ id: String, monkeys: [String: Operation]) -> String {
+		guard let operation = monkeys[id] else {
+			fatalError()
+		}
 
-        switch operation {
-        case .value(let value):
-            return String(value)
-        case .add(let a, let b):
-            let lhs = a == "humn" ? "x" : equationStringForId(a, monkeys: monkeys)
-            let rhs = b == "humn" ? "x" : equationStringForId(b, monkeys: monkeys)
+		switch operation {
+		case .value(let value):
+			return String(value)
+		case .add(let a, let b):
+			let lhs = a == "humn" ? "x" : equationStringForID(a, monkeys: monkeys)
+			let rhs = b == "humn" ? "x" : equationStringForID(b, monkeys: monkeys)
 
-            return "(\(lhs) + \(rhs))"
-        case .sub(let a, let b):
-            let lhs = a == "humn" ? "x" : equationStringForId(a, monkeys: monkeys)
-            let rhs = b == "humn" ? "x" : equationStringForId(b, monkeys: monkeys)
+			return "(\(lhs) + \(rhs))"
+		case .sub(let a, let b):
+			let lhs = a == "humn" ? "x" : equationStringForID(a, monkeys: monkeys)
+			let rhs = b == "humn" ? "x" : equationStringForID(b, monkeys: monkeys)
 
-            return "(\(lhs) - \(rhs))"
-        case .mul(let a, let b):
-            let lhs = a == "humn" ? "x" : equationStringForId(a, monkeys: monkeys)
-            let rhs = b == "humn" ? "x" : equationStringForId(b, monkeys: monkeys)
+			return "(\(lhs) - \(rhs))"
+		case .mul(let a, let b):
+			let lhs = a == "humn" ? "x" : equationStringForID(a, monkeys: monkeys)
+			let rhs = b == "humn" ? "x" : equationStringForID(b, monkeys: monkeys)
 
-            return "(\(lhs) * \(rhs))"
-        case .div(let a, let b):
-            let lhs = a == "humn" ? "x" : equationStringForId(a, monkeys: monkeys)
-            let rhs = b == "humn" ? "x" : equationStringForId(b, monkeys: monkeys)
+			return "(\(lhs) * \(rhs))"
+		case .div(let a, let b):
+			let lhs = a == "humn" ? "x" : equationStringForID(a, monkeys: monkeys)
+			let rhs = b == "humn" ? "x" : equationStringForID(b, monkeys: monkeys)
 
-            return "(\(lhs) / \(rhs))"
-        case .equate:
-            fatalError("Do not use on root")
-        }
-    }
+			return "(\(lhs) / \(rhs))"
+		case .equate:
+			fatalError("Do not use on root")
+		}
+	}
 
-    func solvePart1() -> Int {
-        solvePart1ForId("root", monkeys: input.monkeys)
-    }
+	func solvePart1() -> Int {
+		solvePart1ForID("root", monkeys: input.monkeys)
+	}
 
-    func solvePart2() -> Int {
-        var monkeys = input.monkeys
+	func solvePart2() -> Int {
+		var monkeys = input.monkeys
 
-        let rootOperands = monkeys["root"]!.operands!
+		let rootOperands = monkeys["root"]!.operands!
 
-        let humnValue = 3782852515583
-        //		let rhsResult = 99433652936583 // found by setting a break point @ line 86
+		let humnValue = 3782852515583
+		//		let rhsResult = 99433652936583 // found by setting a break point @ line 86
 
-        monkeys["root"] = .equate(a: rootOperands.a, b: rootOperands.b)
-        monkeys["humn"] = .value(humnValue)
+		monkeys["root"] = .equate(a: rootOperands.a, b: rootOperands.b)
+		monkeys["humn"] = .value(humnValue)
 
-        let result = solvePart2ForId("root", monkeys: monkeys)
+		let result = solvePart2ForID("root", monkeys: monkeys)
 
-        guard result == 1 else {
-            fatalError()
-        }
+		guard result == 1 else {
+			fatalError()
+		}
 
-        return humnValue
-    }
+		return humnValue
+	}
 
-    func parseInput(rawString: String) {
-        var monkeys: [String: Operation] = [:]
+	func parseInput(rawString: String) {
+		var monkeys: [String: Operation] = [:]
 
-        for line in rawString.allLines() {
-            let components = line.components(separatedBy: ": ")
+		for line in rawString.allLines() {
+			let components = line.components(separatedBy: ": ")
 
-            let id = components[0]
-            let operation: Operation
+			let id = components[0]
+			let operation: Operation
 
-            if let value = Int(components[1]) {
-                operation = .value(value)
-            } else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \+ ([a-z]*)"#) {
-                operation = .add(a: values[0], b: values[1])
-            } else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \- ([a-z]*)"#) {
-                operation = .sub(a: values[0], b: values[1])
-            } else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \* ([a-z]*)"#) {
-                operation = .mul(a: values[0], b: values[1])
-            } else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \/ ([a-z]*)"#) {
-                operation = .div(a: values[0], b: values[1])
-            } else {
-                fatalError()
-            }
+			if let value = Int(components[1]) {
+				operation = .value(value)
+			} else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \+ ([a-z]*)"#) {
+				operation = .add(a: values[0], b: values[1])
+			} else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \- ([a-z]*)"#) {
+				operation = .sub(a: values[0], b: values[1])
+			} else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \* ([a-z]*)"#) {
+				operation = .mul(a: values[0], b: values[1])
+			} else if let values = components[1].getCapturedValues(pattern: #"([a-z]*) \/ ([a-z]*)"#) {
+				operation = .div(a: values[0], b: values[1])
+			} else {
+				fatalError()
+			}
 
-            monkeys[id] = operation
-        }
+			monkeys[id] = operation
+		}
 
-        input = .init(monkeys: monkeys)
-    }
+		input = .init(monkeys: monkeys)
+	}
 }

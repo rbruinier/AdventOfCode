@@ -2,134 +2,133 @@ import Foundation
 import Tools
 
 final class Day10Solver: DaySolver {
-    let dayNumber: Int = 10
+	let dayNumber: Int = 10
 
-    let expectedPart1Result = 17020
-    let expectedPart2Result = "RLEZFLGE"
+	let expectedPart1Result = 17020
+	let expectedPart2Result = "RLEZFLGE"
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let instructions: [Instruction]
-    }
+	private struct Input {
+		let instructions: [Instruction]
+	}
 
-    private enum Instruction {
-        case noop
-        case addx(value: Int)
-    }
+	private enum Instruction {
+		case noop
+		case addx(value: Int)
+	}
 
-    private struct CPU {
-        var currentInstruction: Instruction?
-        var instructionCycles = 0
-        var xRegister = 1
-        var clockCycle = 0
+	private struct CPU {
+		var currentInstruction: Instruction?
+		var instructionCycles = 0
+		var xRegister = 1
+		var clockCycle = 0
 
-        var instructions: [Instruction]
+		var instructions: [Instruction]
 
-        init(instructions: [Instruction]) {
-            self.instructions = Array(instructions.reversed())
-        }
+		init(instructions: [Instruction]) {
+			self.instructions = Array(instructions.reversed())
+		}
 
-        mutating func executeInstructions(cycleCallback: (_ cycle: Int, _ xRegister: Int) -> Void) {
-            while true {
-                clockCycle += 1
+		mutating func executeInstructions(cycleCallback: (_ cycle: Int, _ xRegister: Int) -> Void) {
+			while true {
+				clockCycle += 1
 
-                if let unwrappedInstruction = currentInstruction {
-                    instructionCycles -= 1
+				if let unwrappedInstruction = currentInstruction {
+					instructionCycles -= 1
 
-                    if instructionCycles == 0 {
-                        switch unwrappedInstruction {
-                        case .noop:
-                            break
-                        case .addx(let value):
-                            xRegister += value
-                        }
+					if instructionCycles == 0 {
+						switch unwrappedInstruction {
+						case .noop:
+							break
+						case .addx(let value):
+							xRegister += value
+						}
 
-                        currentInstruction = nil
-                    }
-                }
+						currentInstruction = nil
+					}
+				}
 
-                if currentInstruction == nil {
-                    if instructions.isEmpty {
-                        break
-                    }
+				if currentInstruction == nil {
+					if instructions.isEmpty {
+						break
+					}
 
-                    currentInstruction = instructions.removeLast()
+					currentInstruction = instructions.removeLast()
 
-                    switch currentInstruction! {
-                    case .noop:
-                        instructionCycles = 1
-                    case .addx:
-                        instructionCycles = 2
-                    }
-                }
+					switch currentInstruction! {
+					case .noop:
+						instructionCycles = 1
+					case .addx:
+						instructionCycles = 2
+					}
+				}
 
-                cycleCallback(clockCycle, xRegister)
-            }
-        }
-    }
+				cycleCallback(clockCycle, xRegister)
+			}
+		}
+	}
 
-    init() {
-    }
+	init() {}
 
-    func solvePart1() -> Int {
-        var cpu = CPU(instructions: input.instructions)
+	func solvePart1() -> Int {
+		var cpu = CPU(instructions: input.instructions)
 
-        var sum = 0
+		var sum = 0
 
-        cpu.executeInstructions(cycleCallback: { clockCycle, xRegister in
-            if [20, 60, 100, 140, 180, 220].contains(clockCycle) {
-                sum += clockCycle * xRegister
-            }
+		cpu.executeInstructions(cycleCallback: { clockCycle, xRegister in
+			if [20, 60, 100, 140, 180, 220].contains(clockCycle) {
+				sum += clockCycle * xRegister
+			}
 
-        })
+		})
 
-        return sum
-    }
+		return sum
+	}
 
-    func solvePart2() -> String {
-        func printPixels(pixels: [[Bool]]) {
-            for row in pixels {
-                var line = ""
+	func solvePart2() -> String {
+		func printPixels(pixels: [[Bool]]) {
+			for row in pixels {
+				var line = ""
 
-                for pixel in row {
-                    line += pixel ? "#" : "."
-                }
+				for pixel in row {
+					line += pixel ? "#" : "."
+				}
 
-                print(line)
-            }
-        }
+				print(line)
+			}
+		}
 
-        var cpu = CPU(instructions: input.instructions)
+		var cpu = CPU(instructions: input.instructions)
 
-        let width = 40
-        let height = 6
+		let width = 40
+		let height = 6
 
-        var pixels: [[Bool]] = Array(repeating: Array(repeating: false, count: width), count: height)
+		var pixels: [[Bool]] = Array(repeating: Array(repeating: false, count: width), count: height)
 
-        cpu.executeInstructions(cycleCallback: { clockCycle, xRegister in
-            let pixelX = (clockCycle - 1) % width
-            let pixelY = ((clockCycle - 1) / width) % height
+		cpu.executeInstructions(cycleCallback: { clockCycle, xRegister in
+			let pixelX = (clockCycle - 1) % width
+			let pixelY = ((clockCycle - 1) / width) % height
 
-            let pixelIsOn = (xRegister - 1 ... xRegister + 1).contains(pixelX)
+			let pixelIsOn = (xRegister - 1 ... xRegister + 1).contains(pixelX)
 
-            pixels[pixelY][pixelX] = pixelIsOn
-        })
+			pixels[pixelY][pixelX] = pixelIsOn
+		})
 
-//        printPixels(pixels: pixels)
+		//        printPixels(pixels: pixels)
 
-        return "RLEZFLGE"
-    }
+		return "RLEZFLGE"
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(instructions: rawString.allLines().map { line in
-            if line == "noop" {
-                return .noop
-            } else if let values = line.getCapturedValues(pattern: #"addx (-?[0-9]*)"#) {
-                return .addx(value: Int(values[0])!)
-            } else {
-                fatalError()
-            }
-        })
-    }
+	func parseInput(rawString: String) {
+		input = .init(instructions: rawString.allLines().map { line in
+			if line == "noop" {
+				.noop
+			} else if let values = line.getCapturedValues(pattern: #"addx (-?[0-9]*)"#) {
+				.addx(value: Int(values[0])!)
+			} else {
+				fatalError()
+			}
+		})
+	}
 }

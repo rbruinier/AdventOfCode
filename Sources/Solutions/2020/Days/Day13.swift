@@ -2,94 +2,94 @@ import Foundation
 import Tools
 
 final class Day13Solver: DaySolver {
-    let dayNumber: Int = 13
+	let dayNumber: Int = 13
 
-    let expectedPart1Result = 6559
-    let expectedPart2Result = 626670513163231
+	let expectedPart1Result = 6559
+	let expectedPart2Result = 626670513163231
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let earliestDepartureTime: Int
-        let busIds: [Int?]
-    }
+	private struct Input {
+		let earliestDepartureTime: Int
+		let busIDs: [Int?]
+	}
 
-    func solvePart1() -> Int {
-        var bestBusId = 0
-        var bestInterval = Int.max
+	func solvePart1() -> Int {
+		var bestBusID = 0
+		var bestInterval = Int.max
 
-        for busId in input.busIds.compactMap({ $0 }) {
-            var busDepartureTime = (input.earliestDepartureTime / busId) * busId
+		for busID in input.busIDs.compactMap({ $0 }) {
+			var busDepartureTime = (input.earliestDepartureTime / busID) * busID
 
-            if busDepartureTime < input.earliestDepartureTime {
-                busDepartureTime += busId
-            }
+			if busDepartureTime < input.earliestDepartureTime {
+				busDepartureTime += busID
+			}
 
-            let interval = busDepartureTime - input.earliestDepartureTime
+			let interval = busDepartureTime - input.earliestDepartureTime
 
-            if interval < bestInterval {
-                bestInterval = interval
-                bestBusId = busId
-            }
-        }
+			if interval < bestInterval {
+				bestInterval = interval
+				bestBusID = busID
+			}
+		}
 
-        return bestBusId * bestInterval
-    }
+		return bestBusID * bestInterval
+	}
 
-    func solvePart2() -> Int {
-        struct Bus {
-            let minuteOffset: Int
-            let interval: Int
-        }
+	func solvePart2() -> Int {
+		struct Bus {
+			let minuteOffset: Int
+			let interval: Int
+		}
 
-        let busses: [Bus] = input.busIds.enumerated().compactMap { element in
-            guard let busId = element.element else {
-                return nil
-            }
+		let busses: [Bus] = input.busIDs.enumerated().compactMap { element in
+			guard let busID = element.element else {
+				return nil
+			}
 
-            return .init(minuteOffset: element.offset, interval: busId)
-        }
+			return .init(minuteOffset: element.offset, interval: busID)
+		}
 
-        func matchingTime(time: Int, bus: Bus) -> Bool {
-            return ((time + bus.minuteOffset) % bus.interval) == 0
-        }
+		func matchingTime(time: Int, bus: Bus) -> Bool {
+			((time + bus.minuteOffset) % bus.interval) == 0
+		}
 
-        var baseDepartureTime = 0
-        var currentInterval = busses[0].interval
+		var baseDepartureTime = 0
+		var currentInterval = busses[0].interval
 
-        // no brute force:
-        // we find the minimum interval and base departure time incrementally for each bus, as each can only
-        // be matched anyway if all previous busses are aligned
-        // note: we might be able to calculate the intervals also with the Diophantine equation?
-        for bus in busses[1 ..< busses.endIndex] {
-            var departureTime = baseDepartureTime
-            var firstMatch: Int?
+		// no brute force:
+		// we find the minimum interval and base departure time incrementally for each bus, as each can only
+		// be matched anyway if all previous busses are aligned
+		// note: we might be able to calculate the intervals also with the Diophantine equation?
+		for bus in busses[1 ..< busses.endIndex] {
+			var departureTime = baseDepartureTime
+			var firstMatch: Int?
 
-            while true {
-                departureTime += currentInterval
+			while true {
+				departureTime += currentInterval
 
-                if matchingTime(time: departureTime, bus: bus) {
-                    if let firstMatch {
-                        currentInterval = departureTime - firstMatch
+				if matchingTime(time: departureTime, bus: bus) {
+					if let firstMatch {
+						currentInterval = departureTime - firstMatch
 
-                        break
-                    } else {
-                        firstMatch = departureTime
-                        baseDepartureTime = departureTime
-                    }
-                }
-            }
-        }
+						break
+					} else {
+						firstMatch = departureTime
+						baseDepartureTime = departureTime
+					}
+				}
+			}
+		}
 
-        return baseDepartureTime
-    }
+		return baseDepartureTime
+	}
 
-    func parseInput(rawString: String) {
-        let lines = rawString.allLines()
+	func parseInput(rawString: String) {
+		let lines = rawString.allLines()
 
-        let earliestDepartureTime = Int(lines[0])!
-        let busIds = lines[1].components(separatedBy: ",").map { Int(String($0)) }
+		let earliestDepartureTime = Int(lines[0])!
+		let busIDs = lines[1].components(separatedBy: ",").map { Int(String($0)) }
 
-        input = .init(earliestDepartureTime: earliestDepartureTime, busIds: busIds)
-    }
+		input = .init(earliestDepartureTime: earliestDepartureTime, busIDs: busIDs)
+	}
 }

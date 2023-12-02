@@ -2,83 +2,83 @@ import Foundation
 import Tools
 
 final class Day09Solver: DaySolver {
-    let dayNumber: Int = 9
+	let dayNumber: Int = 9
 
-    let expectedPart1Result = 556543474
-    let expectedPart2Result = 76096372
+	let expectedPart1Result = 556543474
+	let expectedPart2Result = 76096372
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let numbers: [Int]
-    }
+	private struct Input {
+		let numbers: [Int]
+	}
 
-    func solvePart1() -> Int {
-        let scanSize = 25
+	func solvePart1() -> Int {
+		let scanSize = 25
 
-        var window = Array(input.numbers[0 ..< scanSize])
+		var window = Array(input.numbers[0 ..< scanSize])
 
-        for number in input.numbers[scanSize ..< input.numbers.endIndex] {
-            var isValid = false
+		for number in input.numbers[scanSize ..< input.numbers.endIndex] {
+			var isValid = false
 
-            for aIndex in 0 ..< scanSize {
-                for bIndex in aIndex + 1 ..< scanSize {
-                    if window[aIndex] + window[bIndex] == number {
-                        isValid = true
+			for aIndex in 0 ..< scanSize {
+				for bIndex in aIndex + 1 ..< scanSize {
+					if window[aIndex] + window[bIndex] == number {
+						isValid = true
 
-                        break
-                    }
-                }
+						break
+					}
+				}
 
-                if isValid {
-                    break
-                }
-            }
+				if isValid {
+					break
+				}
+			}
 
-            if isValid == false {
-                return number
-            }
+			if isValid == false {
+				return number
+			}
 
-            window.removeFirst()
-            window.append(number)
-        }
+			window.removeFirst()
+			window.append(number)
+		}
 
-        return 0
-    }
+		return 0
+	}
 
-    func solvePart2() -> Int {
-        let numbers = input.numbers
-        let numberToFind = 556543474
+	func solvePart2() -> Int {
+		let numbers = input.numbers
+		let numberToFind = 556543474
 
-        var sum = numbers[0] + numbers[1]
+		var sum = numbers[0] + numbers[1]
 
-        var currentTailIndex = 0
-        var currentHeadIndex = 1
+		var currentTailIndex = 0
+		var currentHeadIndex = 1
 
-        while true {
-            if sum == numberToFind {
-                let range = numbers[currentTailIndex ... currentHeadIndex]
+		while true {
+			if sum == numberToFind {
+				let range = numbers[currentTailIndex ... currentHeadIndex]
 
-                return range.min()! + range.max()!
-            } else if sum < numberToFind {
-                currentHeadIndex += 1
+				return range.min()! + range.max()!
+			} else if sum < numberToFind {
+				currentHeadIndex += 1
 
-                sum += numbers[currentHeadIndex]
-            } else {
-                sum -= numbers[currentTailIndex]
+				sum += numbers[currentHeadIndex]
+			} else {
+				sum -= numbers[currentTailIndex]
 
-                currentTailIndex += 1
-            }
+				currentTailIndex += 1
+			}
 
-            guard currentHeadIndex < numbers.count, currentTailIndex < numbers.count else {
-                return 0
-            }
-        }
-    }
+			guard currentHeadIndex < numbers.count, currentTailIndex < numbers.count else {
+				return 0
+			}
+		}
+	}
 
-    func parseInput(rawString: String) {
-        let numbers = rawString.allLines().compactMap { Int($0) }
+	func parseInput(rawString: String) {
+		let numbers = rawString.allLines().compactMap { Int($0) }
 
-        input = .init(numbers: numbers)
-    }
+		input = .init(numbers: numbers)
+	}
 }

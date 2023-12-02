@@ -2,92 +2,92 @@ import Foundation
 import Tools
 
 final class Day23Solver: DaySolver {
-    let dayNumber: Int = 23
+	let dayNumber: Int = 23
 
-    let expectedPart1Result = 26354798
-    let expectedPart2Result = 166298218695
+	let expectedPart1Result = 26354798
+	let expectedPart2Result = 166298218695
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let cups: [Int]
-    }
+	private struct Input {
+		let cups: [Int]
+	}
 
-    private func playRoundLinkedList(cups: LoopedLinkedListSet<Int>, currentCupValue: inout Int, maxCupValue: Int, moveId: Int) {
-        let currentCupNode = cups.findNode(for: currentCupValue)!
+	private func playRoundLinkedList(cups: LoopedLinkedListSet<Int>, currentCupValue: inout Int, maxCupValue: Int, moveID: Int) {
+		let currentCupNode = cups.findNode(for: currentCupValue)!
 
-        let nodes: [LoopedLinkedListSet<Int>.Node] = [
-            cups.removeNextNode(of: currentCupNode),
-            cups.removeNextNode(of: currentCupNode),
-            cups.removeNextNode(of: currentCupNode),
-        ]
+		let nodes: [LoopedLinkedListSet<Int>.Node] = [
+			cups.removeNextNode(of: currentCupNode),
+			cups.removeNextNode(of: currentCupNode),
+			cups.removeNextNode(of: currentCupNode),
+		]
 
-        var newCupValue = currentCupValue
-        var newCupNode: LoopedLinkedListSet<Int>.Node!
+		var newCupValue = currentCupValue
+		var newCupNode: LoopedLinkedListSet<Int>.Node!
 
-        while true {
-            newCupValue -= 1
+		while true {
+			newCupValue -= 1
 
-            if newCupValue <= 0 {
-                newCupValue = maxCupValue
-            }
+			if newCupValue <= 0 {
+				newCupValue = maxCupValue
+			}
 
-            if let cupsNewCupNode = cups.findNode(for: newCupValue) {
-                newCupNode = cupsNewCupNode
+			if let cupsNewCupNode = cups.findNode(for: newCupValue) {
+				newCupNode = cupsNewCupNode
 
-                break
-            }
-        }
+				break
+			}
+		}
 
-        cups.insertNodes(nodes, after: newCupNode)
+		cups.insertNodes(nodes, after: newCupNode)
 
-        currentCupValue = currentCupNode.next!.value
-    }
+		currentCupValue = currentCupNode.next!.value
+	}
 
-    private func play(moves: Int, with cups: LoopedLinkedListSet<Int>, maxValue: Int) -> Int {
-        var currentCupValue = input.cups.first!
+	private func play(moves: Int, with cups: LoopedLinkedListSet<Int>, maxValue: Int) -> Int {
+		var currentCupValue = input.cups.first!
 
-        for moveId in 1 ... moves {
-            playRoundLinkedList(cups: cups, currentCupValue: &currentCupValue, maxCupValue: maxValue, moveId: moveId)
-        }
+		for moveID in 1 ... moves {
+			playRoundLinkedList(cups: cups, currentCupValue: &currentCupValue, maxCupValue: maxValue, moveID: moveID)
+		}
 
-        var currentNode = cups.findNode(for: 1)!
+		var currentNode = cups.findNode(for: 1)!
 
-        var finalResult = 0
+		var finalResult = 0
 
-        for _ in 0 ..< input.cups.count - 1 {
-            currentNode = currentNode.next!
+		for _ in 0 ..< input.cups.count - 1 {
+			currentNode = currentNode.next!
 
-            finalResult *= 10
-            finalResult += currentNode.value
-        }
+			finalResult *= 10
+			finalResult += currentNode.value
+		}
 
-        return finalResult
-    }
+		return finalResult
+	}
 
-    func solvePart1() -> Int {
-        let cups = LoopedLinkedListSet<Int>(values: input.cups)
+	func solvePart1() -> Int {
+		let cups = LoopedLinkedListSet<Int>(values: input.cups)
 
-        return play(moves: 100, with: cups, maxValue: 9)
-    }
+		return play(moves: 100, with: cups, maxValue: 9)
+	}
 
-    func solvePart2() -> Int {
-        var cupValues = input.cups
+	func solvePart2() -> Int {
+		var cupValues = input.cups
 
-        for index in (input.cups.count + 1) ... 1_000_000 {
-            cupValues.append(index)
-        }
+		for index in (input.cups.count + 1) ... 1_000_000 {
+			cupValues.append(index)
+		}
 
-        let cups = LoopedLinkedListSet(values: cupValues)
+		let cups = LoopedLinkedListSet(values: cupValues)
 
-        _ = play(moves: 10_000_000, with: cups, maxValue: 1_000_000)
+		_ = play(moves: 10_000_000, with: cups, maxValue: 1_000_000)
 
-        let currentNode = cups.findNode(for: 1)!
+		let currentNode = cups.findNode(for: 1)!
 
-        return currentNode.next!.value * currentNode.next!.next!.value
-    }
+		return currentNode.next!.value * currentNode.next!.next!.value
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(cups: [2, 8, 4, 5, 7, 3, 9, 6, 1])
-    }
+	func parseInput(rawString: String) {
+		input = .init(cups: [2, 8, 4, 5, 7, 3, 9, 6, 1])
+	}
 }

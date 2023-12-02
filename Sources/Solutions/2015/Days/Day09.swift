@@ -3,98 +3,98 @@ import Foundation
 import Tools
 
 final class Day09Solver: DaySolver {
-    let dayNumber: Int = 9
+	let dayNumber: Int = 9
 
-    let expectedPart1Result = 251
-    let expectedPart2Result = 898
+	let expectedPart1Result = 251
+	let expectedPart2Result = 898
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let routes: [Route]
-    }
+	private struct Input {
+		let routes: [Route]
+	}
 
-    private struct Route {
-        let a: String
-        let b: String
-        let distance: Int
-    }
+	private struct Route {
+		let a: String
+		let b: String
+		let distance: Int
+	}
 
-    private struct Node {
-        let id: String
+	private struct Node {
+		let id: String
 
-        var connections: [String: Int] = [:]
-    }
+		var connections: [String: Int] = [:]
+	}
 
-    // cache for part 2
-    private var minimumDistance = Int.max
-    private var maximumDistance = Int.min
+	// cache for part 2
+	private var minimumDistance = Int.max
+	private var maximumDistance = Int.min
 
-    private func shortestAndLongestRoute(from start: String, nodes: [String: Node]) -> (min: Int, max: Int) {
-        var queue: Deque<(location: String, distance: Int, explored: [String])> = [(start, 0, [])]
+	private func shortestAndLongestRoute(from start: String, nodes: [String: Node]) -> (min: Int, max: Int) {
+		var queue: Deque<(location: String, distance: Int, explored: [String])> = [(start, 0, [])]
 
-        var minimumDistance = Int.max
-        var maximumDistance = Int.min
+		var minimumDistance = Int.max
+		var maximumDistance = Int.min
 
-        while var item = queue.first {
-            queue.removeFirst()
+		while var item = queue.first {
+			queue.removeFirst()
 
-            item.explored.append(item.location)
+			item.explored.append(item.location)
 
-            if item.explored.count == nodes.count {
-                minimumDistance = min(minimumDistance, item.distance)
-                maximumDistance = max(maximumDistance, item.distance)
-            }
+			if item.explored.count == nodes.count {
+				minimumDistance = min(minimumDistance, item.distance)
+				maximumDistance = max(maximumDistance, item.distance)
+			}
 
-            let cityRoutes = nodes[item.location]!
+			let cityRoutes = nodes[item.location]!
 
-            for (destination, distance) in cityRoutes.connections where item.explored.contains(destination) == false {
-                queue.append((destination, item.distance + distance, item.explored))
-            }
-        }
+			for (destination, distance) in cityRoutes.connections where item.explored.contains(destination) == false {
+				queue.append((destination, item.distance + distance, item.explored))
+			}
+		}
 
-        return (min: minimumDistance, max: maximumDistance)
-    }
+		return (min: minimumDistance, max: maximumDistance)
+	}
 
-    func solvePart1() -> Int {
-        let routes = input.routes
+	func solvePart1() -> Int {
+		let routes = input.routes
 
-        var nodes: [String: Node] = [:]
-        var locations: Set<String> = []
+		var nodes: [String: Node] = [:]
+		var locations: Set<String> = []
 
-        for route in routes {
-            nodes[route.a, default: .init(id: route.a)].connections[route.b] = route.distance
-            nodes[route.b, default: .init(id: route.b)].connections[route.a] = route.distance
+		for route in routes {
+			nodes[route.a, default: .init(id: route.a)].connections[route.b] = route.distance
+			nodes[route.b, default: .init(id: route.b)].connections[route.a] = route.distance
 
-            locations.insert(route.a)
-            locations.insert(route.b)
-        }
+			locations.insert(route.a)
+			locations.insert(route.b)
+		}
 
-        for start in locations {
-            let result = shortestAndLongestRoute(from: start, nodes: nodes)
+		for start in locations {
+			let result = shortestAndLongestRoute(from: start, nodes: nodes)
 
-            minimumDistance = min(minimumDistance, result.min)
-            maximumDistance = max(maximumDistance, result.max)
-        }
+			minimumDistance = min(minimumDistance, result.min)
+			maximumDistance = max(maximumDistance, result.max)
+		}
 
-        return minimumDistance
-    }
+		return minimumDistance
+	}
 
-    func solvePart2() -> Int {
-        return maximumDistance
-    }
+	func solvePart2() -> Int {
+		maximumDistance
+	}
 
-    func parseInput(rawString: String) {
-        var routes: [Route] = []
+	func parseInput(rawString: String) {
+		var routes: [Route] = []
 
-        rawString.allLines().forEach { line in
-            guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*) to ([a-zA-Z]*) = ([0-9]*)"#) else {
-                fatalError()
-            }
+		rawString.allLines().forEach { line in
+			guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*) to ([a-zA-Z]*) = ([0-9]*)"#) else {
+				fatalError()
+			}
 
-            routes.append(.init(a: parameters[0], b: parameters[1], distance: Int(parameters[2])!))
-        }
+			routes.append(.init(a: parameters[0], b: parameters[1], distance: Int(parameters[2])!))
+		}
 
-        input = .init(routes: routes)
-    }
+		input = .init(routes: routes)
+	}
 }

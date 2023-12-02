@@ -2,105 +2,105 @@ import Foundation
 import Tools
 
 final class Day13Solver: DaySolver {
-    let dayNumber: Int = 13
+	let dayNumber: Int = 13
 
-    let expectedPart1Result = 618
-    let expectedPart2Result = 601
+	let expectedPart1Result = 618
+	let expectedPart2Result = 601
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let pairs: [String: [Pair]]
-    }
+	private struct Input {
+		let pairs: [String: [Pair]]
+	}
 
-    private struct Pair {
-        let a: String
-        let b: String
+	private struct Pair {
+		let a: String
+		let b: String
 
-        let score: Int
-    }
+		let score: Int
+	}
 
-    private func calculateHappiness(seating: [String], pairs: [String: [Pair]]) -> Int {
-        var score = 0
+	private func calculateHappiness(seating: [String], pairs: [String: [Pair]]) -> Int {
+		var score = 0
 
-        for (index, name) in seating.enumerated() {
-            let scoring = pairs[name]!
+		for (index, name) in seating.enumerated() {
+			let scoring = pairs[name]!
 
-            let previousIndex = (index >= 1) ? index - 1 : seating.count - 1
-            let nextIndex = (index + 1) % seating.count
+			let previousIndex = (index >= 1) ? index - 1 : seating.count - 1
+			let nextIndex = (index + 1) % seating.count
 
-            let previousName = seating[previousIndex]
-            let nextName = seating[nextIndex]
+			let previousName = seating[previousIndex]
+			let nextName = seating[nextIndex]
 
-            let previousScore = scoring.first { $0.b == previousName }!.score
-            let nextScore = scoring.first { $0.b == nextName }!.score
+			let previousScore = scoring.first { $0.b == previousName }!.score
+			let nextScore = scoring.first { $0.b == nextName }!.score
 
-            score += previousScore + nextScore
-        }
+			score += previousScore + nextScore
+		}
 
-        return score
-    }
+		return score
+	}
 
-    func solvePart1() -> Int {
-        let pairs = input.pairs
-        let names: [String] = Array(pairs.keys)
+	func solvePart1() -> Int {
+		let pairs = input.pairs
+		let names: [String] = Array(pairs.keys)
 
-        let allCombinations = names.permutations
+		let allCombinations = names.permutations
 
-        var bestScore = Int.min
+		var bestScore = Int.min
 
-        for seating in allCombinations {
-            bestScore = max(bestScore, calculateHappiness(seating: seating, pairs: pairs))
-        }
+		for seating in allCombinations {
+			bestScore = max(bestScore, calculateHappiness(seating: seating, pairs: pairs))
+		}
 
-        return bestScore
-    }
+		return bestScore
+	}
 
-    func solvePart2() -> Int {
-        var pairs = input.pairs
-        var names: [String] = Array(pairs.keys)
+	func solvePart2() -> Int {
+		var pairs = input.pairs
+		var names: [String] = Array(pairs.keys)
 
-        let newName = "Robert"
+		let newName = "Robert"
 
-        pairs[newName] = names.reduce(into: []) { result, name in
-            result.append(.init(a: newName, b: name, score: 0))
-        }
+		pairs[newName] = names.reduce(into: []) { result, name in
+			result.append(.init(a: newName, b: name, score: 0))
+		}
 
-        for name in names {
-            pairs[name]!.append(.init(a: name, b: newName, score: 0))
-        }
+		for name in names {
+			pairs[name]!.append(.init(a: name, b: newName, score: 0))
+		}
 
-        names.append(newName)
+		names.append(newName)
 
-        let allCombinations = names.permutations
+		let allCombinations = names.permutations
 
-        var bestScore = Int.min
+		var bestScore = Int.min
 
-        for seating in allCombinations {
-            bestScore = max(bestScore, calculateHappiness(seating: seating, pairs: pairs))
-        }
+		for seating in allCombinations {
+			bestScore = max(bestScore, calculateHappiness(seating: seating, pairs: pairs))
+		}
 
-        return bestScore
-    }
+		return bestScore
+	}
 
-    func parseInput(rawString: String) {
-        var pairs: [String: [Pair]] = [:]
+	func parseInput(rawString: String) {
+		var pairs: [String: [Pair]] = [:]
 
-        rawString.allLines().forEach { line in
-            guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*) would ([a-zA-Z]*) ([0-9]*) happiness units by sitting next to ([a-zA-Z]*)"#) else {
-                fatalError()
-            }
+		rawString.allLines().forEach { line in
+			guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*) would ([a-zA-Z]*) ([0-9]*) happiness units by sitting next to ([a-zA-Z]*)"#) else {
+				fatalError()
+			}
 
-            let a = parameters[0]
-            let b = parameters[3]
+			let a = parameters[0]
+			let b = parameters[3]
 
-            let score = Int(parameters[2])!
+			let score = Int(parameters[2])!
 
-            let sign: Int = parameters[1] == "gain" ? 1 : -1
+			let sign: Int = parameters[1] == "gain" ? 1 : -1
 
-            pairs[a, default: []] += [.init(a: a, b: b, score: sign * score)]
-        }
+			pairs[a, default: []] += [.init(a: a, b: b, score: sign * score)]
+		}
 
-        input = .init(pairs: pairs)
-    }
+		input = .init(pairs: pairs)
+	}
 }

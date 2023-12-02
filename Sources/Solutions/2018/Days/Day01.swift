@@ -2,41 +2,41 @@ import Foundation
 import Tools
 
 final class Day01Solver: DaySolver {
-    let dayNumber: Int = 1
+	let dayNumber: Int = 1
 
-    let expectedPart1Result = 522
-    let expectedPart2Result = 73364
+	let expectedPart1Result = 522
+	let expectedPart2Result = 73364
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let frequencies: [Int]
-    }
+	private struct Input {
+		let frequencies: [Int]
+	}
 
-    func solvePart1() -> Int {
-        input.frequencies.reduce(0, +)
-    }
+	func solvePart1() -> Int {
+		input.frequencies.reduce(0, +)
+	}
 
-    func solvePart2() -> Int {
-        var frequencies: Set<Int> = []
+	func solvePart2() -> Int {
+		var frequencies: Set<Int> = []
 
-        var frequency = 0
-        while true {
-            for value in input.frequencies {
-                frequency += value
+		var frequency = 0
+		while true {
+			for value in input.frequencies {
+				frequency += value
 
-                if frequencies.contains(frequency) {
-                    return frequency
-                }
+				if frequencies.contains(frequency) {
+					return frequency
+				}
 
-                frequencies.insert(frequency)
-            }
-        }
+				frequencies.insert(frequency)
+			}
+		}
 
-        fatalError()
-    }
+		fatalError()
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(frequencies: rawString.allLines().map { Int($0)! })
-    }
+	func parseInput(rawString: String) {
+		input = .init(frequencies: rawString.allLines().map { Int($0)! })
+	}
 }

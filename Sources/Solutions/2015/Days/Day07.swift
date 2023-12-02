@@ -2,184 +2,184 @@ import Foundation
 import Tools
 
 final class Day07Solver: DaySolver {
-    let dayNumber: Int = 7
+	let dayNumber: Int = 7
 
-    let expectedPart1Result = 46065
-    let expectedPart2Result = 14134
+	let expectedPart1Result = 46065
+	let expectedPart2Result = 14134
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let instructions: [Instruction]
-    }
+	private struct Input {
+		let instructions: [Instruction]
+	}
 
-    private enum Operand {
-        case constant(value: Int)
-        case register(id: String)
-    }
+	private enum Operand {
+		case constant(value: Int)
+		case register(id: String)
+	}
 
-    private enum Instruction {
-        case mov(value: Operand, targetRegisterId: String)
-        case and(lhs: Operand, rhs: Operand, targetRegisterId: String)
-        case or(lhs: Operand, rhs: Operand, targetRegisterId: String)
-        case shl(lhs: Operand, rhs: Operand, targetRegisterId: String)
-        case shr(lhs: Operand, rhs: Operand, targetRegisterId: String)
-        case not(registerId: String, targetRegisterId: String)
+	private enum Instruction {
+		case mov(value: Operand, targetRegisterID: String)
+		case and(lhs: Operand, rhs: Operand, targetRegisterID: String)
+		case or(lhs: Operand, rhs: Operand, targetRegisterID: String)
+		case shl(lhs: Operand, rhs: Operand, targetRegisterID: String)
+		case shr(lhs: Operand, rhs: Operand, targetRegisterID: String)
+		case not(registerID: String, targetRegisterID: String)
 
-        var targetRegisterId: String {
-            switch self {
-            case .mov(_, let registerId): return registerId
-            case .and(_, _, let registerId): return registerId
-            case .or(_, _, let registerId): return registerId
-            case .shl(_, _, let registerId): return registerId
-            case .shr(_, _, let registerId): return registerId
-            case .not(_, let registerId): return registerId
-            }
-        }
-    }
+		var targetRegisterID: String {
+			switch self {
+			case .mov(_, let registerID): registerID
+			case .and(_, _, let registerID): registerID
+			case .or(_, _, let registerID): registerID
+			case .shl(_, _, let registerID): registerID
+			case .shr(_, _, let registerID): registerID
+			case .not(_, let registerID): registerID
+			}
+		}
+	}
 
-    private func valueFor(operand: Operand, registers: [String: Int]) -> Int? {
-        switch operand {
-        case .constant(let value):
-            return value
-        case .register(let registerId):
-            return registers[registerId]
-        }
-    }
+	private func valueFor(operand: Operand, registers: [String: Int]) -> Int? {
+		switch operand {
+		case .constant(let value):
+			value
+		case .register(let registerID):
+			registers[registerID]
+		}
+	}
 
-    private func execute(instructions originalInstructions: [Instruction], registers originalRegisters: [String: Int]) -> [String: Int] {
-        var registers = originalRegisters
-        var instructions = originalInstructions
+	private func execute(instructions originalInstructions: [Instruction], registers originalRegisters: [String: Int]) -> [String: Int] {
+		var registers = originalRegisters
+		var instructions = originalInstructions
 
-        while true {
-            var remainingInstructions: [Instruction] = []
+		while true {
+			var remainingInstructions: [Instruction] = []
 
-            for instruction in instructions {
-                let targetRegisterId = instruction.targetRegisterId
+			for instruction in instructions {
+				let targetRegisterID = instruction.targetRegisterID
 
-                switch instruction {
-                case .mov(let operand, _):
-                    guard let value = valueFor(operand: operand, registers: registers) else {
-                        remainingInstructions.append(instruction)
+				switch instruction {
+				case .mov(let operand, _):
+					guard let value = valueFor(operand: operand, registers: registers) else {
+						remainingInstructions.append(instruction)
 
-                        continue
-                    }
+						continue
+					}
 
-                    registers[targetRegisterId] = value
-                case .and(let lhs, let rhs, _):
-                    guard
-                        let lhs = valueFor(operand: lhs, registers: registers),
-                        let rhs = valueFor(operand: rhs, registers: registers)
-                    else {
-                        remainingInstructions.append(instruction)
+					registers[targetRegisterID] = value
+				case .and(let lhs, let rhs, _):
+					guard
+						let lhs = valueFor(operand: lhs, registers: registers),
+						let rhs = valueFor(operand: rhs, registers: registers)
+					else {
+						remainingInstructions.append(instruction)
 
-                        continue
-                    }
+						continue
+					}
 
-                    registers[targetRegisterId] = lhs & rhs
-                case .or(let lhs, let rhs, _):
-                    guard
-                        let lhs = valueFor(operand: lhs, registers: registers),
-                        let rhs = valueFor(operand: rhs, registers: registers)
-                    else {
-                        remainingInstructions.append(instruction)
+					registers[targetRegisterID] = lhs & rhs
+				case .or(let lhs, let rhs, _):
+					guard
+						let lhs = valueFor(operand: lhs, registers: registers),
+						let rhs = valueFor(operand: rhs, registers: registers)
+					else {
+						remainingInstructions.append(instruction)
 
-                        continue
-                    }
+						continue
+					}
 
-                    registers[targetRegisterId] = lhs | rhs
-                case .shl(let lhs, let rhs, _):
-                    guard
-                        let lhs = valueFor(operand: lhs, registers: registers),
-                        let rhs = valueFor(operand: rhs, registers: registers)
-                    else {
-                        remainingInstructions.append(instruction)
+					registers[targetRegisterID] = lhs | rhs
+				case .shl(let lhs, let rhs, _):
+					guard
+						let lhs = valueFor(operand: lhs, registers: registers),
+						let rhs = valueFor(operand: rhs, registers: registers)
+					else {
+						remainingInstructions.append(instruction)
 
-                        continue
-                    }
+						continue
+					}
 
-                    registers[targetRegisterId] = lhs << rhs
-                case .shr(let lhs, let rhs, _):
-                    guard
-                        let lhs = valueFor(operand: lhs, registers: registers),
-                        let rhs = valueFor(operand: rhs, registers: registers)
-                    else {
-                        remainingInstructions.append(instruction)
+					registers[targetRegisterID] = lhs << rhs
+				case .shr(let lhs, let rhs, _):
+					guard
+						let lhs = valueFor(operand: lhs, registers: registers),
+						let rhs = valueFor(operand: rhs, registers: registers)
+					else {
+						remainingInstructions.append(instruction)
 
-                        continue
-                    }
+						continue
+					}
 
-                    registers[targetRegisterId] = lhs >> rhs
-                case .not(let registerId, _):
-                    guard let value = registers[registerId] else {
-                        remainingInstructions.append(instruction)
+					registers[targetRegisterID] = lhs >> rhs
+				case .not(let registerID, _):
+					guard let value = registers[registerID] else {
+						remainingInstructions.append(instruction)
 
-                        continue
-                    }
+						continue
+					}
 
-                    registers[targetRegisterId] = value ^ 0xFFFF
-                }
-            }
+					registers[targetRegisterID] = value ^ 0xFFFF
+				}
+			}
 
-            if remainingInstructions.isEmpty {
-                break
-            }
+			if remainingInstructions.isEmpty {
+				break
+			}
 
-            instructions = remainingInstructions
-        }
+			instructions = remainingInstructions
+		}
 
-        return registers
-    }
+		return registers
+	}
 
-    func solvePart1() -> Int {
-        let registers = execute(instructions: input.instructions, registers: [:])
+	func solvePart1() -> Int {
+		let registers = execute(instructions: input.instructions, registers: [:])
 
-        return registers["a"]!
-    }
+		return registers["a"]!
+	}
 
-    func solvePart2() -> Int {
-        var registers = execute(instructions: input.instructions, registers: [:])
+	func solvePart2() -> Int {
+		var registers = execute(instructions: input.instructions, registers: [:])
 
-        let newInstructions: [Instruction] = input.instructions.map { instruction in
-            if case .mov(_, let targetRegisterId) = instruction, targetRegisterId == "b" {
-                return .mov(value: .constant(value: registers["a"]!), targetRegisterId: "b")
-            } else {
-                return instruction
-            }
-        }
+		let newInstructions: [Instruction] = input.instructions.map { instruction in
+			if case .mov(_, let targetRegisterID) = instruction, targetRegisterID == "b" {
+				.mov(value: .constant(value: registers["a"]!), targetRegisterID: "b")
+			} else {
+				instruction
+			}
+		}
 
-        registers = execute(instructions: newInstructions, registers: [:])
+		registers = execute(instructions: newInstructions, registers: [:])
 
-        return registers["a"]!
-    }
+		return registers["a"]!
+	}
 
-    func parseInput(rawString: String) {
-        let instructions: [Instruction] = rawString.allLines().map { line in
-            func operand(from string: String) -> Operand {
-                if let value = Int(string) {
-                    return .constant(value: value)
-                } else {
-                    return .register(id: string)
-                }
-            }
+	func parseInput(rawString: String) {
+		let instructions: [Instruction] = rawString.allLines().map { line in
+			func operand(from string: String) -> Operand {
+				if let value = Int(string) {
+					.constant(value: value)
+				} else {
+					.register(id: string)
+				}
+			}
 
-            if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) AND ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
-                return .and(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) OR ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
-                return .or(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) LSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
-                return .shl(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) RSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
-                return .shr(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterId: arguments[2])
-            } else if let arguments = line.getCapturedValues(pattern: #"NOT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
-                return .not(registerId: arguments[0], targetRegisterId: arguments[1])
-            } else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
-                return .mov(value: operand(from: arguments[0]), targetRegisterId: arguments[1])
-            }
+			if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) AND ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+				return .and(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterID: arguments[2])
+			} else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) OR ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+				return .or(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterID: arguments[2])
+			} else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) LSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+				return .shl(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterID: arguments[2])
+			} else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) RSHIFT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+				return .shr(lhs: operand(from: arguments[0]), rhs: operand(from: arguments[1]), targetRegisterID: arguments[2])
+			} else if let arguments = line.getCapturedValues(pattern: #"NOT ([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+				return .not(registerID: arguments[0], targetRegisterID: arguments[1])
+			} else if let arguments = line.getCapturedValues(pattern: #"([a-zA-Z0-9]*) -> ([a-zA-Z0-9]*)"#) {
+				return .mov(value: operand(from: arguments[0]), targetRegisterID: arguments[1])
+			}
 
-            fatalError()
-        }
+			fatalError()
+		}
 
-        input = .init(instructions: instructions)
-    }
+		input = .init(instructions: instructions)
+	}
 }

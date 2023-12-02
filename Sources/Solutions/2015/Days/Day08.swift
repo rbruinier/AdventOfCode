@@ -2,74 +2,74 @@ import Foundation
 import Tools
 
 final class Day08Solver: DaySolver {
-    let dayNumber: Int = 8
+	let dayNumber: Int = 8
 
-    let expectedPart1Result = 1333
-    let expectedPart2Result = 2046
+	let expectedPart1Result = 1333
+	let expectedPart2Result = 2046
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let strings: [String]
-    }
+	private struct Input {
+		let strings: [String]
+	}
 
-    private func numberOfSuperfluousCharacters(in originalString: String) -> Int {
-        var index = 1
+	private func numberOfSuperfluousCharacters(in originalString: String) -> Int {
+		var index = 1
 
-        var count = 2
-        while index < originalString.count - 1 {
-            let character = originalString[index ... index]
+		var count = 2
+		while index < originalString.count - 1 {
+			let character = originalString[index ... index]
 
-            if character == "\\" {
-                let nextCharacter = originalString[index + 1 ... index + 1]
+			if character == "\\" {
+				let nextCharacter = originalString[index + 1 ... index + 1]
 
-                if nextCharacter == "\\" || nextCharacter == "\"" {
-                    count += 1
-                    index += 1
-                } else if nextCharacter == "x" {
-                    count += 3
-                    index += 2
-                }
-            }
+				if nextCharacter == "\\" || nextCharacter == "\"" {
+					count += 1
+					index += 1
+				} else if nextCharacter == "x" {
+					count += 3
+					index += 2
+				}
+			}
 
-            index += 1
-        }
+			index += 1
+		}
 
-        return count
-    }
+		return count
+	}
 
-    private func numberOfExtraEncodedCharacters(in originalString: String) -> Int {
-        var count = 2
-        for character in originalString {
-            let character = String(character)
+	private func numberOfExtraEncodedCharacters(in originalString: String) -> Int {
+		var count = 2
+		for character in originalString {
+			let character = String(character)
 
-            if character == "\\" || character == "\"" {
-                count += 1
-            }
-        }
+			if character == "\\" || character == "\"" {
+				count += 1
+			}
+		}
 
-        return count
-    }
+		return count
+	}
 
-    func solvePart1() -> Int {
-        var sumOfDifference = 0
-        for string in input.strings {
-            sumOfDifference += numberOfSuperfluousCharacters(in: string)
-        }
+	func solvePart1() -> Int {
+		var sumOfDifference = 0
+		for string in input.strings {
+			sumOfDifference += numberOfSuperfluousCharacters(in: string)
+		}
 
-        return sumOfDifference
-    }
+		return sumOfDifference
+	}
 
-    func solvePart2() -> Int {
-        var sumOfDifference = 0
-        for string in input.strings {
-            sumOfDifference += numberOfExtraEncodedCharacters(in: string)
-        }
+	func solvePart2() -> Int {
+		var sumOfDifference = 0
+		for string in input.strings {
+			sumOfDifference += numberOfExtraEncodedCharacters(in: string)
+		}
 
-        return sumOfDifference
-    }
+		return sumOfDifference
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(strings: rawString.allLines())
-    }
+	func parseInput(rawString: String) {
+		input = .init(strings: rawString.allLines())
+	}
 }

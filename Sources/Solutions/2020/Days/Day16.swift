@@ -2,157 +2,159 @@ import Foundation
 import Tools
 
 final class Day16Solver: DaySolver {
-    let dayNumber: Int = 16
+	let dayNumber: Int = 16
 
-    let expectedPart1Result = 30869
-    let expectedPart2Result = 4381476149273
+	let expectedPart1Result = 30869
+	let expectedPart2Result = 4381476149273
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let fields: [Field]
+	private struct Input {
+		let fields: [Field]
 
-        let yourTicket: [Int]
+		let yourTicket: [Int]
 
-        let nearbyTickets: [[Int]]
-    }
+		let nearbyTickets: [[Int]]
+	}
 
-    private struct Field {
-        let name: String
-        let ranges: [ClosedRange<Int>]
+	private struct Field {
+		let name: String
+		let ranges: [ClosedRange<Int>]
 
-        func matches(value: Int) -> Bool {
-            return ranges.contains { $0.contains(value) }
-        }
-    }
+		func matches(value: Int) -> Bool {
+			ranges.contains { $0.contains(value) }
+		}
+	}
 
-    func solvePart1() -> Int {
-        var invalidValuesSum = 0
+	func solvePart1() -> Int {
+		var invalidValuesSum = 0
 
-        for nearbyTicket in input.nearbyTickets {
-            for value in nearbyTicket {
-                if input.fields.contains(where: { $0.matches(value: value) }) == false {
-                    invalidValuesSum += value
-                }
-            }
-        }
+		for nearbyTicket in input.nearbyTickets {
+			for value in nearbyTicket {
+				if input.fields.contains(where: { $0.matches(value: value) }) == false {
+					invalidValuesSum += value
+				}
+			}
+		}
 
-        return invalidValuesSum
-    }
+		return invalidValuesSum
+	}
 
-    func solvePart2() -> Int {
-        // get valid tickets
-        let validTickets = input.nearbyTickets.filter {
-            for value in $0 {
-                if input.fields.contains(where: { $0.matches(value: value) }) == false {
-                    return false
-                }
-            }
+	func solvePart2() -> Int {
+		// get valid tickets
+		let validTickets = input.nearbyTickets.filter {
+			for value in $0 {
+				if input.fields.contains(where: { $0.matches(value: value) }) == false {
+					return false
+				}
+			}
 
-            return true
-        }
+			return true
+		}
 
-        // find field matches for each value (value: [field])
-        var fieldMatches: [Int: [Int]] = [:]
+		// find field matches for each value (value: [field])
+		var fieldMatches: [Int: [Int]] = [:]
 
-        for (valueIndex, yourTicketValue) in input.yourTicket.enumerated() {
-            for (fieldIndex, field) in input.fields.enumerated() {
-                guard field.matches(value: yourTicketValue) else {
-                    continue
-                }
+		for (valueIndex, yourTicketValue) in input.yourTicket.enumerated() {
+			for (fieldIndex, field) in input.fields.enumerated() {
+				guard field.matches(value: yourTicketValue) else {
+					continue
+				}
 
-                var fieldIsMatch = true
+				var fieldIsMatch = true
 
-                for validTicket in validTickets {
-                    let value = validTicket[valueIndex]
+				for validTicket in validTickets {
+					let value = validTicket[valueIndex]
 
-                    if field.matches(value: value) == false {
-                        fieldIsMatch = false
+					if field.matches(value: value) == false {
+						fieldIsMatch = false
 
-                        break
-                    }
-                }
+						break
+					}
+				}
 
-                if fieldIsMatch {
-                    fieldMatches[valueIndex] = fieldMatches[valueIndex, default: []] + [fieldIndex]
-                }
-            }
-        }
+				if fieldIsMatch {
+					fieldMatches[valueIndex] = fieldMatches[valueIndex, default: []] + [fieldIndex]
+				}
+			}
+		}
 
-        // now we are going to remove one by one ending up with a single field per value
-        var removedFields: [Int] = []
-        while true {
-            guard let uniqueField = fieldMatches.first(where: { value, fields in
-                fields.count == 1 && removedFields.contains(fields[0]) == false
-            })?.value[0] else {
-                break
-            }
+		// now we are going to remove one by one ending up with a single field per value
+		var removedFields: [Int] = []
+		while true {
+			guard
+				let uniqueField = fieldMatches.first(where: { _, fields in
+					fields.count == 1 && removedFields.contains(fields[0]) == false
+				})?.value[0]
+			else {
+				break
+			}
 
-            removedFields.append(uniqueField)
+			removedFields.append(uniqueField)
 
-            fieldMatches = fieldMatches.mapValues { fields in
-                if fields.count == 1 {
-                    return fields
-                }
+			fieldMatches = fieldMatches.mapValues { fields in
+				if fields.count == 1 {
+					return fields
+				}
 
-                return fields.filter { $0 != uniqueField }
-            }
-        }
+				return fields.filter { $0 != uniqueField }
+			}
+		}
 
-        var result = 1
-        for (valueIndex, yourTicketValue) in input.yourTicket.enumerated() {
-            let field = fieldMatches[valueIndex]![0]
+		var result = 1
+		for (valueIndex, yourTicketValue) in input.yourTicket.enumerated() {
+			let field = fieldMatches[valueIndex]![0]
 
-            if input.fields[field].name.starts(with: "departure") {
-                result *= yourTicketValue
-            }
-        }
+			if input.fields[field].name.starts(with: "departure") {
+				result *= yourTicketValue
+			}
+		}
 
-        return result
-    }
+		return result
+	}
 
-    func parseInput(rawString: String) {
-        let lines = rawString.allLines(includeEmpty: true)
+	func parseInput(rawString: String) {
+		let lines = rawString.allLines(includeEmpty: true)
 
-        var currentlyParsing = 0
+		var currentlyParsing = 0
 
-        var fields: [Field] = []
-        var yourTicket: [Int] = []
-        var nearbyTickets: [[Int]] = []
+		var fields: [Field] = []
+		var yourTicket: [Int] = []
+		var nearbyTickets: [[Int]] = []
 
-        for line in lines {
-            if line.isEmpty {
-                currentlyParsing += 1
+		for line in lines {
+			if line.isEmpty {
+				currentlyParsing += 1
 
-                continue
-            }
+				continue
+			}
 
-            if currentlyParsing == 0 {
-                let components = line.components(separatedBy: ": ")
+			if currentlyParsing == 0 {
+				let components = line.components(separatedBy: ": ")
 
-                let fieldName = components[0]
-                let ranges: [ClosedRange<Int>] = components[1].components(separatedBy: " or ").map {
-                    let values = $0.components(separatedBy: "-")
+				let fieldName = components[0]
+				let ranges: [ClosedRange<Int>] = components[1].components(separatedBy: " or ").map {
+					let values = $0.components(separatedBy: "-")
 
-                    return Int(values[0])! ... Int(values[1])!
-                }
+					return Int(values[0])! ... Int(values[1])!
+				}
 
-                fields.append(.init(name: fieldName, ranges: ranges))
-            } else if currentlyParsing == 1 {
-                if line == "nearby tickets:" {
-                    continue
-                }
+				fields.append(.init(name: fieldName, ranges: ranges))
+			} else if currentlyParsing == 1 {
+				if line == "nearby tickets:" {
+					continue
+				}
 
-                yourTicket = line.parseCommaSeparatedInts()
-            } else {
-                if line == "nearby tickets:" {
-                    continue
-                }
+				yourTicket = line.parseCommaSeparatedInts()
+			} else {
+				if line == "nearby tickets:" {
+					continue
+				}
 
-                nearbyTickets.append(line.parseCommaSeparatedInts())
-            }
-        }
+				nearbyTickets.append(line.parseCommaSeparatedInts())
+			}
+		}
 
-        input = .init(fields: fields, yourTicket: yourTicket, nearbyTickets: nearbyTickets)
-    }
+		input = .init(fields: fields, yourTicket: yourTicket, nearbyTickets: nearbyTickets)
+	}
 }

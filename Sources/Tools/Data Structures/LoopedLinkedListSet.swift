@@ -14,82 +14,82 @@ import Foundation
  types. See also: https://github.com/apple/swift/blob/main/docs/Generics.rst#specialization
  */
 public final class LoopedLinkedListSet<Element: Hashable & Equatable> {
-    public class Node {
-        public var value: Element
+	public class Node {
+		public var value: Element
 
-        public var next: Node?
+		public var next: Node?
 
-        @_specialize(exported: true, kind: full, where Element == Int)
-        public init(value: Element, next: Node? = nil) {
-            self.value = value
-            self.next = next
-        }
-    }
+		@_specialize(exported: true, kind: full, where Element == Int)
+		public init(value: Element, next: Node? = nil) {
+			self.value = value
+			self.next = next
+		}
+	}
 
-    // quick lookup of a node instead of enumerating through all items
-    private var nodeByValue: [Element: Node] = [:]
+	// quick lookup of a node instead of enumerating through all items
+	private var nodeByValue: [Element: Node] = [:]
 
-    private var rootNode: Node?
-    private var lastNode: Node?
+	private var rootNode: Node?
+	private var lastNode: Node?
 
-    @_specialize(exported: true, kind: full, where Element == Int)
-    public init(values: [Element] = []) {
-        for value in values {
-            append(value)
-        }
-    }
+	@_specialize(exported: true, kind: full, where Element == Int)
+	public init(values: [Element] = []) {
+		for value in values {
+			append(value)
+		}
+	}
 
-    @_specialize(exported: true, kind: full, where Element == Int)
-    public func append(_ value: Element) {
-        let node = Node(value: value, next: rootNode)
+	@_specialize(exported: true, kind: full, where Element == Int)
+	public func append(_ value: Element) {
+		let node = Node(value: value, next: rootNode)
 
-        if let lastNode {
-            lastNode.next = node
-        } else {
-            rootNode = node
+		if let lastNode {
+			lastNode.next = node
+		} else {
+			rootNode = node
 
-            node.next = node
-        }
+			node.next = node
+		}
 
-        lastNode = node
+		lastNode = node
 
-        nodeByValue[value] = node
-    }
+		nodeByValue[value] = node
+	}
 
-    @_specialize(exported: true, kind: full, where Element == Int)
-    public func removeNextNode(of node: Node) -> Node {
-        let nextNode = node.next!
+	@_specialize(exported: true, kind: full, where Element == Int)
+	public func removeNextNode(of node: Node) -> Node {
+		let nextNode = node.next!
 
-        node.next = nextNode.next!
+		node.next = nextNode.next!
 
-        if nextNode === rootNode {
-            rootNode = node
-        }
+		if nextNode === rootNode {
+			rootNode = node
+		}
 
-        nextNode.next = nil
+		nextNode.next = nil
 
-        nodeByValue[nextNode.value] = nil
+		nodeByValue[nextNode.value] = nil
 
-        return nextNode
-    }
+		return nextNode
+	}
 
-    @_specialize(exported: true, kind: full, where Element == Int)
-    public func insertNode(_ node: Node, after afterNode: Node) {
-        node.next = afterNode.next
-        afterNode.next = node
+	@_specialize(exported: true, kind: full, where Element == Int)
+	public func insertNode(_ node: Node, after afterNode: Node) {
+		node.next = afterNode.next
+		afterNode.next = node
 
-        nodeByValue[node.value] = node
-    }
+		nodeByValue[node.value] = node
+	}
 
-    @_specialize(exported: true, kind: full, where Element == Int)
-    public func insertNodes(_ nodes: [Node], after afterNode: Node) {
-        for node in nodes.reversed() {
-            insertNode(node, after: afterNode)
-        }
-    }
+	@_specialize(exported: true, kind: full, where Element == Int)
+	public func insertNodes(_ nodes: [Node], after afterNode: Node) {
+		for node in nodes.reversed() {
+			insertNode(node, after: afterNode)
+		}
+	}
 
-    @_specialize(exported: true, kind: full, where Element == Int)
-    public func findNode(for value: Element) -> Node? {
-        return nodeByValue[value]
-    }
+	@_specialize(exported: true, kind: full, where Element == Int)
+	public func findNode(for value: Element) -> Node? {
+		nodeByValue[value]
+	}
 }

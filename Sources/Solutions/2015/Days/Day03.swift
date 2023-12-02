@@ -2,63 +2,63 @@ import Foundation
 import Tools
 
 final class Day03Solver: DaySolver {
-    let dayNumber: Int = 3
+	let dayNumber: Int = 3
 
-    let expectedPart1Result = 2081
-    let expectedPart2Result = 2341
+	let expectedPart1Result = 2081
+	let expectedPart2Result = 2341
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let directions: [Direction]
-    }
+	private struct Input {
+		let directions: [Direction]
+	}
 
-    func solvePart1() -> Int {
-        var point = Point2D()
+	func solvePart1() -> Int {
+		var point = Point2D()
 
-        var points: Set<Point2D> = Set([point])
+		var points: Set<Point2D> = Set([point])
 
-        for direction in input.directions {
-            point = point.moved(to: direction)
+		for direction in input.directions {
+			point = point.moved(to: direction)
 
-            points.insert(point)
-        }
+			points.insert(point)
+		}
 
-        return points.count
-    }
+		return points.count
+	}
 
-    func solvePart2() -> Int {
-        var robot = Point2D()
-        var santa = Point2D()
+	func solvePart2() -> Int {
+		var robot = Point2D()
+		var santa = Point2D()
 
-        var points: Set<Point2D> = Set([robot])
+		var points: Set<Point2D> = Set([robot])
 
-        for (index, direction) in input.directions.enumerated() {
-            if index.isEven {
-                santa = santa.moved(to: direction)
+		for (index, direction) in input.directions.enumerated() {
+			if index.isEven {
+				santa = santa.moved(to: direction)
 
-                points.insert(santa)
-            } else {
-                robot = robot.moved(to: direction)
+				points.insert(santa)
+			} else {
+				robot = robot.moved(to: direction)
 
-                points.insert(robot)
-            }
-        }
+				points.insert(robot)
+			}
+		}
 
-        return points.count
-    }
+		return points.count
+	}
 
-    func parseInput(rawString: String) {
-        let directions: [Direction] = rawString.allLines().first!.map {
-            switch $0 {
-            case ">": return .east
-            case "<": return .west
-            case "v": return .south
-            case "^": return .north
-            default: fatalError()
-            }
-        }
+	func parseInput(rawString: String) {
+		let directions: [Direction] = rawString.allLines().first!.map {
+			switch $0 {
+			case ">": .east
+			case "<": .west
+			case "v": .south
+			case "^": .north
+			default: fatalError()
+			}
+		}
 
-        input = .init(directions: directions)
-    }
+		input = .init(directions: directions)
+	}
 }

@@ -2,67 +2,67 @@ import Foundation
 import Tools
 
 final class Day20Solver: DaySolver {
-    let dayNumber: Int = 20
+	let dayNumber: Int = 20
 
-    let expectedPart1Result = 786240
-    let expectedPart2Result = 831600
+	let expectedPart1Result = 786240
+	let expectedPart2Result = 831600
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let numberOfPresents = 34_000_000
-    }
+	private struct Input {
+		let numberOfPresents = 34_000_000
+	}
 
-    func solvePart1() -> Int {
-        // I first implemented a brute force algo and looked at the sequence and googled the sequence and found this: http://sequencedb.net/s/A000203
-        //
-        // Then I looked for an efficient way to calculate the div sum
+	func solvePart1() -> Int {
+		// I first implemented a brute force algo and looked at the sequence and googled the sequence and found this: http://sequencedb.net/s/A000203
+		//
+		// Then I looked for an efficient way to calculate the div sum
 
-        var house = 1
-        while true {
-            let presents = divisorSigma(n: house) * 10
+		var house = 1
+		while true {
+			let presents = divisorSigma(n: house) * 10
 
-            if presents >= input.numberOfPresents {
-                return house
-            }
+			if presents >= input.numberOfPresents {
+				return house
+			}
 
-            house += 1
-        }
+			house += 1
+		}
 
-        fatalError()
-    }
+		fatalError()
+	}
 
-    func solvePart2() -> Int {
-        var house = 1
-        while true {
-            var presents = 0
+	func solvePart2() -> Int {
+		var house = 1
+		while true {
+			var presents = 0
 
-            // adjusted divisor sigma function
-            for i in 1 ... max(1, Int(Double(house).squareRoot())) where house % i == 0 {
-                if i == house / i {
-                    if house / i <= 50 {
-                        presents += i
-                    }
-                } else {
-                    if i <= 50 {
-                        presents += i + (house / i)
-                    }
-                }
-            }
+			// adjusted divisor sigma function
+			for i in 1 ... max(1, Int(Double(house).squareRoot())) where house % i == 0 {
+				if i == house / i {
+					if house / i <= 50 {
+						presents += i
+					}
+				} else {
+					if i <= 50 {
+						presents += i + (house / i)
+					}
+				}
+			}
 
-            presents *= 11
+			presents *= 11
 
-            if presents >= input.numberOfPresents {
-                return house
-            }
+			if presents >= input.numberOfPresents {
+				return house
+			}
 
-            house += 1
-        }
+			house += 1
+		}
 
-        fatalError()
-    }
+		fatalError()
+	}
 
-    func parseInput(rawString: String) {
-        input = .init()
-    }
+	func parseInput(rawString: String) {
+		input = .init()
+	}
 }

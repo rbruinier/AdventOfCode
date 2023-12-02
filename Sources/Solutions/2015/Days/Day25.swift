@@ -2,54 +2,53 @@ import Foundation
 import Tools
 
 final class Day25Solver: DaySolver {
-    let dayNumber: Int = 25
+	let dayNumber: Int = 25
 
-    let expectedPart1Result = 19980801
-    let expectedPart2Result = "Merry Christmas 🎄"
+	let expectedPart1Result = 19980801
+	let expectedPart2Result = "Merry Christmas 🎄"
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-    }
+	private struct Input {}
 
-    func solvePart1() -> Int {
-        func startNumberForColumn(_ column: Int) -> Int { // triangular number sequence
-            return (column * (column + 1)) / 2
-        }
+	func solvePart1() -> Int {
+		func startNumberForColumn(_ column: Int) -> Int { // triangular number sequence
+			(column * (column + 1)) / 2
+		}
 
-        func numberForColumn(_ column: Int, row: Int) -> Int {
-            var current = startNumberForColumn(column)
+		func numberForColumn(_ column: Int, row: Int) -> Int {
+			var current = startNumberForColumn(column)
 
-            var increment = column
+			var increment = column
 
-            for _ in 1 ..< row {
-                current += increment
-                increment += 1
-            }
+			for _ in 1 ..< row {
+				current += increment
+				increment += 1
+			}
 
-            return current
-        }
+			return current
+		}
 
-        func valueForColumn(_ column: Int, row: Int) -> Int { // brute force actual result
-            let count = numberForColumn(column, row: row)
+		func valueForColumn(_ column: Int, row: Int) -> Int { // brute force actual result
+			let count = numberForColumn(column, row: row)
 
-            var currentValue = 20151125
+			var currentValue = 20151125
 
-            for _ in 1 ..< count {
-                currentValue = (currentValue * 252533) % 33554393
-            }
+			for _ in 1 ..< count {
+				currentValue = (currentValue * 252533) % 33554393
+			}
 
-            return currentValue
-        }
+			return currentValue
+		}
 
-        return valueForColumn(3029, row: 2947)
-    }
+		return valueForColumn(3029, row: 2947)
+	}
 
-    func solvePart2() -> String {
-        "Merry Christmas 🎄"
-    }
+	func solvePart2() -> String {
+		"Merry Christmas 🎄"
+	}
 
-    func parseInput(rawString: String) {
-        input = .init()
-    }
+	func parseInput(rawString: String) {
+		input = .init()
+	}
 }

@@ -23,10 +23,10 @@ visualizer.drawLine(from: .init(x: 190, y: 240), to: .init(x: 180, y: 300), colo
 visualizer.drawLine(from: .init(x: 180, y: 300), to: .init(x: 50, y: 200), color: .white)
 
 for radius in stride(from: 2, through: 10, by: 2) {
-    visualizer.drawCircle(at: .init(x: 50, y: 200), radius: radius, color: .deepPink)
-    visualizer.drawCircle(at: .init(x: 230, y: 210), radius: radius * 2, color: .deepPink)
-    visualizer.drawCircle(at: .init(x: 190, y: 240), radius: radius * 3, color: .deepPink)
-    visualizer.drawCircle(at: .init(x: 180, y: 300), radius: radius * 4, color: .deepPink)
+	visualizer.drawCircle(at: .init(x: 50, y: 200), radius: radius, color: .deepPink)
+	visualizer.drawCircle(at: .init(x: 230, y: 210), radius: radius * 2, color: .deepPink)
+	visualizer.drawCircle(at: .init(x: 190, y: 240), radius: radius * 3, color: .deepPink)
+	visualizer.drawCircle(at: .init(x: 180, y: 300), radius: radius * 4, color: .deepPink)
 }
 
 visualizer.fillCircle(at: .init(x: 130, y: 230), radius: 17, color: .red)
@@ -40,16 +40,18 @@ visualizer.drawAALine(from: .init(x: 370, y: 290), to: .init(x: 300, y: 200), co
 
 let encoder = MicroPNG()
 
-let pngData = try! encoder.encodeRGBUncompressed(data: visualizer.rawPixelData,
-                                                 width: UInt32(visualizer.dimensions.width),
-                                                 height: UInt32(visualizer.dimensions.height))
+let pngData = try! encoder.encodeRGBUncompressed(
+	data: visualizer.rawPixelData,
+	width: UInt32(visualizer.dimensions.width),
+	height: UInt32(visualizer.dimensions.height)
+)
 
 let exportPath = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop/AdventOfCode/Test")
 
 try! FileManager.default.createDirectory(at: exportPath, withIntermediateDirectories: true)
 
 pngData.withUnsafeBytes { pointer in
-    let data = Data(bytes: pointer.baseAddress!, count: pointer.count)
+	let data = Data(bytes: pointer.baseAddress!, count: pointer.count)
 
-    try! data.write(to: URL(fileURLWithPath: exportPath.appendingPathComponent("visualizer01.png").relativePath))
+	try! data.write(to: URL(fileURLWithPath: exportPath.appendingPathComponent("visualizer01.png").relativePath))
 }

@@ -2,45 +2,45 @@ import Foundation
 import Tools
 
 final class Day11Solver: DaySolver {
-    let dayNumber: Int = 11
+	let dayNumber: Int = 11
 
-    let expectedPart1Result = 682
-    let expectedPart2Result = 1406
+	let expectedPart1Result = 682
+	let expectedPart2Result = 1406
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let steps: [HexDirection]
-    }
+	private struct Input {
+		let steps: [HexDirection]
+	}
 
-    func solvePart1() -> Int {
-        var point = HexPoint.zero
+	func solvePart1() -> Int {
+		var point = HexPoint.zero
 
-        for step in input.steps {
-            point = point.moved(to: step)
-        }
+		for step in input.steps {
+			point = point.moved(to: step)
+		}
 
-        return point.manhattanDistance(from: .zero)
-    }
+		return point.manhattanDistance(from: .zero)
+	}
 
-    func solvePart2() -> Int {
-        var point = HexPoint.zero
-        var maxDistance = 0
+	func solvePart2() -> Int {
+		var point = HexPoint.zero
+		var maxDistance = 0
 
-        for step in input.steps {
-            point = point.moved(to: step)
+		for step in input.steps {
+			point = point.moved(to: step)
 
-            maxDistance = max(maxDistance, point.manhattanDistance(from: .zero))
-        }
+			maxDistance = max(maxDistance, point.manhattanDistance(from: .zero))
+		}
 
-        return maxDistance
-    }
+		return maxDistance
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(steps: rawString.allLines().first!.components(separatedBy: ",").compactMap { raw in
-            HexDirection(raw)
-        })
-    }
+	func parseInput(rawString: String) {
+		input = .init(steps: rawString.allLines().first!.components(separatedBy: ",").compactMap { raw in
+			HexDirection(raw)
+		})
+	}
 }
 
 // extension Day11Solver {

@@ -2,158 +2,157 @@ import Foundation
 import Tools
 
 final class Day14Solver: DaySolver {
-    let dayNumber: Int = 14
+	let dayNumber: Int = 14
 
-    let expectedPart1Result = 913
-    let expectedPart2Result = 30762
+	let expectedPart1Result = 913
+	let expectedPart2Result = 30762
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let paths: [Path]
-    }
+	private struct Input {
+		let paths: [Path]
+	}
 
-    private struct Path {
-        let points: [Point2D]
-    }
+	private struct Path {
+		let points: [Point2D]
+	}
 
-    init() {
-    }
+	init() {}
 
-    private func blockedPoints(with paths: [Path]) -> Set<Point2D> {
-        var blockedPoints: Set<Point2D> = []
+	private func blockedPoints(with paths: [Path]) -> Set<Point2D> {
+		var blockedPoints: Set<Point2D> = []
 
-        for path in input.paths {
-            for index in 0 ..< path.points.count - 1 {
-                var currentPoint = path.points[index]
-                let nextPoint = path.points[index + 1]
+		for path in input.paths {
+			for index in 0 ..< path.points.count - 1 {
+				var currentPoint = path.points[index]
+				let nextPoint = path.points[index + 1]
 
-                blockedPoints.insert(currentPoint)
+				blockedPoints.insert(currentPoint)
 
-                while currentPoint != nextPoint {
-                    currentPoint.x += sign(nextPoint.x - currentPoint.x)
-                    currentPoint.y += sign(nextPoint.y - currentPoint.y)
+				while currentPoint != nextPoint {
+					currentPoint.x += sign(nextPoint.x - currentPoint.x)
+					currentPoint.y += sign(nextPoint.y - currentPoint.y)
 
-                    blockedPoints.insert(currentPoint)
-                }
-            }
-        }
+					blockedPoints.insert(currentPoint)
+				}
+			}
+		}
 
-        return blockedPoints
-    }
+		return blockedPoints
+	}
 
-    func solvePart1() -> Int {
-        let sandStartPoint = Point2D(x: 500, y: 0)
+	func solvePart1() -> Int {
+		let sandStartPoint = Point2D(x: 500, y: 0)
 
-        var blockedPoints = blockedPoints(with: input.paths)
+		var blockedPoints = blockedPoints(with: input.paths)
 
-        let bottomY = blockedPoints.map(\.y).max()!
+		let bottomY = blockedPoints.map(\.y).max()!
 
-        var grainsOfSand = 0
-        sandLoop: while true {
-            var currentPoint = sandStartPoint
+		var grainsOfSand = 0
+		sandLoop: while true {
+			var currentPoint = sandStartPoint
 
-            moveLoop: while true {
-                let down = currentPoint.moved(to: .south)
-                let downLeft = down.moved(to: .west)
-                let downRight = down.moved(to: .east)
+			moveLoop: while true {
+				let down = currentPoint.moved(to: .south)
+				let downLeft = down.moved(to: .west)
+				let downRight = down.moved(to: .east)
 
-                if currentPoint.y > bottomY {
-                    break sandLoop
-                }
+				if currentPoint.y > bottomY {
+					break sandLoop
+				}
 
-                if blockedPoints.contains(down) == false {
-                    currentPoint = down
+				if blockedPoints.contains(down) == false {
+					currentPoint = down
 
-                    continue moveLoop
-                }
+					continue moveLoop
+				}
 
-                if blockedPoints.contains(downLeft) == false {
-                    currentPoint = downLeft
+				if blockedPoints.contains(downLeft) == false {
+					currentPoint = downLeft
 
-                    continue moveLoop
-                }
+					continue moveLoop
+				}
 
-                if blockedPoints.contains(downRight) == false {
-                    currentPoint = downRight
+				if blockedPoints.contains(downRight) == false {
+					currentPoint = downRight
 
-                    continue moveLoop
-                }
+					continue moveLoop
+				}
 
-                blockedPoints.insert(currentPoint)
+				blockedPoints.insert(currentPoint)
 
-                grainsOfSand += 1
+				grainsOfSand += 1
 
-                break moveLoop
-            }
-        }
+				break moveLoop
+			}
+		}
 
-        return grainsOfSand
-    }
+		return grainsOfSand
+	}
 
-    func solvePart2() -> Int {
-        let sandStartPoint = Point2D(x: 500, y: 0)
+	func solvePart2() -> Int {
+		let sandStartPoint = Point2D(x: 500, y: 0)
 
-        var blockedPoints = blockedPoints(with: input.paths)
+		var blockedPoints = blockedPoints(with: input.paths)
 
-        let bottomY = blockedPoints.map(\.y).max()!
-        let virtualBottomY = bottomY + 2
+		let bottomY = blockedPoints.map(\.y).max()!
+		let virtualBottomY = bottomY + 2
 
-        var grainsOfSand = 0
-        sandLoop: while true {
-            var currentPoint = sandStartPoint
+		var grainsOfSand = 0
+		sandLoop: while true {
+			var currentPoint = sandStartPoint
 
-            moveLoop: while true {
-                let down = currentPoint.moved(to: .south)
-                let downLeft = down.moved(to: .west)
-                let downRight = down.moved(to: .east)
+			moveLoop: while true {
+				let down = currentPoint.moved(to: .south)
+				let downLeft = down.moved(to: .west)
+				let downRight = down.moved(to: .east)
 
-                if down.y == virtualBottomY {
-                    blockedPoints.insert(currentPoint)
+				if down.y == virtualBottomY {
+					blockedPoints.insert(currentPoint)
 
-                    grainsOfSand += 1
+					grainsOfSand += 1
 
-                    break moveLoop
-                }
+					break moveLoop
+				}
 
-                if blockedPoints.contains(down) == false {
-                    currentPoint = down
+				if blockedPoints.contains(down) == false {
+					currentPoint = down
 
-                    continue moveLoop
-                }
+					continue moveLoop
+				}
 
-                if blockedPoints.contains(downLeft) == false, currentPoint.y < virtualBottomY {
-                    currentPoint = downLeft
+				if blockedPoints.contains(downLeft) == false, currentPoint.y < virtualBottomY {
+					currentPoint = downLeft
 
-                    continue moveLoop
-                }
+					continue moveLoop
+				}
 
-                if blockedPoints.contains(downRight) == false {
-                    currentPoint = downRight
+				if blockedPoints.contains(downRight) == false {
+					currentPoint = downRight
 
-                    continue moveLoop
-                }
+					continue moveLoop
+				}
 
-                blockedPoints.insert(currentPoint)
+				blockedPoints.insert(currentPoint)
 
-                grainsOfSand += 1
+				grainsOfSand += 1
 
-                if currentPoint == sandStartPoint {
-                    break sandLoop
-                }
+				if currentPoint == sandStartPoint {
+					break sandLoop
+				}
 
-                break moveLoop
-            }
-        }
+				break moveLoop
+			}
+		}
 
-        return grainsOfSand
-    }
+		return grainsOfSand
+	}
 
-    func parseInput(rawString: String) {
-        input = .init(paths: rawString.allLines().map { line in
-            Path(points: line.components(separatedBy: " -> ").map { components in
-                Point2D(commaSeparatedString: components)
-            })
-        })
-    }
+	func parseInput(rawString: String) {
+		input = .init(paths: rawString.allLines().map { line in
+			Path(points: line.components(separatedBy: " -> ").map { components in
+				Point2D(commaSeparatedString: components)
+			})
+		})
+	}
 }

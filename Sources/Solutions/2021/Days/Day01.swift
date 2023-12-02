@@ -2,55 +2,55 @@ import Foundation
 import Tools
 
 final class Day01Solver: DaySolver {
-    let dayNumber: Int = 1
+	let dayNumber: Int = 1
 
-    let expectedPart1Result = 1167
-    let expectedPart2Result = 1130
+	let expectedPart1Result = 1167
+	let expectedPart2Result = 1130
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let depths: [Int]
-    }
+	private struct Input {
+		let depths: [Int]
+	}
 
-    func solvePart1() -> Int {
-        let result: (counter: Int, previousDepth: Int?) = input.depths.reduce(into: (counter: 0, previousDepth: nil)) { result, depth in
-            if let previousDepth = result.previousDepth {
-                result.counter += depth > previousDepth ? 1 : 0
-            }
+	func solvePart1() -> Int {
+		let result: (counter: Int, previousDepth: Int?) = input.depths.reduce(into: (counter: 0, previousDepth: nil)) { result, depth in
+			if let previousDepth = result.previousDepth {
+				result.counter += depth > previousDepth ? 1 : 0
+			}
 
-            result.previousDepth = depth
-        }
+			result.previousDepth = depth
+		}
 
-        return result.counter
-    }
+		return result.counter
+	}
 
-    func solvePart2() -> Int {
-        var result: (counter: Int, slidingWindow: [Int]) = (0, [])
+	func solvePart2() -> Int {
+		var result: (counter: Int, slidingWindow: [Int]) = (0, [])
 
-        result = input.depths.reduce(into: result) { result, depth in
-            guard result.slidingWindow.count >= 3 else {
-                result.slidingWindow.append(depth)
+		result = input.depths.reduce(into: result) { result, depth in
+			guard result.slidingWindow.count >= 3 else {
+				result.slidingWindow.append(depth)
 
-                return
-            }
+				return
+			}
 
-            let sumA = result.slidingWindow.reduce(0, +)
+			let sumA = result.slidingWindow.reduce(0, +)
 
-            result.slidingWindow.removeFirst()
-            result.slidingWindow.append(depth)
+			result.slidingWindow.removeFirst()
+			result.slidingWindow.append(depth)
 
-            let sumB = result.slidingWindow.reduce(0, +)
+			let sumB = result.slidingWindow.reduce(0, +)
 
-            result.counter += sumB > sumA ? 1 : 0
-        }
+			result.counter += sumB > sumA ? 1 : 0
+		}
 
-        return result.counter
-    }
+		return result.counter
+	}
 
-    func parseInput(rawString: String) {
-        let depths = rawString.components(separatedBy: .newlines).compactMap { Int($0) }
+	func parseInput(rawString: String) {
+		let depths = rawString.components(separatedBy: .newlines).compactMap { Int($0) }
 
-        input = .init(depths: depths)
-    }
+		input = .init(depths: depths)
+	}
 }

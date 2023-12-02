@@ -2,50 +2,50 @@ import Foundation
 import Tools
 
 final class Day02Solver: DaySolver {
-    let dayNumber: Int = 2
+	let dayNumber: Int = 2
 
-    let expectedPart1Result = 48357
-    let expectedPart2Result = 351
+	let expectedPart1Result = 48357
+	let expectedPart2Result = 351
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-        let rows: [[Int]]
-    }
+	private struct Input {
+		let rows: [[Int]]
+	}
 
-    func solvePart1() -> Int {
-        var sum = 0
+	func solvePart1() -> Int {
+		var sum = 0
 
-        for row in input.rows {
-            sum += row.max()! - row.min()!
-        }
+		for row in input.rows {
+			sum += row.max()! - row.min()!
+		}
 
-        return sum
-    }
+		return sum
+	}
 
-    func solvePart2() -> Int {
-        var sum = 0
+	func solvePart2() -> Int {
+		var sum = 0
 
-        for row in input.rows {
-            loop: for i in 0 ..< row.count {
-                for j in 0 ..< row.count where i != j && row[i] >= (row[j] * 2) {
-                    if row[i] % row[j] == 0 {
-                        sum += row[i] / row[j]
+		for row in input.rows {
+			loop: for i in 0 ..< row.count {
+				for j in 0 ..< row.count where i != j && row[i] >= (row[j] * 2) {
+					if row[i] % row[j] == 0 {
+						sum += row[i] / row[j]
 
-                        break loop
-                    }
-                }
-            }
-        }
+						break loop
+					}
+				}
+			}
+		}
 
-        return sum
-    }
+		return sum
+	}
 
-    func parseInput(rawString: String) {
-        let rows: [[Int]] = rawString.allLines().map {
-            $0.components(separatedBy: "\t").map { Int($0)! }
-        }
+	func parseInput(rawString: String) {
+		let rows: [[Int]] = rawString.allLines().map {
+			$0.components(separatedBy: "\t").map { Int($0)! }
+		}
 
-        input = .init(rows: rows)
-    }
+		input = .init(rows: rows)
+	}
 }
