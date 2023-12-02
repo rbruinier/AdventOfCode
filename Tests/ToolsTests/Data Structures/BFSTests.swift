@@ -110,4 +110,48 @@ final class BFSTests: XCTestCase {
 		XCTAssertEqual(result.pathIndices, [0, 1, 2, 3])
 		XCTAssertEqual(result.pathWeight, 30)
 	}
+
+	func testShortestPathInGrid() {
+		struct TestGrid: BFSGrid {
+			// X/Y: 01234
+			//
+			//    0 10011
+			//    1 10001
+			//    2 11111
+
+			let points: Set<Point2D> = [
+				.init(x: 0, y: 0),
+				.init(x: 3, y: 0),
+				.init(x: 4, y: 0),
+				.init(x: 0, y: 1),
+				.init(x: 4, y: 1),
+				.init(x: 0, y: 2),
+				.init(x: 1, y: 2),
+				.init(x: 2, y: 2),
+				.init(x: 3, y: 2),
+				.init(x: 4, y: 2),
+			]
+
+			func reachableNeighborsAt(position: Point2D) -> [Point2D] {
+				position.neighbors().filter { points.contains($0) }
+			}
+		}
+
+		let result = BFS.shortestPathInGrid(TestGrid(), from: .init(x: 0, y: 0), to: .init(x: 3, y: 0))!
+
+		XCTAssertEqual(result.path, [
+			.init(x: 0, y: 0),
+			.init(x: 0, y: 1),
+			.init(x: 0, y: 2),
+			.init(x: 1, y: 2),
+			.init(x: 2, y: 2),
+			.init(x: 3, y: 2),
+			.init(x: 4, y: 2),
+			.init(x: 4, y: 1),
+			.init(x: 4, y: 0),
+			.init(x: 3, y: 0),
+		])
+
+		XCTAssertEqual(result.steps, 9)
+	}
 }

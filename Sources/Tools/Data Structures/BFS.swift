@@ -212,14 +212,14 @@ public extension BFS {
 public extension BFS {
 	struct ShortestPathInWeightedGraphResult {
 		/// The full path from point A to point B.
-		public let pathIndices: [UnweightedGraph.ElementIndex]
+		public let pathIndices: [WeightedGraph.ElementIndex]
 
 		public let weight: Int
 	}
 
 	private struct ShortestPathInWeightedGraphQueueNode {
 		let index: Int
-		let visitedIndices: [UnweightedGraph.ElementIndex]
+		let visitedIndices: [WeightedGraph.ElementIndex]
 		let weight: Int
 
 		var steps: Int {
