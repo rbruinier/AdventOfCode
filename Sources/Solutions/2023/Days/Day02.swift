@@ -4,8 +4,8 @@ import Tools
 final class Day02Solver: DaySolver {
     let dayNumber: Int = 2
 
-    let expectedPart1Result = 0
-    let expectedPart2Result = 0
+    let expectedPart1Result = 2439
+    let expectedPart2Result = 63711
 
     private var input: Input!
 
