@@ -37,7 +37,7 @@ final class Day02Solver: DaySolver {
 
 		return input.games
 			.filter { $0.isValid(withMaxRed: maxRed, maxGreen: maxGreen, maxBlue: maxBlue) }
-			.reduce(0) { result, game in result + game.id }
+			.reduce(0) { $0 + $1.id }
 	}
 
 	func solvePart2() -> Int {
