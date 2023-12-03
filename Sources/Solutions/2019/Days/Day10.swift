@@ -44,7 +44,7 @@ final class Day10Solver: DaySolver {
 						continue
 					}
 
-					guard sign(offset.x) == sign(subOffset.x), sign(offset.y) == sign(subOffset.y) else {
+					guard offset.x.sign == subOffset.x.sign, offset.y.sign == subOffset.y.sign else {
 						continue
 					}
 

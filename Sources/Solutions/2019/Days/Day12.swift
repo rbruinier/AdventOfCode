@@ -40,9 +40,9 @@ final class Day12Solver: DaySolver {
 			for innerMoonIndex in 0 ..< moons.count where outerMoonIndex != innerMoonIndex {
 				let delta = moons[innerMoonIndex].position - moons[outerMoonIndex].position
 
-				velocity.x += sign(delta.x)
-				velocity.y += sign(delta.y)
-				velocity.z += sign(delta.z)
+				velocity.x += delta.x.sign
+				velocity.y += delta.y.sign
+				velocity.z += delta.z.sign
 			}
 
 			position += velocity
@@ -114,7 +114,7 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		return leastCommonMultiplier(for: [stateXCounter, stateYCounter, stateZCounter])
+		return Math.leastCommonMultiplier(for: [stateXCounter, stateYCounter, stateZCounter])
 	}
 
 	func parseInput(rawString: String) {

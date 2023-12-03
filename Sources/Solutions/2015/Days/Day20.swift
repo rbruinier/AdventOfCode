@@ -20,7 +20,7 @@ final class Day20Solver: DaySolver {
 
 		var house = 1
 		while true {
-			let presents = divisorSigma(n: house) * 10
+			let presents = Math.divisorSigma(n: house) * 10
 
 			if presents >= input.numberOfPresents {
 				return house

@@ -30,8 +30,8 @@ final class Day14Solver: DaySolver {
 				blockedPoints.insert(currentPoint)
 
 				while currentPoint != nextPoint {
-					currentPoint.x += sign(nextPoint.x - currentPoint.x)
-					currentPoint.y += sign(nextPoint.y - currentPoint.y)
+					currentPoint.x += (nextPoint.x - currentPoint.x).sign
+					currentPoint.y += (nextPoint.y - currentPoint.y).sign
 
 					blockedPoints.insert(currentPoint)
 				}

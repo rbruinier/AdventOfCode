@@ -110,7 +110,7 @@ final class Day23Solver: DaySolver {
 		c = c + 17_000 // 07 sub c -17000
 
 		for number in stride(from: b, through: c, by: 17) {
-			if isPrime(number) == false {
+			if number.isPrime == false {
 				h += 1
 			}
 		}

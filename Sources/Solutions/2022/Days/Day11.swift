@@ -82,7 +82,7 @@ final class Day11Solver: DaySolver {
 		//
 		// we basically find the boundary of the number space where the logic would be identical (but with higher numbers)
 		// we can modulo all levels with this so we maintain the worry levels in this space
-		let commonDivisor = leastCommonMultiplier(for: monkeys.map(\.test.divisor))
+		let commonDivisor = Math.leastCommonMultiplier(for: monkeys.map(\.test.divisor))
 
 		let rounds = 10_000
 		for _ in 0 ..< rounds {
