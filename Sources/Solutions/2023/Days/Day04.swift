@@ -28,7 +28,7 @@ final class Day04Solver: DaySolver {
 		}
 
 		static func calculateNumberOfMatchingNumbersAndScore(withWinningNumbers winningNumbers: Set<Int>, myNumbers: Set<Int>) -> (Int, Int) {
-			let numberOfMatchingNumbers = winningNumbers.filter { myNumbers.contains($0) }.count
+			let numberOfMatchingNumbers = winningNumbers.intersection(myNumbers).count
 
 			// negative number shifting appears to work 😅
 			let totalScore = 2 << (numberOfMatchingNumbers - 2)
