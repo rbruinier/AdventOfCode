@@ -26,25 +26,12 @@ final class Day05Solver: DaySolver {
 
 	private struct Input {
 		let seeds: [Int]
-		let seedToSoilRanges: [Mapping]
-		let soilToFertilizerRanges: [Mapping]
-		let fertilizerToWaterRanges: [Mapping]
-		let waterToLightRanges: [Mapping]
-		let lightToTemperatureRanges: [Mapping]
-		let temperatureToHumidityRanges: [Mapping]
-		let humidityToLocationRanges: [Mapping]
+		var allRanges: [[Mapping]]
+	}
 
-		var allRanges: [[Mapping]] {
-			[
-				seedToSoilRanges,
-				soilToFertilizerRanges,
-				fertilizerToWaterRanges,
-				waterToLightRanges,
-				lightToTemperatureRanges,
-				temperatureToHumidityRanges,
-				humidityToLocationRanges,
-			]
-		}
+	private struct Mapping {
+		let destinationRange: ClosedRange<Int>
+		let sourceRange: ClosedRange<Int>
 	}
 
 	private func mapValue(_ value: Int, withRanges ranges: [Mapping]) -> Int {
@@ -142,35 +129,22 @@ final class Day05Solver: DaySolver {
 		return minValue
 	}
 
-	private struct Mapping {
-		let destinationRange: ClosedRange<Int>
-		let sourceRange: ClosedRange<Int>
-	}
-
 	func parseInput(rawString: String) {
 		var groupIndex = 0
 
 		var seeds: [Int] = []
-		var seedToSoilRanges: [Mapping] = []
-		var soilToFertilizerRanges: [Mapping] = []
-		var fertilizerToWaterRanges: [Mapping] = []
-		var waterToLightRanges: [Mapping] = []
-		var lightToTemperatureRanges: [Mapping] = []
-		var temperatureToHumidityRanges: [Mapping] = []
-		var humidityToLocationRanges: [Mapping] = []
+		var allRanges: [[Mapping]] = .init(repeating: [], count: 7)
 
 		func readMapping(fromLine line: String) -> Mapping? {
 			let components = line.components(separatedBy: " ")
 
-			guard components.count == 3 else {
-				return nil
-			}
-
-			let destinationStart = Int(components[0])!
-			let sourceStart = Int(components[1])!
-			var length = Int(components[2])!
-
-			if length == 0 {
+			guard 
+				components.count == 3,
+				let destinationStart = Int(components[0]),
+				let sourceStart = Int(components[1]),
+				let length = Int(components[2]),
+				length > 0
+			else {
 				return nil
 			}
 
@@ -191,33 +165,9 @@ final class Day05Solver: DaySolver {
 
 			switch groupIndex {
 			case 0: seeds = line.components(separatedBy: ": ")[1].components(separatedBy: " ").compactMap(Int.init)
-			case 1:
+			case 1 ... 7:
 				if let mapping = readMapping(fromLine: line) {
-					seedToSoilRanges.append(mapping)
-				}
-			case 2:
-				if let mapping = readMapping(fromLine: line) {
-					soilToFertilizerRanges.append(mapping)
-				}
-			case 3:
-				if let mapping = readMapping(fromLine: line) {
-					fertilizerToWaterRanges.append(mapping)
-				}
-			case 4:
-				if let mapping = readMapping(fromLine: line) {
-					waterToLightRanges.append(mapping)
-				}
-			case 5:
-				if let mapping = readMapping(fromLine: line) {
-					lightToTemperatureRanges.append(mapping)
-				}
-			case 6:
-				if let mapping = readMapping(fromLine: line) {
-					temperatureToHumidityRanges.append(mapping)
-				}
-			case 7:
-				if let mapping = readMapping(fromLine: line) {
-					humidityToLocationRanges.append(mapping)
+					allRanges[groupIndex - 1].append(mapping)
 				}
 			default: preconditionFailure()
 			}
@@ -225,13 +175,7 @@ final class Day05Solver: DaySolver {
 
 		input = .init(
 			seeds: seeds,
-			seedToSoilRanges: seedToSoilRanges,
-			soilToFertilizerRanges: soilToFertilizerRanges,
-			fertilizerToWaterRanges: fertilizerToWaterRanges,
-			waterToLightRanges: waterToLightRanges,
-			lightToTemperatureRanges: lightToTemperatureRanges,
-			temperatureToHumidityRanges: temperatureToHumidityRanges,
-			humidityToLocationRanges: humidityToLocationRanges
+			allRanges: allRanges
 		)
 	}
 }
