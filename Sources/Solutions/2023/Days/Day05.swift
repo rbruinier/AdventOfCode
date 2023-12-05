@@ -2,16 +2,6 @@ import Collections
 import Foundation
 import Tools
 
-public extension ClosedRange<Int> {
-	func intersection(_ otherRange: ClosedRange) -> ClosedRange<Int>? {
-		guard overlaps(otherRange) else {
-			return nil
-		}
-
-		return Swift.max(lowerBound, otherRange.lowerBound) ... Swift.min(upperBound, otherRange.upperBound)
-	}
-}
-
 /*
  First solved part 2 brute-force and that took 90 seconds. Nice to have the correct answer but performance is also important
  so instead I built a solver based on finding overlapping ranges, recursively down the layers.
