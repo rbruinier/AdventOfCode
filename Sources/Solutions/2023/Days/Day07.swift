@@ -5,7 +5,7 @@ final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
 	let expectedPart1Result = 253910319
-	let expectedPart2Result = 0
+	let expectedPart2Result = 254083736
 
 	private var input: Input!
 
@@ -13,7 +13,7 @@ final class Day07Solver: DaySolver {
 		let bets: [Bet]
 	}
 
-	private enum Card: Comparable, Equatable, CustomStringConvertible {
+	private enum Card: Comparable, Equatable {
 		case _2
 		case _3
 		case _4
@@ -46,27 +46,9 @@ final class Day07Solver: DaySolver {
 			default: preconditionFailure()
 			}
 		}
-
-		var description: String {
-			switch self {
-			case ._2: "2"
-			case ._3: "3"
-			case ._4: "4"
-			case ._5: "5"
-			case ._6: "6"
-			case ._7: "7"
-			case ._8: "8"
-			case ._9: "9"
-			case .T: "T"
-			case .J: "J"
-			case .Q: "Q"
-			case .K: "K"
-			case .A: "A"
-			}
-		}
 	}
 
-	private enum Hand: Comparable, Equatable {
+	private enum Hand: Comparable, Equatable, Hashable {
 		case highCard
 		case onePair
 		case twoPair
@@ -76,7 +58,7 @@ final class Day07Solver: DaySolver {
 		case fiveOfAKind
 	}
 
-	private struct Bet: Comparable, CustomStringConvertible {
+	private struct Bet: Comparable {
 		let cards: [Card]
 		let bid: Int
 
@@ -122,10 +104,6 @@ final class Day07Solver: DaySolver {
 
 			// assume there are no identical hands as it is not described in the rules
 			preconditionFailure()
-		}
-
-		var description: String {
-			"\(cards) -> \(hand)"
 		}
 
 		static func calculateHand(withCards cards: [Card], jokerEnabled: Bool) -> Hand {
@@ -178,44 +156,28 @@ final class Day07Solver: DaySolver {
 				}
 			}
 
-			if jokerEnabled, jokerCount > 0 {
-				switch bestHand {
-				case .highCard:
-					switch jokerCount {
-					case 1: bestHand = .onePair
-					case 2: bestHand = .threeOfAKind
-					case 3: bestHand = .fourOfAKind
-					case 4: bestHand = .fiveOfAKind
-					case 5: bestHand = .fiveOfAKind
-					default: preconditionFailure()
-					}
-				case .onePair:
-					switch jokerCount {
-					case 1: bestHand = .threeOfAKind
-					case 2: bestHand = .fourOfAKind
-					case 3: bestHand = .fiveOfAKind
-					default: preconditionFailure()
-					}
-				case .twoPair:
-					switch jokerCount {
-					case 1: bestHand = .fullHouse
-					default: preconditionFailure()
-					}
-				case .threeOfAKind:
-					switch jokerCount {
-					case 1: bestHand = .fourOfAKind
-					case 2: bestHand = .fiveOfAKind
-					default: preconditionFailure()
-					}
-				case .fourOfAKind:
-					switch jokerCount {
-					case 1: bestHand = .fiveOfAKind
-					default: preconditionFailure()
-					}
-				case .fullHouse,
-				     .fiveOfAKind:
-					preconditionFailure()
+			if jokerCount > 0 {
+				struct BestHandJokerCombo: Hashable {
+					let hand: Hand
+					let jokerCount: Int
 				}
+
+				let mapping: [BestHandJokerCombo: Hand] = [
+					.init(hand: .highCard, jokerCount: 1): .onePair,
+					.init(hand: .highCard, jokerCount: 2): .threeOfAKind,
+					.init(hand: .highCard, jokerCount: 3): .fourOfAKind,
+					.init(hand: .highCard, jokerCount: 4): .fiveOfAKind,
+					.init(hand: .highCard, jokerCount: 5): .fiveOfAKind,
+					.init(hand: .onePair, jokerCount: 1): .threeOfAKind,
+					.init(hand: .onePair, jokerCount: 2): .fourOfAKind,
+					.init(hand: .onePair, jokerCount: 3): .fiveOfAKind,
+					.init(hand: .twoPair, jokerCount: 1): .fullHouse,
+					.init(hand: .threeOfAKind, jokerCount: 1): .fourOfAKind,
+					.init(hand: .threeOfAKind, jokerCount: 2): .fiveOfAKind,
+					.init(hand: .fourOfAKind, jokerCount: 1): .fiveOfAKind,
+				]
+
+				bestHand = mapping[.init(hand: bestHand, jokerCount: jokerCount)]!
 			}
 
 			return bestHand
