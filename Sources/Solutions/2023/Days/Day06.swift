@@ -45,7 +45,7 @@ final class Day06Solver: DaySolver {
 		let totalDistance = Int(input.races.map(\.distance).map { String($0) }.joined())!
 
 		// (totalTime - Th) * Th > totalDistance
-		// Th^2 - totalTime*Th + totalDistance > 0
+		// Th^2 - totalTime*Th - totalDistance > 0
 
 		let b = -totalTime
 		let c = totalDistance
