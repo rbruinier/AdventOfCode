@@ -113,3 +113,19 @@ public extension ArraySlice where Element == Bool {
 		return newArray
 	}
 }
+
+public extension Array where Element: Comparable {
+	static func < (_ lhs: [Element], _ rhs: [Element]) -> Bool {
+		guard lhs.count == rhs.count else {
+			preconditionFailure()
+		}
+
+		for items in zip(lhs, rhs) {
+			if items.0 != items.1 {
+				return items.0 < items.1
+			}
+		}
+
+		return false
+	}
+}

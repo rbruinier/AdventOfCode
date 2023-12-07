@@ -95,11 +95,7 @@ final class Day07Solver: DaySolver {
 					}
 				}
 			} else {
-				for cardIndex in 0 ... 4 {
-					if lhs.cards[cardIndex] != rhs.cards[cardIndex] {
-						return lhs.cards[cardIndex] < rhs.cards[cardIndex]
-					}
-				}
+				return lhs.cards < rhs.cards
 			}
 
 			// assume there are no identical hands as it is not described in the rules
@@ -107,80 +103,47 @@ final class Day07Solver: DaySolver {
 		}
 
 		static func calculateHand(withCards cards: [Card], jokerEnabled: Bool) -> Hand {
-			let sortedCards = cards.sorted()
-
-			var previousCard: Card?
-			var currentSeriesCard: Card?
-			var bestHand: Hand = .highCard
-			var jokerCount = 0
-
-			for card in sortedCards {
-				let isJoker = jokerEnabled && card == .J
-
-				defer {
-					if !isJoker {
-						previousCard = card
-					}
+			func mapHand(_ hand: Hand, numberOfJokers: Int) -> Hand {
+				if numberOfJokers == 0 {
+					return hand
 				}
 
-				if isJoker {
-					jokerCount += 1
-
-					continue
-				}
-
-				if previousCard == card {
-					if let currentSeriesCard, currentSeriesCard == previousCard {
-						switch bestHand {
-						case .onePair: bestHand = .threeOfAKind
-						case .twoPair: bestHand = .fullHouse
-						case .threeOfAKind: bestHand = .fourOfAKind
-						case .fourOfAKind: bestHand = .fiveOfAKind
-						default: preconditionFailure()
-						}
-					} else {
-						switch bestHand {
-						case .highCard: bestHand = .onePair
-						case .onePair: bestHand = .twoPair
-						case .twoPair: bestHand = .twoPair
-						case .threeOfAKind: bestHand = .fullHouse
-						default: preconditionFailure()
-						}
-					}
-
-					currentSeriesCard = card
-				} else {
-					currentSeriesCard = nil
-
-					continue
+				switch hand {
+				case .fiveOfAKind: return .fiveOfAKind
+				case .fourOfAKind: return .fiveOfAKind
+				case .fullHouse: return .fiveOfAKind
+				case .threeOfAKind: return .fourOfAKind
+				case .twoPair: return numberOfJokers == 1 ? .fullHouse : .fourOfAKind
+				case .onePair: return .threeOfAKind
+				case .highCard: return .onePair
 				}
 			}
 
-			if jokerCount > 0 {
-				struct BestHandJokerCombo: Hashable {
-					let hand: Hand
-					let jokerCount: Int
+			let occurrences = cards.occurrences()
+			let jokerCount = jokerEnabled ? occurrences[.J, default: 0] : 0
+
+			switch occurrences.count {
+			case 5: return mapHand(.highCard, numberOfJokers: jokerCount)
+			case 4: return mapHand(.onePair, numberOfJokers: jokerCount)
+			case 3:
+				switch occurrences.values.max() {
+				case 3: return mapHand(.threeOfAKind, numberOfJokers: jokerCount)
+				case 2: return mapHand(.twoPair, numberOfJokers: jokerCount)
+				case 1: return mapHand(.highCard, numberOfJokers: jokerCount)
+				default: preconditionFailure()
 				}
-
-				let mapping: [BestHandJokerCombo: Hand] = [
-					.init(hand: .highCard, jokerCount: 1): .onePair,
-					.init(hand: .highCard, jokerCount: 2): .threeOfAKind,
-					.init(hand: .highCard, jokerCount: 3): .fourOfAKind,
-					.init(hand: .highCard, jokerCount: 4): .fiveOfAKind,
-					.init(hand: .highCard, jokerCount: 5): .fiveOfAKind,
-					.init(hand: .onePair, jokerCount: 1): .threeOfAKind,
-					.init(hand: .onePair, jokerCount: 2): .fourOfAKind,
-					.init(hand: .onePair, jokerCount: 3): .fiveOfAKind,
-					.init(hand: .twoPair, jokerCount: 1): .fullHouse,
-					.init(hand: .threeOfAKind, jokerCount: 1): .fourOfAKind,
-					.init(hand: .threeOfAKind, jokerCount: 2): .fiveOfAKind,
-					.init(hand: .fourOfAKind, jokerCount: 1): .fiveOfAKind,
-				]
-
-				bestHand = mapping[.init(hand: bestHand, jokerCount: jokerCount)]!
+			case 2:
+				switch occurrences.values.max() {
+				case 4: return mapHand(.fourOfAKind, numberOfJokers: jokerCount)
+				case 3: return mapHand(.fullHouse, numberOfJokers: jokerCount)
+				case 2: return mapHand(.onePair, numberOfJokers: jokerCount)
+				case 1: return mapHand(.highCard, numberOfJokers: jokerCount)
+				default: preconditionFailure()
+				}
+			case 1: return mapHand(.fiveOfAKind, numberOfJokers: jokerCount)
+			case 0: return mapHand(.highCard, numberOfJokers: jokerCount)
+			default: preconditionFailure()
 			}
-
-			return bestHand
 		}
 	}
 
