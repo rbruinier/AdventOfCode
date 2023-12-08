@@ -20,12 +20,12 @@ final class MathTests: XCTestCase {
 	}
 
 	func testLeastCommonMultiplier() {
-		XCTAssertEqual(Math.leastCommonMultiplier(for: 4, and: 6), 12)
-		XCTAssertEqual(Math.leastCommonMultiplier(for: 5, and: 8), 40)
-		XCTAssertEqual(Math.leastCommonMultiplier(for: 9, and: 51), 153)
+		XCTAssertEqual(Math.leastCommonMultiple(for: 4, and: 6), 12)
+		XCTAssertEqual(Math.leastCommonMultiple(for: 5, and: 8), 40)
+		XCTAssertEqual(Math.leastCommonMultiple(for: 9, and: 51), 153)
 
-		XCTAssertEqual(Math.leastCommonMultiplier(for: [4, 6]), 12)
-		XCTAssertEqual(Math.leastCommonMultiplier(for: [4, 6, 5, 8]), 120)
+		XCTAssertEqual(Math.leastCommonMultiple(for: [4, 6]), 12)
+		XCTAssertEqual(Math.leastCommonMultiple(for: [4, 6, 5, 8]), 120)
 	}
 
 	func testIsPrime() {

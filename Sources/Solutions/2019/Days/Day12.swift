@@ -114,7 +114,7 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		return Math.leastCommonMultiplier(for: [stateXCounter, stateYCounter, stateZCounter])
+		return Math.leastCommonMultiple(for: [stateXCounter, stateYCounter, stateZCounter])
 	}
 
 	func parseInput(rawString: String) {

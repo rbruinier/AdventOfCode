@@ -5,7 +5,7 @@ import Tools
  Pretty clear when reading part 2 that it couldn't be brute forced but still tried anyway ;) After checking with the debugger if there was regularity with
  with intervals of arriving at an end node it was clear that each node took exactly the same number of steps to reach an end node in each cycle.
 
- With a previously home made LCM (least common multiplier) solver you can find the number of steps when all cycles align.
+ With a previously home made LCM (least common multiple) solver you can find the number of steps when all cycles align.
  */
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
@@ -110,7 +110,7 @@ final class Day08Solver: DaySolver {
 			}
 		}
 
-		return Math.leastCommonMultiplier(for: Array(intervalPerNodeIndex.values))
+		return Math.leastCommonMultiple(for: Array(intervalPerNodeIndex.values))
 	}
 
 	func parseInput(rawString: String) {

@@ -81,7 +81,7 @@ public enum Math {
 	///		- b: The second integer.
 	///
 	/// - Returns: The least common multiple of the two input integers. If either input is zero, the LCM is considered zero. If both inputs are zero, zero is returned.
-	public static func leastCommonMultiplier(for a: Int, and b: Int) -> Int {
+	public static func leastCommonMultiple(for a: Int, and b: Int) -> Int {
 		a / greatestCommonFactor(a, b) * b
 	}
 
@@ -95,7 +95,7 @@ public enum Math {
 	/// 	- values: An array of integers for which the LCM needs to be calculated.
 	///
 	/// - Returns: The least common multiple of the input integers. If the array has fewer than two unique values, the first unique value is returned. If the array is empty, 0 is returned.
-	public static func leastCommonMultiplier(for values: [Int]) -> Int {
+	public static func leastCommonMultiple(for values: [Int]) -> Int {
 		let uniqueValues = Array(Set(values))
 
 		guard uniqueValues.count >= 2 else {
@@ -103,11 +103,11 @@ public enum Math {
 		}
 
 		// Initialize the current LCM with the LCM of the first two unique values
-		var currentLcm = leastCommonMultiplier(for: uniqueValues[0], and: uniqueValues[1])
+		var currentLcm = leastCommonMultiple(for: uniqueValues[0], and: uniqueValues[1])
 
 		// Iterate through the remaining unique values in the array and update the current LCM
 		for value in uniqueValues[2 ..< uniqueValues.count] {
-			currentLcm = leastCommonMultiplier(for: currentLcm, and: value)
+			currentLcm = leastCommonMultiple(for: currentLcm, and: value)
 		}
 
 		return currentLcm
