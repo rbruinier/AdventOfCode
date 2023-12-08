@@ -92,10 +92,8 @@ final class Day08Solver: DaySolver {
 
 			nodes = newNodes
 
-			for (index, node) in nodes.enumerated() where !intervalPerNodeIndex.keys.contains(index) {
-				if node.hasSuffix("Z") {
-					intervalPerNodeIndex[index] = numberOfSteps + 1
-				}
+			for (index, node) in nodes.enumerated() where !intervalPerNodeIndex.keys.contains(index) && node.hasSuffix("Z") {
+				intervalPerNodeIndex[index] = numberOfSteps + 1
 			}
 
 			if intervalPerNodeIndex.count == nodes.count {
