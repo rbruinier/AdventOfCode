@@ -72,7 +72,6 @@ final class Day08Solver: DaySolver {
 		var numberOfSteps = 0
 
 		var intervalPerNodeIndex: [Int: Int] = [:]
-		var detectedNodeIndices: Set<Int> = []
 
 		while true {
 			defer {
@@ -93,19 +92,13 @@ final class Day08Solver: DaySolver {
 
 			nodes = newNodes
 
-			for (index, node) in nodes.enumerated() where !detectedNodeIndices.contains(index) {
+			for (index, node) in nodes.enumerated() where !intervalPerNodeIndex.keys.contains(index) {
 				if node.hasSuffix("Z") {
-					if let existingCountValue = intervalPerNodeIndex[index] {
-						intervalPerNodeIndex[index] = numberOfSteps - existingCountValue
-
-						detectedNodeIndices.insert(index)
-					} else {
-						intervalPerNodeIndex[index] = numberOfSteps
-					}
+					intervalPerNodeIndex[index] = numberOfSteps + 1
 				}
 			}
 
-			if detectedNodeIndices.count == nodes.count {
+			if intervalPerNodeIndex.count == nodes.count {
 				break
 			}
 		}
