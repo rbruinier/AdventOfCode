@@ -15,28 +15,17 @@ final class Day09Solver: DaySolver {
 	}
 
 	private func reduceSequence(_ sequence: [Int]) -> [Int] {
-		var newSequence: [Int] = []
-
-		for index in 0 ..< sequence.count - 1 {
-			newSequence.append(sequence[index + 1] - sequence[index])
-		}
-
-		return newSequence
+		sequence.dropFirst().enumerated().map { $0.element - sequence[$0.offset] }
 	}
 
 	private func createLayers(_ sequence: [Int]) -> [[Int]] {
-		var newSequence = sequence
-		var layers: [[Int]] = [newSequence]
+		var layers: [[Int]] = [sequence]
 
-		while true {
-			newSequence = reduceSequence(newSequence)
-
-			layers.append(newSequence)
-
-			if Set(newSequence).count == 1 {
-				return layers
-			}
+		while Set(layers.last!).count > 1 {
+			layers.append(reduceSequence(layers.last!))
 		}
+
+		return layers
 	}
 
 	func solvePart1() -> Int {
