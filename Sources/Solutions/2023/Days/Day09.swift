@@ -51,9 +51,7 @@ final class Day09Solver: DaySolver {
 		input.sequences.reduce(0) { result, sequence in
 			let layers = createLayers(sequence)
 
-			return result + layers.reversed().compactMap(\.first).reduce(0) { result, first in
-				first - result
-			}
+			return result + layers.reversed().compactMap(\.first).reduce(0) { $1 - $0 }
 		}
 	}
 
