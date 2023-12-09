@@ -41,7 +41,7 @@ final class Day09Solver: DaySolver {
 
 	func solvePart1() -> Int {
 		input.sequences.reduce(0) { result, sequence in
-			var layers = createLayers(sequence)
+			let layers = createLayers(sequence)
 
 			return result + layers.compactMap(\.last).reduce(0, +)
 		}
@@ -49,13 +49,11 @@ final class Day09Solver: DaySolver {
 
 	func solvePart2() -> Int {
 		input.sequences.reduce(0) { result, sequence in
-			var layers = createLayers(sequence)
+			let layers = createLayers(sequence)
 
-			for index in (1 ..< layers.count).reversed() {
-				layers[index - 1].insert(layers[index - 1].first! - layers[index].first!, at: 0)
+			return result + layers.reversed().compactMap(\.first).reduce(0) { result, first in
+				first - result
 			}
-
-			return result + layers.first!.first!
 		}
 	}
 
