@@ -2,6 +2,8 @@ import Collections
 import Foundation
 import Tools
 
+/// Part 1 is straight forward implementation. Second part is solved by collecting all right handed coordinates for the path (could also have been left handed but this worked). Either
+/// all the right or left handed coordinates are inside the loop (unless they are part of the path, of course). After that a rudimentary flood fiill is done for each of the inside coordinates.
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
@@ -70,17 +72,7 @@ final class Day10Solver: DaySolver {
 		case (false, true, true, false): return .northEastBend
 		case (false, true, false, true): return .vertical
 		case (false, false, true, true): return .southEastBend
-		case (true, false, false, false),
-		     (true, true, true, false),
-		     (true, true, true, true),
-		     (true, false, true, true),
-		     (true, true, false, true),
-		     (false, true, false, false),
-		     (false, true, true, true),
-		     (false, false, true, false),
-		     (false, false, false, true),
-		     (false, false, false, false):
-			preconditionFailure()
+		default: preconditionFailure()
 		}
 	}
 
@@ -118,11 +110,52 @@ final class Day10Solver: DaySolver {
 		point = point.moved(to: direction)
 	}
 
-	private func traverseCompleteLoop(from point: Point2D, startDirection: Direction, pipes: [Point2D: Pipe]) -> [Point2D: Int] {
+	private func collectRightHandedPoints(for point: Point2D, direction: Direction, pipes: [Point2D: Pipe]) -> Set<Point2D> {
+		var rightHandedPoints: Set<Point2D> = []
+
+		rightHandedPoints.insert(point.moved(to: direction.right))
+
+		switch pipes[point]! {
+		case .northEastBend:
+			switch direction {
+			case .south:
+				rightHandedPoints.insert(point.moved(to: direction.right).moved(to: .south))
+				rightHandedPoints.insert(point.moved(to: .south))
+			default: break
+			}
+		case .northWestBend:
+			switch direction {
+			case .east:
+				rightHandedPoints.insert(point.moved(to: direction.right).moved(to: .east))
+				rightHandedPoints.insert(point.moved(to: .east))
+			default: break
+			}
+		case .southEastBend:
+			switch direction {
+			case .south:
+				rightHandedPoints.insert(point.moved(to: direction.right).moved(to: .south))
+				rightHandedPoints.insert(point.moved(to: .south))
+			default: break
+			}
+		case .southWestBend:
+			switch direction {
+			case .south:
+				rightHandedPoints.insert(point.moved(to: direction.right).moved(to: .west))
+				rightHandedPoints.insert(point.moved(to: .west))
+			default: break
+			}
+		default: break
+		}
+
+		return rightHandedPoints
+	}
+
+	private func traverseCompleteLoop(from point: Point2D, startDirection: Direction, pipes: [Point2D: Pipe]) -> (points: [Point2D: Int], rightHandedPoints: Set<Point2D>) {
 		var direction = startDirection
 		var currentPoint = point
 
 		var visitedPoints: [Point2D: Int] = [currentPoint: 0]
+		var rightHandedPoints: Set<Point2D> = []
 
 		var distance = 1
 		while true {
@@ -132,6 +165,8 @@ final class Day10Solver: DaySolver {
 
 			movedToNextPipe(from: &currentPoint, direction: &direction, pipes: pipes)
 
+			rightHandedPoints = rightHandedPoints.union(collectRightHandedPoints(for: currentPoint, direction: direction, pipes: pipes))
+
 			if visitedPoints.keys.contains(currentPoint) {
 				break
 			}
@@ -139,7 +174,7 @@ final class Day10Solver: DaySolver {
 			visitedPoints[currentPoint] = distance
 		}
 
-		return visitedPoints
+		return (points: visitedPoints, rightHandedPoints: rightHandedPoints)
 	}
 
 	func solvePart1() -> Int {
@@ -147,13 +182,13 @@ final class Day10Solver: DaySolver {
 
 		pipes[input.startPosition] = resolveStartingPositionPipe(at: input.startPosition, pipes: pipes)
 
-		let visitedPoints = traverseCompleteLoop(
+		let result = traverseCompleteLoop(
 			from: input.startPosition,
 			startDirection: startDirection(for: pipes[input.startPosition]!),
 			pipes: pipes
 		)
 
-		return visitedPoints.values.sorted()[visitedPoints.count / 2]
+		return result.points.values.sorted()[result.points.count / 2]
 	}
 
 	func solvePart2() -> Int {
@@ -161,37 +196,33 @@ final class Day10Solver: DaySolver {
 
 		pipes[input.startPosition] = resolveStartingPositionPipe(at: input.startPosition, pipes: pipes)
 
-		let pipePoints = traverseCompleteLoop(
+		let traverseResult = traverseCompleteLoop(
 			from: input.startPosition,
 			startDirection: startDirection(for: pipes[input.startPosition]!),
 			pipes: pipes
 		)
 
-		let mainPipePositions = Set(pipePoints.keys)
+		let mainPipePositions = Set(traverseResult.points.keys)
 
-		let maxX = 139
-		let maxY = 139
+		let xRange = 0 ..< pipes.map(\.key.x).max()!
+		let yRange = 0 ..< pipes.map(\.key.y).max()!
 
-		// by row walk from left to right. Any time a vertical oriented pipe is passed we increase a counter
-		// when we are on a non main pipeline piece we can count the piece as in if we are on an uneven piece counter
-		var counter = 0
-		for y in 1 ..< maxY {
-			var encounterCounter = 0
+		var pointsQueue: Deque<Point2D> = .init(traverseResult.rightHandedPoints.filter { !mainPipePositions.contains($0) })
+		var allInsidePoints: Set<Point2D> = []
 
-			for x in 0 ... maxX {
-				let point = Point2D(x: x, y: y)
+		while let point = pointsQueue.popFirst() {
+			allInsidePoints.insert(point)
 
-				if mainPipePositions.contains(point) {
-					if Set([Pipe.vertical, Pipe.northWestBend, Pipe.northEastBend]).contains(pipes[point]) {
-						encounterCounter += 1
-					}
-				} else {
-					counter += (encounterCounter % 2 == 1) ? 1 : 0
+			for neighbor in point.neighbors() where !allInsidePoints.contains(neighbor) && !mainPipePositions.contains(neighbor) {
+				guard xRange.contains(neighbor.x), yRange.contains(neighbor.y) else {
+					fatalError()
 				}
+
+				pointsQueue.append(neighbor)
 			}
 		}
 
-		return counter
+		return allInsidePoints.count
 	}
 
 	func parseInput(rawString: String) {
