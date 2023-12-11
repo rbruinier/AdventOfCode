@@ -41,12 +41,12 @@ final class Day11Solver: DaySolver {
 
 		var newY = 0
 		for y in 0 ... maxY {
-			let existingGalaxiesOnColumn = galaxies.filter { $0.y == y }
+			let existingGalaxiesOnRow = galaxies.filter { $0.y == y }
 
-			if existingGalaxiesOnColumn.isEmpty {
+			if existingGalaxiesOnRow.isEmpty {
 				newY += factor
 			} else {
-				newGalaxies = newGalaxies.union(existingGalaxiesOnColumn.map { .init(x: $0.x, y: newY) })
+				newGalaxies = newGalaxies.union(existingGalaxiesOnRow.map { .init(x: $0.x, y: newY) })
 
 				newY += 1
 			}
