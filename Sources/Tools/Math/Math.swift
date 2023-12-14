@@ -145,4 +145,15 @@ public enum Math {
 
 		return sum
 	}
+
+	public static func solveCycle(withStartIndex startIndex: Int, endIndex: Int, numberOfCycles: Int) -> Int {
+		let loopSize = endIndex - startIndex
+
+		let totalCyclesAfterLoopStart = numberOfCycles - startIndex
+
+		let remainingCycles = totalCyclesAfterLoopStart - ((totalCyclesAfterLoopStart / loopSize) * loopSize)
+		let finalCycle = startIndex + remainingCycles - 1
+
+		return finalCycle
+	}
 }

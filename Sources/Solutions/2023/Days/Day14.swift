@@ -131,13 +131,7 @@ final class Day14Solver: DaySolver {
 			let hash = roundRocks.hashValue
 
 			if let identicalCycle = existingCycleHashes[hash] {
-				let loopSize = cycle - identicalCycle
-
-				let totalCyclesAfterLoopStart = numberOfCycles - identicalCycle
-
-				// we found a cycle, we can now skip a whole lot of cycles :)
-				let remainingCycles = totalCyclesAfterLoopStart - ((totalCyclesAfterLoopStart / loopSize) * loopSize)
-				let finalCycle = identicalCycle + remainingCycles - 1
+				let finalCycle = Math.solveCycle(withStartIndex: identicalCycle, endIndex: cycle, numberOfCycles: numberOfCycles)
 
 				roundRocks = roundRocksByCycle[finalCycle]!
 
