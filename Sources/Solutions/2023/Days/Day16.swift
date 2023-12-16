@@ -38,68 +38,71 @@ final class Day16Solver: DaySolver {
 		// if we are at the same point in the same direction we should not further process this queue item
 		var visitedItems: Set<Item> = []
 
-		while let item = items.popFirst() {
+		itemLoop: while let item = items.popFirst() {
 			guard !visitedItems.contains(item) else {
 				continue
 			}
 
 			visitedItems.insert(item)
 
-			let point = item.point.moved(to: item.direction)
-
-			// out of range, stop
-			if !(0 ... maxX).contains(point.x) || !(0 ... maxY).contains(point.y) {
-				continue
-			}
-
-			path.insert(point)
-
 			var newDirection = item.direction
+			var point = item.point
 
-			switch tiles[point] {
-			case nil:
-				items.append(.init(point: point, direction: newDirection))
-			case .backslash:
-				switch newDirection {
-				case .east: newDirection = .south
-				case .west: newDirection = .north
-				case .south: newDirection = .east
-				case .north: newDirection = .west
-				default: preconditionFailure()
+			// continue till we branch or run out of valid grid area
+			while true {
+				point = point.moved(to: newDirection)
+
+				// out of range, stop
+				if !(0 ... maxX).contains(point.x) || !(0 ... maxY).contains(point.y) {
+					continue itemLoop
 				}
 
-				items.append(.init(point: point, direction: newDirection))
-			case .slash:
-				switch newDirection {
-				case .east: newDirection = .north
-				case .west: newDirection = .south
-				case .south: newDirection = .west
-				case .north: newDirection = .east
-				default: preconditionFailure()
-				}
+				path.insert(point)
 
-				items.append(.init(point: point, direction: newDirection))
-			case .verticalSplitter:
-				switch newDirection {
-				case .east,
-				     .west:
-					items.append(.init(point: point, direction: .north))
-					items.append(.init(point: point, direction: .south))
-				case .north,
-				     .south:
-					items.append(.init(point: point, direction: newDirection))
-				default: preconditionFailure()
-				}
-			case .horizontalSplitter:
-				switch newDirection {
-				case .north,
-				     .south:
-					items.append(.init(point: point, direction: .east))
-					items.append(.init(point: point, direction: .west))
-				case .east,
-				     .west:
-					items.append(.init(point: point, direction: newDirection))
-				default: preconditionFailure()
+				switch tiles[point] {
+				case nil: break
+				case .backslash:
+					switch newDirection {
+					case .east: newDirection = .south
+					case .west: newDirection = .north
+					case .south: newDirection = .east
+					case .north: newDirection = .west
+					default: preconditionFailure()
+					}
+				case .slash:
+					switch newDirection {
+					case .east: newDirection = .north
+					case .west: newDirection = .south
+					case .south: newDirection = .west
+					case .north: newDirection = .east
+					default: preconditionFailure()
+					}
+				case .verticalSplitter:
+					switch newDirection {
+					case .east,
+					     .west:
+						items.append(.init(point: point, direction: .north))
+						items.append(.init(point: point, direction: .south))
+
+						continue itemLoop
+					case .north,
+					     .south:
+						break
+					default: preconditionFailure()
+					}
+				case .horizontalSplitter:
+					switch newDirection {
+					case .north,
+					     .south:
+						items.append(.init(point: point, direction: .east))
+						items.append(.init(point: point, direction: .west))
+
+						continue itemLoop
+					case .east,
+					     .west:
+						break
+					default: preconditionFailure()
+					}
 				}
 			}
 		}
