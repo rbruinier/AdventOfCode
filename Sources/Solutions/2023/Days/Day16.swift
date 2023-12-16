@@ -131,7 +131,7 @@ final class Day16Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) {
-		input = .init(tiles: rawString.parseAsGrid { character, _ in
+		input = .init(tiles: rawString.parseGrid { character, _ in
 			switch character {
 			case "\\": Tile.backslash
 			case "/": Tile.slash
