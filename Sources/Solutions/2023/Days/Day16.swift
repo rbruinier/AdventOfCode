@@ -131,23 +131,15 @@ final class Day16Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) {
-		var tiles: [Point2D: Tile] = [:]
-
-		for (y, line) in rawString.allLines().enumerated() {
-			for (x, character) in line.enumerated() {
-				let point = Point2D(x: x, y: y)
-
-				switch character {
-				case "\\": tiles[point] = .backslash
-				case "/": tiles[point] = .slash
-				case "|": tiles[point] = .verticalSplitter
-				case "-": tiles[point] = .horizontalSplitter
-				case ".": break
-				default: preconditionFailure()
-				}
+		input = .init(tiles: rawString.parseAsGrid { character, _ in
+			switch character {
+			case "\\": Tile.backslash
+			case "/": Tile.slash
+			case "|": Tile.verticalSplitter
+			case "-": Tile.horizontalSplitter
+			case ".": nil
+			default: preconditionFailure()
 			}
-		}
-
-		input = .init(tiles: tiles)
+		})
 	}
 }
