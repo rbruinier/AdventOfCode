@@ -8,6 +8,15 @@ public extension Collection {
 	}
 }
 
+public extension Collection<Point2D> {
+	var ranges: (x: ClosedRange<Int>, y: ClosedRange<Int>) {
+		(
+			x: map(\.x).min()! ... map(\.x).max()!,
+			y: map(\.y).min()! ... map(\.y).max()!
+		)
+	}
+}
+
 public extension Collection where Element: Hashable {
 	func occurrences() -> [Element: Int] {
 		var occurrencesDictionary: [Element: Int] = [:]
