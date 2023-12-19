@@ -41,10 +41,6 @@ final class Day19Solver: DaySolver {
 		case rejected
 
 		init(rawValue: String) {
-			guard rawValue.isNotEmpty else {
-				preconditionFailure()
-			}
-
 			switch rawValue {
 			case "A": self = .accepted
 			case "R": self = .rejected
@@ -71,12 +67,12 @@ final class Day19Solver: DaySolver {
 			valid.values.map(\.count).reduce(1, *)
 		}
 
-		struct Result {
+		struct Split {
 			let passingRanges: Ranges
 			let remainingRanges: Ranges
 		}
 
-		func split(piece: PartPiece, below splitIndex: Int) -> Result {
+		func split(piece: PartPiece, below splitIndex: Int) -> Split {
 			let originalRange = valid[piece]!
 
 			var passingRanges = self
@@ -88,7 +84,7 @@ final class Day19Solver: DaySolver {
 			return .init(passingRanges: passingRanges, remainingRanges: remainingRanges)
 		}
 
-		func split(piece: PartPiece, above splitIndex: Int) -> Result {
+		func split(piece: PartPiece, above splitIndex: Int) -> Split {
 			let originalRange = valid[piece]!
 
 			var passingRanges = self
