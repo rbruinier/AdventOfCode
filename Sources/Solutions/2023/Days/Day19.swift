@@ -156,13 +156,7 @@ final class Day19Solver: DaySolver {
 	}
 
 	func solvePart1() -> Int {
-		var sum = 0
-
-		for part in input.parts {
-			sum += isAccepted(part: part, workflows: input.workflows, destination: .workflow(id: "in"))
-		}
-
-		return sum
+		input.parts.map { isAccepted(part: $0, workflows: input.workflows, destination: .workflow(id: "in")) }.reduce(0, +)
 	}
 
 	func solvePart2() -> Int {
