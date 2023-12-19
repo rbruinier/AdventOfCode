@@ -1,16 +1,20 @@
 public enum Shoelace {
-	public static func calculateArea(of coordinates: [Point2D]) -> Int {
+	public static func calculateArea(of coordinates: [Point2D], includeBorder: Bool = true) -> Int {
 		guard coordinates.count >= 3 else {
 			preconditionFailure()
 		}
 
-		let area: Int = zip(coordinates, coordinates.dropFirst()).map {
-			let c1 = $0.0
-			let c2 = $0.1
+		var area = 0
 
-			return c1.x * c2.y - c2.x * c1.y + abs(c2.x - c1.x) + abs(c2.y - c1.y)
-		}.reduce(0, +)
+		for index in 0 ..< coordinates.count {
+			let nextIndex = (index + 1) % coordinates.count
 
-		return area / 2 + 1
+			let c1 = coordinates[index]
+			let c2 = coordinates[nextIndex]
+
+			area += (c1.x * c2.y) - (c2.x * c1.y) + (includeBorder ? abs(c2.x - c1.x) + abs(c2.y - c1.y) : 0)
+		}
+
+		return area / 2 + (includeBorder ? 1 : 0)
 	}
 }
