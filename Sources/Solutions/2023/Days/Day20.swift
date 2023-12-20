@@ -135,7 +135,7 @@ final class Day20Solver: DaySolver {
 	}
 
 	func solvePart1() -> Int {
-		let helper = Configuration(
+		let configuration = Configuration(
 			flipFlopModuleIDs: Set(input.modules.filter { $0.value.type == .flipFlop }.map(\.key)),
 			rememberModuleIDs: Set(input.modules.filter { $0.value.type == .remember }.map(\.key)),
 			checkForRepeatingCyclesOfRememberModuleID: nil
@@ -143,10 +143,10 @@ final class Day20Solver: DaySolver {
 
 		var state = State()
 
-		initializeRememberStates(with: input.modules, state: &state, configuration: helper)
+		initializeRememberStates(with: input.modules, state: &state, configuration: configuration)
 
 		for _ in 0 ..< 1000 {
-			pressButton(on: input.modules, state: &state, configuration: helper)
+			pressButton(on: input.modules, state: &state, configuration: configuration)
 		}
 
 		return state.lowPulseCount * state.highPulseCount
@@ -159,22 +159,24 @@ final class Day20Solver: DaySolver {
 		//
 		// jq fires low signal if all of these four inputs are on: vr, nl, lr & gt
 
-		let helper = Configuration(
+		let rxInputModuleID = input.modules.first { $0.value.destinations.contains("rx") }.map(\.key)!
+
+		let configuration = Configuration(
 			flipFlopModuleIDs: Set(input.modules.filter { $0.value.type == .flipFlop }.map(\.key)),
 			rememberModuleIDs: Set(input.modules.filter { $0.value.type == .remember }.map(\.key)),
-			checkForRepeatingCyclesOfRememberModuleID: "jq"
+			checkForRepeatingCyclesOfRememberModuleID: rxInputModuleID
 		)
 
 		var state = State()
 
-		initializeRememberStates(with: input.modules, state: &state, configuration: helper)
+		initializeRememberStates(with: input.modules, state: &state, configuration: configuration)
 
 		while true {
 			state.buttonPressCount += 1
 
-			pressButton(on: input.modules, state: &state, configuration: helper)
+			pressButton(on: input.modules, state: &state, configuration: configuration)
 
-			if state.repeatingCycles.count == 4 {
+			if state.repeatingCycles.count == state.rememberModules[rxInputModuleID]!.count {
 				break
 			}
 		}
