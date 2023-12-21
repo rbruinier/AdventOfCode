@@ -10,7 +10,7 @@ extension DaySolver {
 }
 
 let days: [any DaySolver] = [
-	//	Day01Solver(),
+	//		Day01Solver(),
 //	Day02Solver(),
 //	Day03Solver(),
 //	Day04Solver(),
@@ -29,8 +29,8 @@ let days: [any DaySolver] = [
 //	Day17Solver(),
 //	Day18Solver(),
 //	Day19Solver(),
-	Day20Solver(),
-//	Day21Solver(),
+//	Day20Solver(),
+	Day21Solver(),
 //	Day22Solver(),
 //	Day23Solver(),
 //	Day24Solver(),
