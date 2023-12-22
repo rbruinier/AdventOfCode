@@ -43,6 +43,8 @@ final class Day22Solver: DaySolver {
 
 		let supportedBy: [Int: Set<Int>]
 		let supporting: [Int: Set<Int>]
+
+		let movedBricksCounter: Int
 	}
 
 	private func simulateBricks(_ originalBricks: [Brick]) -> Result {
@@ -60,6 +62,8 @@ final class Day22Solver: DaySolver {
 		}
 
 		var newBricks: [Brick] = []
+		var movedBricksCounter = 0
+
 		var heightMap: [Point2D: MapItem] = [:]
 
 		for brick in bricks {
@@ -94,15 +98,19 @@ final class Day22Solver: DaySolver {
 			}
 
 			newBricks.append(Brick(a: newA, b: newB, id: brick.id))
+
+			if newA.z != a.z {
+				movedBricksCounter += 1
+			}
 		}
 
-		return .init(bricks: newBricks, supportedBy: supportedBy, supporting: supporting)
+		return .init(bricks: newBricks, supportedBy: supportedBy, supporting: supporting, movedBricksCounter: movedBricksCounter)
 	}
 
 	/*
 	 Observations:
 	  * there are no bricks that expand in more than 1 direction.
-	  * a.z is always < b.z
+	  * a.z is always <= b.z
 	 */
 	func solvePart1() -> Int {
 		let result = simulateBricks(input.bricks)
@@ -137,15 +145,7 @@ final class Day22Solver: DaySolver {
 
 			beforeBricks.remove(at: index)
 
-			let afterBricks = simulateBricks(beforeBricks).bricks
-
-			for beforeBrick in beforeBricks {
-				let afterBrick = afterBricks.first { $0.id == beforeBrick.id }!
-
-				if beforeBrick.a.z != afterBrick.a.z {
-					changedCounter += 1
-				}
-			}
+			changedCounter += simulateBricks(beforeBricks).movedBricksCounter
 		}
 
 		return changedCounter
