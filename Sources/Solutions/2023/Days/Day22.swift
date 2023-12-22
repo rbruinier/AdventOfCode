@@ -19,7 +19,7 @@ final class Day22Solver: DaySolver {
 		case z
 	}
 
-	private struct Brick: Equatable {
+	private struct Brick {
 		let a: Point3D
 		let b: Point3D
 
@@ -142,7 +142,7 @@ final class Day22Solver: DaySolver {
 			for beforeBrick in beforeBricks {
 				let afterBrick = afterBricks.first { $0.id == beforeBrick.id }!
 
-				if beforeBrick != afterBrick {
+				if beforeBrick.a.z != afterBrick.a.z {
 					changedCounter += 1
 				}
 			}
