@@ -66,95 +66,34 @@ final class Day22Solver: DaySolver {
 			let a = brick.a
 			let b = brick.b
 
+			let mapCoordinates: [Point2D]
+
 			switch brick.orientation {
-			case .x:
-				var bestZOffset = 0
+			case .x: mapCoordinates = (a.x ... b.x).map { Point2D(x: $0, y: a.y) }
+			case .y: mapCoordinates = (a.y ... b.y).map { Point2D(x: a.x, y: $0) }
+			case .z: mapCoordinates = [Point2D(x: a.x, y: a.y)]
+			}
 
-				zOffsetLoop: for zOffset in 1 ... 10000 {
-					let height = a.z - zOffset
-
-					for x in a.x ... b.x {
-						let point = Point2D(x: x, y: a.y)
-
-						if height <= heightMap[point, default: .ground].height {
-							break zOffsetLoop
-						}
-					}
-
-					bestZOffset = zOffset
+			var highestHeight = 0
+			for coordinate in mapCoordinates {
+				if let existingMapItem = heightMap[coordinate] {
+					highestHeight = max(highestHeight, existingMapItem.height)
 				}
+			}
 
-				let newZ = a.z - bestZOffset
+			let newA = Point3D(x: a.x, y: a.y, z: highestHeight + 1)
+			let newB = Point3D(x: b.x, y: b.y, z: highestHeight + 1 + (b.z - a.z))
 
-				newBricks.append(.init(a: .init(x: a.x, y: a.y, z: newZ), b: .init(x: b.x, y: b.y, z: newZ), id: brick.id))
-
-				for x in a.x ... b.x {
-					let point = Point2D(x: x, y: a.y)
-
-					if let existingMapItem = heightMap[point], existingMapItem.height == newZ - 1 {
-						supportedBy[existingMapItem.id, default: []].insert(brick.id)
-						supporting[brick.id, default: []].insert(existingMapItem.id)
-					}
-
-					heightMap[point] = .init(id: brick.id, height: newZ)
-				}
-			case .y:
-				var bestZOffset = 0
-
-				zOffsetLoop: for zOffset in 1 ... 10000 {
-					let height = a.z - zOffset
-
-					for y in a.y ... b.y {
-						let point = Point2D(x: a.x, y: y)
-
-						if height <= heightMap[point, default: .ground].height {
-							break zOffsetLoop
-						}
-					}
-
-					bestZOffset = zOffset
-				}
-
-				let newZ = a.z - bestZOffset
-
-				newBricks.append(.init(a: .init(x: a.x, y: a.y, z: newZ), b: .init(x: b.x, y: b.y, z: newZ), id: brick.id))
-
-				for y in a.y ... b.y {
-					let point = Point2D(x: a.x, y: y)
-
-					if let existingMapItem = heightMap[point], existingMapItem.height == newZ - 1 {
-						supportedBy[existingMapItem.id, default: []].insert(brick.id)
-						supporting[brick.id, default: []].insert(existingMapItem.id)
-					}
-
-					heightMap[point] = .init(id: brick.id, height: newZ)
-				}
-			case .z:
-				var bestZOffset = 0
-
-				let point = Point2D(x: a.x, y: a.y)
-
-				zOffsetLoop: for zOffset in 1 ... 10000 {
-					let height = a.z - zOffset
-
-					if height <= heightMap[point, default: .ground].height {
-						break zOffsetLoop
-					}
-
-					bestZOffset = zOffset
-				}
-
-				let newZ = a.z - bestZOffset
-
-				newBricks.append(.init(a: .init(x: a.x, y: a.y, z: newZ), b: .init(x: b.x, y: b.y, z: b.z - bestZOffset), id: brick.id))
-
-				if let existingMapItem = heightMap[point], existingMapItem.height == newZ - 1 {
+			for coordinate in mapCoordinates {
+				if let existingMapItem = heightMap[coordinate], existingMapItem.height == highestHeight {
 					supportedBy[existingMapItem.id, default: []].insert(brick.id)
 					supporting[brick.id, default: []].insert(existingMapItem.id)
 				}
 
-				heightMap[point] = .init(id: brick.id, height: b.z - bestZOffset)
+				heightMap[coordinate] = .init(id: brick.id, height: newB.z)
 			}
+
+			newBricks.append(Brick(a: newA, b: newB, id: brick.id))
 		}
 
 		return .init(bricks: newBricks, supportedBy: supportedBy, supporting: supporting)
@@ -193,16 +132,15 @@ final class Day22Solver: DaySolver {
 		// brute force removing each
 		var changedCounter = 0
 
-		for (index, brick) in result.bricks.enumerated() {
+		for index in 0 ..< result.bricks.count {
 			var beforeBricks = result.bricks
 
 			beforeBricks.remove(at: index)
 
 			let afterBricks = simulateBricks(beforeBricks).bricks
 
-			for brickID in beforeBricks.map(\.id) {
-				let beforeBrick = beforeBricks.first { $0.id == brickID }!
-				let afterBrick = afterBricks.first { $0.id == brickID }!
+			for beforeBrick in beforeBricks {
+				let afterBrick = afterBricks.first { $0.id == beforeBrick.id }!
 
 				if beforeBrick != afterBrick {
 					changedCounter += 1
@@ -217,12 +155,9 @@ final class Day22Solver: DaySolver {
 		input = .init(bricks: rawString.allLines().enumerated().map { line in
 			let components = line.element.components(separatedBy: "~")
 
-			let a = Point3D(commaSeparatedString: components[0])
-			let b = Point3D(commaSeparatedString: components[1])
-
 			return Brick(
-				a: a,
-				b: b,
+				a: Point3D(commaSeparatedString: components[0]),
+				b: Point3D(commaSeparatedString: components[1]),
 				id: line.offset
 			)
 		})
