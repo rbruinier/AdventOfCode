@@ -47,7 +47,7 @@ final class Day22Solver: DaySolver {
 		let movedBricksCounter: Int
 	}
 
-	private func simulateBricks(_ originalBricks: [Brick]) -> Result {
+	private func simulateBricks(_ originalBricks: [Brick], generateDependencyGraph: Bool) -> Result {
 		// sort vertically so that we can move them one by one
 		let bricks = originalBricks.sorted(by: { $0.a.z < $1.a.z })
 
@@ -61,7 +61,7 @@ final class Day22Solver: DaySolver {
 			static var ground: MapItem { .init(id: -1, height: 0) }
 		}
 
-		var newBricks: [Brick] = []
+		var newBricks: [Brick] = .init(reservedCapacity: originalBricks.count)
 		var movedBricksCounter = 0
 
 		var heightMap: [Point2D: MapItem] = [:]
@@ -89,7 +89,7 @@ final class Day22Solver: DaySolver {
 			let newB = Point3D(x: b.x, y: b.y, z: highestHeight + 1 + (b.z - a.z))
 
 			for coordinate in mapCoordinates {
-				if let existingMapItem = heightMap[coordinate], existingMapItem.height == highestHeight {
+				if generateDependencyGraph, let existingMapItem = heightMap[coordinate], existingMapItem.height == highestHeight {
 					supportedBy[existingMapItem.id, default: []].insert(brick.id)
 					supporting[brick.id, default: []].insert(existingMapItem.id)
 				}
@@ -113,7 +113,7 @@ final class Day22Solver: DaySolver {
 	  * a.z is always <= b.z
 	 */
 	func solvePart1() -> Int {
-		let result = simulateBricks(input.bricks)
+		let result = simulateBricks(input.bricks, generateDependencyGraph: true)
 
 		var bricksThatCanBeRemoved: Set<Int> = []
 
@@ -135,7 +135,7 @@ final class Day22Solver: DaySolver {
 	}
 
 	func solvePart2() -> Int {
-		let result = simulateBricks(input.bricks)
+		let result = simulateBricks(input.bricks, generateDependencyGraph: false)
 
 		// brute force removing each
 		var changedCounter = 0
@@ -145,7 +145,7 @@ final class Day22Solver: DaySolver {
 
 			beforeBricks.remove(at: index)
 
-			changedCounter += simulateBricks(beforeBricks).movedBricksCounter
+			changedCounter += simulateBricks(beforeBricks, generateDependencyGraph: false).movedBricksCounter
 		}
 
 		return changedCounter
