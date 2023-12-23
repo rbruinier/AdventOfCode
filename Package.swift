@@ -147,6 +147,10 @@ var package = Package(
 			path: "Sources/Solutions/2023",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 	]

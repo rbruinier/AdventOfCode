@@ -22,27 +22,27 @@ public struct WeightedGraph {
 		}
 	}
 
-	let edgesByElement: [ElementIndex: [Edge]]
-	let elementsCount: Int
+	public let edgesByElement: [ElementIndex: Set<Edge>]
+	public let elementsCount: Int
 
 	public init(elementsCount: Int, edges: [Edge]) {
 		self.elementsCount = elementsCount
 
-		var edgesByElement: [ElementIndex: [Edge]] = [:]
+		var edgesByElement: [ElementIndex: Set<Edge>] = [:]
 
 		for edge in edges {
-			edgesByElement[edge.a, default: []].append(.init(a: edge.a, b: edge.b, weight: edge.weight))
+			edgesByElement[edge.a, default: []].insert(.init(a: edge.a, b: edge.b, weight: edge.weight))
 
 			if edge.isDirectional == false {
-				edgesByElement[edge.b, default: []].append(.init(a: edge.b, b: edge.a, weight: edge.weight))
+				edgesByElement[edge.b, default: []].insert(.init(a: edge.b, b: edge.a, weight: edge.weight))
 			}
 		}
 
 		self.edgesByElement = edgesByElement
 	}
 
-	func directionalEdges(from elementIndex: ElementIndex) -> [Edge] {
-		edgesByElement[elementIndex, default: []]
+	func directionalEdges(from elementIndex: ElementIndex) -> Set<Edge> {
+		edgesByElement[elementIndex, default: .init()]
 	}
 
 	public var count: Int {
