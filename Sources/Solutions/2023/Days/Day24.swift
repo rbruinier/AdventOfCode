@@ -64,24 +64,23 @@ final class Day24Solver: DaySolver {
 				let hb = hailstones[b]
 
 				let intersection = intersect2D(
-					a: .init(point3D: hailstones[a].position),
-					av: .init(point3D: hailstones[a].velocity),
-					b: .init(point3D: hailstones[b].position),
-					bv: .init(point3D: hailstones[b].velocity)
+					a: .init(point3D: ha.position),
+					av: .init(point3D: ha.velocity),
+					b: .init(point3D: hb.position),
+					bv: .init(point3D: hb.velocity)
 				)
 
-				if let intersection {
-					if
-						(ha.velocity.x < 0 && intersection.x > Double(ha.position.x)) ||
-						(ha.velocity.x > 0 && intersection.x < Double(ha.position.x)) ||
-						(hb.velocity.x < 0 && intersection.x > Double(hb.position.x)) ||
-						(hb.velocity.x > 0 && intersection.x < Double(hb.position.x))
-					{
-						continue
-					}
-
-					counter += (range.contains(intersection.x) && range.contains(intersection.y)) ? 1 : 0
-				} else {}
+				guard
+					let intersection,
+					!(ha.velocity.x < 0 && intersection.x > Double(ha.position.x)),
+					!(ha.velocity.x > 0 && intersection.x < Double(ha.position.x)),
+					!(hb.velocity.x < 0 && intersection.x > Double(hb.position.x)),
+					!(hb.velocity.x > 0 && intersection.x < Double(hb.position.x))
+				else {
+					continue
+				}
+				
+				counter += (range.contains(intersection.x) && range.contains(intersection.y)) ? 1 : 0
 			}
 		}
 
@@ -91,7 +90,7 @@ final class Day24Solver: DaySolver {
 	func solvePart2() -> Int {
 		// Solved with Python & Z3, see & run: Other/solveDay24Part2.py
 
-		757_031_940_316_991
+		757031940316991
 	}
 
 	func parseInput(rawString: String) {
