@@ -17,8 +17,8 @@ public struct UnweightedGraph {
 		}
 	}
 
-	let elementsCount: Int
-	let edgesByElement: [ElementIndex: [Edge]]
+	public let elementsCount: Int
+	public let edgesByElement: [ElementIndex: [Edge]]
 
 	public init(elementsCount: Int, edges: [Edge]) {
 		self.elementsCount = elementsCount

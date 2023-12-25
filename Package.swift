@@ -37,8 +37,11 @@ var package = Package(
 			],
 			resources: [
 				.copy("Visualization/Resources"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
-
 		),
 		.executableTarget(
 			name: "VisualizerTestApp",
@@ -61,6 +64,10 @@ var package = Package(
 			path: "Sources/Solutions/2015",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -72,6 +79,10 @@ var package = Package(
 			path: "Sources/Solutions/2016",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -83,6 +94,10 @@ var package = Package(
 			path: "Sources/Solutions/2017",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -94,6 +109,10 @@ var package = Package(
 			path: "Sources/Solutions/2018",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -106,6 +125,10 @@ var package = Package(
 			path: "Sources/Solutions/2019",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -116,6 +139,10 @@ var package = Package(
 			path: "Sources/Solutions/2020",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -127,6 +154,10 @@ var package = Package(
 			path: "Sources/Solutions/2021",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
@@ -137,12 +168,16 @@ var package = Package(
 			path: "Sources/Solutions/2022",
 			resources: [
 				.copy("Input"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
 			]
 		),
 		.executableTarget(
 			name: "Solutions2023",
 			dependencies: [
-				"Tools",
+				"Tools"
 			],
 			path: "Sources/Solutions/2023",
 			resources: [

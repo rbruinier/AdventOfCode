@@ -8,12 +8,12 @@ public enum Direction: Int, Equatable {
 	case northEast = 5
 	case southWest = 6
 	case southEast = 7
-	
+
 	public init(deltaX: Int, deltaY: Int) {
 		guard !(deltaX == 0 && deltaY == 0) else {
 			preconditionFailure()
 		}
-		
+
 		if deltaX == 0 {
 			self = deltaY > 0 ? .south : .north
 		} else if deltaY == 0 {
