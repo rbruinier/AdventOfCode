@@ -79,9 +79,17 @@ private func solveDay(_ solver: any DaySolver) -> Result {
 	)
 }
 
-public func solveDays(_ days: [any DaySolver], bundle: Bundle) {
+public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle: Bundle) {
 	print("Parsing inputs")
 
+	let days: [any DaySolver]
+	
+	if let dayNumber {
+		days = allDays.filter { $0.dayNumber == dayNumber }
+	} else {
+		days = allDays
+	}
+	
 	days.forEach { day in
 		day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
 	}

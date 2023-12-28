@@ -39,4 +39,7 @@ s.check()
 
 m = s.model()
 
+print(m[x] + m[y] + m[z])
+print(m[vx] + m[vy] + m[vz])
+
 print(m[x].as_long() + m[y].as_long() + m[z].as_long())

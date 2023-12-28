@@ -28,12 +28,6 @@ final class Day24Solver: DaySolver {
 			y = Double(point3D.y)
 			z = Double(point3D.z)
 		}
-
-		init(x: Double, y: Double, z: Double) {
-			self.x = x
-			self.y = y
-			self.z = z
-		}
 	}
 
 	private func intersect2D(a: Point3DDouble, av: Point3DDouble, b: Point3DDouble, bv: Point3DDouble) -> (x: Double, y: Double)? {
@@ -79,7 +73,7 @@ final class Day24Solver: DaySolver {
 				else {
 					continue
 				}
-				
+
 				counter += (range.contains(intersection.x) && range.contains(intersection.y)) ? 1 : 0
 			}
 		}
@@ -87,10 +81,74 @@ final class Day24Solver: DaySolver {
 		return counter
 	}
 
+	/// First solve was with a python script (using Z3 equation solver) but I do prefer this neat solution so I have implemented this instead:
+	/// https://www.reddit.com/r/adventofcode/comments/18pnycy/comment/keqf8uq/
 	func solvePart2() -> Int {
-		// Solved with Python & Z3, see & run: Other/solveDay24Part2.py
+		let range = 500
 
-		757031940316991
+		var xSet: Set<Int> = []
+		var ySet: Set<Int> = []
+		var zSet: Set<Int> = []
+
+		for aIndex in 0 ..< input.hailstones.count {
+			for bIndex in aIndex + 1 ..< input.hailstones.count {
+				let a = input.hailstones[aIndex]
+				let b = input.hailstones[bIndex]
+
+				if a.velocity.x == b.velocity.x {
+					let distance = b.position.x - a.position.x
+
+					let newXSet: Set<Int> = Set((-range ... range).compactMap { v in
+						v != a.velocity.x && (distance % (v - a.velocity.x)) == 0 ? v : nil
+					})
+
+					xSet = xSet.isEmpty ? newXSet : xSet.intersection(newXSet)
+				}
+
+				if a.velocity.y == b.velocity.y {
+					let distance = b.position.y - a.position.y
+
+					let newYSet: Set<Int> = Set((-range ... range).compactMap { v in
+						v != a.velocity.y && (distance % (v - a.velocity.y)) == 0 ? v : nil
+					})
+
+					ySet = ySet.isEmpty ? newYSet : ySet.intersection(newYSet)
+				}
+
+				if a.velocity.z == b.velocity.z {
+					let distance = b.position.z - a.position.z
+
+					let newZSet: Set<Int> = Set((-range ... range).compactMap { v in
+						v != a.velocity.z && (distance % (v - a.velocity.z)) == 0 ? v : nil
+					})
+
+					zSet = zSet.isEmpty ? newZSet : zSet.intersection(newZSet)
+				}
+			}
+		}
+
+		let rockVelocity = Point3DDouble(point3D: .init(x: xSet.first!, y: ySet.first!, z: zSet.first!))
+
+		let aPosition = Point3DDouble(point3D: input.hailstones[0].position)
+		let aVelocity = Point3DDouble(point3D: input.hailstones[0].velocity)
+
+		let bPosition = Point3DDouble(point3D: input.hailstones[1].position)
+		let bVelocity = Point3DDouble(point3D: input.hailstones[1].velocity)
+
+		let slopeA = (aVelocity.y - rockVelocity.y) / (aVelocity.x - rockVelocity.x)
+		let slopeB = (bVelocity.y - rockVelocity.y) / (bVelocity.x - rockVelocity.x)
+		let ca = aPosition.y - (slopeA * aPosition.x)
+		let cb = bPosition.y - (slopeB * bPosition.x)
+
+		let x = (cb - ca) / (slopeA - slopeB)
+		let y = slopeA * x + ca
+		let t = (x - aPosition.x) / (aVelocity.x - rockVelocity.x)
+		let z = aPosition.z + (aVelocity.z - rockVelocity.z) * t
+
+		return Int(x + y + z)
+
+		// Previously solved with Python & Z3, see & run: Other/solveDay24Part2.py
+		// return 757031940316991
 	}
 
 	func parseInput(rawString: String) {
