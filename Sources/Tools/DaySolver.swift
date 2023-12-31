@@ -83,13 +83,13 @@ public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle:
 	print("Parsing inputs")
 
 	let days: [any DaySolver]
-	
+
 	if let dayNumber {
 		days = allDays.filter { $0.dayNumber == dayNumber }
 	} else {
 		days = allDays
 	}
-	
+
 	days.forEach { day in
 		day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
 	}
