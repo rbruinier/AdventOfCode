@@ -37,4 +37,4 @@ let days: [any DaySolver] = [
 	Day25Solver(),
 ]
 
-solveDays(days, dayNumber: 17, bundle: .module)
+solveDays(days, dayNumber: 18, bundle: .module)

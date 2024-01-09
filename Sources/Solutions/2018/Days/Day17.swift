@@ -45,32 +45,20 @@ final class Day17Solver: DaySolver {
 			case .horizontal(let y, _): y
 			}
 		}
-
-		func intersects(point: Point2D) -> Bool {
-			switch self {
-			case .vertical(let x, let y): x == point.x && y.contains(point.y)
-			case .horizontal(let y, let x): y == point.y && x.contains(point.x)
-			}
-		}
 	}
 
-	private func printState(_ state: State, grid: Grid) {
+	private func printGrid(_ grid: Grid) {
 		for y in grid.yRange {
 			var printLine = ""
 
 			for x in grid.xRange {
-				let point = Point2D(x: x, y: y)
+				let tile = grid.tiles[y][x]
 
-				if grid.lines.contains(where: { $0.intersects(point: point) }) {
-					printLine += "#"
-				} else {
-					if state.settledSand.contains(point) {
-						printLine += "~"
-					} else if state.movingSand.contains(point) {
-						printLine += "|"
-					} else {
-						printLine += "."
-					}
+				switch tile {
+				case .empty: printLine += "."
+				case .wall: printLine += "#"
+				case .moving: printLine += "|"
+				case .settled: printLine += "~"
 				}
 			}
 
@@ -85,27 +73,27 @@ final class Day17Solver: DaySolver {
 		let direction: Direction
 	}
 
-	private struct State: Hashable {
-		var movingSand: Set<Point2D> = []
-		var settledSand: Set<Point2D> = []
+	private enum Tile: Equatable {
+		case empty
+		case wall
+		case moving
+		case settled
 	}
 
-	private struct Grid {
-		let lines: [Line]
-
+	private struct Grid: Equatable {
 		let xRange: ClosedRange<Int>
 		let yRange: ClosedRange<Int>
 
-		let walls: Set<Point2D>
+		var tiles: [[Tile]]
 	}
 
 	@discardableResult
-	private func placeGrain(startingAt startPosition: Point2D, direction: Direction, state: inout State, grid: Grid) -> Point2D? {
+	private func placeGrain(startingAt startPosition: Point2D, direction: Direction, grid: inout Grid) -> Point2D? {
 		var currentDirection = direction
 		var currentPosition = startPosition
 
 		func isBlocked(point: Point2D) -> Bool {
-			state.settledSand.contains(point) || grid.walls.contains(point)
+			(grid.tiles[point.y][point.x] == .wall) || (grid.tiles[point.y][point.x] == .settled)
 		}
 
 		while true {
@@ -115,54 +103,44 @@ final class Day17Solver: DaySolver {
 				return nil
 			}
 
-			if state.movingSand.contains(newPoint) {
+			if grid.tiles[newPoint.y][newPoint.x] == .moving {
 				currentPosition = newPoint
-			} else if currentDirection != .south, state.movingSand.contains(currentPosition.moved(to: .south)) {
+			} else if currentDirection != .south, grid.tiles[currentPosition.y + 1][currentPosition.x] == .moving {
 				currentDirection = .south
 			} else if isBlocked(point: newPoint) {
 				if currentDirection == .south {
-					let leftWallPoint = placeGrain(startingAt: currentPosition, direction: .west, state: &state, grid: grid)
-					let rightWallPoint = placeGrain(startingAt: currentPosition, direction: .east, state: &state, grid: grid)
+					let leftWallPoint = placeGrain(startingAt: currentPosition, direction: .west, grid: &grid)
+					let rightWallPoint = placeGrain(startingAt: currentPosition, direction: .east, grid: &grid)
 
 					if let leftWallPoint, let rightWallPoint {
 						for x in leftWallPoint.x ... rightWallPoint.x {
-							let point = Point2D(x: x, y: leftWallPoint.y)
-
-							state.settledSand.insert(point)
-							state.movingSand.remove(point)
+							grid.tiles[leftWallPoint.y][x] = .settled
 						}
 					}
 
 					return nil
-				} else if currentDirection == .west {
-					return currentPosition
-				} else if currentDirection == .east {
+				} else if currentDirection == .west || currentDirection == .east {
 					return currentPosition
 				}
 			} else {
-				if currentDirection == .west || currentDirection == .east {
+				if currentDirection == .south {
+					grid.tiles[newPoint.y][newPoint.x] = .moving
+				} else {
 					let southPoint = newPoint.moved(to: .south)
 
-					if isBlocked(point: southPoint) {
-						state.movingSand.insert(newPoint)
+					grid.tiles[newPoint.y][newPoint.x] = .moving
 
-						return nil
-					} else {
-						state.movingSand.insert(newPoint)
-						state.movingSand.insert(southPoint)
-
-						return nil
+					if !isBlocked(point: southPoint) {
+						grid.tiles[southPoint.y][southPoint.x] = .moving
 					}
-				} else {
-					state.movingSand.insert(newPoint)
-
-					return nil
 				}
+
+				return nil
 			}
 		}
 	}
 
-	private var part1EndState: State!
+	private var part1Grid: Grid!
 
 	func solvePart1() -> Int {
 		let lines = input.lines
@@ -170,45 +148,70 @@ final class Day17Solver: DaySolver {
 		let xRange = lines.map(\.minX).min()! ... lines.map(\.maxX).max()!
 		let yRange = lines.map(\.minY).min()! ... lines.map(\.maxY).max()!
 
-		var walls: Set<Point2D> = []
+		var tiles: [[Tile]] = .init(repeating: .init(repeating: .empty, count: xRange.upperBound + 2), count: yRange.upperBound + 2)
 
 		for line in lines {
 			switch line {
 			case .horizontal(let y, let xRange):
 				for x in xRange {
-					walls.insert(.init(x: x, y: y))
+					tiles[y][x] = .wall
 				}
 			case .vertical(let x, let yRange):
 				for y in yRange {
-					walls.insert(.init(x: x, y: y))
+					tiles[y][x] = .wall
 				}
 			}
 		}
 
-		var state = State()
-		let grid = Grid(lines: lines, xRange: xRange, yRange: yRange, walls: walls)
+		var grid = Grid(xRange: xRange, yRange: yRange, tiles: tiles)
 
-		var oldState = state
+		var oldTiles = grid.tiles
 
 		while true {
-			placeGrain(startingAt: input.spring, direction: .south, state: &state, grid: grid)
+			placeGrain(startingAt: input.spring, direction: .south, grid: &grid)
 
-			if state == oldState {
-				part1EndState = state
+			if oldTiles == grid.tiles {
+				part1Grid = grid
 
-				return state.movingSand.filter { yRange.contains($0.y) }.count + state.settledSand.filter { yRange.contains($0.y) }.count
+				var sum = 0
+
+				for y in grid.yRange {
+					for x in grid.xRange.lowerBound - 1 ... grid.xRange.upperBound + 1 {
+						let tile = grid.tiles[y][x]
+
+						switch tile {
+						case .empty,
+						     .wall: break
+						case .moving,
+						     .settled: sum += 1
+						}
+					}
+				}
+
+				return sum
 			}
 
-			oldState = state
+			oldTiles = grid.tiles
 		}
 	}
 
 	func solvePart2() -> Int {
-		let lines = input.lines
+		var sum = 0
 
-		let yRange = lines.map(\.minY).min()! ... lines.map(\.maxY).max()!
+		for y in part1Grid.yRange {
+			for x in part1Grid.xRange.lowerBound - 1 ... part1Grid.xRange.upperBound + 1 {
+				let tile = part1Grid.tiles[y][x]
 
-		return part1EndState.settledSand.filter { yRange.contains($0.y) }.count
+				switch tile {
+				case .empty,
+				     .wall,
+				     .moving: break
+				case .settled: sum += 1
+				}
+			}
+		}
+
+		return sum
 	}
 
 	func parseInput(rawString: String) {
