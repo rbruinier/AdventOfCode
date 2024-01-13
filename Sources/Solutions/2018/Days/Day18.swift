@@ -9,52 +9,27 @@ final class Day18Solver: DaySolver {
 
 	private var input: Input!
 
+	private typealias Grid = Grid2D<Tile>
+
 	private struct Input {
 		let grid: Grid
 	}
 
-	private struct Grid: Hashable, CustomStringConvertible {
-		let tiles: [[Tile]]
-		let size: Size
+	private enum Tile: String, Hashable, CustomStringConvertible {
+		case open = "."
+		case trees = "|"
+		case lumberyard = "#"
 
 		var description: String {
-			var line = ""
-
-			for y in 0 ..< size.height {
-				for x in 0 ..< size.width {
-					line += tiles[y][x].description
-				}
-
-				line += "\n"
-			}
-
-			return line
-		}
-
-		func hash(into hasher: inout Hasher) {
-			hasher.combine(tiles)
-		}
-	}
-
-	private enum Tile: Hashable, CustomStringConvertible {
-		case open
-		case trees
-		case lumberyard
-
-		var description: String {
-			switch self {
-			case .open: "."
-			case .trees: "|"
-			case .lumberyard: "#"
-			}
+			rawValue
 		}
 	}
 
 	private func updateGrid(_ grid: Grid) -> Grid {
 		var newTiles = grid.tiles
 
-		for y in 0 ..< grid.size.height {
-			for x in 0 ..< grid.size.width {
+		for y in 0 ..< grid.dimensions.height {
+			for x in 0 ..< grid.dimensions.width {
 				var numberOfOpen = 0
 				var numberOfTrees = 0
 				var numberOfLumberyards = 0
@@ -62,8 +37,8 @@ final class Day18Solver: DaySolver {
 				for sampleY in y - 1 ... y + 1 {
 					for sampleX in x - 1 ... x + 1 where !(sampleY == y && sampleX == x) {
 						guard
-							(0 ..< grid.size.width).contains(sampleX),
-							(0 ..< grid.size.height).contains(sampleY)
+							(0 ..< grid.dimensions.width).contains(sampleX),
+							(0 ..< grid.dimensions.height).contains(sampleY)
 						else {
 							continue
 						}
@@ -87,7 +62,7 @@ final class Day18Solver: DaySolver {
 			}
 		}
 
-		return .init(tiles: newTiles, size: grid.size)
+		return .init(tiles: newTiles, dimensions: grid.dimensions)
 	}
 
 	func solvePart1() -> Int {
@@ -143,26 +118,6 @@ final class Day18Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) {
-		let tiles: [Point2D: Tile] = rawString.parseGrid { char, _ in
-			switch char {
-			case ".": .open
-			case "|": .trees
-			case "#": .lumberyard
-			default: preconditionFailure()
-			}
-		}
-
-		let size = Size(
-			width: tiles.keys.map(\.x).max()! + 1,
-			height: tiles.keys.map(\.y).max()! + 1
-		)
-
-		var gridTiles: [[Tile]] = .init(repeating: .init(repeating: .open, count: size.width), count: size.height)
-
-		for (point, tile) in tiles {
-			gridTiles[point.y][point.x] = tile
-		}
-
-		input = .init(grid: .init(tiles: gridTiles, size: size))
+		input = .init(grid: rawString.parseGrid2D())
 	}
 }

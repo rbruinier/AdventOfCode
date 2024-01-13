@@ -97,3 +97,20 @@ public enum Direction: Int, Equatable {
 		}
 	}
 }
+
+// MARK: - CustomStringConvertible
+
+extension Direction: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .north: "N"
+		case .northEast: "NE"
+		case .east: "E"
+		case .southEast: "SE"
+		case .south: "S"
+		case .southWest: "SW"
+		case .west: "W"
+		case .northWest: "NW"
+		}
+	}
+}

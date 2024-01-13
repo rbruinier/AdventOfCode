@@ -87,30 +87,30 @@ final class Day19Solver: DaySolver {
 		return registers[0]
 	}
 
-	/// By looking at what section of the program was repeating the most I reverse engineered the instructions of that section and rewrote it in a function.
-	///
-	/// It adds the input (r4) to r0 if it r3 can be divided by r4.
-	///
-	/// Section:
-	/// 02: seti 1 5 5 -> R5 = 1							-> IP + 1
-	/// 03: mulr 4 5 1 -> R1 = R4 x R5						-> IP + 1
-	/// 04: eqrr 1 3 1 -> IF R1 == R3 THEN R1 = 1 ELSE R1 = 0	-> IP + 1
-	/// 05: addr 1 2 2 -> R2 = R1 + R2						-> IP + 1 OR + 2 IF R1 == R3
-	/// 06: addi 2 1 2 -> R2 = R2 + 1						-> IP + 2 // we skip 7 if R != R3
-	/// 07: addr 4 0 0 -> R0 = R4 + R0						-> IP + 1
-	/// 08: addi 5 1 5 -> R5 = R5 + 1						-> IP + 1
-	/// 09: gtrr 5 3 1 -> R1 = R5 > R3 ? 1 : 0					-> IP + 1
-	/// 10: addr 2 1 2 -> R2 = R2 + R1						-> IP + 1 OR + 2 IF R5 > R3
-	/// 11: seti 2 6 2 -> R2 = 2
-	///
-	/// In pseudocode:
-	///	repeat {
-	///  let r1 = r4 x r5
-	///  if r1 == r3 {
-	///   r0 += r4
-	///  }
-	///  r5 += 1
-	/// } while r5 <= r3
+	// By looking at what section of the program was repeating the most I reverse engineered the instructions of that section and rewrote it in a function.
+	//
+	// It adds the input (r4) to r0 if it r3 can be divided by r4.
+	//
+	// Section:
+	// 02: seti 1 5 5 -> R5 = 1                 -> IP + 1
+	// 03: mulr 4 5 1 -> R1 = R4 * R5           -> IP + 1
+	// 04: eqrr 1 3 1 -> R1 = R1 == R3 ? 1 : 0  -> IP + 1
+	// 05: addr 1 2 2 -> R2 = R1 + R2           -> IP + 1 OR + 2 IF R1 == R3
+	// 06: addi 2 1 2 -> R2 = R2 + 1            -> IP + 2 // we skip 7 if R != R3
+	// 07: addr 4 0 0 -> R0 = R4 + R0           -> IP + 1
+	// 08: addi 5 1 5 -> R5 = R5 + 1            -> IP + 1
+	// 09: gtrr 5 3 1 -> R1 = R5 > R3 ? 1 : 0   -> IP + 1
+	// 10: addr 2 1 2 -> R2 = R2 + R1           -> IP + 1 OR + 2 IF R5 > R3
+	// 11: seti 2 6 2 -> R2 = 2
+	//
+	// In pseudocode:
+	// repeat {
+	//  let r1 = r4 * r5
+	//  if r1 == r3 {
+	//   r0 += r4
+	//  }
+	//  r5 += 1
+	// } while r5 <= r3
 	@inline(__always)
 	private func performDivisorSection(_ registers: inout [Int]) {
 		registers[0] += (registers[3] % registers[4]) == 0 ? registers[4] : 0
