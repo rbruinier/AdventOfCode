@@ -29,132 +29,92 @@ final class Day21Solver: DaySolver {
 		var firstFoundR3Value = 0
 		var lastUniqueR3Value = 0
 
-		var r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0
+		// r5 is IP but has no purpose in our implementation
+
+		var r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0
+
+		// This part is useless:
 
 		// 00 seti 123 0 3
-		r3 = 123
-		r5 += 1
-
 		// 01 bani 3 456 3
-		r3 = r3 & 456
-		r5 += 1
-
 		// 02 eqri 3 72 3
-		r3 = r3 == 72 ? 1 : 0
-		r5 += 1
-
 		// 03 addr 3 5 5
-		r5 = r3 + r5 // here we add an extra to IP so we skip 04
-		r5 += 1
-
 		// 04 seti 0 0 5
-
 		// 05 seti 0 0 3
-		r3 = 0
-		r5 += 1
 
 		while true {
 			// 06 bori 3 65536 2
 			r2 = r3 | 65536
-			r5 += 1
 
 			// 07 seti 14070682 0 3
-			r3 = 14_070_682
-			r5 += 1
+			r3 = 14070682
 
 			// 08 bani 2 255 1
 			while true {
 				r1 = r2 & 255
-				r5 += 1
 
 				// 09 addr 3 1 3
 				r3 = r3 + r1
-				r5 += 1
 
 				// 10 bani 3 16777215 3
-				r3 = r3 & 16_777_215
-				r5 += 1
+				r3 = r3 & 16777215
 
 				// 11 muli 3 65899 3
 				r3 = r3 * 65899
-				r5 += 1
 
 				// 12 bani 3 16777215 3
-				r3 = r3 & 16_777_215
-				r5 += 1
+				r3 = r3 & 16777215
 
 				// 13 gtir 256 2 1
 				r1 = r2 < 256 ? 1 : 0
-				r5 += 1
 
 				if r1 == 1 {
 					break
 				}
 
 				// 14 addr 1 5 5
-				r5 = r1 + r5
-				r5 += 1
 
 				// 15 addi 5 1 5 // we skip 16 as we add extra 1 to IP
-				r5 = r5 + 1
-				r5 += 1
 
 				// 16 seti 27 8 5
 
 				// 17 seti 0 3 1
 				r1 = 0
-				r5 += 1
 
 				// 18 addi 1 1 4
 				while true {
 					r4 = r1 + 1
-					r5 += 1
 
 					// 19 muli 4 256 4
 					r4 = r4 * 256
-					r5 += 1
 
 					// 20 gtrr 4 2 4
 					r4 = r4 > r2 ? 1 : 0
-					r5 += 1
 
 					if r4 == 1 {
-						r5 = 26
-
 						break
 					}
 
 					// 21 addr 4 5 5
-					r5 = r4 + r5
-					r5 += 1
 
 					// 22 addi 5 1 5 // we jump to 24
-					r5 = r5 + 1
-					r5 += 1
 
 					// 23 seti 25 8 5
 
 					// 24 addi 1 1 1
 					r1 += 1
-					r5 += 1
 
 					// 25 seti 17 9 5
-					r5 = 17
-					r5 += 1
 				}
 
 				// 26 setr 1 4 2
 				r2 = r1
-				r5 += 1
 
 				// 27 seti 7 5 5 -> go to 8
-				r5 = 7
-				r5 += 1
 			}
 
 			// 28 eqrr 3 0 1
 			r1 = r3 == r0 ? 1 : 0
-			r5 += 1
 
 			if uniqueR3s.isEmpty {
 				firstFoundR3Value = r3
@@ -170,7 +130,6 @@ final class Day21Solver: DaySolver {
 
 			// 29 addr 1 5 5
 			// 30 seti 5 4 5
-			r5 = 6
 		}
 
 		return .init(lowestNumberOfInstructions: firstFoundR3Value, highestNumberOfInstructions: lastUniqueR3Value)

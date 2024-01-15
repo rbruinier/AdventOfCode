@@ -32,8 +32,6 @@ final class Day01Solver: DaySolver {
 				frequencies.insert(frequency)
 			}
 		}
-
-		fatalError()
 	}
 
 	func parseInput(rawString: String) {

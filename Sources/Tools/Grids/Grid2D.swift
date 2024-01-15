@@ -41,7 +41,7 @@ public extension String {
 		var tiles: [[Tile]] = .init(repeating: [], count: dimensions.height)
 
 		for (y, line) in allLines().enumerated() {
-			for (x, character) in line.enumerated() {
+			for (_, character) in line.enumerated() {
 				guard let tile = Tile(rawValue: String(character)) else {
 					preconditionFailure()
 				}

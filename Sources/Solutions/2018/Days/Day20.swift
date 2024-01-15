@@ -151,7 +151,7 @@ final class Day20Solver: DaySolver {
 			preconditionFailure("Expect only one root set of instructions")
 		}
 
-		var map = Map()
+		let map = Map()
 
 		fillMap(map, startingAt: .zero, instructions: instructions[0])
 
