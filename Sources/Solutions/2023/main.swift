@@ -5,7 +5,7 @@ print("Advent of Code 2023 🎄")
 
 extension DaySolver {
 	var year: Int {
-		fatalError("Make sure to set the year")
+		2023
 	}
 }
 
