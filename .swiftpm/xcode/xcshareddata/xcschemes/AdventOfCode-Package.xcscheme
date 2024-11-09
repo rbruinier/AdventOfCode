@@ -188,6 +188,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Examples"
+               BuildableName = "Examples"
+               BlueprintName = "Examples"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -223,9 +237,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Solutions2024"
-            BuildableName = "Solutions2024"
-            BlueprintName = "Solutions2024"
+            BlueprintIdentifier = "Examples"
+            BuildableName = "Examples"
+            BlueprintName = "Examples"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -249,9 +263,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Solutions2024"
-            BuildableName = "Solutions2024"
-            BlueprintName = "Solutions2024"
+            BlueprintIdentifier = "Examples"
+            BuildableName = "Examples"
+            BlueprintName = "Examples"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>

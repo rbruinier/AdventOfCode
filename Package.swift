@@ -12,6 +12,7 @@ var package = Package(
 	],
 	products: [
 		.library(name: "Tools", targets: ["Tools"]),
+		.executable(name: "Examples", targets: ["Examples"]),
 		.executable(name: "VisualizerTestApp", targets: ["VisualizerTestApp"]),
 		.executable(name: "Solutions2015", targets: ["Solutions2015"]),
 		.executable(name: "Solutions2016", targets: ["Solutions2016"]),
@@ -48,6 +49,15 @@ var package = Package(
 			name: "VisualizerTestApp",
 			dependencies: [
 				"Tools"
+			]
+		),
+		.executableTarget(
+			name: "Examples",
+			dependencies: [
+				"Tools"
+			],
+			resources: [
+				.copy("Input"),
 			]
 		),
 		.testTarget(

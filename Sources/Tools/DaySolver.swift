@@ -5,6 +5,8 @@ public protocol DaySolver {
 	associatedtype Part1Result: Equatable
 	associatedtype Part2Result: Equatable
 
+	var customFilename: String? { get }
+	
 	var dayNumber: Int { get }
 	var year: Int { get }
 
@@ -21,6 +23,10 @@ public protocol DaySolver {
 
 public extension DaySolver {
 	func createVisualizer() -> Visualizer? {
+		nil
+	}
+	
+	var customFilename: String? {
 		nil
 	}
 }
@@ -79,7 +85,7 @@ private func solveDay(_ solver: any DaySolver) -> Result {
 	)
 }
 
-public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle: Bundle) {
+public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle: Bundle, customInputLoader: ((_ daySolver: any DaySolver, _ bundle: Bundle) -> String)? = nil) {
 	print("Parsing inputs")
 
 	let days: [any DaySolver]
@@ -91,7 +97,11 @@ public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle:
 	}
 
 	days.forEach { day in
-		day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
+		if let customInputLoader {
+			day.parseInput(rawString: customInputLoader(day, bundle))
+		} else {
+			day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
+		}
 	}
 
 	print("Start solving days")
