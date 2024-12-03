@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.9
 
 import Foundation
 import PackageDescription
@@ -8,7 +8,7 @@ import PackageDescription
 var package = Package(
 	name: "AdventOfCode",
 	platforms: [
-		.macOS(.v12),
+		.macOS(.v13),
 	],
 	products: [
 		.library(name: "Tools", targets: ["Tools"]),
