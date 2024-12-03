@@ -2,25 +2,66 @@ import Foundation
 import Tools
 
 final class Day02Solver: DaySolver {
-    let dayNumber: Int = 2
+	let dayNumber: Int = 2
 
-	let expectedPart1Result = 0
-	let expectedPart2Result = 0
+	let expectedPart1Result = 230
+	let expectedPart2Result = 301
 
-    private var input: Input!
+	private var input: Input!
 
-    private struct Input {
-    }
+	struct Report {
+		let levels: [Int]
+	}
 
-    func solvePart1() -> Int {
-        return 0
-    }
+	private struct Input {
+		let reports: [Report]
+	}
 
-    func solvePart2() -> Int {
-        return 0
-    }
+	private func isSafe(levels: [Int]) -> Bool {
+		let isIncreasing = levels.last! > levels.first!
 
-    func parseInput(rawString: String) {
-        input = .init()
-    }
+		for index in 1 ..< levels.count {
+			let delta = levels[index] - levels[index - 1]
+
+			guard (1 ... 3).contains(abs(delta)), (isIncreasing && delta > 0) || (!isIncreasing && delta < 0) else {
+				return false
+			}
+		}
+
+		return true
+	}
+
+	private func isSafeWithErrorMargin(levels: [Int]) -> Bool {
+		if isSafe(levels: levels) {
+			return true
+		}
+
+		for index in 0 ..< levels.count {
+			var newLevels = levels
+
+			newLevels.remove(at: index)
+
+			if isSafe(levels: newLevels) {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	func solvePart1() -> Int {
+		input.reports.count { isSafe(levels: $0.levels) }
+	}
+
+	func solvePart2() -> Int {
+		input.reports.count { isSafeWithErrorMargin(levels: $0.levels) }
+	}
+
+	func parseInput(rawString: String) {
+		let reports: [Report] = rawString.allLines().map { line in
+			Report(levels: line.components(separatedBy: .whitespaces).map { Int($0)! })
+		}
+
+		input = .init(reports: reports)
+	}
 }
