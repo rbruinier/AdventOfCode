@@ -43,10 +43,8 @@ final class Day03Solver: DaySolver {
 				isEnabled = true
 			} else if operation.firstMatch(of: dontRegex) != nil {
 				isEnabled = !allowEnabling || false
-			} else if let mul = operation.firstMatch(of: mulRegex) {
-				if isEnabled {
-					total += mul.1 * mul.2
-				}
+			} else if let mul = operation.firstMatch(of: mulRegex), isEnabled {
+				total += mul.1 * mul.2
 			}
 		}
 
