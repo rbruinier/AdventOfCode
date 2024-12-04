@@ -1,4 +1,4 @@
-public enum Direction: Int, Equatable {
+public enum Direction: Int, Equatable, Sendable {
 	case north = 0
 	case east = 1
 	case south = 2

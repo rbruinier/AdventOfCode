@@ -1,5 +1,5 @@
 /// Cube coordinates (https://www.redblobgames.com/grids/hexagons/#coordinates)
-public struct HexPoint: Hashable {
+public struct HexPoint: Hashable, Sendable {
 	public var q = 0
 	public var r = 0
 	public var s = 0

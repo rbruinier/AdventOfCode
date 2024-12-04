@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Point3D {
+public struct Point3D: Sendable {
 	public var x: Int = 0
 	public var y: Int = 0
 	public var z: Int = 0
