@@ -5,7 +5,7 @@ final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
 	let expectedPart1Result = 2545
-	let expectedPart2Result = 0
+	let expectedPart2Result = 1886
 
 	private var input: Input!
 
@@ -16,20 +16,17 @@ final class Day04Solver: DaySolver {
 	func solvePart1() -> Int {
 		var counter = 0
 
-		let matchingLetters: [String] = ["M", "A", "S"]
-		let possibleDirections: [Direction] = Direction.all
+		let matchingCharacters: [String] = ["M", "A", "S"]
 
 		for (startPoint, startCharacter) in input.map where startCharacter == "X" {
-			directionLoop: for direction in possibleDirections {
-				var currentPoint = startPoint
+			directionLoop: for direction in Direction.all {
+				var currentPoint = startPoint.moved(to: direction)
 				var index = 0
 
-				currentPoint = currentPoint.moved(to: direction)
-
-				while index < 3, let nextCharacter = input.map[currentPoint], nextCharacter == matchingLetters[index] {
+				while index < 3, let nextCharacter = input.map[currentPoint], nextCharacter == matchingCharacters[index] {
 					index += 1
 
-					currentPoint = currentPoint.moved(to: direction)
+					currentPoint.move(to: direction)
 				}
 
 				counter += index == 3 ? 1 : 0

@@ -79,6 +79,10 @@ public struct Point2D: Hashable, Equatable {
 		}
 	}
 
+	public mutating func move(to direction: Direction, steps: Int = 1) {
+		self = moved(to: direction, steps: steps)
+	}
+
 	public func neighbors(includingDiagonals: Bool = false) -> [Point2D] {
 		if includingDiagonals {
 			[
