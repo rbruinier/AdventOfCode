@@ -37,4 +37,4 @@ let days: [any DaySolver] = [
 //	Day25Solver()
 ]
 
-solveDays(days, bundle: .module)
+await solveDays(days, bundle: .module)

@@ -1,4 +1,4 @@
-public struct Size: Equatable {
+public struct Size: Equatable, Sendable {
 	public let width: Int
 	public let height: Int
 

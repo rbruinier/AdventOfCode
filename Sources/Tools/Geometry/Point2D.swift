@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Point2D: Hashable, Equatable {
+public struct Point2D: Hashable, Equatable, Sendable {
 	public enum Degrees: Int {
 		case zero = 0
 		case ninety = 90

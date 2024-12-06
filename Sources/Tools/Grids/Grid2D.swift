@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Grid2D<Tile: Hashable>: Hashable {
+public struct Grid2D<Tile: Hashable & Sendable>: Hashable, Sendable {
 	public var tiles: [[Tile]]
 	public let dimensions: Size
 

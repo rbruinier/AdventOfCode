@@ -1,4 +1,3 @@
-import Darwin
 import Foundation
 
 public protocol DaySolver {
@@ -6,27 +5,25 @@ public protocol DaySolver {
 	associatedtype Part2Result: Equatable
 
 	var customFilename: String? { get }
-	
+
 	var dayNumber: Int { get }
 	var year: Int { get }
 
 	var expectedPart1Result: Part1Result { get }
 	var expectedPart2Result: Part2Result { get }
 
-	func parseInput(rawString: String)
+	func parseInput(rawString: String) async
 
-	func solvePart1() -> Part1Result
-	func solvePart2() -> Part2Result
+	func solvePart1() async -> Part1Result
+	func solvePart2() async -> Part2Result
 
 	func createVisualizer() -> Visualizer?
 }
 
 public extension DaySolver {
+	var customFilename: String? { nil }
+
 	func createVisualizer() -> Visualizer? {
-		nil
-	}
-	
-	var customFilename: String? {
 		nil
 	}
 }
@@ -50,13 +47,13 @@ private struct Result {
 	let part2Correct: Bool
 }
 
-private func solveDay(_ solver: any DaySolver) -> Result {
+private func solveDay(_ solver: any DaySolver) async -> Result {
 	print("Solving day \(solver.dayNumber):")
 
 	// part 1
 	var startTime = mach_absolute_time()
 
-	let result1 = solver.solvePart1()
+	let result1 = await solver.solvePart1()
 
 	var formattedDuration = String(format: "%.6f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
@@ -69,7 +66,7 @@ private func solveDay(_ solver: any DaySolver) -> Result {
 	// part 2
 	startTime = mach_absolute_time()
 
-	let result2 = solver.solvePart2()
+	let result2 = await solver.solvePart2()
 
 	formattedDuration = String(format: "%.6f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
@@ -85,7 +82,7 @@ private func solveDay(_ solver: any DaySolver) -> Result {
 	)
 }
 
-public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle: Bundle, customInputLoader: ((_ daySolver: any DaySolver, _ bundle: Bundle) -> String)? = nil) {
+public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle: Bundle, customInputLoader: ((_ daySolver: any DaySolver, _ bundle: Bundle) -> String)? = nil) async {
 	print("Parsing inputs")
 
 	let days: [any DaySolver]
@@ -96,11 +93,11 @@ public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle:
 		days = allDays
 	}
 
-	days.forEach { day in
+	for day in days {
 		if let customInputLoader {
-			day.parseInput(rawString: customInputLoader(day, bundle))
+			await day.parseInput(rawString: customInputLoader(day, bundle))
 		} else {
-			day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
+			await day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
 		}
 	}
 
@@ -111,10 +108,10 @@ public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle:
 	var timesPerDay: [Int: Double] = [:]
 	var incorrectDays: [Int] = []
 
-	days.forEach { day in
+	for day in days {
 		let dayStartTime = mach_absolute_time()
 
-		let result = solveDay(day)
+		let result = await solveDay(day)
 
 		timesPerDay[day.dayNumber] = getSecondsFromMachTimer(duration: mach_absolute_time() - dayStartTime)
 

@@ -16,7 +16,7 @@ final class Day06Solver: DaySolver {
 		var description: String { rawValue }
 	}
 
-	private struct Input {
+	private struct Input: Sendable {
 		let map: Grid2D<Tile>
 		let startPosition: Point2D
 	}
@@ -42,7 +42,7 @@ final class Day06Solver: DaySolver {
 		return visited
 	}
 
-	func isLooping(map: Grid2D<Tile>, startPosition: Point2D) -> Bool {
+	private static func isLooping(map: Grid2D<Tile>, startPosition: Point2D) async -> Bool {
 		var position = startPosition
 		var direction = Direction.north
 
@@ -79,21 +79,27 @@ final class Day06Solver: DaySolver {
 		getPath(map: input.map.tiles, startPosition: input.startPosition).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2() async -> Int {
 		let originalMap = input.map
 		let startPosition = input.startPosition
 
 		let originalPath = getPath(map: originalMap.tiles, startPosition: startPosition)
 
-		let pointsToTest: Set<Point2D> = originalPath.subtracting([startPosition])
+		let pointsToTest = originalPath.subtracting([startPosition])
 
-		return pointsToTest.count(where: { point in
-			var newMap = input.map
+		return await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
+			for point in pointsToTest {
+				taskGroup.addTask {
+					var newMap = originalMap
 
-			newMap.tiles[point.y][point.x] = .obstacle
+					newMap.tiles[point.y][point.x] = .obstacle
 
-			return isLooping(map: newMap, startPosition: startPosition)
-		})
+					return await Self.isLooping(map: newMap, startPosition: startPosition) ? 1 : 0
+				}
+			}
+
+			return await taskGroup.reduce(into: 0) { $0 += $1 }
+		}
 	}
 
 	func parseInput(rawString: String) {
