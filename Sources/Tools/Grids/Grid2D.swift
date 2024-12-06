@@ -12,6 +12,10 @@ public struct Grid2D<Tile: Hashable>: Hashable {
 		self.tiles = tiles
 		self.dimensions = dimensions
 	}
+	
+	public func isSafe(position: Point2D) -> Bool {
+		(0 ..< dimensions.height).contains(position.y) && (0 ..< dimensions.width).contains(position.x)
+	}
 }
 
 // MARK: - CustomStringConvertible
