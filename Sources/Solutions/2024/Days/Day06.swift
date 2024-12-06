@@ -51,7 +51,7 @@ final class Day06Solver: DaySolver {
 			let direction: Direction
 		}
 
-		var path: Set<Visited> = []
+		var path: Set<Visited> = .init(minimumCapacity: 8000)
 
 		while map.isSafe(position: position) {
 			let visited = Visited(position: position, direction: direction)
