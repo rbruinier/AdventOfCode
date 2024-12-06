@@ -85,17 +85,7 @@ final class Day06Solver: DaySolver {
 
 		let originalPath = getPath(map: originalMap.tiles, startPosition: startPosition)
 
-		var pointsToTest: Set<Point2D> = []
-
-		for pathPoint in originalPath {
-			for point in pathPoint.neighbors(includingDiagonals: false) {
-				guard input.map.isSafe(position: point), originalMap.tiles[point.y][point.x] == .empty, point != startPosition else {
-					continue
-				}
-
-				pointsToTest.insert(point)
-			}
-		}
+		let pointsToTest: Set<Point2D> = originalPath.subtracting([startPosition])
 
 		return pointsToTest.count(where: { point in
 			var newMap = input.map
