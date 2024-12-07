@@ -19,7 +19,7 @@ final class Day07Solver: DaySolver {
 	}
 
 	private func solveEquation(expectedResult: Int, operands: [Int], currentValue: Int, allowConcatenation: Bool) -> Bool {
-		guard let nextOperand = operands.first else {
+		guard let nextOperand = operands.first, currentValue <= expectedResult else {
 			return expectedResult == currentValue
 		}
 
