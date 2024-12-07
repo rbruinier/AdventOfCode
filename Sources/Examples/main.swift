@@ -13,7 +13,7 @@ let days: [any DaySolver] = [
 	GridExample(),
 ]
 
-solveDays(days, bundle: .module, customInputLoader: { day, bundle in
+await solveDays(days, bundle: .module, customInputLoader: { day, bundle in
 	guard let customFilename = day.customFilename else {
 		fatalError()
 	}

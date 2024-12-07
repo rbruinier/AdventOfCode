@@ -55,7 +55,7 @@ private func solveDay(_ solver: any DaySolver) async -> Result {
 
 	let result1 = await solver.solvePart1()
 
-	var formattedDuration = String(format: "%.6f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
+	var formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
 	print(" -> part 1: \(result1). Solved in \(formattedDuration) seconds")
 
@@ -68,7 +68,7 @@ private func solveDay(_ solver: any DaySolver) async -> Result {
 
 	let result2 = await solver.solvePart2()
 
-	formattedDuration = String(format: "%.6f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
+	formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
 	print(" -> part 2: \(result2). Solved in \(formattedDuration) seconds")
 
