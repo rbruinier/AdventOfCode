@@ -47,6 +47,7 @@ final class Day07Solver: DaySolver {
 		}.map(\.result).reduce(0, +)
 	}
 
+	
 	func solvePart2() async -> Int {
 		await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
 			for equation in input.equations {
