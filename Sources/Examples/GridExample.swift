@@ -30,10 +30,10 @@ final class GridExample: DaySolver {
 	}
 
 	func solvePart1() -> Int {
-		let grid = input.grid
-
-		print("Automatic grid debug logging:")
-		print(grid.description)
+//		let grid = input.grid
+//
+//		print("Automatic grid debug logging:")
+//		print(grid.description)
 		
 		return 0
 	}

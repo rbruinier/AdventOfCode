@@ -95,7 +95,9 @@ public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle:
 
 	for day in days {
 		if let customInputLoader {
-			await day.parseInput(rawString: customInputLoader(day, bundle))
+			let rawString = customInputLoader(day, bundle)
+			
+			await day.parseInput(rawString: rawString)
 		} else {
 			await day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
 		}

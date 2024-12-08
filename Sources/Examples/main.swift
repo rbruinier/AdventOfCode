@@ -11,14 +11,17 @@ extension DaySolver {
 
 let days: [any DaySolver] = [
 	GridExample(),
+	ShortestPathInGridExample()
 ]
 
-await solveDays(days, bundle: .module, customInputLoader: { day, bundle in
+func customLoader(day: any DaySolver, bundle: Bundle) -> String {
 	guard let customFilename = day.customFilename else {
 		fatalError()
 	}
-	
+
 	let fileURL = bundle.url(forResource: customFilename, withExtension: "txt", subdirectory: "Input")!
 
 	return try! String(contentsOf: fileURL)
-})
+}
+
+await solveDays(days, bundle: .module, customInputLoader: customLoader)
