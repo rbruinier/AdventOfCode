@@ -46,24 +46,19 @@ final class Day09Solver: DaySolver {
 	private static func compactFilemap(_ originalFilemap: [Int?]) -> [Int] {
 		var filemap = originalFilemap
 
-		for index in (0 ..< originalFilemap.count).reversed() {
-			guard let blockID = originalFilemap[index] else {
-				continue
+		var emptyIndex = filemap.firstIndex(where: { $0 == nil })!
+		var valueIndex = filemap.lastIndex(where: { $0 != nil })!
+
+		while valueIndex > emptyIndex {
+			filemap[emptyIndex] = filemap[valueIndex]
+			filemap[valueIndex] = nil
+
+			while filemap[emptyIndex] != nil {
+				emptyIndex += 1
 			}
 
-			var replacedBlock = false
-
-			for emptyIndex in 0 ..< index {
-				if filemap[emptyIndex] == nil {
-					filemap[emptyIndex] = blockID
-					filemap[index] = nil
-					replacedBlock = true
-					break
-				}
-			}
-
-			if !replacedBlock {
-				break
+			while filemap[valueIndex] == nil {
+				valueIndex -= 1
 			}
 		}
 
@@ -76,6 +71,11 @@ final class Day09Solver: DaySolver {
 
 		for (index, block) in blocks.enumerated() {
 			let isFileBlock = index % 2 == 0
+
+			// there are some empty blocks we can ignore straight away
+			if block == 0 {
+				continue
+			}
 
 			if isFileBlock {
 				dataBlocks.append(.init(blockType: .file(id: index / 2), size: block))
@@ -99,6 +99,9 @@ final class Day09Solver: DaySolver {
 			return id
 		}
 
+		// by keeping track of previous index of last length space we can save time by skipping previously checked items
+		var previousIndexByLength: [Int: Int] = [:]
+		
 		identifierLoop: for identifier in identifiers.reversed() {
 			let originalIndex = dataBlocks.firstIndex(where: {
 				guard case .file(let id) = $0.blockType else {
@@ -109,8 +112,14 @@ final class Day09Solver: DaySolver {
 			})!
 
 			let fileDataBlock = dataBlocks[originalIndex]
+			
+			let startIndex: Int = previousIndexByLength[fileDataBlock.size, default: 0]
 
-			for newIndex in 0 ..< originalIndex {
+			guard startIndex < originalIndex else {
+				continue identifierLoop
+			}
+			
+			for newIndex in startIndex ..< originalIndex {
 				let newIndexDataBlock = dataBlocks[newIndex]
 
 				switch newIndexDataBlock.blockType {
@@ -130,6 +139,8 @@ final class Day09Solver: DaySolver {
 						dataBlocks.insert(fileDataBlock, at: newIndex)
 					}
 
+					previousIndexByLength[fileDataBlock.size] = newIndex + 1
+					
 					continue identifierLoop
 				case .file:
 					continue
