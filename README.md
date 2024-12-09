@@ -17,6 +17,10 @@ Links to the solutions:
  
  Timing is done on a 2021 M1 Pro with 32 GB RAM.
  
+ # Inputs
+ 
+ Inputs are in a private repository and should be put in the Sources/AdventOfCodeInputs folder.
+ 
 # 3rd party frameworks
 
  * Swift Collections: For the Deque type allowing for faster popping of first elements from collections (vs arrays).

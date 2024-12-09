@@ -1,0 +1,3 @@
+[submodule "Sources/AdventOfCodeInputs"]
+	path = Sources/AdventOfCodeInputs
+	url = https://github.com/rbruinier/AdventOfCodeInputs

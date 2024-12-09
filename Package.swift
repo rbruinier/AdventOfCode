@@ -74,7 +74,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2015",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2015"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -89,7 +89,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2016",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2016"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -104,7 +104,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2017",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2017"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -119,7 +119,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2018",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2018"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -135,7 +135,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2019",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2019"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -149,7 +149,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2020",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2020"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -164,7 +164,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2021",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2021"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -178,7 +178,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2022",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2022"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -192,7 +192,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2023",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2023"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
@@ -206,7 +206,7 @@ var package = Package(
 			],
 			path: "Sources/Solutions/2024",
 			resources: [
-				.copy("Input"),
+				.copy("../../AdventOfCodeInputs/2024"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),

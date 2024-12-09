@@ -99,7 +99,7 @@ public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle:
 			
 			await day.parseInput(rawString: rawString)
 		} else {
-			await day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, in: bundle))
+			await day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, year: day.year, in: bundle))
 		}
 	}
 
