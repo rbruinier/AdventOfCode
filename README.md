@@ -19,7 +19,8 @@ Links to the solutions:
  
  # Inputs
  
- Inputs are in a private repository and should be put in the Sources/AdventOfCodeInputs folder.
+ Inputs are in a private repository and should be put in the Sources/Inputs folder with the following 
+ example path: "Sources/Inputs/2015/Day01.txt"
  
 # 3rd party frameworks
 
