@@ -19,26 +19,24 @@ final class Day10Solver: DaySolver {
 	}
 
 	private static func pathsFrom(_ startingPoint: Point2D, in heightmap: [Point2D: Int]) -> [[Point2D]] {
-		struct Path {
+		struct Node {
 			let path: [Point2D]
 			let currentHeight: Int
 		}
 
-		var stack: Deque<Path> = [.init(path: [startingPoint], currentHeight: 0)]
+		var stack: Deque<Node> = [.init(path: [startingPoint], currentHeight: 0)]
 
-		var paths: [Path] = []
+		var validNodes: [Node] = []
 
 		// BFS
 		while let path = stack.popFirst() {
 			if path.currentHeight == 9 {
-				paths.append(path)
+				validNodes.append(path)
 
 				continue
 			}
 
-			let position = path.path.last!
-
-			for neighbor in position.neighbors() {
+			for neighbor in path.path.last!.neighbors() {
 				guard let height = heightmap[neighbor], height == path.currentHeight + 1, !path.path.contains(neighbor) else {
 					continue
 				}
@@ -47,16 +45,14 @@ final class Day10Solver: DaySolver {
 			}
 		}
 
-		return paths.map(\.path)
+		return validNodes.map(\.path)
 	}
 
 	func solvePart1() async -> Int {
 		let heightmap = input.heightmap
 
-		let trailheads = Self.trailheads(in: heightmap)
-
 		return await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
-			for trailhead in trailheads {
+			for trailhead in Self.trailheads(in: heightmap) {
 				taskGroup.addTask {
 					let paths = Self.pathsFrom(trailhead, in: heightmap)
 
@@ -71,10 +67,8 @@ final class Day10Solver: DaySolver {
 	func solvePart2() async -> Int {
 		let heightmap = input.heightmap
 
-		let trailheads = Self.trailheads(in: heightmap)
-
 		return await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
-			for trailhead in trailheads {
+			for trailhead in Self.trailheads(in: heightmap) {
 				taskGroup.addTask {
 					let paths = Self.pathsFrom(trailhead, in: heightmap)
 
