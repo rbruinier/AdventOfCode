@@ -1,0 +1,84 @@
+--acronyms CBUUID,ID,UUID
+--allman false
+--assetliterals visual-width
+--asynccapturing 
+--beforemarks 
+--binarygrouping 4,8
+--categorymark "MARK: %c"
+--classthreshold 0
+--closingparen balanced
+--closurevoid remove
+--commas always
+--conflictmarkers reject
+--decimalgrouping ignore
+--elseposition same-line
+--emptybraces no-space
+--enumnamespaces always
+--enumthreshold 0
+--exponentcase lowercase
+--exponentgrouping disabled
+--extensionacl on-extension
+--extensionlength 0
+--extensionmark "MARK: - %t + %c"
+--fractiongrouping disabled
+--fragment false
+--funcattributes preserve
+--generictypes 
+--groupedextension "MARK: - %c"
+--guardelse auto
+--header ignore
+--hexgrouping 4,8
+--hexliteralcase uppercase
+--ifdef no-indent
+--importgrouping testable-last
+--indent tab
+--indentcase false
+--indentstrings false
+--lifecycle 
+--lineaftermarks true
+--linebreaks lf
+--markcategories true
+--markextensions if-not-empty
+--marktypes never
+--maxwidth none
+--modifierorder 
+--nevertrailing 
+--nospaceoperators 
+--nowrapoperators 
+--octalgrouping 4,8
+--operatorfunc spaced
+--organizetypes actor,class,enum,struct
+--patternlet inline
+--ranges spaced
+--redundanttype infer-locals-only
+--self remove
+--selfrequired debug,error,info,log,trace,warning
+--semicolons inline
+--shortoptionals always
+--smarttabs enabled
+--someany true
+--stripunusedargs closure-only
+--structthreshold 0
+--swiftversion 5.9
+--tabwidth 4
+--throwcapturing 
+--trailingclosures 
+--trimwhitespace always
+--typeattributes preserve
+--typeblanklines remove
+--typemark "MARK: - %t"
+--varattributes preserve
+--voidtype void
+--wraparguments before-first
+--wrapcollections before-first
+--wrapconditions before-first
+--wrapeffects preserve
+--wrapenumcases always
+--wrapparameters before-first
+--wrapreturntype if-multiline
+--wrapternary default
+--wraptypealiases preserve
+--xcodeindentation enabled
+--yodaswap always
+--disable blankLinesAtStartOfScope,conditionalAssignment
+--enable acronyms,blankLineAfterImports,isEmpty,markTypes,wrapEnumCases,wrapSwitchCases
