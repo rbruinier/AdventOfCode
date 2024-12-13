@@ -32,4 +32,4 @@ let yearsSolver = YearSolver(
 	]
 )
 
-await solveYear(yearsSolver, bundle: .module)
+await solveYear(yearsSolver, dayNumber: 13, bundle: .module)
