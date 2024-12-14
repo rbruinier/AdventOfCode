@@ -153,7 +153,7 @@ final class Day12Solver: DaySolver {
 					}
 				}
 
-				let numberOfSections = verticalIntersections.values.map(\.count).reduce(0, +) + horizontalIntersections.values.map(\.count).reduce(0, +)
+				let numberOfSections: Int = verticalIntersections.values.reduce(into: 0) { $0 += $1.count } + horizontalIntersections.values.reduce(into: 0) { $0 += $1.count }
 
 				result += visited.count * numberOfSections
 			}

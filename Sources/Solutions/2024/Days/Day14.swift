@@ -110,8 +110,6 @@ final class Day14Solver: DaySolver {
 		var robots: [Robot] = []
 
 		for line in rawString.allLines() {
-			// p=0,4 v=3,-3
-
 			let components = line.split(separator: " ")
 
 			let position = components[0].split(separator: "=")[1].split(separator: ",").map { Int($0)! }
