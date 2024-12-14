@@ -4,21 +4,19 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let workflows: [String: Workflow]
 		let parts: [Part]
 	}
 
-	private enum PartPiece: String, RawRepresentable {
+	enum PartPiece: String, RawRepresentable {
 		case x
 		case m
 		case a
 		case s
 	}
 
-	private struct Part {
+	struct Part {
 		let ratings: [PartPiece: Int]
 
 		var sum: Int {
@@ -26,13 +24,13 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	private enum Conditional {
+	enum Conditional {
 		case smallerThan(piece: PartPiece, value: Int, destination: Destination)
 		case greaterThan(piece: PartPiece, value: Int, destination: Destination)
 		case unconditionally(destination: Destination)
 	}
 
-	private enum Destination {
+	enum Destination {
 		case workflow(id: String)
 		case accepted
 		case rejected
@@ -46,7 +44,7 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	private struct Workflow {
+	struct Workflow {
 		var conditions: [Conditional]
 	}
 
@@ -103,7 +101,7 @@ final class Day19Solver: DaySolver {
 		case .workflow(let id): startWorkflowID = id
 		}
 
-		let workflow = input.workflows[startWorkflowID]!
+		let workflow = workflows[startWorkflowID]!
 		let condition = workflow.conditions[conditionsIndex]
 
 		switch condition {
@@ -133,7 +131,7 @@ final class Day19Solver: DaySolver {
 		case .workflow(let id): startWorkflowID = id
 		}
 
-		let workflow = input.workflows[startWorkflowID]!
+		let workflow = workflows[startWorkflowID]!
 		let condition = workflow.conditions[conditionIndex]
 
 		switch condition {
@@ -152,15 +150,15 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.parts.map { isAccepted(part: $0, workflows: input.workflows, destination: .workflow(id: "in")) }.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solveRanges(.init(), workflows: input.workflows, destination: .workflow(id: "in"))
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var workflows: [String: Workflow] = [:]
 		var parts: [Part] = []
 
@@ -201,6 +199,6 @@ final class Day19Solver: DaySolver {
 			}
 		}
 
-		input = .init(workflows: workflows, parts: parts)
+		return .init(workflows: workflows, parts: parts)
 	}
 }

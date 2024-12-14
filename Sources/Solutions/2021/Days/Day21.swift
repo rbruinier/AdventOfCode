@@ -4,9 +4,7 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let startPosition1: Int
 		let startPosition2: Int
 	}
@@ -87,7 +85,7 @@ final class Day21Solver: DaySolver {
 		return wins
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var position1 = input.startPosition1 - 1
 		var position2 = input.startPosition2 - 1
 
@@ -121,7 +119,7 @@ final class Day21Solver: DaySolver {
 		return diceCount * min(score1, score2)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let position1 = input.startPosition1 - 1
 		let position2 = input.startPosition2 - 1
 
@@ -141,7 +139,7 @@ final class Day21Solver: DaySolver {
 		return max(wins.player1, wins.player2)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(startPosition1: 3, startPosition2: 10)
+	func parseInput(rawString: String) -> Input {
+		return .init(startPosition1: 3, startPosition2: 10)
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let track: [Point2D: Segment]
 		let robots: [Point2D: Robot]
 	}
@@ -182,7 +180,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var robots = input.robots
 
 		while true {
@@ -199,7 +197,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var robots = input.robots
 
 		while true {
@@ -222,7 +220,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var track: [Point2D: Segment] = [:]
 		var robots: [Point2D: Robot] = [:]
 
@@ -255,6 +253,6 @@ final class Day13Solver: DaySolver {
 			}
 		}
 
-		input = .init(track: track, robots: robots)
+		return .init(track: track, robots: robots)
 	}
 }

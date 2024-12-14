@@ -9,13 +9,11 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let monkeys: [String: Operation]
 	}
 
-	private enum Operation {
+	enum Operation {
 		case value(Int)
 		case add(a: String, b: String)
 		case sub(a: String, b: String)
@@ -121,11 +119,11 @@ final class Day21Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solvePart1ForID("root", monkeys: input.monkeys)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var monkeys = input.monkeys
 
 		let rootOperands = monkeys["root"]!.operands!
@@ -145,7 +143,7 @@ final class Day21Solver: DaySolver {
 		return humnValue
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var monkeys: [String: Operation] = [:]
 
 		for line in rawString.allLines() {
@@ -171,6 +169,6 @@ final class Day21Solver: DaySolver {
 			monkeys[id] = operation
 		}
 
-		input = .init(monkeys: monkeys)
+		return .init(monkeys: monkeys)
 	}
 }

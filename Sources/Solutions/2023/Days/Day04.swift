@@ -4,13 +4,11 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let cards: [Card]
 	}
 
-	private struct Card {
+	struct Card {
 		let winningNumbers: Set<Int>
 		let myNumbers: Set<Int>
 
@@ -34,11 +32,11 @@ final class Day04Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.cards.map(\.score).reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var copiesPerCard: [Int: Int] = [:]
 
 		for index in 0 ..< input.cards.count {
@@ -58,7 +56,7 @@ final class Day04Solver: DaySolver {
 		return copiesPerCard.values.reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let cards: [Card] = rawString.allLines().map { line in
 			let numberComponents = line.components(separatedBy: ": ")[1].components(separatedBy: " | ")
 
@@ -68,6 +66,6 @@ final class Day04Solver: DaySolver {
 			)
 		}
 
-		input = .init(cards: cards)
+		return .init(cards: cards)
 	}
 }

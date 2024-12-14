@@ -4,9 +4,7 @@ import Tools
 final class Day02Solver: DaySolver {
 	let dayNumber: Int = 2
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let passwords: [Password]
 	}
 
@@ -28,15 +26,15 @@ final class Day02Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.passwords.filter(\.isValidWithPolicy1).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.passwords.filter(\.isValidWithPolicy2).count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let capturePattern = #"([0-9]*)-([0-9]*) ([a-z]*): ([a-z]*)"#
 		let captureRegex = try! NSRegularExpression(pattern: capturePattern, options: [])
 
@@ -53,6 +51,6 @@ final class Day02Solver: DaySolver {
 			return .init(policyRange: policyRangeLowerBounds ... policyRangeUpperBounds, policyCharacter: policyCharacter, password: password)
 		}
 
-		input = .init(passwords: passwords)
+		return .init(passwords: passwords)
 	}
 }

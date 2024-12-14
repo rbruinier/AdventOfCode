@@ -4,14 +4,12 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Rule {
+	struct Rule {
 		let a: Int
 		let b: Int
 	}
 
-	private struct Input {
+	struct Input {
 		let rules: [Rule]
 		let updates: [[Int]]
 	}
@@ -70,13 +68,13 @@ final class Day05Solver: DaySolver {
 		return currentUpdate
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.updates.map {
 			isValidUpdate($0, rules: input.rules) ? $0[$0.count >> 1] : 0
 		}.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.updates
 			.filter { !isValidUpdate($0, rules: input.rules) }
 			.map {
@@ -85,7 +83,7 @@ final class Day05Solver: DaySolver {
 			.reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var rules: [Rule] = []
 		var updates: [[Int]] = []
 
@@ -106,6 +104,6 @@ final class Day05Solver: DaySolver {
 			}
 		}
 
-		input = .init(rules: rules, updates: updates)
+		return .init(rules: rules, updates: updates)
 	}
 }

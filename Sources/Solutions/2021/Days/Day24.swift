@@ -4,8 +4,6 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
 	/*
 	  I first looked at the input script and copy pasted the code for each input in an spreadsheet column. There
 	  I noticed the ops are all the same for each input and there are only three constants for ops 5, 6 and 16 that are
@@ -22,7 +20,7 @@ final class Day24Solver: DaySolver {
 		let operandC: Int
 	}
 
-	private struct Input {
+	struct Input {
 		let steps: [Step]
 	}
 
@@ -52,7 +50,7 @@ final class Day24Solver: DaySolver {
 		return ((z / step.operandA) * 26) + input + step.operandC
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		// As we know the result is completely z and digit input driven we just care about z states and their max values
 		//
 		// Brute force through all possible z values for each step and digit
@@ -88,12 +86,12 @@ final class Day24Solver: DaySolver {
 		return cachedResults.max
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		cachedResults.min
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(steps: [
+	func parseInput(rawString: String) -> Input {
+		return .init(steps: [
 			.init(operandA: 1, operandB: 10, operandC: 12),
 			.init(operandA: 1, operandB: 10, operandC: 10),
 			.init(operandA: 1, operandB: 12, operandC: 8),

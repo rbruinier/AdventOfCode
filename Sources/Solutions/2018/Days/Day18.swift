@@ -4,11 +4,9 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
 	private typealias Grid = Grid2D<Tile>
 
-	private struct Input {
+	struct Input {
 		let grid: Grid
 	}
 
@@ -62,7 +60,7 @@ final class Day18Solver: DaySolver {
 		return .init(tiles: newTiles, dimensions: grid.dimensions)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid = input.grid
 
 		for _ in 0 ..< 10 {
@@ -77,7 +75,7 @@ final class Day18Solver: DaySolver {
 		return numberOfTrees * numberOfLumberyards
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var grid = input.grid
 
 		var states: [Int: Int] = [:]
@@ -114,7 +112,7 @@ final class Day18Solver: DaySolver {
 		preconditionFailure()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(grid: rawString.parseGrid2D())
+	func parseInput(rawString: String) -> Input {
+		return .init(grid: rawString.parseGrid2D())
 	}
 }

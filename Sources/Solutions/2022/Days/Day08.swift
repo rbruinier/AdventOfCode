@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let heights: [Point2D: Int]
 	}
 
@@ -58,7 +56,7 @@ final class Day08Solver: DaySolver {
 		return scenicScore
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var isVisibleFromAnEdgeCounter = 0
 
 		for point in input.heights.keys {
@@ -68,7 +66,7 @@ final class Day08Solver: DaySolver {
 		return isVisibleFromAnEdgeCounter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var maxScenicScore = 0
 
 		for point in input.heights.keys {
@@ -78,7 +76,7 @@ final class Day08Solver: DaySolver {
 		return maxScenicScore
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var heights: [Point2D: Int] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -87,6 +85,6 @@ final class Day08Solver: DaySolver {
 			}
 		}
 
-		input = .init(heights: heights)
+		return .init(heights: heights)
 	}
 }

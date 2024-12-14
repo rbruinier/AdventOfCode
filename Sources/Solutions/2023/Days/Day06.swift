@@ -5,18 +5,16 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let races: [Race]
 	}
 
-	private struct Race {
+	struct Race {
 		let time: Int
 		let distance: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var result = 1
 
 		for race in input.races {
@@ -37,7 +35,7 @@ final class Day06Solver: DaySolver {
 		return result
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let totalTime = Int(input.races.map(\.time).map { String($0) }.joined())!
 		let totalDistance = Int(input.races.map(\.distance).map { String($0) }.joined())!
 
@@ -54,7 +52,7 @@ final class Day06Solver: DaySolver {
 		return w1 - w2
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let timesLine = rawString.allLines()[0].components(separatedBy: ": ")[1].trimmingCharacters(in: .whitespaces)
 		let distancesLine = rawString.allLines()[1].components(separatedBy: ": ")[1].trimmingCharacters(in: .whitespaces)
 
@@ -65,6 +63,6 @@ final class Day06Solver: DaySolver {
 			preconditionFailure()
 		}
 
-		input = .init(races: zip(times, distances).map { Race(time: $0, distance: $1) })
+		return .init(races: zip(times, distances).map { Race(time: $0, distance: $1) })
 	}
 }

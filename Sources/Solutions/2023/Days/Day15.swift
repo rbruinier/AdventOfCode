@@ -4,9 +4,7 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let steps: [String]
 	}
 
@@ -16,13 +14,13 @@ final class Day15Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.steps.reduce(into: 0) { result, step in
 			result += hash(for: AsciiString(string: step))
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		struct Lens {
 			let label: String
 			let focalLength: Int
@@ -67,8 +65,8 @@ final class Day15Solver: DaySolver {
 		return result
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(steps: rawString.components(separatedBy: ",").map { rawStep in
+	func parseInput(rawString: String) -> Input {
+		return .init(steps: rawString.components(separatedBy: ",").map { rawStep in
 			rawStep.trimmingCharacters(in: .whitespacesAndNewlines)
 		})
 	}

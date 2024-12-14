@@ -4,16 +4,14 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let elves: Set<Point2D>
 	}
 
 	init() {}
 
 	func performAlgorithm(elves: Set<Point2D>, maxRounds: Int?) -> (rounds: Int, emptyTiles: Int) {
-		var currentElves = input.elves
+		var currentElves = elves
 		var currentStartMoveIndex = 0
 
 		let maxRounds = maxRounds ?? Int.max
@@ -132,15 +130,15 @@ final class Day23Solver: DaySolver {
 		return (rounds: roundIndex, emptyTiles: emptyTiles)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		performAlgorithm(elves: input.elves, maxRounds: 10).emptyTiles
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		performAlgorithm(elves: input.elves, maxRounds: nil).rounds
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var elves: Set<Point2D> = []
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -151,6 +149,6 @@ final class Day23Solver: DaySolver {
 			}
 		}
 
-		input = .init(elves: elves)
+		return .init(elves: elves)
 	}
 }

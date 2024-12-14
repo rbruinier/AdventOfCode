@@ -4,12 +4,10 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
 	// we get part 2 for free in part 1 so we cache it
 	var maximumLoosingCost = Int.min
 
-	private struct Input {
+	struct Input {
 		let weapons: [Item]
 		let armors: [Item]
 		let rings: [Item]
@@ -48,7 +46,7 @@ final class Day21Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let weapons = input.weapons
 		let armors: [Item?] = input.armors + [nil]
 		let rings = input.rings
@@ -79,12 +77,12 @@ final class Day21Solver: DaySolver {
 		return minimumCost
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		maximumLoosingCost
 	}
 
-	func parseInput(rawString: String) {
-		input = Input(
+	func parseInput(rawString: String) -> Input {
+		return Input(
 			weapons: [
 				.init(name: "Dagger", cost: 8, damage: 4, armor: 0),
 				.init(name: "Shortsword", cost: 10, damage: 5, armor: 0),

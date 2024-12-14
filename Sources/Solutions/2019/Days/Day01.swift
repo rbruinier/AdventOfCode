@@ -4,9 +4,7 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let masses: [Int]
 	}
 
@@ -14,13 +12,13 @@ final class Day01Solver: DaySolver {
 		(mass / 3) - 2
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.masses.reduce(0) { result, mass in
 			result + calculateFuel(for: mass)
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.masses.reduce(0) { result, mass in
 			var sum = 0
 			var remainingMass = mass
@@ -40,7 +38,7 @@ final class Day01Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(masses: rawString.allLines().map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(masses: rawString.allLines().map { Int($0)! })
 	}
 }

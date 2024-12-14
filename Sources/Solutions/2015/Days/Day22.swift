@@ -5,11 +5,9 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
 	private var randomGenerator = SeededRandomNumberGenerator(seed: 0xDEAD_BEAF)
 
-	private struct Input {}
+	struct Input {}
 
 	private class Player {
 		var hitPoints: Int
@@ -257,7 +255,7 @@ final class Day22Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var minMana = Int.max
 
 		for _ in 0 ..< 100_000 {
@@ -269,7 +267,7 @@ final class Day22Solver: DaySolver {
 		return minMana
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var minMana = Int.max
 
 		for _ in 0 ..< 100_000 {
@@ -281,7 +279,7 @@ final class Day22Solver: DaySolver {
 		return minMana
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

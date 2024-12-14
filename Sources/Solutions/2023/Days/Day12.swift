@@ -4,19 +4,17 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let rows: [Row]
 	}
 
-	private enum State: Hashable {
+	enum State: Hashable {
 		case operational
 		case damaged
 		case unknown
 	}
 
-	private struct Row {
+	struct Row {
 		let states: [State]
 		let groups: [Int]
 	}
@@ -104,7 +102,7 @@ final class Day12Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var memoization: Memoization = .init(minimumCapacity: 1_000_000)
 
 		return input.rows.map {
@@ -112,7 +110,7 @@ final class Day12Solver: DaySolver {
 		}.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var memoization: Memoization = .init(minimumCapacity: 1_000_000)
 
 		return input.rows.map { row in
@@ -132,8 +130,8 @@ final class Day12Solver: DaySolver {
 		}.reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(rows: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(rows: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			let states: [State] = components[0].map {

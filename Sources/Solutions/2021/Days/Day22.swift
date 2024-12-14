@@ -4,9 +4,7 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let steps: [Step]
 	}
 
@@ -85,7 +83,7 @@ final class Day22Solver: DaySolver {
 		return newBoxes
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let steps = input.steps.filter {
 			guard
 				(-50 ... 50).contains($0.box.minPoint.x),
@@ -117,7 +115,7 @@ final class Day22Solver: DaySolver {
 		return count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var boxes: [Box] = [input.steps[0].box]
 
 		var stepIndex = 2
@@ -134,7 +132,7 @@ final class Day22Solver: DaySolver {
 		return count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.filter { $0.isEmpty == false }
@@ -173,6 +171,6 @@ final class Day22Solver: DaySolver {
 			}
 		}
 
-		input = .init(steps: steps)
+		return .init(steps: steps)
 	}
 }

@@ -4,13 +4,11 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let digits: [Int]
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		// 0, 1, 0, -1
 		var originalDigits = input.digits
 
@@ -79,7 +77,7 @@ final class Day16Solver: DaySolver {
 		return originalDigits[0 ..< 8].map { String($0) }.joined()
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		// solved with some help from: https://www.reddit.com/r/adventofcode/comments/ebf5cy/2019_day_16_part_2_understanding_how_to_come_up/
 
 		let initialOffset = Int(input.digits[0 ..< 7].map { String($0) }.joined())!
@@ -111,9 +109,9 @@ final class Day16Solver: DaySolver {
 		return digits[0 ..< 8].map { String($0) }.joined()
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let digits: [Int] = rawString.allLines().first!.compactMap { Int(String($0)) }
 
-		input = .init(digits: digits)
+		return .init(digits: digits)
 	}
 }

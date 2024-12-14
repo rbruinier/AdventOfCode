@@ -4,13 +4,11 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let elves: [Elf]
 	}
 
-	private struct Elf {
+	struct Elf {
 		var items: [Int]
 
 		var total: Int {
@@ -20,21 +18,21 @@ final class Day01Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.elves
 			.sorted(by: { $0.total < $1.total })
 			.last!
 			.total
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.elves
 			.sorted(by: { $0.total < $1.total })
 			.suffix(3)
 			.reduce(0) { $0 + $1.total }
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var elves: [Elf] = []
 
 		var items: [Int] = []
@@ -48,6 +46,6 @@ final class Day01Solver: DaySolver {
 			}
 		}
 
-		input = .init(elves: elves)
+		return .init(elves: elves)
 	}
 }

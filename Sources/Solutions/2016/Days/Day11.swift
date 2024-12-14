@@ -5,9 +5,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber = 11
 
-	private var input: Input!
-
-	private struct Input {}
+	struct Input {}
 
 	private struct Element: Hashable {
 		var id: String
@@ -195,7 +193,7 @@ final class Day11Solver: DaySolver {
 		return minimumSteps
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let state = State(floor: 0, elements: [
 			.init(id: "polonium", generatorFloor: 0, chipFloor: 0),
 			.init(id: "thulium", generatorFloor: 0, chipFloor: 0),
@@ -207,7 +205,7 @@ final class Day11Solver: DaySolver {
 		return solve(with: state)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let state = State(floor: 0, elements: [
 			.init(id: "elerium", generatorFloor: 0, chipFloor: 0),
 			.init(id: "dilithium", generatorFloor: 0, chipFloor: 0),
@@ -221,5 +219,5 @@ final class Day11Solver: DaySolver {
 		return solve(with: state)
 	}
 
-	func parseInput(rawString: String) {}
+	func parseInput(rawString: String) -> Input {}
 }

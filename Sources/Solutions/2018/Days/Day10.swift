@@ -6,9 +6,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lights: [Light]
 	}
 
@@ -47,7 +45,7 @@ final class Day10Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var lights = input.lights
 
 		for cycle in 1 ..< 100_000 {
@@ -63,7 +61,7 @@ final class Day10Solver: DaySolver {
 		return "HRPHBRKG"
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var lights = input.lights
 
 		for cycle in 1 ..< 100_000 {
@@ -79,9 +77,9 @@ final class Day10Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		// position=<-30822, -30933> velocity=< 3,  3>
-		input = .init(lights: rawString.allLines().map { line in
+		return .init(lights: rawString.allLines().map { line in
 			let positionComponents = line[10 ..< 24].components(separatedBy: ", ").map { $0.trimmingCharacters(in: .whitespaces) }
 			let velocityComponents = line[36 ..< 42].components(separatedBy: ", ").map { $0.trimmingCharacters(in: .whitespaces) }
 

@@ -5,9 +5,7 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let seed = "abbhdwsy"
 	}
 
@@ -27,7 +25,7 @@ final class Day05Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var password = ""
 
 		for i in 0 ..< 100_000_000 {
@@ -49,7 +47,7 @@ final class Day05Solver: DaySolver {
 		fatalError()
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var password = "________"
 		var placedCount = 0
 
@@ -82,7 +80,7 @@ final class Day05Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

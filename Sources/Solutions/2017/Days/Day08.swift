@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -15,7 +13,7 @@ final class Day08Solver: DaySolver {
 		case dec(register: String, amount: Int, conditionRegister: String, conditionConstant: Int, conditional: (_ a: Int, _ b: Int) -> Bool)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var registers: [String: Int] = [:]
 
 		for instruction in input.instructions {
@@ -30,7 +28,7 @@ final class Day08Solver: DaySolver {
 		return registers.values.max()!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var highestValue = Int.min
 
 		var registers: [String: Int] = [:]
@@ -49,7 +47,7 @@ final class Day08Solver: DaySolver {
 		return highestValue
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
@@ -81,6 +79,6 @@ final class Day08Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

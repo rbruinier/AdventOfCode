@@ -4,13 +4,11 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var metaProgram = """
 		# we certainly want to jump if the A (next item) is empty
 		NOT A J
@@ -41,7 +39,7 @@ final class Day21Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var metaProgram = """
 		# we certainly want to jump if the A (next item) is empty
 		NOT A J
@@ -92,7 +90,7 @@ final class Day21Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

@@ -4,13 +4,11 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let items: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var gammaRate = 0
 
 		for digitIndex in 0 ..< 12 {
@@ -28,7 +26,7 @@ final class Day03Solver: DaySolver {
 		return gammaRate * epsilonRate
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var oxygenGeneratorItems = input.items
 		var co2ScrubbingItems = input.items
 
@@ -68,11 +66,11 @@ final class Day03Solver: DaySolver {
 		return oxygenGeneratorRating * co2ScrubberRating
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let items = rawString.components(separatedBy: .newlines).compactMap {
 			Int($0, radix: 2)
 		}
 
-		input = .init(items: items)
+		return .init(items: items)
 	}
 }

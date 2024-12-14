@@ -4,16 +4,14 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let grid: [Bool]
 
 		let width: Int
 		let height: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var x = 0
 		var y = 0
 
@@ -28,7 +26,7 @@ final class Day03Solver: DaySolver {
 		return counter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let slopes: [(x: Int, y: Int)] = [
 			(x: 1, y: 1),
 			(x: 3, y: 1),
@@ -56,7 +54,7 @@ final class Day03Solver: DaySolver {
 		return combined
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		let grid: [Bool] = lines.flatMap { $0.map { $0 == "#" ? true : false }}
@@ -64,6 +62,6 @@ final class Day03Solver: DaySolver {
 		let width = grid.count / lines.count
 		let height = lines.count
 
-		input = .init(grid: grid, width: width, height: height)
+		return .init(grid: grid, width: width, height: height)
 	}
 }

@@ -4,13 +4,11 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let hailstones: [Hailstone]
 	}
 
-	private struct Hailstone {
+	struct Hailstone {
 		var position: Point3D
 		let velocity: Point3D
 	}
@@ -43,7 +41,7 @@ final class Day24Solver: DaySolver {
 		return (x: x, y: y)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let hailstones = input.hailstones
 
 		let range = Double(200_000_000_000_000) ... Double(400_000_000_000_000)
@@ -80,7 +78,7 @@ final class Day24Solver: DaySolver {
 
 	/// First solve was with a python script (using Z3 equation solver) but I do prefer this neat solution so I have implemented this instead:
 	/// https://www.reddit.com/r/adventofcode/comments/18pnycy/comment/keqf8uq/
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let range = 500
 
 		var xSet: Set<Int> = []
@@ -148,8 +146,8 @@ final class Day24Solver: DaySolver {
 		// return 757031940316991
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(hailstones: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(hailstones: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " @ ")
 
 			return .init(

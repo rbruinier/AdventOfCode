@@ -4,14 +4,12 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let listA: [Int]
 		let listB: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let aValues: [Int] = input.listA.sorted()
 		let bValues: [Int] = input.listB.sorted()
 
@@ -23,7 +21,7 @@ final class Day01Solver: DaySolver {
 		return totalDistance
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let aValues: [Int] = input.listA
 		let bValues: [Int] = input.listB
 
@@ -37,7 +35,7 @@ final class Day01Solver: DaySolver {
 		return totalScore
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var listA: [Int] = []
 		var listB: [Int] = []
 
@@ -58,6 +56,6 @@ final class Day01Solver: DaySolver {
 			}
 		}
 
-		input = .init(listA: listA, listB: listB)
+		return .init(listA: listA, listB: listB)
 	}
 }

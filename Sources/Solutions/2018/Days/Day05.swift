@@ -4,9 +4,7 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let polymer: [AsciiCharacter]
 	}
 
@@ -31,11 +29,11 @@ final class Day05Solver: DaySolver {
 		return currentPolymer
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		reactPolymer(input.polymer).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var lowestCount = Int.max
 
 		for lowerCase in AsciiCharacter.a ... AsciiCharacter.z {
@@ -53,7 +51,7 @@ final class Day05Solver: DaySolver {
 		return lowestCount
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(polymer: rawString.allLines().first!.map { AsciiCharacter($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(polymer: rawString.allLines().first!.map { AsciiCharacter($0)! })
 	}
 }

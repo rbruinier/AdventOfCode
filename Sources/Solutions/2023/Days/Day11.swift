@@ -4,9 +4,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let galaxies: Set<Point2D>
 	}
 
@@ -72,15 +70,15 @@ final class Day11Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		calculateTotalDistance(with: input.galaxies, factor: 2)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		calculateTotalDistance(with: input.galaxies, factor: 1_000_000)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var galaxies: Set<Point2D> = []
 
 		rawString.allLines().enumerated().forEach { y, line in
@@ -95,6 +93,6 @@ final class Day11Solver: DaySolver {
 			}
 		}
 
-		input = .init(galaxies: galaxies)
+		return .init(galaxies: galaxies)
 	}
 }

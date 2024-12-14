@@ -4,9 +4,7 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let triangles: [Triangle]
 	}
 
@@ -20,11 +18,11 @@ final class Day03Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.triangles.filter(\.isValid).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let triangles = input.triangles
 		var newTriangles: [Triangle] = []
 
@@ -40,13 +38,13 @@ final class Day03Solver: DaySolver {
 		return newTriangles.filter(\.isValid).count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let triangles: [Triangle] = rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: "[ ]*([0-9]*)[ ]*([0-9]*)[ ]*([0-9]*)")!
 
 			return .init(a: Int(values[0])!, b: Int(values[1])!, c: Int(values[2])!)
 		}
 
-		input = .init(triangles: triangles)
+		return .init(triangles: triangles)
 	}
 }

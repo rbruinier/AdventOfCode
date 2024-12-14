@@ -5,9 +5,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let grid: [[Int]]
 	}
 
@@ -111,21 +109,21 @@ final class Day17Solver: DaySolver {
 		preconditionFailure()
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(withGrid: input.grid, minRepeating: 0, maxRepeating: 3)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solve(withGrid: input.grid, minRepeating: 4, maxRepeating: 10)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var grid: [[Int]] = []
 
 		rawString.allLines().enumerated().forEach { _, line in
 			grid.append(line.map { String($0) }.compactMap(Int.init))
 		}
 
-		input = .init(grid: grid)
+		return .init(grid: grid)
 	}
 }

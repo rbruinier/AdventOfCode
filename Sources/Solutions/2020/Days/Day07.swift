@@ -4,9 +4,7 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let bags: [String: Bag]
 	}
 
@@ -47,19 +45,19 @@ final class Day07Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.bags.values.filter {
 			bag($0, canContain: "shiny gold bag", allBags: input.bags)
 		}.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let bag = input.bags["shiny gold bag"]!
 
 		return subBagCountFor(bag: bag, allBags: input.bags)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var bags: [String: Bag] = [:]
@@ -86,6 +84,6 @@ final class Day07Solver: DaySolver {
 			bags[bagID] = .init(id: bagID, subBags: subBags)
 		}
 
-		input = .init(bags: bags)
+		return .init(bags: bags)
 	}
 }

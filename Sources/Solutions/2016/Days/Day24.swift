@@ -7,11 +7,9 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
 	private typealias Grid = [Point2D: Node]
 
-	private struct Input {
+	struct Input {
 		let grid: Grid
 	}
 
@@ -70,7 +68,7 @@ final class Day24Solver: DaySolver {
 		return .init(elementsCount: numbers.count, edges: edges)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let grid = input.grid
 
 		allNumbers = grid.compactMap { _, value in
@@ -86,11 +84,11 @@ final class Day24Solver: DaySolver {
 		return BFS.visitAllElementsInGraph(graph, returnToStart: false)!.pathWeight
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		BFS.visitAllElementsInGraph(graph, returnToStart: true)!.pathWeight
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var grid: [Point2D: Node] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -110,6 +108,6 @@ final class Day24Solver: DaySolver {
 			}
 		}
 
-		input = .init(grid: grid)
+		return .init(grid: grid)
 	}
 }

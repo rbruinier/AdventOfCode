@@ -4,9 +4,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let adapters: [Int]
 	}
 
@@ -38,7 +36,7 @@ final class Day10Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let adapters = input.adapters.sorted()
 
 		var sum = adapters[0] + 3
@@ -59,7 +57,7 @@ final class Day10Solver: DaySolver {
 		return joltCount[1]! * joltCount[3]!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var cache: [Int: Int] = [:]
 
 		let adapters = [0] + input.adapters.sorted()
@@ -67,9 +65,9 @@ final class Day10Solver: DaySolver {
 		return possibleCombinations(from: 0, adapters: adapters, cache: &cache)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let adapters = rawString.allLines().compactMap { Int($0) }
 
-		input = .init(adapters: adapters)
+		return .init(adapters: adapters)
 	}
 }

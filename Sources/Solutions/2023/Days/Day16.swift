@@ -5,15 +5,13 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
+	typealias Tiles = [Point2D: Tile]
 
-	private typealias Tiles = [Point2D: Tile]
-
-	private struct Input {
+	struct Input {
 		let tiles: Tiles
 	}
 
-	private enum Tile {
+	enum Tile {
 		case backslash
 		case slash
 		case verticalSplitter
@@ -107,11 +105,11 @@ final class Day16Solver: DaySolver {
 		return path
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solveBeamPath(withTiles: input.tiles, startPoint: .init(x: -1, y: 0), direction: .east).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let maxX = input.tiles.keys.map(\.x).max()!
 		let maxY = input.tiles.keys.map(\.y).max()!
 
@@ -130,8 +128,8 @@ final class Day16Solver: DaySolver {
 		return maxCount
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(tiles: rawString.parseGrid { character, _ in
+	func parseInput(rawString: String) -> Input {
+		return .init(tiles: rawString.parseGrid { character, _ in
 			switch character {
 			case "\\": Tile.backslash
 			case "/": Tile.slash

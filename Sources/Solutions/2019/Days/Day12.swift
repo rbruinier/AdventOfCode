@@ -4,9 +4,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let moons: [Moon]
 	}
 
@@ -50,7 +48,7 @@ final class Day12Solver: DaySolver {
 		return updatedMoons
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var moons = input.moons
 
 		for _ in 0 ..< 1000 {
@@ -60,7 +58,7 @@ final class Day12Solver: DaySolver {
 		return moons.map(\.energy).reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var moons = input.moons
 
 		// the axis do not influence each other so we can focus on individual axis and find the least common multiplier for the 3 counters to see where they align
@@ -114,7 +112,7 @@ final class Day12Solver: DaySolver {
 		return Math.leastCommonMultiple(for: [stateXCounter, stateYCounter, stateZCounter])
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let moons: [Moon] = rawString.allLines().map { line in
 			let rawCoordinates = line[1 ..< line.count - 1].components(separatedBy: ", ")
 
@@ -125,6 +123,6 @@ final class Day12Solver: DaySolver {
 			return .init(position: .init(x: x, y: y, z: z))
 		}
 
-		input = .init(moons: moons)
+		return .init(moons: moons)
 	}
 }

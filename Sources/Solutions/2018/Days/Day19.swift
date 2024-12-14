@@ -4,9 +4,7 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Instruction]
 		let ip: Int
 	}
@@ -63,7 +61,7 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var registers: [Int] = .init(repeating: 0, count: 6)
 
 		let ipRegister = input.ip
@@ -114,7 +112,7 @@ final class Day19Solver: DaySolver {
 		registers[2] = 11
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var registers: [Int] = .init(repeating: 0, count: 6)
 
 		let ipRegister = input.ip
@@ -141,7 +139,7 @@ final class Day19Solver: DaySolver {
 		return registers[0]
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var program: [Instruction] = []
 		var ip: Int = -1
 
@@ -158,6 +156,6 @@ final class Day19Solver: DaySolver {
 
 		assert(ip != -1)
 
-		input = .init(program: program, ip: ip)
+		return .init(program: program, ip: ip)
 	}
 }

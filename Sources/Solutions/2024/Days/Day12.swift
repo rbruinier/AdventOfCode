@@ -5,9 +5,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var map: [Point2D: Int]
 	}
 
@@ -32,7 +30,7 @@ final class Day12Solver: DaySolver {
 		return visited
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let map = input.map
 
 		let maxX = map.keys.map(\.x).max()!
@@ -75,7 +73,7 @@ final class Day12Solver: DaySolver {
 		return result
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let map = input.map
 
 		let maxX = map.keys.map(\.x).max()!
@@ -164,7 +162,7 @@ final class Day12Solver: DaySolver {
 		return result
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var map: [Point2D: Int] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -173,6 +171,6 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		input = .init(map: map)
+		return .init(map: map)
 	}
 }

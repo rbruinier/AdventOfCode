@@ -4,9 +4,7 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let numbers: [String]
 	}
 
@@ -61,17 +59,17 @@ final class Day25Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		let sum = input.numbers.map { snafuToInt($0) }.reduce(0, +)
 
 		return intToSnafu(sum)
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(numbers: rawString.allLines())
+	func parseInput(rawString: String) -> Input {
+		return .init(numbers: rawString.allLines())
 	}
 }

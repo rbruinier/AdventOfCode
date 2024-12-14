@@ -4,9 +4,7 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let polymerTemplate: [Character]
 
 		let insertionRules: [InsertionRule]
@@ -68,15 +66,15 @@ final class Day14Solver: DaySolver {
 		return highestElementOccurence - lowestElementOccurence
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solveForSteps(10)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solveForSteps(40)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.compactMap { $0.isEmpty == false ? $0 : nil }
@@ -96,6 +94,6 @@ final class Day14Solver: DaySolver {
 			rules.append(InsertionRule(elements: elements, result: result))
 		}
 
-		input = .init(polymerTemplate: polymerTemplate, insertionRules: rules)
+		return .init(polymerTemplate: polymerTemplate, insertionRules: rules)
 	}
 }

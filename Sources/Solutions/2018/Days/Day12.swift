@@ -7,9 +7,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let plants: [Bool]
 		let instructions: [[Bool]: Bool]
 	}
@@ -43,7 +41,7 @@ final class Day12Solver: DaySolver {
 		return indices.map { $0 - lowIndex }
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var currentPlantIndices: [Int] = []
 
 		for (index, plant) in input.plants.enumerated() {
@@ -59,7 +57,7 @@ final class Day12Solver: DaySolver {
 		return currentPlantIndices.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var currentPlantIndices: [Int] = []
 
 		for (index, plant) in input.plants.enumerated() {
@@ -92,7 +90,7 @@ final class Day12Solver: DaySolver {
 		return currentPlantIndices.reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let allLines = rawString.allLines()
 
 		func mapCharToBool(_ char: Character) -> Bool? {
@@ -103,7 +101,7 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		input = .init(.init(
+		return .init(.init(
 			plants: allLines[0].compactMap { mapCharToBool($0) },
 			instructions: allLines[1 ..< allLines.count].reduce(into: [[Bool]: Bool]()) { result, line in
 				let components: [String] = String(line).components(separatedBy: " => ")

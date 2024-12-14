@@ -5,9 +5,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let string: String
 	}
 
@@ -39,7 +37,7 @@ final class Day10Solver: DaySolver {
 
 	private var cachedCurrentNumbers: [Int]!
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var currentNumbers: [Int] = input.string.map { Int(String($0))! }
 
 		for _ in 0 ..< 40 {
@@ -51,7 +49,7 @@ final class Day10Solver: DaySolver {
 		return currentNumbers.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var currentNumbers = cachedCurrentNumbers!
 
 		for _ in 40 ..< 50 {
@@ -61,7 +59,7 @@ final class Day10Solver: DaySolver {
 		return currentNumbers.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(string: rawString.allLines().first!)
+	func parseInput(rawString: String) -> Input {
+		return .init(string: rawString.allLines().first!)
 	}
 }

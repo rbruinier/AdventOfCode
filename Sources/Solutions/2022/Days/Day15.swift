@@ -4,13 +4,11 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let sensors: [Sensor]
 	}
 
-	private struct Sensor {
+	struct Sensor {
 		let position: Point2D
 		let closestBeaconPosition: Point2D
 
@@ -61,7 +59,7 @@ final class Day15Solver: DaySolver {
 		return mergedBoundaries
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let inspectY = 2_000_000
 
 		let mergedBoundaries = mergedBoundariesForY(inspectY, sensors: input.sensors)
@@ -69,7 +67,7 @@ final class Day15Solver: DaySolver {
 		return mergedBoundaries.map { $0.upperBound - $0.lowerBound }.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let maxCoordinate = 4_000_000
 
 		for inspectY in 0 ... maxCoordinate {
@@ -83,8 +81,8 @@ final class Day15Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(sensors: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(sensors: rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: #"Sensor at x=(-?[0-9]*), y=(-?[0-9]*): closest beacon is at x=(-?[0-9]*), y=(-?[0-9]*)"#)!
 
 			return Sensor(position: .init(x: Int(values[0])!, y: Int(values[1])!), closestBeaconPosition: .init(x: Int(values[2])!, y: Int(values[3])!))

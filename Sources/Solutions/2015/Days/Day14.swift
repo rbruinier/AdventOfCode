@@ -4,9 +4,7 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let reindeer: [Reindeer]
 	}
 
@@ -26,7 +24,7 @@ final class Day14Solver: DaySolver {
 		return ((nrOfCompleteCycles * reindeer.duration) + min(cycleRemainder, reindeer.duration)) * reindeer.speed
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let time = 2503
 
 		var best: (name: String, distance: Int) = (name: "", distance: Int.min)
@@ -42,7 +40,7 @@ final class Day14Solver: DaySolver {
 		return best.distance
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let time = 2503
 
 		var scores: [String: Int] = [:]
@@ -64,7 +62,7 @@ final class Day14Solver: DaySolver {
 		return scores.sorted(by: { $0.value > $1.value }).first!.value
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let reindeer: [Reindeer] = rawString.allLines().map { line in
 			guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*) can fly ([0-9]*) km/s for ([0-9]*) seconds, but then must rest for ([0-9]*) seconds*"#) else {
 				fatalError()
@@ -78,6 +76,6 @@ final class Day14Solver: DaySolver {
 			return .init(name: name, speed: speed, duration: duration, rest: rest)
 		}
 
-		input = .init(reindeer: reindeer)
+		return .init(reindeer: reindeer)
 	}
 }

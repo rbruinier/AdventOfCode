@@ -4,9 +4,7 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let pairs: [String: [Pair]]
 	}
 
@@ -38,7 +36,7 @@ final class Day13Solver: DaySolver {
 		return score
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let pairs = input.pairs
 		let names: [String] = Array(pairs.keys)
 
@@ -53,7 +51,7 @@ final class Day13Solver: DaySolver {
 		return bestScore
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var pairs = input.pairs
 		var names: [String] = Array(pairs.keys)
 
@@ -80,7 +78,7 @@ final class Day13Solver: DaySolver {
 		return bestScore
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var pairs: [String: [Pair]] = [:]
 
 		rawString.allLines().forEach { line in
@@ -98,6 +96,6 @@ final class Day13Solver: DaySolver {
 			pairs[a, default: []] += [.init(a: a, b: b, score: sign * score)]
 		}
 
-		input = .init(pairs: pairs)
+		return .init(pairs: pairs)
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lines: [Line]
 
 		let gridWidth: Int
@@ -127,7 +125,7 @@ final class Day05Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid = Grid(width: input.gridWidth, height: input.gridHeight)
 
 		for line in input.lines {
@@ -137,7 +135,7 @@ final class Day05Solver: DaySolver {
 		return grid.numberOfItemsWithMinimumCounter(2)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var grid = Grid(width: input.gridWidth, height: input.gridHeight)
 
 		for line in input.lines {
@@ -147,7 +145,7 @@ final class Day05Solver: DaySolver {
 		return grid.numberOfItemsWithMinimumCounter(2)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var largestX = 0
 		var largestY = 0
 
@@ -172,6 +170,6 @@ final class Day05Solver: DaySolver {
 				return Line(x1: coordinates[0].0, y1: coordinates[0].1, x2: coordinates[1].0, y2: coordinates[1].1)
 			}
 
-		input = .init(lines: lines, gridWidth: largestX + 1, gridHeight: largestY + 1)
+		return .init(lines: lines, gridWidth: largestX + 1, gridHeight: largestY + 1)
 	}
 }

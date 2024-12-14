@@ -5,9 +5,7 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let depth: Int
 		let target: Point2D
 	}
@@ -67,7 +65,7 @@ final class Day22Solver: DaySolver {
 		)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let size = Size(width: input.target.x + 1, height: input.target.y + 1)
 
 		let grid = createGridWithSize(size, depth: input.depth)
@@ -165,7 +163,7 @@ final class Day22Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// twice the size in each direction, assuming this is enough (must be, right?!)
 		let size = Size(width: input.target.x * 2 + 1, height: input.target.y * 2 + 1)
 
@@ -176,10 +174,10 @@ final class Day22Solver: DaySolver {
 		return findShortestPath(from: startState, to: input.target, in: grid)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
-		input = .init(
+		return .init(
 			depth: Int(lines[0].components(separatedBy: ": ")[1])!,
 			target: Point2D(commaSeparatedString: lines[1].components(separatedBy: ": ")[1])
 		)

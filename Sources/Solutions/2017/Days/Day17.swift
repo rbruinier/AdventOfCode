@@ -5,13 +5,11 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let steps: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var buffer = [0]
 
 		var currentPosition = 0
@@ -24,7 +22,7 @@ final class Day17Solver: DaySolver {
 		return buffer[(currentPosition + 1) % buffer.count]
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var valueAfterZero = 0
 
 		var currentPosition = 0
@@ -39,7 +37,7 @@ final class Day17Solver: DaySolver {
 		return valueAfterZero
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(steps: 359)
+	func parseInput(rawString: String) -> Input {
+		return .init(steps: 359)
 	}
 }

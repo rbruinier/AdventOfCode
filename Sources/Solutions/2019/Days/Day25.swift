@@ -4,13 +4,11 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let intcode = IntcodeProcessor(program: input.program)
 
 		/*
@@ -107,11 +105,11 @@ final class Day25Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

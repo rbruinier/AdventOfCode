@@ -6,16 +6,14 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
+	typealias Grid = [Point2D: Tile]
 
-	private typealias Grid = [Point2D: Tile]
-
-	private struct Input {
+	struct Input {
 		let grid: Grid
 		let size: Size
 	}
 
-	private enum Tile: Equatable {
+	enum Tile: Equatable {
 		case empty
 		case wall
 		case slope(direction: Direction)
@@ -190,14 +188,14 @@ final class Day23Solver: DaySolver {
 		return highestWeight
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let start = Point2D(x: 1, y: 0)
 		let goal = Point2D(x: input.size.width - 2, y: input.size.height - 1)
 
 		return solvePart1(startAt: start, goal: goal, grid: input.grid, size: input.size)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let start = Point2D(x: 1, y: 0)
 		let goal = Point2D(x: input.size.width - 2, y: input.size.height - 1)
 
@@ -209,7 +207,7 @@ final class Day23Solver: DaySolver {
 		return longestPathInGraph(graphData.graph, startIndex: graphData.startIndex, goalIndex: graphData.endIndex, steps: 0, visitedNodes: &visitedNodes)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let grid: [Point2D: Tile] = rawString.parseGrid { character, _ in
 			switch character {
 			case ".": .empty
@@ -225,6 +223,6 @@ final class Day23Solver: DaySolver {
 		let maxX = grid.keys.map(\.x).max()!
 		let maxY = grid.keys.map(\.y).max()!
 
-		input = .init(grid: grid, size: .init(width: maxX + 1, height: maxY + 1))
+		return .init(grid: grid, size: .init(width: maxX + 1, height: maxY + 1))
 	}
 }

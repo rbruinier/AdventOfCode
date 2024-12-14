@@ -4,13 +4,11 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let monkeys: [Monkey]
 	}
 
-	private struct Monkey {
+	struct Monkey {
 		struct Test {
 			var divisor: Int
 			var ifTrueMonkeyIndex: Int
@@ -29,7 +27,7 @@ final class Day11Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var monkeys = input.monkeys
 
 		var inspectionCounter: [Int: Int] = [:]
@@ -69,7 +67,7 @@ final class Day11Solver: DaySolver {
 		return inspectionCounter.values.sorted().suffix(2).reduce(1, *)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var monkeys = input.monkeys
 
 		var inspectionCounter: [Int: Int] = [:]
@@ -116,7 +114,7 @@ final class Day11Solver: DaySolver {
 		return inspectionCounter.values.sorted().suffix(2).reduce(1, *)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var monkeys: [Monkey] = []
 
 		let lines = rawString.allLines(includeEmpty: false)
@@ -146,6 +144,6 @@ final class Day11Solver: DaySolver {
 			monkeys.append(.init(items: startingItems, operation: operation, test: test))
 		}
 
-		input = .init(monkeys: monkeys)
+		return .init(monkeys: monkeys)
 	}
 }

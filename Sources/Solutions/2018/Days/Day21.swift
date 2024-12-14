@@ -4,11 +4,9 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
 	private var cachedResult: Result!
 
-	private struct Input {}
+	struct Input {}
 
 	private struct Result {
 		let lowestNumberOfInstructions: Int
@@ -132,17 +130,17 @@ final class Day21Solver: DaySolver {
 		return .init(lowestNumberOfInstructions: firstFoundR3Value, highestNumberOfInstructions: lastUniqueR3Value)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		cachedResult = reverseEngineeredImplementation()
 
 		return cachedResult.lowestNumberOfInstructions
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		cachedResult.highestNumberOfInstructions
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

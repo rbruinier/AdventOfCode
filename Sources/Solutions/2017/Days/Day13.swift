@@ -4,9 +4,7 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let layers: [Int: Int]
 	}
 
@@ -37,11 +35,11 @@ final class Day13Solver: DaySolver {
 		return (severity: result, caught: gotCaught)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		calculateSeverity(startTime: 4, layers: input.layers).severity
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		for delay in 10 ..< 1_000_000_000 {
 			if calculateSeverity(startTime: delay, layers: input.layers).caught == false {
 				return delay
@@ -51,8 +49,8 @@ final class Day13Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(layers: rawString.allLines().reduce(into: [Int: Int]()) { result, line in
+	func parseInput(rawString: String) -> Input {
+		return .init(layers: rawString.allLines().reduce(into: [Int: Int]()) { result, line in
 			let components = line.components(separatedBy: ": ")
 
 			result[Int(components[0])!] = Int(components[1])!

@@ -5,9 +5,7 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 	
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let tiles: [Point2D: Tile]
 	}
 
@@ -164,7 +162,7 @@ final class Day18Solver: DaySolver {
 		return reachableKeys
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let tiles = input.tiles
 
 		//        printTiles(tiles)
@@ -220,7 +218,7 @@ final class Day18Solver: DaySolver {
 		fatalError()
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var tiles = input.tiles
 
 		let originalEntrancePoint = pointForTile(.entrance, tiles: tiles)!
@@ -323,7 +321,7 @@ final class Day18Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var tiles: [Point2D: Tile] = [:]
@@ -346,6 +344,6 @@ final class Day18Solver: DaySolver {
 			}
 		}
 
-		input = .init(tiles: tiles)
+		return .init(tiles: tiles)
 	}
 }

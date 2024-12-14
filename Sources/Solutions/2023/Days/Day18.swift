@@ -5,20 +5,18 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let moves: [Move]
 	}
 
-	private struct Move {
+	struct Move {
 		let direction: Direction
 		let steps: Int
 		let part2Direction: Direction
 		let part2Steps: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var point: Point2D = .zero
 		var points: [Point2D] = [point]
 
@@ -31,7 +29,7 @@ final class Day18Solver: DaySolver {
 		return Shoelace.calculateArea(of: points)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var point: Point2D = .zero
 		var points: [Point2D] = [point]
 
@@ -44,8 +42,8 @@ final class Day18Solver: DaySolver {
 		return Shoelace.calculateArea(of: points)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(moves: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(moves: rawString.allLines().map { line in
 			let components = line.components(separatedBy: .whitespaces)
 
 			let direction: Direction

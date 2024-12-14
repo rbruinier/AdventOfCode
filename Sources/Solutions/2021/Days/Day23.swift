@@ -5,12 +5,10 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
 	// cache solution to facilitate visualizer
 	private var part2Solution: (startState: GameState, endState: GameState)!
 
-	private struct Input {
+	struct Input {
 		let rooms: [Room]
 	}
 
@@ -323,7 +321,7 @@ final class Day23Solver: DaySolver {
 		return bestGameState
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let initialGameState = GameState(hallway: .init(), rooms: input.rooms, totalCost: 0, moves: [])
 
 		let bestGameState = solve(with: initialGameState)!
@@ -331,7 +329,7 @@ final class Day23Solver: DaySolver {
 		return bestGameState.totalCost
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var rooms = input.rooms
 
 		rooms[0].cells.insert(.desert, at: 1)
@@ -352,8 +350,8 @@ final class Day23Solver: DaySolver {
 		return bestGameState.totalCost
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(rooms: [
+	func parseInput(rawString: String) -> Input {
+		return .init(rooms: [
 			.init(amphipod: .amber, cells: [.amber, .desert]),
 			.init(amphipod: .bronze, cells: [.copper, .desert]),
 			.init(amphipod: .copper, cells: [.bronze, .bronze]),

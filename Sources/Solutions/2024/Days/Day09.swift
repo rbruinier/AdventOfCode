@@ -4,9 +4,7 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct DataBlock {
+	struct DataBlock {
 		enum BlockType: Equatable {
 			case free
 			case file(id: Int)
@@ -16,7 +14,7 @@ final class Day09Solver: DaySolver {
 		let size: Int
 	}
 
-	private struct Input {
+	struct Input {
 		let blocks: [Int]
 	}
 
@@ -161,13 +159,13 @@ final class Day09Solver: DaySolver {
 		return checksum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let filemap = Self.expandBlocksIntoFilemap(input.blocks)
 
 		return Self.checksum(for: Self.compactFilemap(filemap))
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var dataBlocks = Self.expandBlocksIntoDataBlocks(input.blocks)
 
 		dataBlocks = Self.compactDataBlocks(dataBlocks)
@@ -190,11 +188,11 @@ final class Day09Solver: DaySolver {
 		return Self.checksum(for: checksumInput)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let blocks: [Int] = rawString.trimmingCharacters(in: .whitespacesAndNewlines).map { character in
 			Int(String(character))!
 		}
 
-		input = .init(blocks: blocks)
+		return .init(blocks: blocks)
 	}
 }

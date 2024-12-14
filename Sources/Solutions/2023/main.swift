@@ -1,35 +1,32 @@
 import Foundation
 import Tools
 
-let yearSolver = YearSolver(
-	year: 2023,
-	days: [
-		Day01Solver(),
-		Day02Solver(),
-		Day03Solver(),
-		Day04Solver(),
-		Day05Solver(),
-		Day06Solver(),
-		Day07Solver(),
-		Day08Solver(),
-		Day09Solver(),
-		Day10Solver(),
-		Day11Solver(),
-		Day12Solver(),
-		Day13Solver(),
-		Day14Solver(),
-		Day15Solver(),
-		Day16Solver(),
-		Day17Solver(),
-		Day18Solver(),
-		Day19Solver(),
-		Day20Solver(),
-		Day21Solver(),
-		Day22Solver(),
-		Day23Solver(),
-		Day24Solver(),
-		Day25Solver(),
-	]
-)
+var yearSolver = YearSolver(year: 2023)
+
+yearSolver.addSolver(Day01Solver())
+yearSolver.addSolver(Day02Solver())
+yearSolver.addSolver(Day03Solver())
+yearSolver.addSolver(Day04Solver())
+yearSolver.addSolver(Day05Solver())
+yearSolver.addSolver(Day06Solver())
+yearSolver.addSolver(Day07Solver())
+yearSolver.addSolver(Day08Solver())
+yearSolver.addSolver(Day09Solver())
+yearSolver.addSolver(Day10Solver())
+yearSolver.addSolver(Day11Solver())
+yearSolver.addSolver(Day12Solver())
+yearSolver.addSolver(Day13Solver())
+yearSolver.addSolver(Day14Solver())
+yearSolver.addSolver(Day15Solver())
+yearSolver.addSolver(Day16Solver())
+yearSolver.addSolver(Day17Solver())
+yearSolver.addSolver(Day18Solver())
+yearSolver.addSolver(Day19Solver())
+yearSolver.addSolver(Day20Solver())
+yearSolver.addSolver(Day21Solver())
+yearSolver.addSolver(Day22Solver())
+yearSolver.addSolver(Day23Solver())
+yearSolver.addSolver(Day24Solver())
+yearSolver.addSolver(Day25Solver())
 
 await solveYear(yearSolver, bundle: .module)

@@ -4,19 +4,17 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let bricks: [Brick]
 	}
 
-	private enum Orientation {
+	enum Orientation {
 		case x
 		case y
 		case z
 	}
 
-	private struct Brick {
+	struct Brick {
 		let a: Point3D
 		let b: Point3D
 
@@ -109,7 +107,7 @@ final class Day22Solver: DaySolver {
 	  * there are no bricks that expand in more than 1 direction.
 	  * a.z is always <= b.z
 	 */
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let result = simulateBricks(input.bricks, generateDependencyGraph: true)
 
 		var bricksThatCanBeRemoved: Set<Int> = []
@@ -131,7 +129,7 @@ final class Day22Solver: DaySolver {
 		return bricksThatCanBeRemoved.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let result = simulateBricks(input.bricks, generateDependencyGraph: false)
 
 		// brute force removing each
@@ -148,8 +146,8 @@ final class Day22Solver: DaySolver {
 		return changedCounter
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(bricks: rawString.allLines().enumerated().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(bricks: rawString.allLines().enumerated().map { line in
 			let components = line.element.components(separatedBy: "~")
 
 			return Brick(

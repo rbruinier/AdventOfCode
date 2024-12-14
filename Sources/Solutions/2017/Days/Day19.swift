@@ -4,9 +4,7 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var tiles: [Point2D: String] = [:]
 	}
 
@@ -61,15 +59,15 @@ final class Day19Solver: DaySolver {
 		return (encounteredLetters: encounteredLetters, steps: steps)
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		walkPath(tiles: input.tiles).encounteredLetters
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		walkPath(tiles: input.tiles).steps
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var tiles: [Point2D: String] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -78,6 +76,6 @@ final class Day19Solver: DaySolver {
 			}
 		}
 
-		input = .init(tiles: tiles)
+		return .init(tiles: tiles)
 	}
 }

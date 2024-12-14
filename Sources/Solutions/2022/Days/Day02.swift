@@ -4,13 +4,11 @@ import Tools
 final class Day02Solver: DaySolver {
 	let dayNumber: Int = 2
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let games: [Game]
 	}
 
-	private enum Hand {
+	enum Hand {
 		case rock
 		case paper
 		case scissors
@@ -44,14 +42,14 @@ final class Day02Solver: DaySolver {
 		}
 	}
 
-	private struct Game {
+	struct Game {
 		let a: Hand
 		let b: Hand
 	}
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var score = 0
 		for game in input.games {
 			score += game.b.score
@@ -68,7 +66,7 @@ final class Day02Solver: DaySolver {
 		return score
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var score = 0
 
 		for game in input.games {
@@ -85,8 +83,8 @@ final class Day02Solver: DaySolver {
 		return score
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(games: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(games: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			let a: Hand

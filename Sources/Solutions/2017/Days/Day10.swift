@@ -4,13 +4,11 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lengths: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var numbers: [Int] = (0 ... 255).map { $0 }
 
 		var skipSize = 0
@@ -31,7 +29,7 @@ final class Day10Solver: DaySolver {
 		return numbers[0] * numbers[1]
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var lengths = input.lengths
 			.map { String(describing: $0) }
 			.joined(separator: ",")
@@ -73,7 +71,7 @@ final class Day10Solver: DaySolver {
 		return denseHash.map { String(format: "%02hhx", $0) }.joined()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(lengths: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(lengths: rawString.parseCommaSeparatedInts())
 	}
 }

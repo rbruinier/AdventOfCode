@@ -4,13 +4,11 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let positions: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let sortedPositions = input.positions.sorted()
 
 		let median = sortedPositions[input.positions.count >> 1]
@@ -22,7 +20,7 @@ final class Day07Solver: DaySolver {
 		return fuelUsage
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// possible optimization: group by unique positions with count but this already currently performs well enough
 
 		let minimumPosition = input.positions.min()!
@@ -46,12 +44,12 @@ final class Day07Solver: DaySolver {
 		return bestFuelCost
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawNumbers = rawString
 			.components(separatedBy: ",")
 			.map { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
 			.compactMap { Int($0) }
 
-		input = .init(positions: rawNumbers)
+		return .init(positions: rawNumbers)
 	}
 }

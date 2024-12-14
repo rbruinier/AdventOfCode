@@ -4,16 +4,14 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let layers: [[Int]]
 
 		let width: Int
 		let height: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var minLayer: [Int] = input.layers.first!
 		var minNumberOfZeros = minLayer.filter { $0 == 0 }.count
 
@@ -29,7 +27,7 @@ final class Day08Solver: DaySolver {
 		return minLayer.filter { $0 == 1 }.count * minLayer.filter { $0 == 2 }.count
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		let transparent = 2
 
 		var finalPixels: [Int] = Array(repeating: transparent, count: input.width * input.height)
@@ -62,7 +60,7 @@ final class Day08Solver: DaySolver {
 		return "AURCY"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let pixels = rawString.compactMap { Int(String($0)) }
 
 		let layerSize = 25 * 6
@@ -76,6 +74,6 @@ final class Day08Solver: DaySolver {
 			layers.append(Array(pixels[(layer * layerSize) ..< ((layer + 1) * layerSize)]))
 		}
 
-		input = .init(layers: layers, width: 25, height: 6)
+		return .init(layers: layers, width: 25, height: 6)
 	}
 }

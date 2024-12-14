@@ -4,9 +4,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let pipes: [Int: [Int]]
 	}
 
@@ -22,7 +20,7 @@ final class Day12Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var visitedPipes: Set<Int> = []
 
 		visitAllFromStartID(0, allPipes: input.pipes, visitedPipes: &visitedPipes)
@@ -30,7 +28,7 @@ final class Day12Solver: DaySolver {
 		return visitedPipes.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var combinedVisitedPipes: Set<Int> = []
 
 		var groupCount = 0
@@ -47,8 +45,8 @@ final class Day12Solver: DaySolver {
 		return groupCount
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
+	func parseInput(rawString: String) -> Input {
+		return .init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
 			let components = line.components(separatedBy: " <-> ")
 
 			let start = Int(components[0])!

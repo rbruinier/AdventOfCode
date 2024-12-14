@@ -4,13 +4,11 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let map: [Point2D: String]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var counter = 0
 
 		let matchingCharacters: [String] = ["M", "A", "S"]
@@ -33,7 +31,7 @@ final class Day04Solver: DaySolver {
 		return counter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let map = input.map
 
 		var counter = 0
@@ -58,7 +56,7 @@ final class Day04Solver: DaySolver {
 		return counter
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var map: [Point2D: String] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -67,6 +65,6 @@ final class Day04Solver: DaySolver {
 			}
 		}
 
-		input = .init(map: map)
+		return .init(map: map)
 	}
 }

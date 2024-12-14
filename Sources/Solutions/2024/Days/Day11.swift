@@ -4,9 +4,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let stones: [Int]
 	}
 
@@ -46,15 +44,15 @@ final class Day11Solver: DaySolver {
 		return stoneCounters.values.reduce(0, +)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		Self.performCount(with: input.stones, numberOfCycles: 25)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		Self.performCount(with: input.stones, numberOfCycles: 75)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(stones: rawString.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ").map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		.init(stones: rawString.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ").map { Int($0)! })
 	}
 }

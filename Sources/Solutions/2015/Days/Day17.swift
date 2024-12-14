@@ -4,9 +4,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let containers: [Int]
 	}
 
@@ -25,7 +23,7 @@ final class Day17Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var solutionsPerContainers: [Int: Int] = [:]
 
 		fill(containers: input.containers, amount: 150, numberOfContainers: 0, solutionsPerContainers: &solutionsPerContainers)
@@ -33,7 +31,7 @@ final class Day17Solver: DaySolver {
 		return solutionsPerContainers.values.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var solutionsPerContainers: [Int: Int] = [:]
 
 		fill(containers: input.containers, amount: 150, numberOfContainers: 0, solutionsPerContainers: &solutionsPerContainers)
@@ -41,7 +39,7 @@ final class Day17Solver: DaySolver {
 		return solutionsPerContainers.sorted(by: { $0.key < $1.key }).first!.value
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(containers: rawString.allLines().map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(containers: rawString.allLines().map { Int($0)! })
 	}
 }

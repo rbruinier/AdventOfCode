@@ -5,9 +5,7 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let discs: [Disc]
 	}
 
@@ -16,7 +14,7 @@ final class Day15Solver: DaySolver {
 		var position: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let discs = input.discs
 
 		for loop in 0 ..< 1_000_000 {
@@ -40,7 +38,7 @@ final class Day15Solver: DaySolver {
 		fatalError()
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var discs = input.discs
 
 		discs.append(.init(nrOfPositions: 11, position: 0))
@@ -66,8 +64,8 @@ final class Day15Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(discs: [
+	func parseInput(rawString: String) -> Input {
+		return .init(discs: [
 			.init(nrOfPositions: 13, position: 1),
 			.init(nrOfPositions: 19, position: 10),
 			.init(nrOfPositions: 3, position: 2),

@@ -19,9 +19,7 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -115,7 +113,7 @@ final class Day23Solver: DaySolver {
 		return h
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cpu = CPU(instructions: input.instructions)
 
 		while cpu.executeNextInstruction() == false {}
@@ -123,12 +121,12 @@ final class Day23Solver: DaySolver {
 		return cpu.mulInstructionCounter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		actualProgram()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(instructions: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(instructions: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			let operandA: Operand

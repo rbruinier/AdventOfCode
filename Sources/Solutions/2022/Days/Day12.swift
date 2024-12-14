@@ -5,9 +5,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let start: Point2D
 		let end: Point2D
 
@@ -32,13 +30,13 @@ final class Day12Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let bfsGrid = GridWrapper(heightMap: input.heightMap)
 
 		return BFS.shortestPathInGrid(bfsGrid, from: input.start, to: input.end)!.steps
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let bfsGrid = GridWrapper(heightMap: input.heightMap)
 
 		let allZeroHeightPoints = input.heightMap.filter { $0.value == 0 }
@@ -53,7 +51,7 @@ final class Day12Solver: DaySolver {
 		return minimumSteps
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var start: Point2D = .zero
 		var end: Point2D = .zero
 
@@ -75,6 +73,6 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		input = .init(start: start, end: end, heightMap: heightMap)
+		return .init(start: start, end: end, heightMap: heightMap)
 	}
 }

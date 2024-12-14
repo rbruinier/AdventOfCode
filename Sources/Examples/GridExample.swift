@@ -8,11 +8,9 @@ final class GridExample: DaySolver {
 		"GridExample"
 	}
 	
-	private var input: Input!
-
 	private typealias Grid = Grid2D<Tile>
 
-	private struct Input {
+	struct Input {
 		let grid: Grid
 	}
 
@@ -26,7 +24,7 @@ final class GridExample: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 //		let grid = input.grid
 //
 //		print("Automatic grid debug logging:")
@@ -35,11 +33,11 @@ final class GridExample: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(grid: rawString.parseGrid2D())
+	func parseInput(rawString: String) -> Input {
+		return .init(grid: rawString.parseGrid2D())
 	}
 }

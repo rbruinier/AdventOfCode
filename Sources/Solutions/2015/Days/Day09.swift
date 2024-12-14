@@ -5,9 +5,7 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let routes: [Route]
 	}
 
@@ -53,7 +51,7 @@ final class Day09Solver: DaySolver {
 		return (min: minimumDistance, max: maximumDistance)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let routes = input.routes
 
 		var nodes: [String: Node] = [:]
@@ -77,11 +75,11 @@ final class Day09Solver: DaySolver {
 		return minimumDistance
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		maximumDistance
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var routes: [Route] = []
 
 		rawString.allLines().forEach { line in
@@ -92,6 +90,6 @@ final class Day09Solver: DaySolver {
 			routes.append(.init(a: parameters[0], b: parameters[1], distance: Int(parameters[2])!))
 		}
 
-		input = .init(routes: routes)
+		return .init(routes: routes)
 	}
 }

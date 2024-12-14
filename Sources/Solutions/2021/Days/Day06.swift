@@ -4,9 +4,7 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let initialTimers: [Int]
 	}
 
@@ -41,20 +39,20 @@ final class Day06Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		runFor(iterations: 80)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		runFor(iterations: 256)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawNumbers = rawString
 			.components(separatedBy: ",")
 			.map { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
 			.compactMap { Int($0) }
 
-		input = .init(initialTimers: rawNumbers)
+		return .init(initialTimers: rawNumbers)
 	}
 }

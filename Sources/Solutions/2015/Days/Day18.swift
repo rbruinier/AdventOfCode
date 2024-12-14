@@ -4,9 +4,7 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var grid: [Bool]
 
 		let width: Int = 100
@@ -48,7 +46,7 @@ final class Day18Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid = input.grid
 
 		for _ in 0 ..< 100 {
@@ -58,7 +56,7 @@ final class Day18Solver: DaySolver {
 		return grid.filter { $0 }.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var grid = input.grid
 
 		for step in 0 ... 100 {
@@ -75,9 +73,9 @@ final class Day18Solver: DaySolver {
 		return grid.filter { $0 }.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let grid: [Bool] = rawString.allLines().joined().map { $0 == "#" ? true : false }
 
-		input = .init(grid: grid)
+		return .init(grid: grid)
 	}
 }

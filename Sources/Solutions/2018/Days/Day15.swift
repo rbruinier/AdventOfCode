@@ -5,11 +5,9 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
 	private var shortestPathCache: [Int: [Point2D]?] = [:]
 
-	private struct Input {
+	struct Input {
 		let grid: Grid
 		let goblins: [Point2D]
 		let elves: [Point2D]
@@ -297,7 +295,7 @@ final class Day15Solver: DaySolver {
 		return .completed
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let state = State(units: input.goblins.map {
 			Unit(unitType: .goblin, position: $0, hitPoints: 200)
 		} + input.elves.map {
@@ -319,7 +317,7 @@ final class Day15Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var attackPower = 3
 
 		attackPowerLoop: while true {
@@ -353,7 +351,7 @@ final class Day15Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var walls: Set<Point2D> = []
 		var goblins: [Point2D] = []
 		var elves: [Point2D] = []
@@ -371,6 +369,6 @@ final class Day15Solver: DaySolver {
 			size = .init(width: max(size.width, point.x + 1), height: max(size.height, point.y + 1))
 		}
 
-		input = .init(grid: .init(walls: walls, size: size), goblins: goblins, elves: elves)
+		return .init(grid: .init(walls: walls, size: size), goblins: goblins, elves: elves)
 	}
 }

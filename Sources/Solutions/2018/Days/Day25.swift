@@ -4,9 +4,7 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let points: [Point4D]
 	}
 	
@@ -52,7 +50,7 @@ final class Day25Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let constellations: [Constellation] = input.points.map { Constellation(points: Set([$0])) }
 		
 		// start by each point in its own constellation and then start merging them till there is nothing to merge
@@ -73,12 +71,12 @@ final class Day25Solver: DaySolver {
 		return constellations.count { $0.points.isNotEmpty }
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(points: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(points: rawString.allLines().map { line in
 			let components = line.components(separatedBy: ",")
 			
 			return Point4D(x: Int(components[0])!, y: Int(components[1])!, z: Int(components[2])!, w: Int(components[3])!)

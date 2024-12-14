@@ -4,9 +4,7 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let enhancementMapping: [Int]
 		let bitmap: Bitmap
 
@@ -103,15 +101,15 @@ final class Day20Solver: DaySolver {
 		return originalBitmap.pixels.filter { $0 == 1 }.count
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(steps: 2)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solve(steps: 50)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.filter { $0.isEmpty == false }
@@ -128,6 +126,6 @@ final class Day20Solver: DaySolver {
 		assert(enhancementMapping.count == 512)
 		assert(width == height)
 
-		input = .init(enhancementMapping: enhancementMapping, bitmap: .init(pixels: pixels, width: width, height: height))
+		return .init(enhancementMapping: enhancementMapping, bitmap: .init(pixels: pixels, width: width, height: height))
 	}
 }

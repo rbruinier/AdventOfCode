@@ -4,13 +4,11 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let pairs: [Pair]
 	}
 
-	private struct Pair {
+	struct Pair {
 		let a: ClosedRange<Int>
 		let b: ClosedRange<Int>
 
@@ -25,16 +23,16 @@ final class Day04Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.pairs.count(\.hasFullyContainedRange)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.pairs.count(\.hasOverlappingRange)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(pairs: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(pairs: rawString.allLines().map { line in
 			let elves = line.components(separatedBy: ",")
 
 			let a = elves[0].components(separatedBy: "-")

@@ -4,9 +4,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lines: [[Character]]
 	}
 
@@ -53,7 +51,7 @@ final class Day10Solver: DaySolver {
 		return stack.isEmpty ? .valid : .incomplete(remainingStack: stack)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let validations: [Validation] = input.lines.map(validateLine)
 
 		let score = validations.reduce(0) { result, validation in
@@ -74,7 +72,7 @@ final class Day10Solver: DaySolver {
 		return score
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let validations: [Validation] = input.lines.map(validateLine)
 
 		let scores: [Int] = validations.compactMap { validation in
@@ -101,13 +99,13 @@ final class Day10Solver: DaySolver {
 		return scores.sorted()[scores.count >> 1]
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.filter { $0.isEmpty == false }
 
 		let lines = rawLines.map { [Character]($0) }
 
-		input = .init(lines: lines)
+		return .init(lines: lines)
 	}
 }

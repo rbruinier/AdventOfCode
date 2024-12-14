@@ -4,9 +4,7 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let weights: [Int]
 	}
 
@@ -26,7 +24,7 @@ final class Day24Solver: DaySolver {
 		return []
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let weights = input.weights
 
 		let totalWeight = weights.reduce(0, +)
@@ -39,7 +37,7 @@ final class Day24Solver: DaySolver {
 		}.sorted().first!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let weights = input.weights
 
 		let totalWeight = weights.reduce(0, +)
@@ -52,7 +50,7 @@ final class Day24Solver: DaySolver {
 		}.sorted().first!
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(weights: rawString.allLines().map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(weights: rawString.allLines().map { Int($0)! })
 	}
 }

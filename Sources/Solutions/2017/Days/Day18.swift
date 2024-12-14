@@ -4,9 +4,7 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -142,7 +140,7 @@ final class Day18Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cpu = CPUPart1(instructions: input.instructions)
 
 		while cpu.executeNextInstruction() == false {
@@ -154,7 +152,7 @@ final class Day18Solver: DaySolver {
 		fatalError()
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var cpu1 = CPUPart2(instructions: input.instructions)
 		var cpu2 = CPUPart2(instructions: input.instructions)
 
@@ -194,7 +192,7 @@ final class Day18Solver: DaySolver {
 		return cpu2.sendCount
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		func parseOperand(_ text: String) -> Operand {
 			if let value = Int(text) {
 				.value(value)
@@ -203,7 +201,7 @@ final class Day18Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: rawString.allLines().map { part in
+		return .init(instructions: rawString.allLines().map { part in
 			if let values = part.getCapturedValues(pattern: #"set ([a-z]*) (-?[0-9a-z]*)"#) {
 				.set(a: parseOperand(values[0]), b: parseOperand(values[1]))
 			} else if let values = part.getCapturedValues(pattern: #"add ([a-z]*) (-?[0-9a-z]*)"#) {

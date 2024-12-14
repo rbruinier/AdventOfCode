@@ -9,9 +9,7 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let blizzards: [Point2D: [Direction]]
 
 		let areaSize: Size
@@ -53,22 +51,22 @@ final class Day24Solver: DaySolver {
 		return newBlizzards
 	}
 
-	private func generateCachedBlizzards() -> [Int: (points: Set<Point2D>, hash: Int)] {
-		var blizzards = input.blizzards
+	private func generateCachedBlizzards(_ blizzards: [Point2D: [Direction]], areaSize: Size) -> [Int: (points: Set<Point2D>, hash: Int)] {
+		var blizzards = blizzards
 		var cachedBlizzards: [Int: (points: Set<Point2D>, hash: Int)] = [:]
 
-		for step in 0 ..< input.areaSize.width * input.areaSize.height {
+		for step in 0 ..< areaSize.width * areaSize.height {
 			let asSet = Set(blizzards.keys)
 
 			cachedBlizzards[step] = (points: asSet, hash: asSet.hashValue)
 
-			blizzards = moveBlizzards(blizzards, areaSize: input.areaSize)
+			blizzards = moveBlizzards(blizzards, areaSize: areaSize)
 		}
 
 		return cachedBlizzards
 	}
 
-	private func shortestPath(from: Point2D, to: Point2D, startSteps: Int, cachedBlizzards: [Int: (points: Set<Point2D>, hash: Int)]) -> Int {
+	private func shortestPath(from: Point2D, to: Point2D, startSteps: Int, areaSize: Size, cachedBlizzards: [Int: (points: Set<Point2D>, hash: Int)]) -> Int {
 		struct State {
 			let position: Point2D
 			let steps: Int
@@ -87,7 +85,7 @@ final class Day24Solver: DaySolver {
 			.init(position: from, steps: startSteps),
 		]
 
-		let cacheSize = input.areaSize.width * input.areaSize.height
+		let cacheSize = areaSize.width * areaSize.height
 
 		var visitedHashes: Set<Int> = [hashFor(position: from, blizzards: cachedBlizzards[startSteps % cacheSize]!.hash)]
 
@@ -102,8 +100,8 @@ final class Day24Solver: DaySolver {
 				}
 
 				guard
-					(0 ..< input.areaSize.width).contains(nextPoint.x),
-					(0 ..< input.areaSize.height).contains(nextPoint.y),
+					(0 ..< areaSize.width).contains(nextPoint.x),
+					(0 ..< areaSize.height).contains(nextPoint.y),
 					blizzards.points.contains(nextPoint) == false
 				else {
 					continue
@@ -138,24 +136,24 @@ final class Day24Solver: DaySolver {
 		fatalError()
 	}
 
-	func solvePart1() -> Int {
-		let cachedBlizzards = generateCachedBlizzards()
+	func solvePart1(withInput input: Input) -> Int {
+		let cachedBlizzards = generateCachedBlizzards(input.blizzards, areaSize: input.areaSize)
 
-		return shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, cachedBlizzards: cachedBlizzards)
+		return shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, areaSize: input.areaSize, cachedBlizzards: cachedBlizzards)
 	}
 
-	func solvePart2() -> Int {
-		let cachedBlizzards = generateCachedBlizzards()
+	func solvePart2(withInput input: Input) -> Int {
+		let cachedBlizzards = generateCachedBlizzards(input.blizzards, areaSize: input.areaSize)
 
-		var steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, cachedBlizzards: cachedBlizzards)
+		var steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: 0, areaSize: input.areaSize, cachedBlizzards: cachedBlizzards)
 
-		steps = shortestPath(from: input.endPoint, to: input.startPoint, startSteps: steps, cachedBlizzards: cachedBlizzards)
-		steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: steps, cachedBlizzards: cachedBlizzards)
+		steps = shortestPath(from: input.endPoint, to: input.startPoint, startSteps: steps, areaSize: input.areaSize, cachedBlizzards: cachedBlizzards)
+		steps = shortestPath(from: input.startPoint, to: input.endPoint, startSteps: steps, areaSize: input.areaSize, cachedBlizzards: cachedBlizzards)
 
 		return steps
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let allLines = rawString.allLines()
 
 		var blizzards: [Point2D: [Direction]] = [:]
@@ -185,7 +183,7 @@ final class Day24Solver: DaySolver {
 			}
 		}
 
-		input = .init(
+		return .init(
 			blizzards: blizzards,
 			areaSize: .init(
 				width: width,

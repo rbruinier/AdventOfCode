@@ -4,9 +4,7 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let reactions: [String: Reaction]
 	}
 
@@ -19,7 +17,7 @@ final class Day14Solver: DaySolver {
 
 	private func make(chemical: String, minimumQuantity: Int, reactions: [String: Reaction], storage: inout [String: Int]) -> Int {
 		let reaction = reactions[chemical]!
-		let input = reaction.input
+		let return reaction.input
 
 		let multiplier = Int(ceil(Double(minimumQuantity) / Double(reaction.outputQuantity)))
 
@@ -51,7 +49,7 @@ final class Day14Solver: DaySolver {
 		return oreSum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var storage: [String: Int] = [:]
 
 		let oreQuantity = make(chemical: "FUEL", minimumQuantity: 1, reactions: input.reactions, storage: &storage)
@@ -59,7 +57,7 @@ final class Day14Solver: DaySolver {
 		return oreQuantity
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var storage: [String: Int] = [:]
 
 		// binary search
@@ -83,7 +81,7 @@ final class Day14Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let reactions: [String: Reaction] = Dictionary(uniqueKeysWithValues: rawString.allLines().map { line in
 			let parts = line.components(separatedBy: " => ")
 
@@ -104,6 +102,6 @@ final class Day14Solver: DaySolver {
 			return (outputChemical, Reaction(input: input, outputQuantity: outputQuantity, outputChemical: outputChemical))
 		})
 
-		input = .init(reactions: reactions)
+		return .init(reactions: reactions)
 	}
 }

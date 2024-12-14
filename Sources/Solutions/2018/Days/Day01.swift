@@ -4,17 +4,15 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let frequencies: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.frequencies.reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var frequencies: Set<Int> = []
 
 		var frequency = 0
@@ -31,7 +29,7 @@ final class Day01Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(frequencies: rawString.allLines().map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(frequencies: rawString.allLines().map { Int($0)! })
 	}
 }

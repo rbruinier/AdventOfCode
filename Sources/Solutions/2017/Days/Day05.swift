@@ -4,13 +4,11 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let jumps: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var jumps = input.jumps
 
 		var steps = 0
@@ -31,7 +29,7 @@ final class Day05Solver: DaySolver {
 		return steps
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var jumps = input.jumps
 
 		var steps = 0
@@ -56,7 +54,7 @@ final class Day05Solver: DaySolver {
 		return steps
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(jumps: rawString.allLines().map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(jumps: rawString.allLines().map { Int($0)! })
 	}
 }

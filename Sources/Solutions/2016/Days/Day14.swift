@@ -5,11 +5,9 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
 	private typealias Hash = [UInt8]
 
-	private struct Input {
+	struct Input {
 		let salt = "ihaygndm"
 	}
 
@@ -49,7 +47,7 @@ final class Day14Solver: DaySolver {
 		return false
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var hashQueue: Deque<Hash> = []
 
 		var index = 0
@@ -85,7 +83,7 @@ final class Day14Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		func calcHash(for string: String) -> Hash {
 			var value = md5AsBytes(with: [UInt8](string.data(using: .ascii)!))
 
@@ -131,7 +129,7 @@ final class Day14Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

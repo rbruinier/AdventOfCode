@@ -4,9 +4,7 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let text: String
 	}
 
@@ -54,15 +52,15 @@ final class Day09Solver: DaySolver {
 		return (sum: sum, nrOfCancelled: nrOfCancelled)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(text: input.text).sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solve(text: input.text).nrOfCancelled
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(text: rawString.allLines().first!)
+	func parseInput(rawString: String) -> Input {
+		return .init(text: rawString.allLines().first!)
 	}
 }

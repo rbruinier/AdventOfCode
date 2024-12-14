@@ -21,9 +21,7 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let blueprints: [Blueprint]
 	}
 
@@ -38,7 +36,7 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	private struct Blueprint {
+	struct Blueprint {
 		let id: Int
 		var oreRobotOreCost: Int
 		var clayRobotOreCost: Int
@@ -255,7 +253,7 @@ final class Day19Solver: DaySolver {
 		return maxScore
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var sumOfQualityLevels = 0
 
 		var maxMemoizationSize = 0
@@ -288,7 +286,7 @@ final class Day19Solver: DaySolver {
 		return sumOfQualityLevels
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var product = 1
 
 		var maxMemoizationSize = 0
@@ -321,8 +319,8 @@ final class Day19Solver: DaySolver {
 		return product
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(blueprints: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(blueprints: rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: #"Blueprint ([0-9]*): Each ore robot costs ([0-9]*) ore. Each clay robot costs ([0-9]*) ore. Each obsidian robot costs ([0-9]*) ore and ([0-9]*) clay. Each geode robot costs ([0-9]*) ore and ([0-9]*) obsidian."#)!
 
 			return Blueprint(

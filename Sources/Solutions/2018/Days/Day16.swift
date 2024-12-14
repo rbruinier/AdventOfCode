@@ -4,9 +4,7 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let samples: [Sample]
 		let programLines: [[Int]]
 	}
@@ -108,7 +106,7 @@ final class Day16Solver: DaySolver {
 		return [:]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var matchingSamplesCounter = 0
 
 		for sample in input.samples {
@@ -130,7 +128,7 @@ final class Day16Solver: DaySolver {
 		return matchingSamplesCounter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// as many operations could be multiple operation numbers we have to try all combinations
 		let operands = deduceOperations(Operation.allCases, availableNumbers: Set(0 ... 15), samples: input.samples)
 
@@ -143,7 +141,7 @@ final class Day16Solver: DaySolver {
 		return registers[0]
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var lineIndex = 0
@@ -173,6 +171,6 @@ final class Day16Solver: DaySolver {
 			}
 		}
 
-		input = .init(samples: samples, programLines: programLines)
+		return .init(samples: samples, programLines: programLines)
 	}
 }

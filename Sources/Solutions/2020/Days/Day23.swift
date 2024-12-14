@@ -4,9 +4,7 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let cups: [Int]
 	}
 
@@ -62,13 +60,13 @@ final class Day23Solver: DaySolver {
 		return finalResult
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let cups = LoopedLinkedListSet<Int>(values: input.cups)
 
 		return play(moves: 100, with: cups, maxValue: 9)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var cupValues = input.cups
 
 		for index in (input.cups.count + 1) ... 1_000_000 {
@@ -84,7 +82,7 @@ final class Day23Solver: DaySolver {
 		return currentNode.next!.value * currentNode.next!.next!.value
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(cups: [2, 8, 4, 5, 7, 3, 9, 6, 1])
+	func parseInput(rawString: String) -> Input {
+		return .init(cups: [2, 8, 4, 5, 7, 3, 9, 6, 1])
 	}
 }

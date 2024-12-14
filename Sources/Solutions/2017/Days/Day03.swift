@@ -4,9 +4,7 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let squareID: Int
 	}
 
@@ -38,13 +36,13 @@ final class Day03Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let point = spiralPoint(for: input.squareID)
 
 		return abs(point.x) + abs(point.y)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var sumsPerPoint: [Point2D: Int] = [:]
 
 		for n in 1 ... 100 {
@@ -68,7 +66,7 @@ final class Day03Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(Input(squareID: 277_678))
+	func parseInput(rawString: String) -> Input {
+		return .init(Input(squareID: 277_678))
 	}
 }

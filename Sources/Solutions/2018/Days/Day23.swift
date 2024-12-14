@@ -4,9 +4,7 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let bots: [Nanobot]
 	}
 
@@ -15,7 +13,7 @@ final class Day23Solver: DaySolver {
 		let radius: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let biggestRadiusBot = input.bots.sorted(by: { $0.radius > $1.radius }).first!
 
 		return input.bots.count {
@@ -106,7 +104,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let bots = input.bots
 
 		// find a cube with pow of 2 size (so that it is perfectly divisible in 8 sub cubes) that contains all bots
@@ -153,7 +151,7 @@ final class Day23Solver: DaySolver {
 		preconditionFailure()
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let bots: [Nanobot] = rawString.allLines().map { line in
 			guard let parameters = line.getCapturedValues(pattern: #"pos=<(-?[0-9]*),(-?[0-9]*),(-?[0-9]*)>, r=([0-9]*)"#) else {
 				preconditionFailure()
@@ -162,6 +160,6 @@ final class Day23Solver: DaySolver {
 			return .init(position: Point3D(x: Int(parameters[0])!, y: Int(parameters[1])!, z: Int(parameters[2])!), radius: Int(parameters[3])!)
 		}
 
-		input = .init(bots: bots)
+		return .init(bots: bots)
 	}
 }

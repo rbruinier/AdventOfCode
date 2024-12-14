@@ -4,9 +4,7 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let groups: [Group]
 	}
 
@@ -26,19 +24,19 @@ final class Day06Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.groups.reduce(0) { result, group in
 			result + group.uniqueAnswers.count
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.groups.reduce(0) { result, group in
 			result + group.sharedAnswers.count
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines(includeEmpty: true)
 
 		var groups: [Group] = []
@@ -56,6 +54,6 @@ final class Day06Solver: DaySolver {
 			groupAnswers.append(line.map { String($0) })
 		}
 
-		input = .init(groups: groups)
+		return .init(groups: groups)
 	}
 }

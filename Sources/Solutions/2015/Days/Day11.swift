@@ -4,12 +4,10 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
 	private let invalidCharacters: [UInt8] = [105, 108, 111] // i, l & o
 	private var cachedPart1Password: String! // we need it for part 2
 
-	private struct Input {
+	struct Input {
 		let password: String
 	}
 
@@ -68,7 +66,7 @@ final class Day11Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var password: [UInt8] = input.password.map { $0.asciiValue! }
 
 		while true {
@@ -84,7 +82,7 @@ final class Day11Solver: DaySolver {
 		return cachedPart1Password!
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var password: [UInt8] = cachedPart1Password.map { $0.asciiValue! }
 
 		password = increment(password: password)
@@ -100,7 +98,7 @@ final class Day11Solver: DaySolver {
 		return password.map { String(Character(.init($0))) }.joined()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(password: rawString.allLines().first!)
+	func parseInput(rawString: String) -> Input {
+		return .init(password: rawString.allLines().first!)
 	}
 }

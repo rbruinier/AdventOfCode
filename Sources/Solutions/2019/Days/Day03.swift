@@ -4,9 +4,7 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lines: [[Move]]
 	}
 
@@ -66,7 +64,7 @@ final class Day03Solver: DaySolver {
 		return intersections
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let intersections = intersections(for: input.lines)
 
 		resultCache = intersections
@@ -74,11 +72,11 @@ final class Day03Solver: DaySolver {
 		return intersections.map { abs($0.point.x) + abs($0.point.y) }.min()!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		resultCache.map(\.steps).min()!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines: [[Move]] = rawString.allLines().map {
 			let line: [Move] = $0.components(separatedBy: ",").map {
 				let count = Int($0[1 ..< $0.count])!
@@ -95,6 +93,6 @@ final class Day03Solver: DaySolver {
 			return line
 		}
 
-		input = .init(lines: lines)
+		return .init(lines: lines)
 	}
 }

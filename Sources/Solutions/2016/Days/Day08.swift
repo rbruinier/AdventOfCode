@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 
 		let width = 50
@@ -21,7 +19,7 @@ final class Day08Solver: DaySolver {
 
 	private var solvedGrid: [Bool]!
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let width = input.width
 		let height = input.height
 
@@ -55,7 +53,7 @@ final class Day08Solver: DaySolver {
 		return grid.filter { $0 }.count
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var index = 0
 		for _ in 0 ..< input.height {
 			var result = ""
@@ -74,7 +72,7 @@ final class Day08Solver: DaySolver {
 		return "UPOJFLBCEZ"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().map { line in
 			if let values = line.getCapturedValues(pattern: #"rect ([0-9]*)x([0-9]*)"#) {
 				.rect(width: Int(values[0])!, height: Int(values[1])!)
@@ -87,6 +85,6 @@ final class Day08Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

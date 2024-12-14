@@ -4,13 +4,11 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let numbers: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var numbers: [Int] = input.numbers
 
 		// brute force works fine here
@@ -27,7 +25,7 @@ final class Day15Solver: DaySolver {
 		return numbers.last!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// memory hungry but efficient (< 1 sec)
 		let roundCount = 30_000_000
 
@@ -59,9 +57,9 @@ final class Day15Solver: DaySolver {
 		return lastNumber
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let numbers = rawString.parseCommaSeparatedInts()
 
-		input = .init(numbers: numbers)
+		return .init(numbers: numbers)
 	}
 }

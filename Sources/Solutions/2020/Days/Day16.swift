@@ -4,9 +4,7 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let fields: [Field]
 
 		let yourTicket: [Int]
@@ -23,7 +21,7 @@ final class Day16Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var invalidValuesSum = 0
 
 		for nearbyTicket in input.nearbyTickets {
@@ -37,7 +35,7 @@ final class Day16Solver: DaySolver {
 		return invalidValuesSum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// get valid tickets
 		let validTickets = input.nearbyTickets.filter {
 			for value in $0 {
@@ -110,7 +108,7 @@ final class Day16Solver: DaySolver {
 		return result
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines(includeEmpty: true)
 
 		var currentlyParsing = 0
@@ -152,6 +150,6 @@ final class Day16Solver: DaySolver {
 			}
 		}
 
-		input = .init(fields: fields, yourTicket: yourTicket, nearbyTickets: nearbyTickets)
+		return .init(fields: fields, yourTicket: yourTicket, nearbyTickets: nearbyTickets)
 	}
 }

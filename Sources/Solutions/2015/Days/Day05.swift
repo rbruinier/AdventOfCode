@@ -4,9 +4,7 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let strings: [String]
 	}
 
@@ -69,15 +67,15 @@ final class Day05Solver: DaySolver {
 		return foundMatchingPair && foundRepeatingLetter
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.strings.filter(isNicePart1(string:)).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.strings.filter(isNicePart2(string:)).count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(strings: rawString.allLines())
+	func parseInput(rawString: String) -> Input {
+		return .init(strings: rawString.allLines())
 	}
 }

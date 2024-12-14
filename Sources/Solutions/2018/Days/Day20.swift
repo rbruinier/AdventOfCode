@@ -5,12 +5,10 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
 	// cached part 1 result for part 2
 	private var shortestDistances: [Point2D: Int]!
 
-	private struct Input {
+	struct Input {
 		let regex: AsciiString
 	}
 
@@ -141,7 +139,7 @@ final class Day20Solver: DaySolver {
 		return distances
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let instructions = parseInstructions(input.regex)
 
 		guard instructions.count == 1 else {
@@ -157,13 +155,13 @@ final class Day20Solver: DaySolver {
 		return shortestDistances.values.max()!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		shortestDistances.filter { $0.value >= 1000 }.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let firstLine = rawString.allLines().first!
 
-		input = .init(regex: AsciiString(string: firstLine[1 ..< firstLine.count - 1]))
+		return .init(regex: AsciiString(string: firstLine[1 ..< firstLine.count - 1]))
 	}
 }

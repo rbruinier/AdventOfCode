@@ -3,21 +3,19 @@ import Tools
 
 final class Day24Solver: DaySolver {
     let dayNumber: Int = 24
+	
+	struct Input {
+	}
 
-    private var input: Input!
+	func solvePart1(withInput input: Input) -> Int {
+		return 0
+	}
 
-    private struct Input {
-    }
+	func solvePart2(withInput input: Input) -> Int {
+		return 0
+	}
 
-    func solvePart1() -> Int {
-        return 0
-    }
-
-    func solvePart2() -> Int {
-        return 0
-    }
-
-    func parseInput(rawString: String) {
-        input = .init()
-    }
+	func parseInput(rawString: String) -> Input {
+		return .init()
+	}
 }

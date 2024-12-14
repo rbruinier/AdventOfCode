@@ -9,14 +9,12 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let seeds: [Int]
 		var allRanges: [[Mapping]]
 	}
 
-	private struct Mapping {
+	struct Mapping {
 		let destinationRange: ClosedRange<Int>
 		let sourceRange: ClosedRange<Int>
 	}
@@ -76,7 +74,7 @@ final class Day05Solver: DaySolver {
 		return mappedSeedRanges
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let allRanges = input.allRanges
 
 		var locations: [Int] = []
@@ -94,7 +92,7 @@ final class Day05Solver: DaySolver {
 		return locations.min()!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let allRanges = input.allRanges
 
 		var seedRanges: [ClosedRange<Int>] = []
@@ -116,7 +114,7 @@ final class Day05Solver: DaySolver {
 		return minValue
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var groupIndex = 0
 
 		var seeds: [Int] = []
@@ -160,7 +158,7 @@ final class Day05Solver: DaySolver {
 			}
 		}
 
-		input = .init(
+		return .init(
 			seeds: seeds,
 			allRanges: allRanges
 		)

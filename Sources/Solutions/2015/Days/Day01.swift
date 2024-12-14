@@ -4,17 +4,15 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let line: String
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.line.filter { $0 == "(" }.count - input.line.filter { $0 == ")" }.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var level = 0
 		for (index, character) in input.line.enumerated() {
 			if character == "(" {
@@ -31,7 +29,7 @@ final class Day01Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(line: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+	func parseInput(rawString: String) -> Input {
+		return .init(line: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

@@ -5,9 +5,7 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let key = "bgvyzdsv"
 	}
 
@@ -28,7 +26,7 @@ final class Day04Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		for i in cachedStartIndex ..< 1_000_000 {
 			let number = md5First3Bytes(with: input.key + String(i))
 
@@ -42,7 +40,7 @@ final class Day04Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		for i in cachedStartIndex ..< 10_000_000 {
 			let number = md5First3Bytes(with: input.key + String(i))
 
@@ -54,7 +52,7 @@ final class Day04Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

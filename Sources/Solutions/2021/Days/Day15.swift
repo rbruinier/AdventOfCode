@@ -4,9 +4,7 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let riskLevels: [Int]
 
 		let width: Int
@@ -57,11 +55,11 @@ final class Day15Solver: DaySolver {
 		return minimumRiskGrid.last!
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(riskLevels: input.riskLevels, width: input.width, height: input.height)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var riskLevels: [Int] = Array(repeating: 0, count: input.riskLevels.count * 25)
 
 		let width = input.width * 5
@@ -88,7 +86,7 @@ final class Day15Solver: DaySolver {
 		return solve(riskLevels: riskLevels, width: width, height: height)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let height = rawString.filter(\.isNewline).count
 
 		let riskLevels: [Int] = rawString
@@ -96,6 +94,6 @@ final class Day15Solver: DaySolver {
 
 		let width = riskLevels.count / height
 
-		input = .init(riskLevels: riskLevels, width: width, height: height)
+		return .init(riskLevels: riskLevels, width: width, height: height)
 	}
 }

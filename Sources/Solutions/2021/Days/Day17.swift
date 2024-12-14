@@ -4,9 +4,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let targetArea: [Int]
 	}
 
@@ -47,7 +45,7 @@ final class Day17Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let minX = input.targetArea[0]
 		let maxX = input.targetArea[1]
 		let minY = input.targetArea[2]
@@ -66,7 +64,7 @@ final class Day17Solver: DaySolver {
 		return bestMaximumY
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let minX = input.targetArea[0]
 		let maxX = input.targetArea[1]
 		let minY = input.targetArea[2]
@@ -87,7 +85,7 @@ final class Day17Solver: DaySolver {
 		return velocities.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(targetArea: [217, 240, -126, -69])
+	func parseInput(rawString: String) -> Input {
+		return .init(targetArea: [217, 240, -126, -69])
 	}
 }

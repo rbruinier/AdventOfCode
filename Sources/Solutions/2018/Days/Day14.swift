@@ -4,13 +4,11 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let value: Int
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var recipeScores: [Int] = [3, 7]
 
 		var index1 = 0
@@ -37,7 +35,7 @@ final class Day14Solver: DaySolver {
 		return recipeScores[recipeCount ..< recipeCount + 10].map { String($0) }.joined()
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var recipeScores: [Int] = [3, 7]
 
 		recipeScores.reserveCapacity(1_000_000_000)
@@ -80,7 +78,7 @@ final class Day14Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(value: 920_831)
+	func parseInput(rawString: String) -> Input {
+		return .init(value: 920_831)
 	}
 }

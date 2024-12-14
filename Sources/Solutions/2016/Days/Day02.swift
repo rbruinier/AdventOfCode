@@ -4,9 +4,7 @@ import Tools
 final class Day02Solver: DaySolver {
 	let dayNumber: Int = 2
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lines: [[Step]]
 	}
 
@@ -17,7 +15,7 @@ final class Day02Solver: DaySolver {
 		case left = "L"
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		let digits: [Point2D: Int] = [
 			.init(x: -1, y: -1): 1,
 			.init(x: 0, y: -1): 2,
@@ -55,7 +53,7 @@ final class Day02Solver: DaySolver {
 		return code
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		let digits: [Point2D: String] = [
 			.init(x: 0, y: -2): "1",
 			.init(x: -1, y: -1): "2",
@@ -97,11 +95,11 @@ final class Day02Solver: DaySolver {
 		return code
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines: [[Step]] = rawString.allLines().map { line in
 			line.map { Step(rawValue: String($0))! }
 		}
 
-		input = .init(lines: lines)
+		return .init(lines: lines)
 	}
 }

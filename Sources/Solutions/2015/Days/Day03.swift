@@ -4,13 +4,11 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let directions: [Direction]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var point = Point2D()
 
 		var points: Set<Point2D> = Set([point])
@@ -24,7 +22,7 @@ final class Day03Solver: DaySolver {
 		return points.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var robot = Point2D()
 		var santa = Point2D()
 
@@ -45,7 +43,7 @@ final class Day03Solver: DaySolver {
 		return points.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let directions: [Direction] = rawString.allLines().first!.map {
 			switch $0 {
 			case ">": .east
@@ -56,6 +54,6 @@ final class Day03Solver: DaySolver {
 			}
 		}
 
-		input = .init(directions: directions)
+		return .init(directions: directions)
 	}
 }

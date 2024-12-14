@@ -8,11 +8,9 @@ final class ShortestPathInGridExample: DaySolver {
 		"ShortestPathInGridExample"
 	}
 
-	private var input: Input!
-
 	private typealias Grid = Grid2D<Tile>
 
-	private struct Input {
+	struct Input {
 		let grid: Grid
 	}
 
@@ -52,7 +50,7 @@ final class ShortestPathInGridExample: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid = input.grid
 
 		var startPoint: Point2D!
@@ -76,12 +74,12 @@ final class ShortestPathInGridExample: DaySolver {
 		return shortestPath.steps
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(grid: rawString.parseGrid2D { character, _ in
+	func parseInput(rawString: String) -> Input {
+		return .init(grid: rawString.parseGrid2D { character, _ in
 			switch character {
 			case "S": .start
 			case "E": .end

@@ -4,13 +4,11 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let paths: [Path]
 	}
 
-	private struct Path {
+	struct Path {
 		let points: [Point2D]
 	}
 
@@ -19,7 +17,7 @@ final class Day14Solver: DaySolver {
 	private func blockedPoints(with paths: [Path]) -> Set<Point2D> {
 		var blockedPoints: Set<Point2D> = []
 
-		for path in input.paths {
+		for path in paths {
 			for index in 0 ..< path.points.count - 1 {
 				var currentPoint = path.points[index]
 				let nextPoint = path.points[index + 1]
@@ -38,7 +36,7 @@ final class Day14Solver: DaySolver {
 		return blockedPoints
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let sandStartPoint = Point2D(x: 500, y: 0)
 
 		var blockedPoints = blockedPoints(with: input.paths)
@@ -87,7 +85,7 @@ final class Day14Solver: DaySolver {
 		return grainsOfSand
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let sandStartPoint = Point2D(x: 500, y: 0)
 
 		var blockedPoints = blockedPoints(with: input.paths)
@@ -145,8 +143,8 @@ final class Day14Solver: DaySolver {
 		return grainsOfSand
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(paths: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(paths: rawString.allLines().map { line in
 			Path(points: line.components(separatedBy: " -> ").map { components in
 				Point2D(commaSeparatedString: components)
 			})

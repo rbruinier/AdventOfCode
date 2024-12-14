@@ -4,9 +4,7 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let cells: [Cell]
 
 		let width: Int
@@ -78,7 +76,7 @@ final class Day25Solver: DaySolver {
 		return (cells: newCells, didMove: didMove)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cells = input.cells
 		var didMove = true
 		var stepCount = 0
@@ -103,11 +101,11 @@ final class Day25Solver: DaySolver {
 		return stepCount
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.filter { $0.isEmpty == false }
@@ -128,6 +126,6 @@ final class Day25Solver: DaySolver {
 		let width = cells.count / rawLines.count
 		let height = rawLines.count
 
-		input = .init(cells: cells, width: width, height: height)
+		return .init(cells: cells, width: width, height: height)
 	}
 }

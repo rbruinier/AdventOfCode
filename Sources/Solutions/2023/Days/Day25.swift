@@ -4,15 +4,13 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
+	typealias Nodes = [String: Set<String>]
 
-	private typealias Nodes = [String: Set<String>]
-
-	private struct Input {
+	struct Input {
 		let nodes: Nodes
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var edges: [KargerMinimumCut.Edge] = []
 
 		let nodeAsArray = Array(input.nodes.keys)
@@ -38,11 +36,11 @@ final class Day25Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var nodes: [String: Set<String>] = [:]
 
 		rawString.allLines().forEach { line in
@@ -62,6 +60,6 @@ final class Day25Solver: DaySolver {
 			}
 		}
 
-		input = .init(nodes: nodes)
+		return .init(nodes: nodes)
 	}
 }

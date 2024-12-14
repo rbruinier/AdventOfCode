@@ -4,14 +4,12 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Equation {
+	struct Equation {
 		let result: Int
 		let operands: [Int]
 	}
 
-	private struct Input {
+	struct Input {
 		let equations: [Equation]
 	}
 
@@ -38,14 +36,14 @@ final class Day07Solver: DaySolver {
 		return false
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.equations.filter {
 			Self.solveEquation(expectedResult: $0.result, operands: Array($0.operands[1...]), currentValue: $0.operands[0], allowConcatenation: false)
 		}.map(\.result).reduce(0, +)
 	}
 
 	
-	func solvePart2() async -> Int {
+	func solvePart2(withInput input: Input) async -> Int {
 		await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
 			for equation in input.equations {
 				taskGroup.addTask {
@@ -57,8 +55,8 @@ final class Day07Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(equations: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(equations: rawString.allLines().map { line in
 			let components = line.split(separator: ": ")
 
 			return Equation(

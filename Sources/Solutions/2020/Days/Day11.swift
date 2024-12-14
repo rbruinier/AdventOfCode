@@ -4,9 +4,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let states: [State]
 
 		let width: Int
@@ -126,7 +124,7 @@ final class Day11Solver: DaySolver {
 		return (states: states, modified: modified)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var states = input.states
 
 		var stepCount = 0
@@ -145,7 +143,7 @@ final class Day11Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var states = input.states
 
 		var stepCount = 0
@@ -164,7 +162,7 @@ final class Day11Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		let states: [State] = rawString.compactMap {
@@ -178,6 +176,6 @@ final class Day11Solver: DaySolver {
 		let width = states.count / lines.count
 		let height = lines.count
 
-		input = .init(states: states, width: width, height: height)
+		return .init(states: states, width: width, height: height)
 	}
 }

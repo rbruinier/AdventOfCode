@@ -4,9 +4,7 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let firstRow: [Cell]
 	}
 
@@ -57,16 +55,16 @@ final class Day18Solver: DaySolver {
 		return safeSum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(with: input.firstRow, count: 40)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solve(with: input.firstRow, count: 400_000)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(Input(firstRow: rawString.allLines().first!.map {
+	func parseInput(rawString: String) -> Input {
+		return .init(Input(firstRow: rawString.allLines().first!.map {
 			$0 == "." ? .safe : .trap
 		}))
 	}

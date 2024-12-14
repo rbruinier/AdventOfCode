@@ -4,9 +4,7 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -19,7 +17,7 @@ final class Day14Solver: DaySolver {
 		let value: Int64
 	}
 
-	public func solvePart1() -> Int {
+	public func solvePart1(withInput input: Input) -> Int {
 		var memory: [Int: Int64] = [:]
 
 		for instruction in input.instructions {
@@ -42,7 +40,7 @@ final class Day14Solver: DaySolver {
 		return Int(memory.values.reduce(0, +))
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		func createAllVariations(base: Int64, instruction: Instruction, bitShifters: [Int64]) -> [Int64] {
 			var shifters = bitShifters
 
@@ -85,7 +83,7 @@ final class Day14Solver: DaySolver {
 		return Int(memory.values.reduce(0, +))
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var currentMask: Int64 = 0
@@ -124,6 +122,6 @@ final class Day14Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

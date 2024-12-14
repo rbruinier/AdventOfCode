@@ -4,9 +4,7 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let hexString: String
 	}
 
@@ -103,7 +101,7 @@ final class Day16Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var bits = input.hexString.map { Int(String($0), radix: 16)! }.reduce(into: [Int]()) { result, value in
 			result.append(value >> 3 & 1)
 			result.append(value >> 2 & 1)
@@ -127,7 +125,7 @@ final class Day16Solver: DaySolver {
 		return versionSum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var bits = input.hexString.map { Int(String($0), radix: 16)! }.reduce(into: [Int]()) { result, value in
 			result.append(value >> 3 & 1)
 			result.append(value >> 2 & 1)
@@ -140,11 +138,11 @@ final class Day16Solver: DaySolver {
 		return rootPackage.value
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLine = rawString
 			.components(separatedBy: CharacterSet.whitespacesAndNewlines)
 			.first!
 
-		input = .init(hexString: rawLine)
+		return .init(hexString: rawLine)
 	}
 }

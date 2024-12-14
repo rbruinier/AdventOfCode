@@ -4,8 +4,6 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
 	enum Tile: String, CustomStringConvertible {
 		case empty = "."
 		case obstacle = "#"
@@ -13,13 +11,13 @@ final class Day06Solver: DaySolver {
 		var description: String { rawValue }
 	}
 
-	private struct Input: Sendable {
+	struct Input: Sendable {
 		let map: Grid2D<Tile>
 		let startPosition: Point2D
 	}
 
 	func getPath(map: [[Tile]], startPosition: Point2D) -> Set<Point2D> {
-		var position = input.startPosition
+		var position = startPosition
 		var direction = Direction.north
 
 		var visited: Set<Point2D> = []
@@ -72,11 +70,11 @@ final class Day06Solver: DaySolver {
 		return false
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		getPath(map: input.map.tiles, startPosition: input.startPosition).count
 	}
 
-	func solvePart2() async -> Int {
+	func solvePart2(withInput input: Input) async -> Int {
 		let originalMap = input.map
 		let startPosition = input.startPosition
 
@@ -99,7 +97,7 @@ final class Day06Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var startPosition: Point2D = .zero
 
 		let map: Grid2D<Tile> = rawString.parseGrid2D { character, position in
@@ -114,6 +112,6 @@ final class Day06Solver: DaySolver {
 			}
 		}
 
-		input = .init(map: map, startPosition: startPosition)
+		return .init(map: map, startPosition: startPosition)
 	}
 }

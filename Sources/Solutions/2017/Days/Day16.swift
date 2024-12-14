@@ -5,9 +5,7 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -38,7 +36,7 @@ final class Day16Solver: DaySolver {
 		return line
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var line: [String] = generateStartLine()
 
 		line = shuffleLine(line, instructions: input.instructions)
@@ -46,7 +44,7 @@ final class Day16Solver: DaySolver {
 		return line.joined()
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		let startLine: [String] = generateStartLine()
 
 		var line = startLine
@@ -72,8 +70,8 @@ final class Day16Solver: DaySolver {
 		return line.joined()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(instructions: rawString.allLines().first!.components(separatedBy: ",").map { part in
+	func parseInput(rawString: String) -> Input {
+		return .init(instructions: rawString.allLines().first!.components(separatedBy: ",").map { part in
 			if let values = part.getCapturedValues(pattern: #"s([0-9]*)"#) {
 				.spin(size: Int(values[0])!)
 			} else if let values = part.getCapturedValues(pattern: #"x([0-9]*)\/([0-9]*)"#) {

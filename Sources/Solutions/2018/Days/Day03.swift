@@ -4,9 +4,7 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let claims: [Claim]
 	}
 
@@ -15,7 +13,7 @@ final class Day03Solver: DaySolver {
 		let area: Rect
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let claims = input.claims
 
 		var overlapCounter: [Point2D: Int] = [:]
@@ -31,7 +29,7 @@ final class Day03Solver: DaySolver {
 		return overlapCounter.values.filter { $0 >= 2 }.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let claims = input.claims
 
 		outerLoop: for i in 0 ..< claims.count {
@@ -47,8 +45,8 @@ final class Day03Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(claims: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(claims: rawString.allLines().map { line in
 			let lineComponents = line.components(separatedBy: " @ ")
 
 			let id = Int(lineComponents[0].replacingOccurrences(of: "#", with: ""))!

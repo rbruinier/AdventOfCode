@@ -4,9 +4,7 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let ingredients: [Ingredient]
 	}
 
@@ -70,7 +68,7 @@ final class Day15Solver: DaySolver {
 		return bestScore
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let numberOfTeaspoons = 100
 
 		return getScoresForIngredients(
@@ -81,7 +79,7 @@ final class Day15Solver: DaySolver {
 		)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let numberOfTeaspoons = 100
 
 		return getScoresForIngredients(
@@ -92,8 +90,8 @@ final class Day15Solver: DaySolver {
 		)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(ingredients: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(ingredients: rawString.allLines().map { line in
 			guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*): capacity (-?[0-9]*), durability (-?[0-9]*), flavor (-?[0-9]*), texture (-?[0-9]*), calories (-?[0-9]*)"#) else {
 				fatalError()
 			}

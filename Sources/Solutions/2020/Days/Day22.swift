@@ -6,9 +6,7 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let player1: Player
 		let player2: Player
 	}
@@ -73,7 +71,7 @@ final class Day22Solver: DaySolver {
 		}
 	}
 
-	public func solvePart1() -> Int {
+	public func solvePart1(withInput input: Input) -> Int {
 		var gameID = 1
 
 		let winnerCards = playGame(player1Cards: input.player1.cards, player2Cards: input.player2.cards, gameID: &gameID, allowRecursion: false).winnerCards
@@ -86,7 +84,7 @@ final class Day22Solver: DaySolver {
 		return score
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var gameID = 1
 
 		let winnerCards = playGame(player1Cards: input.player1.cards, player2Cards: input.player2.cards, gameID: &gameID, allowRecursion: true).winnerCards
@@ -99,7 +97,7 @@ final class Day22Solver: DaySolver {
 		return score
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var lines = rawString.allLines(includeEmpty: true)
 
 		lines.removeFirst() // player 1
@@ -117,6 +115,6 @@ final class Day22Solver: DaySolver {
 			cards2.append(Int(lines.removeFirst())!)
 		}
 
-		input = .init(player1: .init(cards: cards1), player2: .init(cards: cards2))
+		return .init(player1: .init(cards: cards1), player2: .init(cards: cards2))
 	}
 }

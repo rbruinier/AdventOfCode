@@ -4,13 +4,11 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let banks: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var banks = input.banks
 
 		var previousBanks: Set<[Int]> = [banks]
@@ -36,7 +34,7 @@ final class Day06Solver: DaySolver {
 		return previousBanks.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var banks = input.banks
 
 		var previousBanks: [[Int]: Int] = [:]
@@ -65,7 +63,7 @@ final class Day06Solver: DaySolver {
 		return previousBanks.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(banks: rawString.allLines().first!.components(separatedBy: "\t").map { Int($0)! })
+	func parseInput(rawString: String) -> Input {
+		return .init(banks: rawString.allLines().first!.components(separatedBy: "\t").map { Int($0)! })
 	}
 }

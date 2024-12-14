@@ -4,9 +4,7 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let ranges: [ClosedRange<UInt32>]
 	}
 
@@ -41,13 +39,13 @@ final class Day20Solver: DaySolver {
 		return result
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let ranges = collapseRanges(input.ranges)
 
 		return Int(ranges[0].upperBound + 1)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let ranges = collapseRanges(input.ranges)
 
 		var numberOfAvailableNumbers: UInt32 = 0
@@ -61,8 +59,8 @@ final class Day20Solver: DaySolver {
 		return Int(numberOfAvailableNumbers)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(ranges: rawString.allLines().map {
+	func parseInput(rawString: String) -> Input {
+		return .init(ranges: rawString.allLines().map {
 			let components = $0.components(separatedBy: "-")
 
 			return UInt32(components[0])! ... UInt32(components[1])!

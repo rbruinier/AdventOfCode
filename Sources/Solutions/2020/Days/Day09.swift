@@ -4,13 +4,11 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let numbers: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let scanSize = 25
 
 		var window = Array(input.numbers[0 ..< scanSize])
@@ -43,7 +41,7 @@ final class Day09Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let numbers = input.numbers
 		let numberToFind = 556543474
 
@@ -73,9 +71,9 @@ final class Day09Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let numbers = rawString.allLines().compactMap { Int($0) }
 
-		input = .init(numbers: numbers)
+		return .init(numbers: numbers)
 	}
 }

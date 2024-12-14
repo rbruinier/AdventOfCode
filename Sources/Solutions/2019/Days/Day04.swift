@@ -4,13 +4,11 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let range: ClosedRange<Int>
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let aLowerBound = input.range.lowerBound / 100_000
 		let aUpperBound = input.range.upperBound / 100_000
 
@@ -37,7 +35,7 @@ final class Day04Solver: DaySolver {
 		return possiblePasswords.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let aLowerBound = input.range.lowerBound / 100_000
 		let aUpperBound = input.range.upperBound / 100_000
 
@@ -74,7 +72,7 @@ final class Day04Solver: DaySolver {
 		return possiblePasswords.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(range: 307237 ... 769058)
+	func parseInput(rawString: String) -> Input {
+		return .init(range: 307237 ... 769058)
 	}
 }

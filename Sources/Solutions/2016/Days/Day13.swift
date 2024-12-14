@@ -5,9 +5,7 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let favoriteNumber = 1362
 		let destination = Point2D(x: 31, y: 39)
 	}
@@ -33,7 +31,7 @@ final class Day13Solver: DaySolver {
 		return count.isOdd
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var visitedPoints: Set<Point2D> = []
 
 		var queue: Deque<Step> = [.init(point: Point2D(x: 1, y: 1), nrOfSteps: 0)]
@@ -59,7 +57,7 @@ final class Day13Solver: DaySolver {
 		return shortestSteps
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var reachablePoints: Set<Point2D> = []
 
 		for y in (0 ... 51).reversed() {
@@ -115,7 +113,7 @@ final class Day13Solver: DaySolver {
 		return reachablePoints.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

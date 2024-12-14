@@ -5,9 +5,7 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let sequences: [[Int]]
 	}
 
@@ -25,7 +23,7 @@ final class Day09Solver: DaySolver {
 		return layers
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.sequences.reduce(0) { result, sequence in
 			let layers = createLayers(sequence)
 
@@ -33,7 +31,7 @@ final class Day09Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.sequences.reduce(0) { result, sequence in
 			let layers = createLayers(sequence)
 
@@ -41,7 +39,7 @@ final class Day09Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(sequences: rawString.allLines().map { $0.components(separatedBy: " ").compactMap(Int.init) })
+	func parseInput(rawString: String) -> Input {
+		return .init(sequences: rawString.allLines().map { $0.components(separatedBy: " ").compactMap(Int.init) })
 	}
 }

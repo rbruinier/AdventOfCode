@@ -4,8 +4,6 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
 	private let combinations: [(rotation: Point2D.Degrees, flip: Flip)] = [
 		(rotation: .zero, flip: .none),
 		(rotation: .ninety, flip: .none),
@@ -21,7 +19,7 @@ final class Day20Solver: DaySolver {
 		(rotation: .twoSeventy, flip: .horizontal),
 	]
 
-	private struct Input {
+	struct Input {
 		let tiles: [Int: Tile]
 	}
 
@@ -263,7 +261,7 @@ final class Day20Solver: DaySolver {
 		return false
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let matchesByTile: [Int: [Match]] = allMatchesByTile()
 
 		let cornerTiles = matchesByTile
@@ -275,7 +273,7 @@ final class Day20Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let matchesByTile: [Int: [Match]] = allMatchesByTile()
 
 		let topLeftCorner = matchesByTile
@@ -369,7 +367,7 @@ final class Day20Solver: DaySolver {
 		return sourcePixels.filter { $0 }.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var tiles: [Int: Tile] = [:]
 
 		var lines = rawString.allLines()
@@ -387,6 +385,6 @@ final class Day20Solver: DaySolver {
 			tiles[tileID] = .init(id: tileID, pixels: pixels)
 		}
 
-		input = .init(tiles: tiles)
+		return .init(tiles: tiles)
 	}
 }

@@ -4,27 +4,43 @@ public protocol DaySolver {
 	associatedtype Part1Result: Equatable
 	associatedtype Part2Result: Equatable
 
+	associatedtype Input: Any
+
 	var customFilename: String? { get }
 
 	var dayNumber: Int { get }
 
-	func parseInput(rawString: String) async
+	func parseInput(rawString: String) async -> Input
 
 	func parseExpectedResults(rawString: String) async -> ExpectedResults
 
-	func solvePart1() async -> Part1Result
-	func solvePart2() async -> Part2Result
+	func solvePart1(withInput input: Input) async -> Part1Result
+	func solvePart2(withInput input: Input) async -> Part2Result
 
 	func createVisualizer() -> Visualizer?
 }
 
 public struct YearSolver {
-	let year: Int
-	let days: [any DaySolver]
+	fileprivate struct AnySolver {
+		let dayNumber: Int
+		let solve: (_ bundle: Bundle) async -> Result
+	}
 
-	public init(year: Int, days: [any DaySolver]) {
+	let year: Int
+
+	fileprivate var solvers: [AnySolver] = []
+
+	public init(year: Int) {
 		self.year = year
-		self.days = days
+	}
+
+	public mutating func addSolver(_ daySolver: some DaySolver) {
+		solvers.append(.init(
+			dayNumber: daySolver.dayNumber,
+			solve: { [year] bundle in
+				await solveDay(daySolver, year: year, bundle: bundle)
+			}
+		))
 	}
 }
 
@@ -90,13 +106,18 @@ private struct Result {
 	let part2Correct: Bool
 }
 
-private func solveDay(_ solver: any DaySolver, expectedResults: ExpectedResults) async -> Result {
+private func solveDay(_ solver: some DaySolver, year: Int, bundle: Bundle) async -> Result {
 	print("Solving day \(solver.dayNumber):")
+
+	print(" - parsing input and expected results")
+
+	let input = await solver.parseInput(rawString: getRawInputStringFor(day: solver.dayNumber, year: year, in: bundle))
+	let expectedResults = await solver.parseExpectedResults(rawString: getRawExpectedResultsStringFor(day: solver.dayNumber, year: year, in: bundle))
 
 	// part 1
 	var startTime = mach_absolute_time()
 
-	let result1 = await solver.solvePart1()
+	let result1 = await solver.solvePart1(withInput: input)
 
 	var formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
@@ -114,7 +135,7 @@ private func solveDay(_ solver: any DaySolver, expectedResults: ExpectedResults)
 	// part 2
 	startTime = mach_absolute_time()
 
-	let result2 = await solver.solvePart2()
+	let result2 = await solver.solvePart2(withInput: input)
 
 	formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
@@ -138,32 +159,6 @@ private func solveDay(_ solver: any DaySolver, expectedResults: ExpectedResults)
 public func solveYear(_ yearSolver: YearSolver, dayNumber: Int? = nil, bundle: Bundle) async {
 	print("Advent of Code \(yearSolver.year) 🎄")
 
-	print("Parsing inputs")
-
-	let days: [any DaySolver]
-
-	if let dayNumber {
-		days = yearSolver.days.filter { $0.dayNumber == dayNumber }
-	} else {
-		days = yearSolver.days
-	}
-
-	print("Parsing expected results")
-
-	var expectedResults: [Int: ExpectedResults] = [:]
-
-	for day in days {
-//		if let customInputLoader {
-//			let rawString = customInputLoader(day, bundle)
-//
-//			await day.parseInput(rawString: rawString)
-//		} else {
-		await day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, year: yearSolver.year, in: bundle))
-//		}
-
-		expectedResults[day.dayNumber] = await day.parseExpectedResults(rawString: getRawExpectedResultsStringFor(day: day.dayNumber, year: yearSolver.year, in: bundle))
-	}
-
 	print("Start solving days")
 
 	let startTime = mach_absolute_time()
@@ -171,15 +166,15 @@ public func solveYear(_ yearSolver: YearSolver, dayNumber: Int? = nil, bundle: B
 	var timesPerDay: [Int: Double] = [:]
 	var incorrectDays: [Int] = []
 
-	for day in days {
+	for daySolver in yearSolver.solvers.filter({ dayNumber != nil ? $0.dayNumber == dayNumber! : true }) {
 		let dayStartTime = mach_absolute_time()
 
-		let result = await solveDay(day, expectedResults: expectedResults[day.dayNumber]!)
+		let result = await daySolver.solve(bundle)
 
-		timesPerDay[day.dayNumber] = getSecondsFromMachTimer(duration: mach_absolute_time() - dayStartTime)
+		timesPerDay[daySolver.dayNumber] = getSecondsFromMachTimer(duration: mach_absolute_time() - dayStartTime)
 
 		if result.part1Correct == false || result.part2Correct == false {
-			incorrectDays.append(day.dayNumber)
+			incorrectDays.append(daySolver.dayNumber)
 		}
 	}
 
@@ -203,71 +198,3 @@ public func solveYear(_ yearSolver: YearSolver, dayNumber: Int? = nil, bundle: B
 		}
 	}
 }
-
-//
-// public func solveDays(_ allDays: [any DaySolver], dayNumber: Int? = nil, bundle: Bundle, customInputLoader: ((_ daySolver: any DaySolver, _ bundle: Bundle) -> String)? = nil) async {
-//	print("Parsing inputs")
-//
-//	let days: [any DaySolver]
-//
-//	if let dayNumber {
-//		days = allDays.filter { $0.dayNumber == dayNumber }
-//	} else {
-//		days = allDays
-//	}
-//
-//	print("Parsing expected results")
-//
-//	var expectedResults: [Int: ExpectedResults] = [:]
-//
-//	for day in days {
-//		if let customInputLoader {
-//			let rawString = customInputLoader(day, bundle)
-//
-//			await day.parseInput(rawString: rawString)
-//		} else {
-//			await day.parseInput(rawString: getRawInputStringFor(day: day.dayNumber, year: day.year, in: bundle))
-//		}
-//
-//		expectedResults[day.dayNumber] = await day.parseExpectedResults(rawString: getRawExpectedResultsStringFor(day: day.dayNumber, year: day.year, in: bundle))
-//	}
-//
-//	print("Start solving days")
-//
-//	let startTime = mach_absolute_time()
-//
-//	var timesPerDay: [Int: Double] = [:]
-//	var incorrectDays: [Int] = []
-//
-//	for day in days {
-//		let dayStartTime = mach_absolute_time()
-//
-//		let result = await solveDay(day, expectedResults: expectedResults[day.dayNumber]!)
-//
-//		timesPerDay[day.dayNumber] = getSecondsFromMachTimer(duration: mach_absolute_time() - dayStartTime)
-//
-//		if result.part1Correct == false || result.part2Correct == false {
-//			incorrectDays.append(day.dayNumber)
-//		}
-//	}
-//
-//	let formattedDuration = String(format: "%.4f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
-//
-//	print("⏱ Total running duration is \(formattedDuration) seconds")
-//
-//	if incorrectDays.isNotEmpty {
-//		print("⛔️ There are incorrect days:")
-//
-//		for day in incorrectDays {
-//			print(" -> Day \(day)")
-//		}
-//	}
-//
-//	if timesPerDay.count >= 3 {
-//		print("🐌 Slowest days:")
-//
-//		for (day, duration) in timesPerDay.sorted(by: { $0.value > $1.value }).prefix(upTo: 3) {
-//			print(String(format: " -> Day \(day) solved in %.4f seconds", duration))
-//		}
-//	}
-// }

@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var program: [Instruction]
 	}
 
@@ -52,7 +50,7 @@ final class Day08Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cpu = CPU(program: input.program)
 
 		while cpu.executeNextInstruction() {}
@@ -60,7 +58,7 @@ final class Day08Solver: DaySolver {
 		return cpu.accumulator
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		for ip in 0 ..< input.program.count {
 			var program = input.program
 
@@ -85,7 +83,7 @@ final class Day08Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().compactMap {
 			let parts = $0.components(separatedBy: .whitespaces)
 
@@ -101,6 +99,6 @@ final class Day08Solver: DaySolver {
 			}
 		}
 
-		input = .init(program: instructions)
+		return .init(program: instructions)
 	}
 }

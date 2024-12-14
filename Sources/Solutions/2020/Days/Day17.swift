@@ -4,9 +4,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let items: [Bool]
 
 		let width: Int
@@ -119,7 +117,7 @@ final class Day17Solver: DaySolver {
 		return Grid(points: newPoints, dimensions: grid.dimensions)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var points: Set<[Int]> = Set()
 
 		for (index, item) in input.items.enumerated() {
@@ -142,7 +140,7 @@ final class Day17Solver: DaySolver {
 		return currentGrid.points.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var points: Set<[Int]> = Set()
 
 		for (index, item) in input.items.enumerated() {
@@ -165,7 +163,7 @@ final class Day17Solver: DaySolver {
 		return currentGrid.points.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let grid: [Bool] = rawString.compactMap {
 			switch $0 {
 			case "#": true
@@ -179,6 +177,6 @@ final class Day17Solver: DaySolver {
 		let width = grid.count / lines.count
 		let depth = lines.count
 
-		input = .init(items: grid, width: width, height: depth)
+		return .init(items: grid, width: width, height: depth)
 	}
 }

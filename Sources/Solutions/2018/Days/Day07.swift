@@ -4,9 +4,7 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		// can begin letter -> needs to be finished set of letters
 		let relations: [String: Set<String>]
 	}
@@ -121,20 +119,20 @@ final class Day07Solver: DaySolver {
 		return openNodes.values.max()!
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		let relations = allRelationsAndEndNode(relations: input.relations)
 
 		return processNodesForPart1(relations: relations)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let relations = allRelationsAndEndNode(relations: input.relations)
 
 		return processNodesForPart2(relations: relations, nrOfWorkers: 5, extraTime: 60)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(relations: rawString.allLines().reduce(into: [String: Set<String>]()) { result, line in
+	func parseInput(rawString: String) -> Input {
+		return .init(relations: rawString.allLines().reduce(into: [String: Set<String>]()) { result, line in
 			let arguments = line.getCapturedValues(pattern: #"Step ([A-Z]*) must be finished before step ([A-Z]*) can begin."#)!
 
 			result[arguments[1], default: []].insert(arguments[0])

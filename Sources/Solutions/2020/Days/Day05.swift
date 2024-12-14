@@ -4,9 +4,7 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let seats: [String]
 	}
 
@@ -42,7 +40,7 @@ final class Day05Solver: DaySolver {
 		return lowRow * 8 + lowSeat
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var highestSeatID = 0
 
 		for seatCode in input.seats {
@@ -54,7 +52,7 @@ final class Day05Solver: DaySolver {
 		return highestSeatID
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let seatIDs: [Int] = input.seats.map { getSeatID(from: $0) }
 
 		let lowestSeatID = seatIDs.min()!
@@ -69,9 +67,9 @@ final class Day05Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let seats = rawString.allLines()
 
-		input = .init(seats: seats)
+		return .init(seats: seats)
 	}
 }

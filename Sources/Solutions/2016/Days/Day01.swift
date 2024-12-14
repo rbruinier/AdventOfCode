@@ -4,9 +4,7 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let steps: [Step]
 	}
 
@@ -17,7 +15,7 @@ final class Day01Solver: DaySolver {
 
 	private var firstTwiceVisitedPoint: Point2D?
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var point = Point2D()
 		var direction = Direction.north
 
@@ -53,11 +51,11 @@ final class Day01Solver: DaySolver {
 		return abs(point.x) + abs(point.y)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		abs(firstTwiceVisitedPoint!.x) + abs(firstTwiceVisitedPoint!.y)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let steps: [Step] = rawString
 			.components(separatedBy: ",")
 			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -71,6 +69,6 @@ final class Day01Solver: DaySolver {
 				}
 			}
 
-		input = .init(steps: steps)
+		return .init(steps: steps)
 	}
 }

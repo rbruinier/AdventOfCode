@@ -10,19 +10,17 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let shapes: [Shape]
 		let jetDirections: [JetDirection]
 	}
 
-	private enum JetDirection {
+	enum JetDirection {
 		case left
 		case right
 	}
 
-	private struct Shape {
+	struct Shape {
 		var points: [Point2D]
 
 		let xRange: ClosedRange<Int>
@@ -147,7 +145,7 @@ final class Day17Solver: DaySolver {
 		return .init(occupiedPositions: occupiedPositions, dataPerRock: dataPerRock, heightPerDroppedRock: heightPerDroppedRock)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let result = runGame(withRockCount: 2022, shapes: input.shapes, jetDirections: input.jetDirections)
 
 		let minY = result.occupiedPositions.map(\.y).min()!
@@ -155,7 +153,7 @@ final class Day17Solver: DaySolver {
 		return -minY
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let result = runGame(withRockCount: 10000, shapes: input.shapes, jetDirections: input.jetDirections)
 
 		var repetition: (startIndex: Int, size: Int)?
@@ -205,7 +203,7 @@ final class Day17Solver: DaySolver {
 		return heightBeforeCycle + (cycleHeight * numberOfCycles) + remainingHeight - 1
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let shapes: [Shape] = [
 			.init(points: [
 				.init(x: 0, y: 0),
@@ -249,6 +247,6 @@ final class Day17Solver: DaySolver {
 			}
 		}
 
-		input = .init(shapes: shapes, jetDirections: jetDirections)
+		return .init(shapes: shapes, jetDirections: jetDirections)
 	}
 }

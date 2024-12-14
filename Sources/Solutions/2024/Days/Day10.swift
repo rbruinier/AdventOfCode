@@ -5,9 +5,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var heightmap: [Point2D: Int]
 	}
 
@@ -45,7 +43,7 @@ final class Day10Solver: DaySolver {
 		return validNodes.map(\.path)
 	}
 
-	func solvePart1() async -> Int {
+	func solvePart1(withInput input: Input) async -> Int {
 		let heightmap = input.heightmap
 
 		return await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
@@ -61,7 +59,7 @@ final class Day10Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() async -> Int {
+	func solvePart2(withInput input: Input) async -> Int {
 		let heightmap = input.heightmap
 
 		return await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
@@ -77,7 +75,7 @@ final class Day10Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var heightmap: [Point2D: Int] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -86,6 +84,6 @@ final class Day10Solver: DaySolver {
 			}
 		}
 
-		input = .init(heightmap: heightmap)
+		return .init(heightmap: heightmap)
 	}
 }

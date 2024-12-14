@@ -4,9 +4,7 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
@@ -47,7 +45,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let intcode = IntcodeProcessor(program: input.program)
 
 		var tiles: [Point2D: Tile] = [:]
@@ -68,7 +66,7 @@ final class Day13Solver: DaySolver {
 		return tiles.values.filter { $0 == .block }.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var program = input.program
 
 		program[0] = 2 // insert 2 quarters :)
@@ -86,11 +84,11 @@ final class Day13Solver: DaySolver {
 			let input: Int
 
 			if ballPosition.x < paddlePosition.x {
-				input = -1
+				return -1
 			} else if ballPosition.x > paddlePosition.x {
-				input = 1
+				return 1
 			} else {
-				input = 0
+				return 0
 			}
 
 			if let output = intcode.continueProgramTillOutput(input: [input]) {
@@ -122,7 +120,7 @@ final class Day13Solver: DaySolver {
 		return score
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let heightMap: [Int]
 
 		let width: Int
@@ -100,7 +98,7 @@ final class Day09Solver: DaySolver {
 		return lowPoints
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let lowPoints = getLowPoints(from: input)
 
 		let heights = lowPoints.map { input.heightMap[$0.y * input.width + $0.x] }
@@ -108,7 +106,7 @@ final class Day09Solver: DaySolver {
 		return heights.reduce(0) { result, height in result + height + 1 }
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let lowPoints = getLowPoints(from: input)
 
 		var allBasinSizes: [Int] = []
@@ -126,13 +124,13 @@ final class Day09Solver: DaySolver {
 		return allBasinSizes[0] * allBasinSizes[1] * allBasinSizes[2]
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let height = rawString.filter(\.isNewline).count
 
 		let heights: [Int] = rawString.compactMap { Int(String($0)) }
 
 		let width = heights.count / height
 
-		input = .init(heightMap: heights, width: width, height: height)
+		return .init(heightMap: heights, width: width, height: height)
 	}
 }

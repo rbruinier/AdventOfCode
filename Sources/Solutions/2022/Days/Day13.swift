@@ -4,18 +4,16 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let pairs: [Pair]
 	}
 
-	private enum Data: Equatable {
+	enum Data: Equatable {
 		case digit(value: Int)
 		case list(items: [Data])
 	}
 
-	private struct Packet: Equatable, Comparable {
+	struct Packet: Equatable, Comparable {
 		let data: [Data]
 
 		static func < (lhs: Packet, rhs: Packet) -> Bool {
@@ -63,7 +61,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	private struct Pair {
+	struct Pair {
 		let a: Packet
 		let b: Packet
 
@@ -74,7 +72,7 @@ final class Day13Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var sum = 0
 
 		for (index, pair) in input.pairs.enumerated() {
@@ -84,7 +82,7 @@ final class Day13Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var packets: [Packet] = input.pairs.reduce([]) {
 			$0 + [$1.a, $1.b]
 		}
@@ -103,7 +101,7 @@ final class Day13Solver: DaySolver {
 		return indexA * indexB
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		func parsePacketLine(_ line: String, index: inout Int) -> [Data] {
@@ -154,6 +152,6 @@ final class Day13Solver: DaySolver {
 			pairs.append(.init(a: packetA, b: packetB))
 		}
 
-		input = .init(pairs: pairs)
+		return .init(pairs: pairs)
 	}
 }

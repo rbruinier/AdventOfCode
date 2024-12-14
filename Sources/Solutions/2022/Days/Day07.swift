@@ -4,13 +4,11 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let terminalLines: [TerminalLine]
 	}
 
-	private enum Command: CustomStringConvertible {
+	enum Command: CustomStringConvertible {
 		case cdRoot
 		case cdBack
 		case cd(folder: String)
@@ -24,7 +22,7 @@ final class Day07Solver: DaySolver {
 		}
 	}
 
-	private enum Listing: CustomStringConvertible {
+	enum Listing: CustomStringConvertible {
 		case dir(name: String)
 		case file(name: String, size: Int)
 
@@ -36,7 +34,7 @@ final class Day07Solver: DaySolver {
 		}
 	}
 
-	private enum TerminalLine: CustomStringConvertible {
+	enum TerminalLine: CustomStringConvertible {
 		case command(command: Command)
 		case listing(listing: Listing)
 
@@ -86,7 +84,7 @@ final class Day07Solver: DaySolver {
 
 		var currentNode = rootNode
 
-		for terminalLine in input.terminalLines {
+		for terminalLine in terminalLines {
 			switch terminalLine {
 			case .command(let command):
 				switch command {
@@ -110,7 +108,7 @@ final class Day07Solver: DaySolver {
 		return rootNode
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let rootNode = createFileStructure(fromTerminalLines: input.terminalLines)
 
 		func findDirectoriesWithMaximumSize(startNode: FileNode, result: inout Int) {
@@ -132,7 +130,7 @@ final class Day07Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let rootNode = createFileStructure(fromTerminalLines: input.terminalLines)
 
 		let totalDiskSpace = 70_000_000
@@ -163,7 +161,7 @@ final class Day07Solver: DaySolver {
 		return bestSize
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let terminalLines: [TerminalLine] = rawString.allLines().compactMap { line in
 			if line == "$ cd /" {
 				.command(command: .cdRoot)
@@ -182,6 +180,6 @@ final class Day07Solver: DaySolver {
 			}
 		}
 
-		input = .init(terminalLines: terminalLines)
+		return .init(terminalLines: terminalLines)
 	}
 }

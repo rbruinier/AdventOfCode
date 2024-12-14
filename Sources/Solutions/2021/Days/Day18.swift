@@ -4,9 +4,7 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lines: [Line]
 	}
 
@@ -244,7 +242,7 @@ final class Day18Solver: DaySolver {
 		return rootNode.magnitude
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var sumLine: Line = input.lines.first!
 
 		for originalLine in input.lines[1 ..< input.lines.endIndex] {
@@ -278,7 +276,7 @@ final class Day18Solver: DaySolver {
 		return rootNode.magnitude
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var maxMagnitude = Int.min
 
 		for aIndex in 0 ..< input.lines.count {
@@ -297,7 +295,7 @@ final class Day18Solver: DaySolver {
 		return maxMagnitude
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLines: [[Character]] = rawString.components(separatedBy: CharacterSet.newlines).compactMap { $0.isEmpty == false ? $0 : nil }.map { $0.map { $0 } }
 
 		var lines: [Line] = []
@@ -330,6 +328,6 @@ final class Day18Solver: DaySolver {
 			lines.append(.init(segments: segments))
 		}
 
-		input = .init(lines: lines)
+		return .init(lines: lines)
 	}
 }

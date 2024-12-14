@@ -4,13 +4,11 @@ import Tools
 final class Day02Solver: DaySolver {
 	let dayNumber: Int = 2
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let games: [Game]
 	}
 
-	private struct Game {
+	struct Game {
 		struct Set {
 			let red: Int
 			let green: Int
@@ -27,7 +25,7 @@ final class Day02Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let maxRed = 12
 		let maxGreen = 13
 		let maxBlue = 14
@@ -37,7 +35,7 @@ final class Day02Solver: DaySolver {
 			.reduce(0) { $0 + $1.id }
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.games.reduce(0) { result, game in
 			let maxRed = game.sets.map(\.red).max()!
 			let maxGreen = game.sets.map(\.green).max()!
@@ -47,7 +45,7 @@ final class Day02Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var gameID = 1
 
 		let games: [Game] = rawString.allLines().map { line in
@@ -86,6 +84,6 @@ final class Day02Solver: DaySolver {
 			return .init(id: gameID, sets: sets)
 		}
 
-		input = .init(games: games)
+		return .init(games: games)
 	}
 }

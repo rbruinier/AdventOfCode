@@ -4,9 +4,7 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let drawnNumbers: [Int]
 		let boards: [Board]
 	}
@@ -64,7 +62,7 @@ final class Day04Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var boards = input.boards
 
 		for number in input.drawnNumbers {
@@ -80,7 +78,7 @@ final class Day04Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var boards = input.boards
 
 		var lastWinningScore = 0
@@ -101,7 +99,7 @@ final class Day04Solver: DaySolver {
 		return lastWinningScore
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let index = rawString.firstIndex(of: "\n")!
 
 		let drawnNumbers = String(rawString[rawString.startIndex ..< index])
@@ -120,6 +118,6 @@ final class Day04Solver: DaySolver {
 			boards.append(board)
 		}
 
-		input = .init(drawnNumbers: drawnNumbers, boards: boards)
+		return .init(drawnNumbers: drawnNumbers, boards: boards)
 	}
 }

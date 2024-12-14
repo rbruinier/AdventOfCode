@@ -7,14 +7,12 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let startPosition: Point2D
 		let pipes: [Point2D: Pipe]
 	}
 
-	private enum Pipe: Hashable {
+	enum Pipe: Hashable {
 		case vertical
 		case horizontal
 		case northEastBend
@@ -174,7 +172,7 @@ final class Day10Solver: DaySolver {
 		return (points: visitedPoints, rightHandedPoints: rightHandedPoints)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var pipes = input.pipes
 
 		pipes[input.startPosition] = resolveStartingPositionPipe(at: input.startPosition, pipes: pipes)
@@ -188,7 +186,7 @@ final class Day10Solver: DaySolver {
 		return result.points.values.sorted()[result.points.count / 2]
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var pipes = input.pipes
 
 		pipes[input.startPosition] = resolveStartingPositionPipe(at: input.startPosition, pipes: pipes)
@@ -222,7 +220,7 @@ final class Day10Solver: DaySolver {
 		return allInsidePoints.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var startPosition: Point2D!
 		var pipes: [Point2D: Pipe] = [:]
 
@@ -243,7 +241,7 @@ final class Day10Solver: DaySolver {
 				}
 			}
 		}
-		input = .init(
+		return .init(
 			startPosition: startPosition,
 			pipes: pipes
 		)

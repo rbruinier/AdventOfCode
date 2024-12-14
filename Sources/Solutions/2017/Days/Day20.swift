@@ -6,9 +6,7 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let particles: [Particle]
 	}
 
@@ -18,7 +16,7 @@ final class Day20Solver: DaySolver {
 		var acceleration: Point3D
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		// we should not need to simulate anything, instead whatever has the lowest total acceleration should be closest on the long term
 
 		let particles = input.particles
@@ -38,7 +36,7 @@ final class Day20Solver: DaySolver {
 		return nearestParticleIndex
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var particles = input.particles
 
 		var particleIndicesToRemove: Set<Int> = []
@@ -77,12 +75,12 @@ final class Day20Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		func parsePoint3D(_ data: String) -> Point3D {
 			Point3D(commaSeparatedString: data[3 ..< data.count - 1])
 		}
 
-		input = .init(particles: rawString.allLines().map { line in
+		return .init(particles: rawString.allLines().map { line in
 			let parts = line.components(separatedBy: ", ")
 
 			return Particle(

@@ -5,15 +5,13 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Machine {
+	struct Machine {
 		let a: Point2D
 		let b: Point2D
 		let prize: Point2D
 	}
 
-	private struct Input {
+	struct Input {
 		let machines: [Machine]
 	}
 
@@ -76,11 +74,11 @@ final class Day13Solver: DaySolver {
 		return x * 3 + y
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.machines.compactMap(tokensForMachine(_:)).reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let newMachines: [Machine] = input.machines.map { .init(
 			a: $0.a, b: $0.b, prize: .init(x: $0.prize.x + 10_000_000_000_000, y: $0.prize.y + 10_000_000_000_000)
 		) }
@@ -88,7 +86,7 @@ final class Day13Solver: DaySolver {
 		return newMachines.compactMap(tokensForMachine(_:)).reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var machines: [Machine] = []
 
 		let allLines = rawString.allLines()
@@ -136,6 +134,6 @@ final class Day13Solver: DaySolver {
 			))
 		}
 
-		input = .init(machines: machines)
+		return .init(machines: machines)
 	}
 }

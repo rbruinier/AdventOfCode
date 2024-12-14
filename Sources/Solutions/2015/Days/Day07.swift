@@ -4,9 +4,7 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -128,13 +126,13 @@ final class Day07Solver: DaySolver {
 		return registers
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let registers = execute(instructions: input.instructions, registers: [:])
 
 		return registers["a"]!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var registers = execute(instructions: input.instructions, registers: [:])
 
 		let newInstructions: [Instruction] = input.instructions.map { instruction in
@@ -150,7 +148,7 @@ final class Day07Solver: DaySolver {
 		return registers["a"]!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().map { line in
 			func operand(from string: String) -> Operand {
 				if let value = Int(string) {
@@ -177,6 +175,6 @@ final class Day07Solver: DaySolver {
 			fatalError()
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

@@ -4,14 +4,12 @@ import Tools
 final class Day15Solver: DaySolver {
 	let dayNumber: Int = 15
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let a: Int
 		let b: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var a = input.a
 		var b = input.b
 
@@ -28,7 +26,7 @@ final class Day15Solver: DaySolver {
 		return counter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var a = input.a
 		var b = input.b
 
@@ -66,7 +64,7 @@ final class Day15Solver: DaySolver {
 		return counter
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(a: 512, b: 191)
+	func parseInput(rawString: String) -> Input {
+		return .init(a: 512, b: 191)
 	}
 }

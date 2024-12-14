@@ -4,9 +4,7 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -116,7 +114,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cpu = CPU(instructions: input.instructions)
 
 		cpu.registers["a"] = 7
@@ -128,7 +126,7 @@ final class Day23Solver: DaySolver {
 		return cpu.registers["a"]!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		/*
 		 This solution required me to reverse engineer some of the assembly code. First a counter per instruction was kept and
 		 printed after letting it run for a few seconds. This gave insight in what instructions are the hotspots to focus on. This
@@ -167,7 +165,7 @@ final class Day23Solver: DaySolver {
 		return cpu.registers["a"]!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
@@ -205,6 +203,6 @@ final class Day23Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let numberOfPlayers: Int
 		let lastMarbleWorth: Int
 	}
@@ -35,15 +33,15 @@ final class Day09Solver: DaySolver {
 		return playerScores.values.max()!
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(forNumberOfPlayers: input.numberOfPlayers, numberOfMarbles: input.lastMarbleWorth)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solve(forNumberOfPlayers: input.numberOfPlayers, numberOfMarbles: input.lastMarbleWorth * 100)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(Input(numberOfPlayers: 411, lastMarbleWorth: 71170))
+	func parseInput(rawString: String) -> Input {
+		return .init(Input(numberOfPlayers: 411, lastMarbleWorth: 71170))
 	}
 }

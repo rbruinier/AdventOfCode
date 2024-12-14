@@ -4,9 +4,7 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -84,7 +82,7 @@ final class Day25Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		// brute force works fine
 		for startValue in 0 ..< 10000 {
 			var cpu = CPU(instructions: input.instructions)
@@ -110,11 +108,11 @@ final class Day25Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
@@ -160,6 +158,6 @@ final class Day25Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

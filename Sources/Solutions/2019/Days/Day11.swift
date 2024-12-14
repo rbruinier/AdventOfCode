@@ -4,9 +4,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
@@ -19,7 +17,7 @@ final class Day11Solver: DaySolver {
 		var panels: [Point2D: Int] = startPanels
 
 		while true {
-			let input = panels[position, default: 0]
+			let return panels[position, default: 0]
 
 			guard
 				let color = intcode.continueProgramTillOutput(input: [input]),
@@ -44,11 +42,11 @@ final class Day11Solver: DaySolver {
 		return panels
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		runProgram(startPanels: [:]).keys.count
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		let panels = runProgram(startPanels: [.init(x: 0, y: 0): 1])
 
 		let points = panels.keys
@@ -76,7 +74,7 @@ final class Day11Solver: DaySolver {
 		return "KLCZAEGU"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

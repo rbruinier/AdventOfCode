@@ -4,9 +4,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
@@ -46,7 +44,7 @@ final class Day17Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let intcode = IntcodeProcessor(program: input.program)
 
 		var position = Point2D()
@@ -116,7 +114,7 @@ final class Day17Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var position: Point2D!
 		var direction: Direction = .north
 
@@ -233,7 +231,7 @@ final class Day17Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

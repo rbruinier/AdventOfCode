@@ -4,9 +4,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let json: String
 	}
 
@@ -30,19 +28,19 @@ final class Day12Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let content = try! JSONSerialization.jsonObject(with: input.json.data(using: .ascii)!, options: [])
 
 		return sumOfAllDigits(in: content)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let content = try! JSONSerialization.jsonObject(with: input.json.data(using: .ascii)!, options: [])
 
 		return sumOfAllDigits(in: content, exludeRed: true)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(json: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+	func parseInput(rawString: String) -> Input {
+		return .init(json: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

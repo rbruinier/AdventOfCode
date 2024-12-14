@@ -4,13 +4,11 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let bets: [Bet]
 	}
 
-	private enum Card: Comparable, Equatable {
+	enum Card: Comparable, Equatable {
 		case _2
 		case _3
 		case _4
@@ -45,7 +43,7 @@ final class Day07Solver: DaySolver {
 		}
 	}
 
-	private enum Hand: Comparable, Equatable, Hashable {
+	enum Hand: Comparable, Equatable, Hashable {
 		case highCard
 		case onePair
 		case twoPair
@@ -55,7 +53,7 @@ final class Day07Solver: DaySolver {
 		case fiveOfAKind
 	}
 
-	private struct Bet: Comparable {
+	struct Bet: Comparable {
 		let cards: [Card]
 		let bid: Int
 
@@ -144,7 +142,7 @@ final class Day07Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let sortedBets = input.bets.sorted()
 
 		var totalScore = 0
@@ -155,7 +153,7 @@ final class Day07Solver: DaySolver {
 		return totalScore
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let jokerEnabledBets = input.bets.map { Bet(cards: $0.cards, bid: $0.bid, jokerEnabled: true) }
 
 		let sortedBets = jokerEnabledBets.sorted()
@@ -168,7 +166,7 @@ final class Day07Solver: DaySolver {
 		return totalScore
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let bets: [Bet] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
@@ -178,6 +176,6 @@ final class Day07Solver: DaySolver {
 			return Bet(cards: cards, bid: bid, jokerEnabled: false)
 		}
 
-		input = .init(bets: bets)
+		return .init(bets: bets)
 	}
 }

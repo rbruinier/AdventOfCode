@@ -4,9 +4,7 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let entries: [Entry]
 	}
 
@@ -56,20 +54,20 @@ final class Day04Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		validEntries = input.entries.filter(\.isValid)
 
 		return validEntries.map(\.sectorID).reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let entries = validEntries.map(\.nameShifted)
 
 		return entries.first(where: { $0.name == "northpole-object-storage" })!.sectorID
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(entries: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(entries: rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: #"([a-z-]*)\-([0-9]*)\[([a-z]*)\]"#)!
 
 			let name = values[0] // .replacingOccurrences(of: "-", with: "")

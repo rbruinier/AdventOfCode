@@ -4,9 +4,7 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let rules: [Int: Rule]
 
 		let strings: [String]
@@ -58,7 +56,7 @@ final class Day19Solver: DaySolver {
 		return remainingStrings
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var validCount = 0
 		for stringIndex in 0 ..< input.strings.count {
 			let string = input.strings[stringIndex]
@@ -71,7 +69,7 @@ final class Day19Solver: DaySolver {
 		return validCount
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var rules = input.rules
 
 		rules[8] = .rule(groups: [[42], [42, 8]])
@@ -89,7 +87,7 @@ final class Day19Solver: DaySolver {
 		return validCount
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var lines = rawString.allLines(includeEmpty: true)
 
 		var rules: [Int: Rule] = [:]
@@ -119,6 +117,6 @@ final class Day19Solver: DaySolver {
 			}
 		}
 
-		input = .init(rules: rules, strings: lines.filter(\.isNotEmpty))
+		return .init(rules: rules, strings: lines.filter(\.isNotEmpty))
 	}
 }

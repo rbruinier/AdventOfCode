@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let entries: [Entry]
 	}
 
@@ -59,7 +57,7 @@ final class Day08Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let occurencesOfOne = input.entries.reduce(0) { result, entry in
 			result + entry.outputDigits.filter { $0.segments.count == 2 }.count
 		}
@@ -79,7 +77,7 @@ final class Day08Solver: DaySolver {
 		return occurencesOfOne + occurencesOfFour + occurencesOfSeven + occurencesOfEight
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var result = 0
 
 		for entry in input.entries {
@@ -160,7 +158,7 @@ final class Day08Solver: DaySolver {
 		return result
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.filter { $0.isEmpty == false }
@@ -170,7 +168,7 @@ final class Day08Solver: DaySolver {
 		for rawLine in rawLines {
 			let lineComponents = rawLine.components(separatedBy: " | ")
 
-			let uniqueDigitsInput = lineComponents[0].components(separatedBy: CharacterSet.whitespaces)
+			let uniqueDigitsreturn lineComponents[0].components(separatedBy: CharacterSet.whitespaces)
 			let fourDigitOuput = lineComponents[1].components(separatedBy: CharacterSet.whitespaces)
 
 			let uniqueDigits: [Digit] = uniqueDigitsInput.map { digits in
@@ -184,6 +182,6 @@ final class Day08Solver: DaySolver {
 			entries.append(.init(uniqueDigits: uniqueDigits, outputDigits: outputDigits))
 		}
 
-		input = .init(entries: entries)
+		return .init(entries: entries)
 	}
 }

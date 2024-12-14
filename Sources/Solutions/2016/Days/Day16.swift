@@ -4,9 +4,7 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let values: [Bool]
 		let desiredLengthPart1: Int
 		let desiredLengthPart2: Int
@@ -44,22 +42,22 @@ final class Day16Solver: DaySolver {
 		return Array(values[0 ..< length])
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		let values = fillDisc(startingWith: input.values, length: input.desiredLengthPart1)
 		let checksum = checksum(for: values)
 
 		return checksum.map { $0 ? "1" : "0" }.joined()
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		let values = fillDisc(startingWith: input.values, length: input.desiredLengthPart2)
 		let checksum = checksum(for: values)
 
 		return checksum.map { $0 ? "1" : "0" }.joined()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(
+	func parseInput(rawString: String) -> Input {
+		return .init(
 			values: "11100010111110100".map { $0 == "1" ? true : false },
 			desiredLengthPart1: 272,
 			desiredLengthPart2: 35651584

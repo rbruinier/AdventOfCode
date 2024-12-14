@@ -4,9 +4,7 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let foods: [Food]
 	}
 
@@ -59,7 +57,7 @@ final class Day21Solver: DaySolver {
 		return (matches: matches, remainingIngredients: remainingIngredients, countPerIngredient: countPerIngredient)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let solution = solve(with: input.foods)
 
 		return solution.remainingIngredients.reduce(0) { result, ingredient in
@@ -67,7 +65,7 @@ final class Day21Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		let solution = solve(with: input.foods)
 
 		return solution.matches.sorted(by: { $0.key < $1.key })
@@ -75,7 +73,7 @@ final class Day21Solver: DaySolver {
 			.joined(separator: ",")
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var foods: [Food] = []
 
 		for line in rawString.allLines() {
@@ -87,6 +85,6 @@ final class Day21Solver: DaySolver {
 			foods.append(.init(ingredients: ingredients, allergens: allergens))
 		}
 
-		input = .init(foods: foods)
+		return .init(foods: foods)
 	}
 }

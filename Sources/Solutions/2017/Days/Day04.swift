@@ -4,13 +4,11 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let passphrases: [String]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var validPhrases = 0
 
 		mainLoop: for passphrase in input.passphrases {
@@ -28,7 +26,7 @@ final class Day04Solver: DaySolver {
 		return validPhrases
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var validPhrases = 0
 
 		mainLoop: for passphrase in input.passphrases {
@@ -46,7 +44,7 @@ final class Day04Solver: DaySolver {
 		return validPhrases
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(passphrases: rawString.allLines())
+	func parseInput(rawString: String) -> Input {
+		return .init(passphrases: rawString.allLines())
 	}
 }

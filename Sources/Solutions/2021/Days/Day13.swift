@@ -4,9 +4,7 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let coordinates: [Coordinate]
 
 		let folds: [Fold]
@@ -100,7 +98,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid = Grid(width: input.width, height: input.height)
 
 		for coordinate in input.coordinates {
@@ -112,7 +110,7 @@ final class Day13Solver: DaySolver {
 		return grid.items.filter { $0 }.count
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var grid = Grid(width: input.width, height: input.height)
 
 		for coordinate in input.coordinates {
@@ -131,7 +129,7 @@ final class Day13Solver: DaySolver {
 		return "ZUJUAFHP"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var coordinates: [Coordinate] = []
 		var folds: [Fold] = []
 
@@ -163,6 +161,6 @@ final class Day13Solver: DaySolver {
 		let width = coordinates.map(\.x).max()! + 1
 		let height = coordinates.map(\.y).max()! + 1
 
-		input = .init(coordinates: coordinates, folds: folds, width: width, height: height)
+		return .init(coordinates: coordinates, folds: folds, width: width, height: height)
 	}
 }

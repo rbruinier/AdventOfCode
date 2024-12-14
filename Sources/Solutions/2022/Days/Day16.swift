@@ -15,15 +15,13 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
 	private var memoization: [Int] = [] // space is reserved in solvers
 
-	private struct Input {
+	struct Input {
 		let valves: [Valve]
 	}
 
-	private struct Valve: Equatable, Hashable {
+	struct Valve: Equatable, Hashable {
 		let id: String
 		let rate: Int
 		let connectedToIDs: [String]
@@ -187,7 +185,7 @@ final class Day16Solver: DaySolver {
 		return maxScore
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		memoization = Array(repeating: -1, count: 68_000_000)
 
 		let valveNetwork = generateValveNetwork(valves: input.valves, startMinutes: 30)
@@ -201,7 +199,7 @@ final class Day16Solver: DaySolver {
 		)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		memoization = Array(repeating: -1, count: 68_000_000)
 
 		let valveNetwork = generateValveNetwork(valves: input.valves, startMinutes: 26)
@@ -215,8 +213,8 @@ final class Day16Solver: DaySolver {
 		)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(valves: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(valves: rawString.allLines().map { line in
 			let splittedLine = line.components(separatedBy: "; ")
 
 			let valveArguments = splittedLine[0].getCapturedValues(pattern: #"Valve ([A-Z]*) has flow rate=([0-9]*)"#)!

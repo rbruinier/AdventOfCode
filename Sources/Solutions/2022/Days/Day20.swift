@@ -8,14 +8,12 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
-	private struct Pair: Hashable {
+	struct Pair: Hashable {
 		let index: Int
 		let digit: Int
 	}
 
-	private struct Input {
+	struct Input {
 		let digits: [Pair]
 	}
 
@@ -54,15 +52,15 @@ final class Day20Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		runDecryption(on: input.digits, rounds: 1, multiplier: 1)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		runDecryption(on: input.digits, rounds: 10, multiplier: 811589153)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(digits: rawString.allLines().enumerated().map { .init(index: $0, digit: Int($1)!) })
+	func parseInput(rawString: String) -> Input {
+		return .init(digits: rawString.allLines().enumerated().map { .init(index: $0, digit: Int($1)!) })
 	}
 }

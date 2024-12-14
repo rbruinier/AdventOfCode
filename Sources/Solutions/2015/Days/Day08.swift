@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let strings: [String]
 	}
 
@@ -48,7 +46,7 @@ final class Day08Solver: DaySolver {
 		return count
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var sumOfDifference = 0
 		for string in input.strings {
 			sumOfDifference += numberOfSuperfluousCharacters(in: string)
@@ -57,7 +55,7 @@ final class Day08Solver: DaySolver {
 		return sumOfDifference
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var sumOfDifference = 0
 		for string in input.strings {
 			sumOfDifference += numberOfExtraEncodedCharacters(in: string)
@@ -66,7 +64,7 @@ final class Day08Solver: DaySolver {
 		return sumOfDifference
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(strings: rawString.allLines())
+	func parseInput(rawString: String) -> Input {
+		return .init(strings: rawString.allLines())
 	}
 }

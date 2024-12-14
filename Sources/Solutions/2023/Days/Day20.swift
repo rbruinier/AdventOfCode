@@ -4,23 +4,21 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
-	private typealias Modules = [String: Module]
+	typealias Modules = [String: Module]
 
 	private let broadcasterID = "broadcaster"
 
-	private struct Input {
+	struct Input {
 		let modules: Modules
 	}
 
-	private enum ModuleType {
+	enum ModuleType {
 		case flipFlop
 		case remember
 		case broadcast
 	}
 
-	private struct Module {
+	struct Module {
 		let type: ModuleType
 		let destinations: [String]
 	}
@@ -131,7 +129,7 @@ final class Day20Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let configuration = Configuration(
 			flipFlopModuleIDs: Set(input.modules.filter { $0.value.type == .flipFlop }.map(\.key)),
 			rememberModuleIDs: Set(input.modules.filter { $0.value.type == .remember }.map(\.key)),
@@ -149,7 +147,7 @@ final class Day20Solver: DaySolver {
 		return state.lowPulseCount * state.highPulseCount
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// Cycle detection... might only work for my input:
 		//
 		// &jq -> rx
@@ -181,7 +179,7 @@ final class Day20Solver: DaySolver {
 		return Math.leastCommonMultiple(for: state.repeatingCycles.values.map { $0 })
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var modules: Modules = [:]
 
 		for line in rawString.allLines() {
@@ -206,6 +204,6 @@ final class Day20Solver: DaySolver {
 			modules[id] = .init(type: moduleType, destinations: components[1].components(separatedBy: ", "))
 		}
 
-		input = .init(modules: modules)
+		return .init(modules: modules)
 	}
 }

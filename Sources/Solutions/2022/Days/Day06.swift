@@ -4,9 +4,7 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let buffer: String
 	}
 
@@ -22,15 +20,15 @@ final class Day06Solver: DaySolver {
 		fatalError()
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		scan(buffer: input.buffer, count: 4)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		scan(buffer: input.buffer, count: 14)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(buffer: rawString.allLines().first!)
+	func parseInput(rawString: String) -> Input {
+		return .init(buffer: rawString.allLines().first!)
 	}
 }

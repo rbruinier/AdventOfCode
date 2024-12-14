@@ -4,9 +4,7 @@ import Tools
 final class Day16Solver: DaySolver {
 	let dayNumber: Int = 16
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let aunts: [Aunt]
 	}
 
@@ -28,7 +26,7 @@ final class Day16Solver: DaySolver {
 		"perfumes": 1,
 	]
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var bestAunt: Aunt!
 		var bestScore = Int.min
 
@@ -59,7 +57,7 @@ final class Day16Solver: DaySolver {
 		return Int(bestAunt.name.replacingOccurrences(of: "Sue ", with: ""))!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var bestAunt: Aunt!
 		var bestScore = Int.min
 
@@ -100,7 +98,7 @@ final class Day16Solver: DaySolver {
 		return Int(bestAunt.name.replacingOccurrences(of: "Sue ", with: ""))!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let aunts: [Aunt] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: ": ")
 
@@ -119,6 +117,6 @@ final class Day16Solver: DaySolver {
 			return .init(name: components[0], items: items)
 		}
 
-		input = .init(aunts: aunts)
+		return .init(aunts: aunts)
 	}
 }

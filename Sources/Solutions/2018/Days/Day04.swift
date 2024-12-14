@@ -4,9 +4,7 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let events: [Event]
 	}
 
@@ -63,7 +61,7 @@ final class Day04Solver: DaySolver {
 		return shiftsPerGuard
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let shiftsPerGuard = resolveGuardShifts(byEvents: input.events)
 
 		// find guard with most minutes asleep
@@ -89,7 +87,7 @@ final class Day04Solver: DaySolver {
 		return sleepiestGuardID * bestMinute
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let shiftsPerGuard = resolveGuardShifts(byEvents: input.events)
 
 		var perMinuteGuardCounters: [Int: [Int: Int]] = [:]
@@ -127,7 +125,7 @@ final class Day04Solver: DaySolver {
 		return bestGuardID! * bestMinute!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		func parseTimestamp(_ values: [String]) -> Int {
 			let month = Int(values[0])!
 			let day = Int(values[1])!
@@ -152,6 +150,6 @@ final class Day04Solver: DaySolver {
 			}
 		}
 
-		input = .init(events: events.sorted(by: { $0.timestamp < $1.timestamp }))
+		return .init(events: events.sorted(by: { $0.timestamp < $1.timestamp }))
 	}
 }

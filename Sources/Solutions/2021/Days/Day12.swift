@@ -4,9 +4,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let uniqueNodes: [Node]
 		let startNode: Node
 		let endNode: Node
@@ -72,13 +70,13 @@ final class Day12Solver: DaySolver {
 		return allPaths
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let completedPaths = iteratePath(startNode: input.startNode, endNode: input.endNode)
 
 		return completedPaths.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let smallNodes = input.uniqueNodes.filter {
 			$0.isBig == false && $0 != input.startNode && $0 != input.endNode
 		}
@@ -100,7 +98,7 @@ final class Day12Solver: DaySolver {
 		return allPaths.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let paths: [Path] = rawString
 			.components(separatedBy: CharacterSet.newlines)
 			.filter { $0.isEmpty == false }
@@ -137,6 +135,6 @@ final class Day12Solver: DaySolver {
 		let startNode = uniqueNodes.first(where: { $0.name == "start" })!
 		let endNode = uniqueNodes.first(where: { $0.name == "end" })!
 
-		input = .init(uniqueNodes: uniqueNodes, startNode: startNode, endNode: endNode)
+		return .init(uniqueNodes: uniqueNodes, startNode: startNode, endNode: endNode)
 	}
 }

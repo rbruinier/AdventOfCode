@@ -4,9 +4,7 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let replacements: [String: [String]]
 
 		let molecule: String
@@ -40,7 +38,7 @@ final class Day19Solver: DaySolver {
 		return steps
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var combinations: Set<String> = []
 
 		for (original, replacements) in input.replacements {
@@ -58,7 +56,7 @@ final class Day19Solver: DaySolver {
 		return combinations.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var reverseMatches: [String: String] = [:]
 
 		for (original, replacements) in input.replacements {
@@ -76,7 +74,7 @@ final class Day19Solver: DaySolver {
 		return reduceToE(current: input.molecule, reverseMatches: reverseMatches, replacements: replacements)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var lines = rawString.allLines()
 
 		let molecule = lines.removeLast()
@@ -89,6 +87,6 @@ final class Day19Solver: DaySolver {
 			replacements[parts[0], default: []].append(parts[1])
 		}
 
-		input = .init(replacements: replacements, molecule: molecule)
+		return .init(replacements: replacements, molecule: molecule)
 	}
 }

@@ -6,9 +6,7 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let steps: [Step]
 	}
 
@@ -45,7 +43,7 @@ final class Day22Solver: DaySolver {
 		return newDeck
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var deck: [Int] = []
 
 		for i in 0 ... 10006 {
@@ -68,7 +66,7 @@ final class Day22Solver: DaySolver {
 		return deck.firstIndex(of: 2019)!
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		// source: https://www.reddit.com/r/adventofcode/comments/ee0rqi/2019_day_22_solutions/fbnifwk/
 
 		func modPower(_ x: BInt, _ y: BInt, _ m: BInt) -> BInt {
@@ -118,7 +116,7 @@ final class Day22Solver: DaySolver {
 		return String((modPower(A, loopSize, deckSize) * X + (modPower(A, loopSize, deckSize) - 1) * modInverse(A - 1, deckSize) * B) % deckSize)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var invalidNumberCharacterSet = NSCharacterSet.decimalDigits
 
 		invalidNumberCharacterSet.insert("-")
@@ -135,6 +133,6 @@ final class Day22Solver: DaySolver {
 			}
 		}
 
-		input = .init(steps: steps)
+		return .init(steps: steps)
 	}
 }

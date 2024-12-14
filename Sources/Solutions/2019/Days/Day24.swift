@@ -4,9 +4,7 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var grid: [Point2D: Bool]
 	}
 
@@ -119,7 +117,7 @@ final class Day24Solver: DaySolver {
 		return rating
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid = input.grid
 
 		var pastHashes: Set<Int> = Set()
@@ -136,7 +134,7 @@ final class Day24Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var grids: [Int: [Point2D: Bool]] = [0: input.grid]
 
 		for _ in 0 ..< 200 {
@@ -151,7 +149,7 @@ final class Day24Solver: DaySolver {
 		return sum
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var grid: [Point2D: Bool] = [:]
@@ -163,6 +161,6 @@ final class Day24Solver: DaySolver {
 			}
 		}
 
-		input = .init(grid: grid)
+		return .init(grid: grid)
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let size: Size
 		let antennas: [Character: [Point2D]]
 	}
@@ -65,15 +63,15 @@ final class Day08Solver: DaySolver {
 		return antinodes.count
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		Self.solve(antennas: input.antennas, size: input.size, performLoop: false)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		Self.solve(antennas: input.antennas, size: input.size, performLoop: true)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var antennas: [Character: [Point2D]] = [:]
 
 		for (y, line) in rawString.allLines().enumerated() {
@@ -82,7 +80,7 @@ final class Day08Solver: DaySolver {
 			}
 		}
 
-		input = .init(
+		return .init(
 			size: .init(width: 50, height: 50),
 			antennas: antennas
 		)

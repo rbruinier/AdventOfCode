@@ -6,18 +6,18 @@ final class Day10Solver: DaySolver {
 
     private var input: Input!
 
-    private struct Input {
+    struct Input {
     }
 
-    func solvePart1() -> Int {
+    func solvePart1(withInput input: Input) -> Int {
         return 0
     }
 
-    func solvePart2() -> Int {
+    func solvePart2(withInput input: Input) -> Int {
         return 0
     }
 
-    func parseInput(rawString: String) {
-        input = .init()
+    func parseInput(rawString: String) -> Input {
+        return .init()
     }
 }

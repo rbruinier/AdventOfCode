@@ -4,9 +4,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let octopi: [Octopus]
 
 		let width: Int
@@ -68,7 +66,7 @@ final class Day11Solver: DaySolver {
 		return numberOfFlashes
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var octopi = input.octopi
 
 		var totalNumberOfFlashes = 0
@@ -80,7 +78,7 @@ final class Day11Solver: DaySolver {
 		return totalNumberOfFlashes
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var octopi = input.octopi
 
 		for step in 0 ..< Int.max {
@@ -94,7 +92,7 @@ final class Day11Solver: DaySolver {
 		return -1
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let height = rawString.filter(\.isNewline).count
 
 		let octopi: [Octopus] = rawString
@@ -103,7 +101,7 @@ final class Day11Solver: DaySolver {
 
 		let width = octopi.count / height
 
-		input = .init(octopi: octopi, width: width, height: height)
+		return .init(octopi: octopi, width: width, height: height)
 	}
 }
 

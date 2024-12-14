@@ -4,13 +4,11 @@ import Tools
 final class Day02Solver: DaySolver {
 	let dayNumber: Int = 2
 
-	private var input: Input!
-
 	struct Report {
 		let levels: [Int]
 	}
 
-	private struct Input {
+	struct Input {
 		let reports: [Report]
 	}
 
@@ -46,19 +44,19 @@ final class Day02Solver: DaySolver {
 		return false
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.reports.count { isSafe(levels: $0.levels) }
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.reports.count { isSafeWithErrorMargin(levels: $0.levels) }
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let reports: [Report] = rawString.allLines().map { line in
 			Report(levels: line.components(separatedBy: .whitespaces).map { Int($0)! })
 		}
 
-		input = .init(reports: reports)
+		return .init(reports: reports)
 	}
 }

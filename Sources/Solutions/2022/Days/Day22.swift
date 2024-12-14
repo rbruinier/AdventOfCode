@@ -8,19 +8,17 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let tiles: [Point2D: Tile]
 		let moves: [Move]
 	}
 
-	private enum Tile {
+	enum Tile {
 		case floor
 		case wall
 	}
 
-	private struct Move {
+	struct Move {
 		let steps: Int
 		let turn: Point2D.Degrees
 	}
@@ -105,7 +103,7 @@ final class Day22Solver: DaySolver {
 		return (point.y + 1) * 1000 + (point.x + 1) * 4 + facingPoints
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let tiles = input.tiles
 		let moves = input.moves
 
@@ -146,7 +144,7 @@ final class Day22Solver: DaySolver {
 		return scoreFor(point: point, direction: direction)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let a = 0
 		let b = 1
 		let c = 2
@@ -254,7 +252,7 @@ final class Day22Solver: DaySolver {
 		return scoreFor(point: point, direction: direction)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var parseMap = true
 
 		var tiles: [Point2D: Tile] = [:]
@@ -307,6 +305,6 @@ final class Day22Solver: DaySolver {
 			}
 		}
 
-		input = .init(tiles: tiles, moves: moves)
+		return .init(tiles: tiles, moves: moves)
 	}
 }

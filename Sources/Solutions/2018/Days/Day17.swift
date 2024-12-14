@@ -4,9 +4,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let lines: [Line]
 		let spring: Point2D
 	}
@@ -139,7 +137,7 @@ final class Day17Solver: DaySolver {
 
 	private var part1Grid: Grid!
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let lines = input.lines
 
 		let xRange = lines.map(\.minX).min()! ... lines.map(\.maxX).max()!
@@ -192,7 +190,7 @@ final class Day17Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var sum = 0
 
 		for y in part1Grid.yRange {
@@ -211,7 +209,7 @@ final class Day17Solver: DaySolver {
 		return sum
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines: [Line] = rawString.allLines().map { line in
 			if let arguments = line.getCapturedValues(pattern: #"x=([0-9]*), y=([Z0-9]*)..([0-9]*)"#) {
 				.vertical(x: Int(arguments[0])!, y: Int(arguments[1])! ... Int(arguments[2])!)
@@ -222,6 +220,6 @@ final class Day17Solver: DaySolver {
 			}
 		}
 
-		input = .init(lines: lines, spring: .init(x: 500, y: 0))
+		return .init(lines: lines, spring: .init(x: 500, y: 0))
 	}
 }

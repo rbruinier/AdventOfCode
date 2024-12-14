@@ -4,13 +4,11 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let digits: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var digits = input.digits
 
 		digits.append(digits.first!)
@@ -23,7 +21,7 @@ final class Day01Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let digits = input.digits
 
 		let halfIndex = digits.count / 2
@@ -36,11 +34,11 @@ final class Day01Solver: DaySolver {
 		return sum
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let digits: [Int] = rawString.allLines().first!.map {
 			Int(String($0))!
 		}
 
-		input = .init(digits: digits)
+		return .init(digits: digits)
 	}
 }

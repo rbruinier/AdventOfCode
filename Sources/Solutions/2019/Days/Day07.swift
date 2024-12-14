@@ -4,13 +4,11 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let intcode = IntcodeProcessor()
 
 		let permutations = [0, 1, 2, 3, 4].permutations
@@ -18,10 +16,10 @@ final class Day07Solver: DaySolver {
 		var maxThrusterSignal = 0
 
 		for permutation in permutations {
-			var currentInput = 0
+			var currentreturn 0
 
 			for phaseSetting in permutation {
-				currentInput = intcode.executeProgram(input.program, input: [phaseSetting, currentInput]).output.last!
+				currentreturn intcode.executeProgram(input.program, input: [phaseSetting, currentInput]).output.last!
 			}
 
 			maxThrusterSignal = max(maxThrusterSignal, currentInput)
@@ -30,7 +28,7 @@ final class Day07Solver: DaySolver {
 		return maxThrusterSignal
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let permutations = [5, 6, 7, 8, 9].permutations
 
 		var maxThrusterSignal = 0
@@ -44,20 +42,20 @@ final class Day07Solver: DaySolver {
 				IntcodeProcessor(),
 			]
 
-			var currentInput = 0
+			var currentreturn 0
 			var iteration = 0
 
 			iterationLoop: while true {
 				for (amplifierIndex, phaseSetting) in permutation.enumerated() {
 					if iteration == 0 {
-						guard let newCurrentInput = amplifiers[amplifierIndex].executeProgramTillOutput(input.program, input: [phaseSetting, currentInput]) else {
+						guard let newCurrentreturn amplifiers[amplifierIndex].executeProgramTillOutput(input.program, input: [phaseSetting, currentInput]) else {
 							fatalError()
 						}
 
-						currentInput = newCurrentInput
+						currentreturn newCurrentInput
 					} else {
-						if let newCurrentInput = amplifiers[amplifierIndex].continueProgramTillOutput(input: [currentInput]) {
-							currentInput = newCurrentInput
+						if let newCurrentreturn amplifiers[amplifierIndex].continueProgramTillOutput(input: [currentInput]) {
+							currentreturn newCurrentInput
 						} else {
 							break iterationLoop
 						}
@@ -73,7 +71,7 @@ final class Day07Solver: DaySolver {
 		return maxThrusterSignal
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

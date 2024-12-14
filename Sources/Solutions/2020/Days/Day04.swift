@@ -4,9 +4,7 @@ import Tools
 final class Day04Solver: DaySolver {
 	let dayNumber: Int = 4
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let passports: [Passport]
 	}
 
@@ -25,7 +23,7 @@ final class Day04Solver: DaySolver {
 		let items: [Item: String]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let requiredItems: [Passport.Item] = [.ecl, .pid, .eyr, .hcl, .byr, .iyr, .hgt]
 
 		let validPassports = input.passports.filter { passport in
@@ -41,7 +39,7 @@ final class Day04Solver: DaySolver {
 		return validPassports.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let validPassports = input.passports.filter { passport in
 			guard
 				let byr = Int(passport.items[.byr] ?? "-"),
@@ -87,7 +85,7 @@ final class Day04Solver: DaySolver {
 		return validPassports.count
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines(includeEmpty: true)
 
 		var passports: [Passport] = []
@@ -108,6 +106,6 @@ final class Day04Solver: DaySolver {
 			}
 		}
 
-		input = .init(passports: passports)
+		return .init(passports: passports)
 	}
 }

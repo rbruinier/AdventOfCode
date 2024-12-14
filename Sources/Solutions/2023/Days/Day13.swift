@@ -4,13 +4,11 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let maps: [Map]
 	}
 
-	private struct Map {
+	struct Map {
 		let rocks: Set<Point2D>
 
 		var size: Size {
@@ -78,7 +76,7 @@ final class Day13Solver: DaySolver {
 		return nil
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.maps.reduce(into: 0) { result, map in
 			if let row = scanForReflectionRow(in: map) {
 				result += 100 * (row + 1)
@@ -90,7 +88,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.maps.reduce(into: 0) { result, map in
 			if let row = scanForReflectionRow(in: map, numberOfDifferences: 1) {
 				result += 100 * (row + 1)
@@ -102,7 +100,7 @@ final class Day13Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var rocks: Set<Point2D> = []
 		var maps: [Map] = []
 		var y = 0
@@ -130,6 +128,6 @@ final class Day13Solver: DaySolver {
 			y += 1
 		}
 
-		input = .init(maps: maps)
+		return .init(maps: maps)
 	}
 }

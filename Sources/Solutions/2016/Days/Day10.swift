@@ -4,9 +4,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -81,19 +79,19 @@ final class Day10Solver: DaySolver {
 		return (bots: bots, outputs: outputs)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let (bots, _) = solve(instructions: input.instructions)
 
 		return bots.first(where: { $0.value.low == 17 && $0.value.high == 61 })!.key
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let (_, outputs) = solve(instructions: input.instructions)
 
 		return outputs[0]! * outputs[1]! * outputs[2]!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		func parseOutput(from string: String) -> Output {
 			let parts = string.components(separatedBy: " ")
 
@@ -116,6 +114,6 @@ final class Day10Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

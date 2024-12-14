@@ -5,9 +5,7 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let beginState: State
 		let steps: Int
 		let instructions: [State: [Instruction]]
@@ -33,7 +31,7 @@ final class Day25Solver: DaySolver {
 		case f
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var state = input.beginState
 		var cursorPosition = 0
 
@@ -58,13 +56,13 @@ final class Day25Solver: DaySolver {
 		return values.values.filter { $0 == 1 }.count
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		//		// example input
-		//        input = .init(
+		//        return .init(
 		//			beginState: .a,
 		//			steps: 6,
 		//			instructions: [
@@ -80,7 +78,7 @@ final class Day25Solver: DaySolver {
 		//		)
 //
 		// real input
-		input = .init(
+		return .init(
 			beginState: .a,
 			steps: 12861455,
 			instructions: [

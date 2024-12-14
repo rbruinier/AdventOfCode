@@ -4,13 +4,11 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let steps: [HexDirection]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var point = HexPoint.zero
 
 		for step in input.steps {
@@ -20,7 +18,7 @@ final class Day11Solver: DaySolver {
 		return point.manhattanDistance(from: .zero)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var point = HexPoint.zero
 		var maxDistance = 0
 
@@ -33,8 +31,8 @@ final class Day11Solver: DaySolver {
 		return maxDistance
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(steps: rawString.allLines().first!.components(separatedBy: ",").compactMap { raw in
+	func parseInput(rawString: String) -> Input {
+		return .init(steps: rawString.allLines().first!.components(separatedBy: ",").compactMap { raw in
 			HexDirection(raw)
 		})
 	}

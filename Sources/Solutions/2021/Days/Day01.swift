@@ -4,13 +4,11 @@ import Tools
 final class Day01Solver: DaySolver {
 	let dayNumber: Int = 1
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let depths: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let result: (counter: Int, previousDepth: Int?) = input.depths.reduce(into: (counter: 0, previousDepth: nil)) { result, depth in
 			if let previousDepth = result.previousDepth {
 				result.counter += depth > previousDepth ? 1 : 0
@@ -22,7 +20,7 @@ final class Day01Solver: DaySolver {
 		return result.counter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var result: (counter: Int, slidingWindow: [Int]) = (0, [])
 
 		result = input.depths.reduce(into: result) { result, depth in
@@ -45,9 +43,9 @@ final class Day01Solver: DaySolver {
 		return result.counter
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let depths = rawString.components(separatedBy: .newlines).compactMap { Int($0) }
 
-		input = .init(depths: depths)
+		return .init(depths: depths)
 	}
 }

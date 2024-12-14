@@ -4,9 +4,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -63,7 +61,7 @@ final class Day12Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cpu = CPU(instructions: input.instructions)
 
 		while cpu.isFinished == false {
@@ -73,7 +71,7 @@ final class Day12Solver: DaySolver {
 		return cpu.registers["a"]!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var cpu = CPU(instructions: input.instructions)
 
 		cpu.registers["c"] = 1
@@ -85,7 +83,7 @@ final class Day12Solver: DaySolver {
 		return cpu.registers["a"]!
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let instructions: [Instruction] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
@@ -110,6 +108,6 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }

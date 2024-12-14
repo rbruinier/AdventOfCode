@@ -5,13 +5,11 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var counter = 0
 		for y in 0 ..< 50 {
 			for x in 0 ..< 50 {
@@ -28,7 +26,7 @@ final class Day19Solver: DaySolver {
 		return counter
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var slidingWindow: Deque<(y: Int, startX: Int, endX: Int)> = []
 
 		for y in 1100 ..< 10_000 {
@@ -75,7 +73,7 @@ final class Day19Solver: DaySolver {
 		fatalError()
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

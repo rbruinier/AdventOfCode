@@ -4,9 +4,7 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let cardPublicKey: Int
 		let doorPublicKey: Int
 	}
@@ -37,7 +35,7 @@ final class Day25Solver: DaySolver {
 		return value
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		guard
 			let cardLoopSize = loopSizeFor(publicKey: input.cardPublicKey),
 			let doorLoopSize = loopSizeFor(publicKey: input.doorPublicKey)
@@ -55,11 +53,11 @@ final class Day25Solver: DaySolver {
 		return cardEncryptionKey
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(cardPublicKey: 6929599, doorPublicKey: 2448427)
+	func parseInput(rawString: String) -> Input {
+		return .init(cardPublicKey: 6929599, doorPublicKey: 2448427)
 	}
 }

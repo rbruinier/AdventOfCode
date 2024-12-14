@@ -4,14 +4,12 @@ import Tools
 final class Day13Solver: DaySolver {
 	let dayNumber: Int = 13
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let earliestDepartureTime: Int
 		let busIDs: [Int?]
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var bestBusID = 0
 		var bestInterval = Int.max
 
@@ -33,7 +31,7 @@ final class Day13Solver: DaySolver {
 		return bestBusID * bestInterval
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		struct Bus {
 			let minuteOffset: Int
 			let interval: Int
@@ -81,12 +79,12 @@ final class Day13Solver: DaySolver {
 		return baseDepartureTime
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		let earliestDepartureTime = Int(lines[0])!
 		let busIDs = lines[1].components(separatedBy: ",").map { Int(String($0)) }
 
-		input = .init(earliestDepartureTime: earliestDepartureTime, busIDs: busIDs)
+		return .init(earliestDepartureTime: earliestDepartureTime, busIDs: busIDs)
 	}
 }

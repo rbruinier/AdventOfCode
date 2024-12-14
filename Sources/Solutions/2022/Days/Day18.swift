@@ -7,15 +7,13 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let points: Set<Point3D>
 	}
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var sum = 0
 
 		for point in input.points {
@@ -27,7 +25,7 @@ final class Day18Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let points = input.points
 
 		let minX = points.map(\.x).min()! - 1
@@ -73,8 +71,8 @@ final class Day18Solver: DaySolver {
 		return sum
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(points: Set(rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(points: Set(rawString.allLines().map { line in
 			Point3D(commaSeparatedString: line)
 		}))
 	}

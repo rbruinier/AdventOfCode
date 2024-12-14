@@ -4,9 +4,7 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let ports: [Port]
 	}
 
@@ -114,16 +112,16 @@ final class Day24Solver: DaySolver {
 		return (strength: maxStrength, length: maxLength)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		bestStrength(withInput: 0, remainingPorts: Set(input.ports))
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		bestLength(withInput: 0, remainingPorts: Set(input.ports)).strength
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(ports: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(ports: rawString.allLines().map { line in
 			let components = line.components(separatedBy: "/")
 
 			return Port(a: Int(components[0])!, b: Int(components[1])!)

@@ -5,9 +5,7 @@ import Tools
 final class Day20Solver: DaySolver {
 	let dayNumber: Int = 20
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let tiles: [Point2D: Tile]
 
 		let min: Point2D
@@ -197,7 +195,7 @@ final class Day20Solver: DaySolver {
 		return pairs
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var tiles = input.tiles
 
 		tiles = processTiles(tiles, min: input.min, max: input.max)
@@ -255,7 +253,7 @@ final class Day20Solver: DaySolver {
 		return 0
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var tiles = input.tiles
 
 		tiles = processTiles(tiles, min: input.min, max: input.max)
@@ -326,7 +324,7 @@ final class Day20Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var tiles: [Point2D: Tile] = [:]
@@ -348,6 +346,6 @@ final class Day20Solver: DaySolver {
 			}
 		}
 
-		input = .init(tiles: tiles)
+		return .init(tiles: tiles)
 	}
 }

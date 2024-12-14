@@ -4,14 +4,12 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let unfilteredPartNumbers: [PartNumber]
 		let symbols: [Symbol]
 	}
 
-	private struct PartNumber {
+	struct PartNumber {
 		let startPosition: Point2D
 		let endPosition: Point2D
 
@@ -50,7 +48,7 @@ final class Day03Solver: DaySolver {
 		}
 	}
 
-	private struct Symbol {
+	struct Symbol {
 		let position: Point2D
 		let symbol: String
 	}
@@ -65,13 +63,13 @@ final class Day03Solver: DaySolver {
 		return filteredPartNumbers
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let filteredPartNumbers = filterPartNumbers(input.unfilteredPartNumbers, withSymbols: input.symbols)
 
 		return filteredPartNumbers.map(\.number).reduce(0, +)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let filteredPartNumbers = filterPartNumbers(input.unfilteredPartNumbers, withSymbols: input.symbols)
 		let gears = input.symbols.filter { $0.symbol == "*" }
 
@@ -88,7 +86,7 @@ final class Day03Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var partNumbers: [PartNumber] = []
 		var symbols: [Symbol] = []
 
@@ -133,6 +131,6 @@ final class Day03Solver: DaySolver {
 
 		// note: if the last characters on the last line make up a number we miss it but this does not seem the case in the input
 
-		input = .init(unfilteredPartNumbers: partNumbers, symbols: symbols)
+		return .init(unfilteredPartNumbers: partNumbers, symbols: symbols)
 	}
 }

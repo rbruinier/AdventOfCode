@@ -4,9 +4,7 @@ import Tools
 final class Day02Solver: DaySolver {
 	let dayNumber: Int = 2
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let movements: [(direction: Direction, count: Int)]
 	}
 
@@ -16,7 +14,7 @@ final class Day02Solver: DaySolver {
 		case up
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var result: (x: Int, depth: Int) = (0, 0)
 
 		result = input.movements.reduce(into: result) { result, movement in
@@ -30,7 +28,7 @@ final class Day02Solver: DaySolver {
 		return result.x * result.depth
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var result: (x: Int, depth: Int, aim: Int) = (0, 0, 0)
 
 		result = input.movements.reduce(into: result) { result, movement in
@@ -46,7 +44,7 @@ final class Day02Solver: DaySolver {
 		return result.x * result.depth
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let movements: [(direction: Direction, count: Int)] = rawString
 			.components(separatedBy: .newlines)
 			.filter { $0.isEmpty == false }
@@ -56,6 +54,6 @@ final class Day02Solver: DaySolver {
 				return (direction: Direction(rawValue: components[0])!, count: Int(components[1])!)
 			}
 
-		input = .init(movements: movements)
+		return .init(movements: movements)
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let strings: [String]
 	}
 
@@ -93,15 +91,15 @@ final class Day07Solver: DaySolver {
 		return false
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.strings.filter { supportsTLS(ip: $0) }.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		input.strings.filter { supportsSSL(ip: $0) }.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(strings: rawString.allLines())
+	func parseInput(rawString: String) -> Input {
+		return .init(strings: rawString.allLines())
 	}
 }

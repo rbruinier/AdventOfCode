@@ -5,9 +5,7 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let memory: String
 	}
 
@@ -48,15 +46,15 @@ final class Day03Solver: DaySolver {
 		return total
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(memory: input.memory, allowEnabling: false)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		solve(memory: input.memory, allowEnabling: true)
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(memory: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+	func parseInput(rawString: String) -> Input {
+		return .init(memory: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

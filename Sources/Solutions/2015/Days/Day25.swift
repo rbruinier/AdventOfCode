@@ -4,11 +4,9 @@ import Tools
 final class Day25Solver: DaySolver {
 	let dayNumber: Int = 25
 
-	private var input: Input!
+	struct Input {}
 
-	private struct Input {}
-
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		func startNumberForColumn(_ column: Int) -> Int { // triangular number sequence
 			(column * (column + 1)) / 2
 		}
@@ -41,11 +39,11 @@ final class Day25Solver: DaySolver {
 		return valueForColumn(3029, row: 2947)
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		"Merry Christmas 🎄"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init()
+	func parseInput(rawString: String) -> Input {
+		return .init()
 	}
 }

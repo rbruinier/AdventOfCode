@@ -4,8 +4,6 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
 	private lazy var matrices: [Matrix] = {
 		// base matrices
 		let unitMatrix = Matrix(rows: [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
@@ -50,7 +48,7 @@ final class Day19Solver: DaySolver {
 		]
 	}()
 
-	private struct Input {
+	struct Input {
 		let scanners: [Scanner]
 	}
 
@@ -247,7 +245,7 @@ final class Day19Solver: DaySolver {
 		return (scanner: scannerLocation, beacons: beacons)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let scanners = input.scanners
 
 		var relations: Set<Relation> = Set()
@@ -283,7 +281,7 @@ final class Day19Solver: DaySolver {
 		return uniqueBeacons.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let scanners = input.scanners
 
 		var scannerLocations: [Point] = []
@@ -306,7 +304,7 @@ final class Day19Solver: DaySolver {
 		return maxDistance
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var rawLines = rawString
 			.components(separatedBy: CharacterSet.newlines)
 
@@ -337,6 +335,6 @@ final class Day19Solver: DaySolver {
 			scanners.append(.init(name: name, beacons: beacons))
 		}
 
-		input = .init(scanners: scanners)
+		return .init(scanners: scanners)
 	}
 }

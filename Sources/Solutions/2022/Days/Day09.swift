@@ -4,13 +4,11 @@ import Tools
 final class Day09Solver: DaySolver {
 	let dayNumber: Int = 9
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let moves: [Move]
 	}
 
-	private struct Move {
+	struct Move {
 		let direction: Direction
 		let steps: Int
 	}
@@ -33,7 +31,7 @@ final class Day09Solver: DaySolver {
 		return newKnotPoint
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var visitedPoints: Set<Point2D> = []
 
 		var currentH = Point2D()
@@ -52,7 +50,7 @@ final class Day09Solver: DaySolver {
 		return visitedPoints.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var visitedPoints: Set<Point2D> = []
 
 		var currentH = Point2D()
@@ -78,8 +76,8 @@ final class Day09Solver: DaySolver {
 		return visitedPoints.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(moves: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(moves: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			switch components[0] {

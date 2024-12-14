@@ -4,9 +4,7 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let immunityArmy: Army
 		let infectionArmy: Army
 	}
@@ -207,7 +205,7 @@ final class Day24Solver: DaySolver {
 		return totalUnitsKilled
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var immunityArmy = Army(groups: Set(input.immunityArmy.groups.map { Group(group: $0) }))
 		var infectionArmy = Army(groups: Set(input.infectionArmy.groups.map { Group(group: $0) }))
 
@@ -226,7 +224,7 @@ final class Day24Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// brute force testing works well enough
 		var boost = 0
 
@@ -256,7 +254,7 @@ final class Day24Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		var parsingImmuneSystem = false
@@ -329,6 +327,6 @@ final class Day24Solver: DaySolver {
 			}
 		}
 
-		input = .init(immunityArmy: .init(groups: immunityGroups), infectionArmy: .init(groups: infectionGroups))
+		return .init(immunityArmy: .init(groups: immunityGroups), infectionArmy: .init(groups: infectionGroups))
 	}
 }

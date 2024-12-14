@@ -4,14 +4,12 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let points: Set<Point2D>
 		let safeDistanceThreshold: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let points = input.points
 
 		let minX = points.map(\.x).min()! - 1
@@ -67,7 +65,7 @@ final class Day06Solver: DaySolver {
 			.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let points = input.points
 
 		let minX = points.map(\.x).min()! - 1
@@ -105,8 +103,8 @@ final class Day06Solver: DaySolver {
 		return nrOfSafeCoordinates
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(
+	func parseInput(rawString: String) -> Input {
+		return .init(
 			points: Set(rawString.allLines().map { line in
 				Point2D(commaSeparatedString: line.replacingOccurrences(of: " ", with: ""))
 			}),

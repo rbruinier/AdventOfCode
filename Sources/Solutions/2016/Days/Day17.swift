@@ -4,9 +4,7 @@ import Tools
 final class Day17Solver: DaySolver {
 	let dayNumber: Int = 17
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let passcode: String
 	}
 
@@ -38,7 +36,7 @@ final class Day17Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var paths: [String] = []
 
 		findPath(position: Point2D(x: 0, y: 0), pathSoFar: "", paths: &paths)
@@ -46,7 +44,7 @@ final class Day17Solver: DaySolver {
 		return paths.min(by: { $0.count < $1.count }) ?? "NOT FOUND"
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var paths: [String] = []
 
 		findPath(position: Point2D(x: 0, y: 0), pathSoFar: "", paths: &paths)
@@ -58,7 +56,7 @@ final class Day17Solver: DaySolver {
 		return path.count
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(passcode: "qljzarfv")
+	func parseInput(rawString: String) -> Input {
+		return .init(passcode: "qljzarfv")
 	}
 }

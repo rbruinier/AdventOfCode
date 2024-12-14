@@ -4,13 +4,11 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case noop
 		case addx(value: Int)
 	}
@@ -68,7 +66,7 @@ final class Day10Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var cpu = CPU(instructions: input.instructions)
 
 		var sum = 0
@@ -83,7 +81,7 @@ final class Day10Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		func printPixels(pixels: [[Bool]]) {
 			for row in pixels {
 				var line = ""
@@ -117,8 +115,8 @@ final class Day10Solver: DaySolver {
 		return "RLEZFLGE"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(instructions: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(instructions: rawString.allLines().map { line in
 			if line == "noop" {
 				.noop
 			} else if let values = line.getCapturedValues(pattern: #"addx (-?[0-9]*)"#) {

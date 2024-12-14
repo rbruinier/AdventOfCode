@@ -4,9 +4,7 @@ import Tools
 final class Day23Solver: DaySolver {
 	let dayNumber: Int = 23
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let program: [Int]
 	}
 
@@ -45,7 +43,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var computers: [Computer] = []
 
 		for address in 0 ..< 50 {
@@ -87,7 +85,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var computers: [Computer] = []
 
 		for address in 0 ..< 50 {
@@ -152,7 +150,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(program: rawString.parseCommaSeparatedInts())
+	func parseInput(rawString: String) -> Input {
+		return .init(program: rawString.parseCommaSeparatedInts())
 	}
 }

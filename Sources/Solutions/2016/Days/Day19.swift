@@ -5,13 +5,11 @@ import Tools
 final class Day19Solver: DaySolver {
 	let dayNumber: Int = 19
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let numberOfElves: Int
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		// first elf is always taking next elf items, so next elf always is removed
 		// use a deque for quickly removing first and appending last items
 
@@ -28,7 +26,7 @@ final class Day19Solver: DaySolver {
 		return currentElvesWithPresent.first!
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// removing items in the center of a deque is slow, we split it in two instead
 
 		let halfCount = (input.numberOfElves / 2)
@@ -50,7 +48,7 @@ final class Day19Solver: DaySolver {
 		return half1.first!
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(numberOfElves: 3012210)
+	func parseInput(rawString: String) -> Input {
+		return .init(numberOfElves: 3012210)
 	}
 }

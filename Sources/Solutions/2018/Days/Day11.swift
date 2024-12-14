@@ -5,9 +5,7 @@ import Tools
 final class Day11Solver: DaySolver {
 	let dayNumber: Int = 11
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let serialNumber: Int
 	}
 
@@ -87,13 +85,13 @@ final class Day11Solver: DaySolver {
 		return (point: bestPoint, sum: bestSum)
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		let (bestPoint, _) = bestLevelOfSquare(withSize: 3, serial: input.serialNumber)
 
 		return "\(bestPoint.x),\(bestPoint.y)"
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var bestSum = 0
 		var bestPoint = Point2D.zero
 		var bestSize = 0
@@ -111,7 +109,7 @@ final class Day11Solver: DaySolver {
 		return "\(bestPoint.x),\(bestPoint.y),\(bestSize)"
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(serialNumber: 9424)
+	func parseInput(rawString: String) -> Input {
+		return .init(serialNumber: 9424)
 	}
 }

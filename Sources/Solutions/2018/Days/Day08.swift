@@ -4,9 +4,7 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let node: Node
 	}
 
@@ -33,15 +31,15 @@ final class Day08Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		sumOfMetadata(node: input.node)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		valueOf(node: input.node)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		func parseNode(at position: inout Int, data: [Int]) -> Node {
 			let node = Node()
 
@@ -68,6 +66,6 @@ final class Day08Solver: DaySolver {
 
 		var position = 0
 
-		input = .init(node: parseNode(at: &position, data: rawString.allLines().first!.components(separatedBy: " ").map { Int($0)! }))
+		return .init(node: parseNode(at: &position, data: rawString.allLines().first!.components(separatedBy: " ").map { Int($0)! }))
 	}
 }

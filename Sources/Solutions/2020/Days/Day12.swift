@@ -4,9 +4,7 @@ import Tools
 final class Day12Solver: DaySolver {
 	let dayNumber: Int = 12
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let actions: [Action]
 	}
 
@@ -33,7 +31,7 @@ final class Day12Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var orientation: Orientation = .east
 
 		var ship = Point2D()
@@ -59,7 +57,7 @@ final class Day12Solver: DaySolver {
 		return abs(ship.x) + abs(ship.y)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var ship = Point2D()
 		var waypoint = Point2D(x: 10, y: 1)
 
@@ -82,7 +80,7 @@ final class Day12Solver: DaySolver {
 		return abs(ship.x) + abs(ship.y)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let actions: [Action] = rawString.components(separatedBy: .newlines).filter(\.isNotEmpty).compactMap { line in
 			let value = Int(line[line.index(line.startIndex, offsetBy: 1) ..< line.endIndex])!
 
@@ -98,6 +96,6 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		input = .init(actions: actions)
+		return .init(actions: actions)
 	}
 }

@@ -4,9 +4,7 @@ import Tools
 final class Day07Solver: DaySolver {
 	let dayNumber: Int = 7
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let programs: [String: Program]
 	}
 
@@ -18,7 +16,7 @@ final class Day07Solver: DaySolver {
 
 	private var rootProgramID: String!
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		let programs = input.programs
 
 		for subProgramID in programs.keys {
@@ -98,7 +96,7 @@ final class Day07Solver: DaySolver {
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let programs = input.programs
 
 		let rootNode = Node(program: programs[rootProgramID]!, allPrograms: programs)
@@ -114,7 +112,7 @@ final class Day07Solver: DaySolver {
 		return newWeight
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let programs: [String: Program] = rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
@@ -131,6 +129,6 @@ final class Day07Solver: DaySolver {
 			return (id, Program(id: id, weight: weight, holding: subIDs))
 		}.reduce(into: [:]) { $0[$1.0] = $1.1 }
 
-		input = .init(programs: programs)
+		return .init(programs: programs)
 	}
 }

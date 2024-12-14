@@ -6,9 +6,7 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let tiles: Set<Point2D>
 		let sizeTwoMappings: [Int: Set<Point2D>]
 		let sizeThreeMappings: [Int: Set<Point2D>]
@@ -96,11 +94,11 @@ final class Day21Solver: DaySolver {
 		return tiles
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		solve(tiles: Array(input.tiles), iterations: 5).count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// cycle of 3 is always 3, 2, 2 so we make little groups again after 3 cycles so our sets stay small
 		let cycleSize = 3
 
@@ -148,7 +146,7 @@ final class Day21Solver: DaySolver {
 		return groups.reduce(0) { $0 + $1.count }
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let tiles: Set<Point2D> = [
 			.init(x: 1, y: 0),
 			.init(x: 2, y: 1),
@@ -257,6 +255,6 @@ final class Day21Solver: DaySolver {
 			sizeThreeMappingsAsDictionary[mapping.input.hashValue] = mapping.output
 		}
 
-		input = .init(tiles: tiles, sizeTwoMappings: sizeTwoMappingsAsDictionary, sizeThreeMappings: sizeThreeMappingsAsDictionary)
+		return .init(tiles: tiles, sizeTwoMappings: sizeTwoMappingsAsDictionary, sizeThreeMappings: sizeThreeMappingsAsDictionary)
 	}
 }

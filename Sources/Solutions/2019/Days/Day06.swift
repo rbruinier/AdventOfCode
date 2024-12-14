@@ -4,9 +4,7 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let orbits: [String: Node]
 	}
 
@@ -53,7 +51,7 @@ final class Day06Solver: DaySolver {
 		return path
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var result = 0
 
 		for node in input.orbits.values {
@@ -65,7 +63,7 @@ final class Day06Solver: DaySolver {
 		return result
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let allOrbits = input.orbits
 
 		let pathToSan = pathTo(objectID: "SAN", allOrbits: allOrbits)
@@ -82,7 +80,7 @@ final class Day06Solver: DaySolver {
 		return 0
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var nodes: [String: Node] = [:]
 
 		rawString.allLines().forEach {
@@ -98,6 +96,6 @@ final class Day06Solver: DaySolver {
 			nodes[components[1]] = childNode
 		}
 
-		input = .init(orbits: nodes)
+		return .init(orbits: nodes)
 	}
 }

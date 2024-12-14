@@ -4,9 +4,7 @@ import Tools
 final class Day05Solver: DaySolver {
 	let dayNumber: Int = 5
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let stacks: [[String]]
 		let moves: [Move]
 	}
@@ -19,7 +17,7 @@ final class Day05Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		var stacks = input.stacks
 
 		for move in input.moves {
@@ -33,7 +31,7 @@ final class Day05Solver: DaySolver {
 		return stacks.reduce("") { $0 + ($1.last ?? "") }
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		var stacks = input.stacks
 
 		for move in input.moves {
@@ -44,7 +42,7 @@ final class Day05Solver: DaySolver {
 		return stacks.reduce("") { $0 + ($1.last ?? "") }
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let numberOfStacks = 9
 
 		var stacks: [[String]] = Array(repeating: [], count: numberOfStacks)
@@ -76,6 +74,6 @@ final class Day05Solver: DaySolver {
 			}
 		}
 
-		input = .init(stacks: stacks, moves: moves)
+		return .init(stacks: stacks, moves: moves)
 	}
 }

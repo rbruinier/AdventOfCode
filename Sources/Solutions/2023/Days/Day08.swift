@@ -10,14 +10,12 @@ import Tools
 final class Day08Solver: DaySolver {
 	let dayNumber: Int = 8
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 		let nodes: [String: LeftRight]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case left
 		case right
 
@@ -30,12 +28,12 @@ final class Day08Solver: DaySolver {
 		}
 	}
 
-	private struct LeftRight {
+	struct LeftRight {
 		let left: String
 		let right: String
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var currentInstructionIndex = 0
 
 		var node = "AAA"
@@ -62,7 +60,7 @@ final class Day08Solver: DaySolver {
 		return numberOfSteps
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var nodes: [String] = input.nodes.keys.filter { $0.hasSuffix("A") }
 
 		var currentInstructionIndex = 0
@@ -101,7 +99,7 @@ final class Day08Solver: DaySolver {
 		return Math.leastCommonMultiple(for: Array(intervalPerNodeIndex.values))
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 		var nodes: [String: LeftRight] = [:]
 
@@ -113,6 +111,6 @@ final class Day08Solver: DaySolver {
 			nodes[values[0]] = .init(left: values[1], right: values[2])
 		}
 
-		input = .init(instructions: instructions, nodes: nodes)
+		return .init(instructions: instructions, nodes: nodes)
 	}
 }

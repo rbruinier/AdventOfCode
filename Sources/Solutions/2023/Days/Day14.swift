@@ -4,9 +4,7 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let roundRocks: Set<Point2D>
 		let cubeRocks: Set<Point2D>
 
@@ -101,13 +99,13 @@ final class Day14Solver: DaySolver {
 		}
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		let roundRocks = move(roundRocks: input.roundRocks, cubeRocks: input.cubeRocks, direction: .north, size: input.size)
 
 		return calculateWeight(for: roundRocks, size: input.size)
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var roundRocks = input.roundRocks
 
 		// we hash the rock configuration and store the cycle number for each hash
@@ -142,7 +140,7 @@ final class Day14Solver: DaySolver {
 		return calculateWeight(for: roundRocks, size: input.size)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var roundRocks: Set<Point2D> = []
 		var cubeRocks: Set<Point2D> = []
 
@@ -163,6 +161,6 @@ final class Day14Solver: DaySolver {
 			maxSize = .init(width: max(maxSize.width, line.count), height: max(maxSize.height, y + 1))
 		}
 
-		input = .init(roundRocks: roundRocks, cubeRocks: cubeRocks, size: maxSize)
+		return .init(roundRocks: roundRocks, cubeRocks: cubeRocks, size: maxSize)
 	}
 }

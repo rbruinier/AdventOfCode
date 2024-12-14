@@ -4,14 +4,12 @@ import Tools
 final class Day22Solver: DaySolver {
 	let dayNumber: Int = 22
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		var initialSize: Size
 		var infectedNodes: Set<Point2D>
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var currentPosition = Point2D(x: input.initialSize.width / 2, y: input.initialSize.height / 2)
 		var currentDirection = Direction.north
 
@@ -37,7 +35,7 @@ final class Day22Solver: DaySolver {
 		return numberOfInfections
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		enum State {
 			case clean
 			case weakened
@@ -80,7 +78,7 @@ final class Day22Solver: DaySolver {
 		return numberOfInfections
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let allLines = rawString.allLines()
 
 		var infectedNodes: Set<Point2D> = []
@@ -96,6 +94,6 @@ final class Day22Solver: DaySolver {
 			}
 		}
 
-		input = .init(initialSize: .init(width: width, height: height), infectedNodes: infectedNodes)
+		return .init(initialSize: .init(width: width, height: height), infectedNodes: infectedNodes)
 	}
 }

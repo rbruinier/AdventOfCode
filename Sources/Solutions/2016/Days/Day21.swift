@@ -4,9 +4,7 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let password: AsciiString
 		let scrambledPassword: AsciiString
 		let operations: [Operation]
@@ -135,15 +133,15 @@ final class Day21Solver: DaySolver {
 		return password
 	}
 
-	func solvePart1() -> String {
+	func solvePart1(withInput input: Input) -> String {
 		performOperations(input.operations, on: input.password).description
 	}
 
-	func solvePart2() -> String {
+	func solvePart2(withInput input: Input) -> String {
 		performReversedOperations(input.operations.reversed(), on: input.scrambledPassword).description
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let operations: [Operation] = rawString.allLines().map { line in
 			if let arguments = line.getCapturedValues(pattern: #"swap position ([0-9]*) with position ([0-9]*)"#) {
 				.swapPosition(x: Int(arguments[0])!, positionY: Int(arguments[1])!)
@@ -168,7 +166,7 @@ final class Day21Solver: DaySolver {
 			}
 		}
 
-		input = .init(
+		return .init(
 			password: AsciiString(string: "abcdefgh"),
 			scrambledPassword: AsciiString(string: "fbgdceah"),
 			operations: operations

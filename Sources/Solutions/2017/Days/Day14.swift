@@ -6,12 +6,10 @@ import Tools
 final class Day14Solver: DaySolver {
 	let dayNumber: Int = 14
 
-	private var input: Input!
-
 	// cache result of part 1 for part 2
 	private var part1Bits: [[Int]] = []
 
-	private struct Input {
+	struct Input {
 		let key: String
 	}
 
@@ -112,11 +110,11 @@ final class Day14Solver: DaySolver {
 		return visitedPoints
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var sum = 0
 
 		for row in 0 ..< 128 {
-			let input = input.key + "-" + String(row)
+			let return input.key + "-" + String(row)
 
 			let hash = knotHash(for: input)
 			let bits = bitArray(of: hash)
@@ -129,7 +127,7 @@ final class Day14Solver: DaySolver {
 		return sum
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var consumedPoints: Set<Point2D> = []
 		var nrOfRegions = 0
 
@@ -147,7 +145,7 @@ final class Day14Solver: DaySolver {
 		return nrOfRegions
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(key: "stpzcrnm")
+	func parseInput(rawString: String) -> Input {
+		return .init(key: "stpzcrnm")
 	}
 }

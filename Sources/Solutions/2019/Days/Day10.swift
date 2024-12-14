@@ -4,9 +4,7 @@ import Tools
 final class Day10Solver: DaySolver {
 	let dayNumber: Int = 10
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let asteroids: [Point2D]
 
 		let width: Int
@@ -16,7 +14,7 @@ final class Day10Solver: DaySolver {
 	private var matchesPerAsteroid: [Point2D: [Point2D]]!
 	private var bestMatch: Point2D!
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		matchesPerAsteroid = [:]
 
 		bestMatch = input.asteroids.first!
@@ -67,7 +65,7 @@ final class Day10Solver: DaySolver {
 		return matchesPerAsteroid[bestMatch]!.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		func degrees(_ x: Double, _ y: Double) -> Double {
 			var degrees = Double.pi * 0.5 + atan2(y, x).remainder(dividingBy: Double.pi * 2.0)
 
@@ -121,7 +119,7 @@ final class Day10Solver: DaySolver {
 		}
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		let lines = rawString.allLines()
 
 		let height = lines.count
@@ -139,6 +137,6 @@ final class Day10Solver: DaySolver {
 			}
 		}
 
-		input = .init(asteroids: asteroids, width: width, height: height)
+		return .init(asteroids: asteroids, width: width, height: height)
 	}
 }

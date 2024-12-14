@@ -5,9 +5,7 @@ import Tools
 final class Day21Solver: DaySolver {
 	let dayNumber: Int = 21
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let rocks: Set<Point2D>
 		let start: Point2D
 		let range: Size
@@ -39,7 +37,7 @@ final class Day21Solver: DaySolver {
 		return reachedPoints.count
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		numberOfReachableSpots(from: input.start, rocks: input.rocks, range: input.range, steps: 64)
 	}
 
@@ -70,7 +68,7 @@ final class Day21Solver: DaySolver {
 
 	 See also the diagram in the "Other" folder: Day21.Part2.
 	 */
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		// constants:
 		let numberOfSteps = 26501365
 		let tileSize = 131
@@ -122,7 +120,7 @@ final class Day21Solver: DaySolver {
 		return parts.reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		var range: Size = .zero
 		var start: Point2D = .zero
 		var rocks: Set<Point2D> = []
@@ -139,6 +137,6 @@ final class Day21Solver: DaySolver {
 			return nil
 		}
 
-		input = .init(rocks: rocks, start: start, range: range)
+		return .init(rocks: rocks, start: start, range: range)
 	}
 }

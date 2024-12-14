@@ -4,13 +4,11 @@ import Tools
 final class Day03Solver: DaySolver {
 	let dayNumber: Int = 3
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let rucksacks: [Rucksack]
 	}
 
-	private struct Item: Hashable {
+	struct Item: Hashable {
 		let value: AsciiCharacter
 
 		var priority: Int {
@@ -22,7 +20,7 @@ final class Day03Solver: DaySolver {
 		}
 	}
 
-	private struct Rucksack {
+	struct Rucksack {
 		let aItems: [Item]
 		let bItems: [Item]
 
@@ -40,13 +38,13 @@ final class Day03Solver: DaySolver {
 
 	init() {}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		input.rucksacks.reduce(0) {
 			$0 + $1.sharedItems.map(\.priority).reduce(0, +)
 		}
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		let nrOfGroups = input.rucksacks.count / 3
 
 		var prioritySum = 0
@@ -69,8 +67,8 @@ final class Day03Solver: DaySolver {
 		return prioritySum
 	}
 
-	func parseInput(rawString: String) {
-		input = .init(rucksacks: rawString.allLines().map { line in
+	func parseInput(rawString: String) -> Input {
+		return .init(rucksacks: rawString.allLines().map { line in
 			let lineA = String(line[0 ..< line.count / 2])
 			let lineB = String(line[line.count / 2 ..< line.count])
 

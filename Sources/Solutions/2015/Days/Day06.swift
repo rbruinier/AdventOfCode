@@ -4,9 +4,7 @@ import Tools
 final class Day06Solver: DaySolver {
 	let dayNumber: Int = 6
 
-	private var input: Input!
-
-	private struct Input {
+	struct Input {
 		let instructions: [Instruction]
 	}
 
@@ -16,7 +14,7 @@ final class Day06Solver: DaySolver {
 		case toggle(from: Point2D, to: Point2D)
 	}
 
-	func solvePart1() -> Int {
+	func solvePart1(withInput input: Input) -> Int {
 		var grid: [Bool] = Array(repeating: false, count: 1_000 * 1_000)
 
 		for instruction in input.instructions {
@@ -55,7 +53,7 @@ final class Day06Solver: DaySolver {
 		return grid.filter { $0 }.count
 	}
 
-	func solvePart2() -> Int {
+	func solvePart2(withInput input: Input) -> Int {
 		var grid: [Int] = Array(repeating: 0, count: 1_000 * 1_000)
 
 		for instruction in input.instructions {
@@ -94,7 +92,7 @@ final class Day06Solver: DaySolver {
 		return grid.reduce(0, +)
 	}
 
-	func parseInput(rawString: String) {
+	func parseInput(rawString: String) -> Input {
 		func points(from string: String) -> (Point2D, Point2D) {
 			let components = string.components(separatedBy: " through ")
 
@@ -122,6 +120,6 @@ final class Day06Solver: DaySolver {
 			}
 		}
 
-		input = .init(instructions: instructions)
+		return .init(instructions: instructions)
 	}
 }
