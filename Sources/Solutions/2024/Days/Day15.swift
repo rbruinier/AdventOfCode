@@ -137,16 +137,11 @@ final class Day15Solver: DaySolver {
 		return movedBoxesIds
 	}
 
-	func solvePart1(withInput input: Input) -> Int {
-		var boxes: [Int: Box] = [:]
-		let walls = input.walls
-		var position = input.startPosition
+	private func solveFor(startPosition: Point2D, boxes originalBoxes: [Int: Box], walls: Set<Point2D>, instructions: [Direction]) -> Int {
+		var position = startPosition
+		var boxes = originalBoxes
 
-		for (id, box) in input.boxes.enumerated() {
-			boxes[id] = .init(id: id, position: box, width: 1)
-		}
-
-		for instruction in input.instructions {
+		for instruction in instructions {
 			let nextPosition = position.moved(to: instruction)
 
 			guard !walls.contains(nextPosition) else {
@@ -173,9 +168,21 @@ final class Day15Solver: DaySolver {
 			} else {
 				position = nextPosition
 			}
+
+			// printState(position: position, boxes: boxes, walls: walls)
 		}
 
 		return score(boxes: Set(boxes.values.map(\.position)))
+	}
+
+	func solvePart1(withInput input: Input) -> Int {
+		var boxes: [Int: Box] = [:]
+
+		for (id, box) in input.boxes.enumerated() {
+			boxes[id] = .init(id: id, position: box, width: 1)
+		}
+
+		return solveFor(startPosition: input.startPosition, boxes: boxes, walls: input.walls, instructions: input.instructions)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
@@ -185,39 +192,7 @@ final class Day15Solver: DaySolver {
 
 		(boxes, walls, position) = widenMap(boxes: input.boxes, walls: input.walls, startPoint: position)
 
-		for instruction in input.instructions {
-			let nextPosition = position.moved(to: instruction)
-
-			guard !walls.contains(nextPosition) else {
-				continue
-			}
-
-			if boxAt(nextPosition, boxes: boxes) != nil {
-				let boxesToMove: Set<Int>
-
-				if instruction.isHorizontal {
-					boxesToMove = horizontallyMovableBoxIds(at: nextPosition, direction: instruction, boxes: boxes, walls: walls)
-				} else {
-					boxesToMove = verticallyMovableBoxIds(at: nextPosition, direction: instruction, boxes: boxes, walls: walls)
-				}
-
-				for boxIdToMove in boxesToMove {
-					boxes[boxIdToMove]!.position.move(to: instruction)
-				}
-
-				if boxesToMove.isNotEmpty {
-					position = nextPosition
-				}
-
-			} else {
-				position = nextPosition
-			}
-
-//			print("Instruction \(step): \(instruction):")
-//			printState(position: position, boxes: boxes, walls: walls)
-		}
-
-		return score(boxes: Set(boxes.values.map(\.position)))
+		return solveFor(startPosition: position, boxes: boxes, walls: walls, instructions: input.instructions)
 	}
 
 	func parseInput(rawString: String) -> Input {
