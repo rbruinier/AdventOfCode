@@ -17,11 +17,15 @@ Links to the solutions:
  
  Timing is done on a 2021 M1 Pro with 32 GB RAM.
  
- # Inputs
+ # Excluded Assets
  
- Inputs are in a private repository and should be put in the Sources/Inputs folder with the following 
- example path: "Sources/Inputs/2015/Day01.txt"
+Inputs and expected results are stored in a private repository and should be put in a folder with the following 
+structure:
+
+Sources/Assets/{YEAR}/Inputs & Sources/Assets/{YEAR}/ExpectedResults 
  
+Files in those folders should be named Day01.txt, Day02.txt, ... Day25.txt.
+
 # 3rd party frameworks
 
  * Swift Collections: For the Deque type allowing for faster popping of first elements from collections (vs arrays).
