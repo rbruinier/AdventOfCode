@@ -86,6 +86,14 @@ public enum Direction: Int, Equatable, Sendable {
 		case .southWest: .northEast
 		}
 	}
+	
+	public var isHorizontal: Bool {
+		[.east, .west].contains(self)
+	}
+
+	public var isVertical: Bool {
+		[.north, .south].contains(self)
+	}
 
 	public func turned(degrees: Point2D.Degrees) -> Direction {
 		switch degrees {
