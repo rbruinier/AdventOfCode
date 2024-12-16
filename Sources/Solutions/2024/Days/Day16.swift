@@ -21,7 +21,9 @@ final class Day16Solver: DaySolver {
 		case moveForward
 	}
 
-	/// relaxed: true means include equal scoring paths instead of just the best scoring path
+	/// Find shortest path using Dijkstra.
+	///
+	/// relaxed: true means including all equal scoring shortest paths instead of just a single best scoring path
 	private func findShortestPath(in grid: Grid2D<Tile>, start: Point2D, end: Point2D, relaxed: Bool) -> [(path: Set<Point2D>, score: Int)] {
 		struct Node: Comparable {
 			var position: Point2D
@@ -64,15 +66,15 @@ final class Day16Solver: DaySolver {
 
 			var possibleNextNodes: [Node] = []
 
-			if !node.history.contains(forwardPosition), let forwardTile = grid[safe: forwardPosition], forwardTile == .empty {
+			if !node.history.contains(forwardPosition), grid[safe: forwardPosition] == .empty {
 				possibleNextNodes.append(Node(position: forwardPosition, direction: node.direction, score: node.score + 1, history: node.history.union([forwardPosition])))
 			}
 
-			if !node.history.contains(leftPosition), let tile = grid[safe: leftPosition], tile == .empty {
+			if !node.history.contains(leftPosition), grid[safe: leftPosition] == .empty {
 				possibleNextNodes.append(Node(position: node.position, direction: leftDirection, score: node.score + 1000, history: node.history))
 			}
 
-			if !node.history.contains(leftPosition), let tile = grid[safe: rightPosition], tile == .empty {
+			if !node.history.contains(rightPosition), grid[safe: rightPosition] == .empty {
 				possibleNextNodes.append(Node(position: node.position, direction: rightDirection, score: node.score + 1000, history: node.history))
 			}
 
