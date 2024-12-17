@@ -8,7 +8,7 @@ import PackageDescription
 var package = Package(
 	name: "AdventOfCode",
 	platforms: [
-		.macOS(.v13),
+		.macOS(.v15),
 	],
 	products: [
 		.library(name: "Tools", targets: ["Tools"]),
