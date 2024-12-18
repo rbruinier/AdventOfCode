@@ -17,7 +17,7 @@ final class Day14Solver: DaySolver {
 
 	private func make(chemical: String, minimumQuantity: Int, reactions: [String: Reaction], storage: inout [String: Int]) -> Int {
 		let reaction = reactions[chemical]!
-		let return reaction.input
+		let input = reaction.input
 
 		let multiplier = Int(ceil(Double(minimumQuantity) / Double(reaction.outputQuantity)))
 

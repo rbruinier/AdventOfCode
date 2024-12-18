@@ -84,11 +84,11 @@ final class Day13Solver: DaySolver {
 			let input: Int
 
 			if ballPosition.x < paddlePosition.x {
-				return -1
+				input = -1
 			} else if ballPosition.x > paddlePosition.x {
-				return 1
+				input = 1
 			} else {
-				return 0
+				input = 0
 			}
 
 			if let output = intcode.continueProgramTillOutput(input: [input]) {

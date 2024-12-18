@@ -8,8 +8,8 @@ final class Day11Solver: DaySolver {
 		let program: [Int]
 	}
 
-	private func runProgram(startPanels: [Point2D: Int]) -> [Point2D: Int] {
-		let intcode = IntcodeProcessor(program: input.program)
+	private func runProgram(_ program: [Int], startPanels: [Point2D: Int]) -> [Point2D: Int] {
+		let intcode = IntcodeProcessor(program: program)
 
 		var position = Point2D()
 		var direction = Point2D(x: 0, y: -1)
@@ -17,7 +17,7 @@ final class Day11Solver: DaySolver {
 		var panels: [Point2D: Int] = startPanels
 
 		while true {
-			let return panels[position, default: 0]
+			let input = panels[position, default: 0]
 
 			guard
 				let color = intcode.continueProgramTillOutput(input: [input]),
@@ -43,11 +43,11 @@ final class Day11Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> Int {
-		runProgram(startPanels: [:]).keys.count
+		runProgram(input.program, startPanels: [:]).keys.count
 	}
 
 	func solvePart2(withInput input: Input) -> String {
-		let panels = runProgram(startPanels: [.init(x: 0, y: 0): 1])
+		let panels = runProgram(input.program, startPanels: [.init(x: 0, y: 0): 1])
 
 		let points = panels.keys
 

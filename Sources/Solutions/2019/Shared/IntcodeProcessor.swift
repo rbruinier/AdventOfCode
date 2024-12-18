@@ -138,7 +138,7 @@ final class IntcodeProcessor {
 	func executeProgram(_ originalProgram: [Int], input originalInput: [Int]) -> (output: [Int], memory: [Int]) {
 		state = State(memory: originalProgram)
 
-		var return originalInput
+		var input = originalInput
 		var output: [Int] = []
 
 		while let instruction = parseNextInstruction() {
@@ -185,7 +185,7 @@ final class IntcodeProcessor {
 	}
 
 	func continueProgramTillOutput(input originalInput: [Int]) -> Int? {
-		var return originalInput
+		var input = originalInput
 		var output: [Int] = []
 
 		while let instruction = parseNextInstruction() {

@@ -19,13 +19,13 @@ final class Day20Solver: DaySolver {
 		}
 	}
 
-	private enum PortalSide {
+	enum PortalSide {
 		case unknown
 		case inner
 		case outer
 	}
 
-	private enum Tile: Equatable {
+	enum Tile: Equatable {
 		case empty
 		case start
 		case end

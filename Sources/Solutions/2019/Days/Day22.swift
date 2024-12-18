@@ -10,7 +10,7 @@ final class Day22Solver: DaySolver {
 		let steps: [Step]
 	}
 
-	private enum Step {
+	enum Step {
 		case reverse
 		case cut(n: Int)
 		case increment(n: Int)

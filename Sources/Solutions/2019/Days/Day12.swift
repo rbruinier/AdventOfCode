@@ -8,7 +8,7 @@ final class Day12Solver: DaySolver {
 		let moons: [Moon]
 	}
 
-	private struct Moon: Equatable, Hashable {
+	struct Moon: Equatable, Hashable {
 		var position: Point3D
 		var velocity: Point3D = .init()
 

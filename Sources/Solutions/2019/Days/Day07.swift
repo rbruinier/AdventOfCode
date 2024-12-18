@@ -16,10 +16,10 @@ final class Day07Solver: DaySolver {
 		var maxThrusterSignal = 0
 
 		for permutation in permutations {
-			var currentreturn 0
+			var currentInput = 0
 
 			for phaseSetting in permutation {
-				currentreturn intcode.executeProgram(input.program, input: [phaseSetting, currentInput]).output.last!
+				currentInput = intcode.executeProgram(input.program, input: [phaseSetting, currentInput]).output.last!
 			}
 
 			maxThrusterSignal = max(maxThrusterSignal, currentInput)
@@ -42,20 +42,20 @@ final class Day07Solver: DaySolver {
 				IntcodeProcessor(),
 			]
 
-			var currentreturn 0
+			var currentInput = 0
 			var iteration = 0
 
 			iterationLoop: while true {
 				for (amplifierIndex, phaseSetting) in permutation.enumerated() {
 					if iteration == 0 {
-						guard let newCurrentreturn amplifiers[amplifierIndex].executeProgramTillOutput(input.program, input: [phaseSetting, currentInput]) else {
+						guard let newCurrentInput = amplifiers[amplifierIndex].executeProgramTillOutput(input.program, input: [phaseSetting, currentInput]) else {
 							fatalError()
 						}
 
-						currentreturn newCurrentInput
+						currentInput = newCurrentInput
 					} else {
-						if let newCurrentreturn amplifiers[amplifierIndex].continueProgramTillOutput(input: [currentInput]) {
-							currentreturn newCurrentInput
+						if let newCurrentInput = amplifiers[amplifierIndex].continueProgramTillOutput(input: [currentInput]) {
+							currentInput = newCurrentInput
 						} else {
 							break iterationLoop
 						}

@@ -8,7 +8,7 @@ final class Day06Solver: DaySolver {
 		let orbits: [String: Node]
 	}
 
-	private final class Node {
+	final class Node {
 		var id: String
 		var parent: Node?
 		var children: [Node] = []

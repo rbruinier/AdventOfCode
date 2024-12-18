@@ -8,7 +8,7 @@ final class Day03Solver: DaySolver {
 		let lines: [[Move]]
 	}
 
-	private enum Move {
+	enum Move {
 		case up(count: Int)
 		case right(count: Int)
 		case down(count: Int)
@@ -23,7 +23,7 @@ final class Day03Solver: DaySolver {
 
 		var intersections: [(point: Point2D, steps: Int)] = []
 
-		for (lineIndex, line) in input.lines.enumerated() {
+		for (lineIndex, line) in lines.enumerated() {
 			var point = Point2D(x: 0, y: 0)
 			var steps = 0
 

@@ -9,7 +9,7 @@ final class Day18Solver: DaySolver {
 		let tiles: [Point2D: Tile]
 	}
 
-	private enum Tile: Equatable {
+	enum Tile: Equatable {
 		case empty
 		case entrance
 		case wall
