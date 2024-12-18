@@ -11,7 +11,7 @@ final class Day22Solver: DaySolver {
 		let player2: Player
 	}
 
-	private struct Player {
+	struct Player {
 		let cards: [Int]
 	}
 

@@ -8,13 +8,13 @@ final class Day04Solver: DaySolver {
 		let events: [Event]
 	}
 
-	private enum EventType {
+	enum EventType {
 		case beginsShift(id: Int)
 		case fallsAsleep
 		case wakesUp
 	}
 
-	private struct Event {
+	struct Event {
 		let timestamp: Int
 		let type: EventType
 	}

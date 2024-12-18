@@ -8,7 +8,7 @@ final class Day24Solver: DaySolver {
 		let lines: [[Direction]]
 	}
 
-	private enum Direction {
+	enum Direction {
 		case east
 		case southEast
 		case southWest

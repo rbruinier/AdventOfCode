@@ -9,7 +9,7 @@ final class Day17Solver: DaySolver {
 		let spring: Point2D
 	}
 
-	private enum Line {
+	enum Line {
 		case vertical(x: Int, y: ClosedRange<Int>)
 		case horizontal(y: Int, x: ClosedRange<Int>)
 

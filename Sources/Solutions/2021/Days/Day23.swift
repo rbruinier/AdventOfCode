@@ -12,7 +12,7 @@ final class Day23Solver: DaySolver {
 		let rooms: [Room]
 	}
 
-	private enum Amphipod: Int, Equatable, Hashable, RawRepresentable {
+	enum Amphipod: Int, Equatable, Hashable, RawRepresentable {
 		case none = 0
 		case amber = 1
 		case bronze = 2
@@ -30,7 +30,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	private struct Hallway: Hashable {
+	struct Hallway: Hashable {
 		var cells: [Amphipod] = Array(repeating: .none, count: 11)
 
 		func canMove(from: Int, to: Int, toRoom: Int? = nil, gameState: GameState) -> Bool {
@@ -50,7 +50,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	private struct Room: Hashable {
+	struct Room: Hashable {
 		let amphipod: Amphipod
 
 		var cells: [Amphipod] // 0 is top (closest to hallways)
@@ -82,7 +82,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	private struct GameState: Hashable {
+	struct GameState: Hashable {
 		let hallway: Hallway
 		let rooms: [Room]
 
@@ -133,12 +133,12 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	private enum Spot: Equatable {
+	enum Spot: Equatable {
 		case hallway(index: Int)
 		case room(index: Int, cellIndex: Int)
 	}
 
-	private struct Move: Equatable {
+	struct Move: Equatable {
 		let who: Amphipod
 
 		let from: Spot

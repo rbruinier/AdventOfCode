@@ -8,7 +8,7 @@ final class Day07Solver: DaySolver {
 		let bags: [String: Bag]
 	}
 
-	private struct Bag {
+	struct Bag {
 		let id: String
 
 		let subBags: [String: Int]

@@ -11,7 +11,7 @@ final class Day05Solver: DaySolver {
 		let gridHeight: Int
 	}
 
-	private struct Grid {
+	struct Grid {
 		struct Item {
 			var counter = 0
 		}
@@ -101,7 +101,7 @@ final class Day05Solver: DaySolver {
 		}
 	}
 
-	private struct Line {
+	struct Line {
 		enum Orientation {
 			case horizontal
 			case vertical

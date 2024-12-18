@@ -8,7 +8,7 @@ final class Day03Solver: DaySolver {
 		let triangles: [Triangle]
 	}
 
-	private struct Triangle {
+	struct Triangle {
 		let a: Int
 		let b: Int
 		let c: Int

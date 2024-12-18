@@ -8,12 +8,12 @@ final class Day10Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Output {
+	enum Output {
 		case bot(index: Int)
 		case output(index: Int)
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case value(botIndex: Int, value: Int)
 		case give(botIndex: Int, low: Output, high: Output)
 	}

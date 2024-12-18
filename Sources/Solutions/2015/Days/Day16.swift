@@ -8,7 +8,7 @@ final class Day16Solver: DaySolver {
 		let aunts: [Aunt]
 	}
 
-	private struct Aunt {
+	struct Aunt {
 		let name: String
 		let items: [String: Int]
 	}

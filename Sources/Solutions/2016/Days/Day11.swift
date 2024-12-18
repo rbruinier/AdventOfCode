@@ -219,5 +219,7 @@ final class Day11Solver: DaySolver {
 		return solve(with: state)
 	}
 
-	func parseInput(rawString: String) -> Input {}
+	func parseInput(rawString: String) -> Input {
+		.init()
+	}
 }

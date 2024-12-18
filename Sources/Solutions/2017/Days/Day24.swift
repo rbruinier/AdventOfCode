@@ -8,7 +8,7 @@ final class Day24Solver: DaySolver {
 		let ports: [Port]
 	}
 
-	private struct Port: Hashable {
+	struct Port: Hashable {
 		let id: UUID = .init()
 
 		let a: Int

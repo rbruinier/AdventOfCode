@@ -67,6 +67,6 @@ final class Day03Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(Input(squareID: 277_678))
+		return .init(squareID: 277_678)
 	}
 }

@@ -11,18 +11,18 @@ final class Day25Solver: DaySolver {
 		let instructions: [State: [Instruction]]
 	}
 
-	private enum Move {
+	enum Move {
 		case left
 		case right
 	}
 
-	private struct Instruction {
+	struct Instruction {
 		let write: Int
 		let move: Move
 		let nextState: State
 	}
 
-	private enum State {
+	enum State {
 		case a
 		case b
 		case c

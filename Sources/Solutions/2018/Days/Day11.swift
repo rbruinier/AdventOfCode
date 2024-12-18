@@ -73,7 +73,7 @@ final class Day11Solver: DaySolver {
 
 		for y in 1 ..< 300 - size {
 			for x in 1 ..< 300 - size {
-				let sum = powerLevelOfSquare(at: .init(x: x, y: y), size: size, serial: input.serialNumber)
+				let sum = powerLevelOfSquare(at: .init(x: x, y: y), size: size, serial: serial)
 
 				if sum > bestSum {
 					bestSum = sum

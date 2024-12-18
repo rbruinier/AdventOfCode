@@ -8,7 +8,7 @@ final class Day06Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case on(from: Point2D, to: Point2D)
 		case off(from: Point2D, to: Point2D)
 		case toggle(from: Point2D, to: Point2D)

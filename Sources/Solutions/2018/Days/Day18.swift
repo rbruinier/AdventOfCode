@@ -4,13 +4,13 @@ import Tools
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
 
-	private typealias Grid = Grid2D<Tile>
+	typealias Grid = Grid2D<Tile>
 
 	struct Input {
 		let grid: Grid
 	}
 
-	private enum Tile: String, Hashable, CustomStringConvertible {
+	enum Tile: String, Hashable, CustomStringConvertible {
 		case open = "."
 		case trees = "|"
 		case lumberyard = "#"

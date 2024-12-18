@@ -8,7 +8,7 @@ final class Day02Solver: DaySolver {
 		let passwords: [Password]
 	}
 
-	private struct Password {
+	struct Password {
 		var policyRange: ClosedRange<Int>
 		var policyCharacter: String
 

@@ -10,7 +10,7 @@ final class Day20Solver: DaySolver {
 		let particles: [Particle]
 	}
 
-	private struct Particle {
+	struct Particle {
 		var position: Point3D
 		var velocity: Point3D
 		var acceleration: Point3D

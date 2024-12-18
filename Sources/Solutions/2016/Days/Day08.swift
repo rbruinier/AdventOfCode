@@ -11,7 +11,7 @@ final class Day08Solver: DaySolver {
 		let height = 6
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case rect(width: Int, height: Int)
 		case rotateRow(y: Int, by: Int)
 		case rotateColumn(x: Int, by: Int)

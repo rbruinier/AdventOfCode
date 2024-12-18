@@ -32,15 +32,15 @@ final class Day17Solver: DaySolver {
 		let a = Point2D(x: 0, y: 0)
 		let b = Point2D(x: size.width - 1, y: size.height - 1)
 
-		var priorityQueue = PriorityQueue<QueueNode>(isAscending: true)
+		var priorityQueue = PriorityQueue<QueueNode>()
 
 		var weights: [Int: Int] = [
 			UniqueState(point: .zero, direction: .east, directionCount: 0).hashValue: 0,
 		]
 
-		priorityQueue.push(.init(point: a, direction: .east, directionCount: 0, weight: 0))
+		priorityQueue.insert(.init(point: a, direction: .east, directionCount: 0, weight: 0))
 
-		while let solution = priorityQueue.pop() {
+		while let solution = priorityQueue.popMin() {
 			if solution.point == b {
 				return solution.weight
 			}
@@ -94,7 +94,7 @@ final class Day17Solver: DaySolver {
 				if oldWeight == nil || combinedWeight < oldWeight! {
 					weights[stateHash] = combinedWeight
 
-					priorityQueue.push(
+					priorityQueue.insert(
 						QueueNode(
 							point: newPoint,
 							direction: newDirection,

@@ -41,9 +41,9 @@ final class Day16Solver: DaySolver {
 			let direction: Direction
 		}
 
-		var priorityQueue = PriorityQueue<Node>(isAscending: true)
+		var priorityQueue = PriorityQueue<Node>()
 
-		priorityQueue.push(Node(position: start, direction: .east, score: 0, history: [start]))
+		priorityQueue.insert(Node(position: start, direction: .east, score: 0, history: [start]))
 
 		var scores: [Int: Int] = [
 			ScoreKey(position: start, direction: .east).hashValue: 0,
@@ -51,7 +51,7 @@ final class Day16Solver: DaySolver {
 
 		var shortestPaths: [(path: Set<Point2D>, score: Int)] = []
 
-		while let node = priorityQueue.pop() {
+		while let node = priorityQueue.popMin() {
 			if node.position == end {
 				shortestPaths.append((path: node.history, score: node.score))
 
@@ -86,7 +86,7 @@ final class Day16Solver: DaySolver {
 				if oldScore == nil || possibleNextNode.score < (oldScore! + (relaxed ? 1 : 0)) {
 					scores[scoreHash] = possibleNextNode.score
 
-					priorityQueue.push(possibleNextNode)
+					priorityQueue.insert(possibleNextNode)
 				}
 			}
 		}

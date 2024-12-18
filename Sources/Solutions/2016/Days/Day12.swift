@@ -8,12 +8,12 @@ final class Day12Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Value {
+	enum Value {
 		case value(value: Int)
 		case register(id: String)
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case cpy(value: Value, targetRegisterID: String)
 		case inc(registerID: String)
 		case dec(registerID: String)

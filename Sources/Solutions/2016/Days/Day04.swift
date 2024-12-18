@@ -10,7 +10,7 @@ final class Day04Solver: DaySolver {
 
 	private var validEntries: [Entry]!
 
-	private struct Entry {
+	struct Entry {
 		var name: String
 		let sectorID: Int
 		let checksum: String

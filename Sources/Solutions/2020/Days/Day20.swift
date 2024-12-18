@@ -23,7 +23,7 @@ final class Day20Solver: DaySolver {
 		let tiles: [Int: Tile]
 	}
 
-	private struct Tile {
+	struct Tile {
 		let id: Int
 
 		let pixels: [Bool]
@@ -108,11 +108,11 @@ final class Day20Solver: DaySolver {
 		return matches
 	}
 
-	private func allMatchesByTile() -> [Int: [Match]] {
+	private func allMatchesByTile(tiles: [Int: Tile]) -> [Int: [Match]] {
 		var matchesByTile: [Int: [Match]] = [:]
 
-		for (lhsTileID, lhs) in input.tiles {
-			for (rhsTileID, rhs) in input.tiles {
+		for (lhsTileID, lhs) in tiles {
+			for (rhsTileID, rhs) in tiles {
 				guard lhsTileID != rhsTileID else {
 					continue
 				}
@@ -262,7 +262,7 @@ final class Day20Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> Int {
-		let matchesByTile: [Int: [Match]] = allMatchesByTile()
+		let matchesByTile: [Int: [Match]] = allMatchesByTile(tiles: input.tiles)
 
 		let cornerTiles = matchesByTile
 			.filter { $0.value.count == 2 }
@@ -274,7 +274,7 @@ final class Day20Solver: DaySolver {
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
-		let matchesByTile: [Int: [Match]] = allMatchesByTile()
+		let matchesByTile: [Int: [Match]] = allMatchesByTile(tiles: input.tiles)
 
 		let topLeftCorner = matchesByTile
 			.first { $0.value.count == 2

@@ -24,7 +24,7 @@ final class Day22Solver: DaySolver {
 		}
 	}
 
-	private func createGridWithSize(_ size: Size, depth: Int) -> Grid2D<Tile> {
+	private func createGridWithSize(_ size: Size, depth: Int, target: Point2D) -> Grid2D<Tile> {
 		var erosionLevels: [[Int]] = .init(repeating: .init(repeating: 0, count: size.width), count: size.height)
 
 		let moduloValue = 20183
@@ -38,11 +38,11 @@ final class Day22Solver: DaySolver {
 		}
 
 		erosionLevels[0][0] = depth % moduloValue
-		erosionLevels[input.target.y][input.target.x] = depth % moduloValue
+		erosionLevels[target.y][target.x] = depth % moduloValue
 
 		for y in 1 ..< size.height {
 			for x in 1 ..< size.width {
-				guard !(input.target.y == y && input.target.x == x) else {
+				guard !(target.y == y && target.x == x) else {
 					continue
 				}
 
@@ -68,7 +68,7 @@ final class Day22Solver: DaySolver {
 	func solvePart1(withInput input: Input) -> Int {
 		let size = Size(width: input.target.x + 1, height: input.target.y + 1)
 
-		let grid = createGridWithSize(size, depth: input.depth)
+		let grid = createGridWithSize(size, depth: input.depth, target: input.target)
 
 		return grid.tiles.flatMap { $0 }.reduce(into: 0) { result, tile in
 			result += tile.riskLevel
@@ -118,15 +118,15 @@ final class Day22Solver: DaySolver {
 		let xRange = 0 ..< grid.dimensions.width
 		let yRange = 0 ..< grid.dimensions.height
 
-		var priorityQueue = PriorityQueue<Node>(isAscending: true)
+		var priorityQueue = PriorityQueue<Node>()
 
 		var weights: [Int: Int] = [
 			startState.hashValue: 0,
 		]
 
-		priorityQueue.push(.init(equippedState: startState.equippedState, position: startState.position, weight: 0))
+		priorityQueue.insert(.init(equippedState: startState.equippedState, position: startState.position, weight: 0))
 
-		while let node = priorityQueue.pop() {
+		while let node = priorityQueue.popMin() {
 			guard let currentWeight = weights[State(equippedState: node.equippedState, position: node.position).hashValue] else {
 				preconditionFailure()
 			}
@@ -154,7 +154,7 @@ final class Day22Solver: DaySolver {
 					if oldWeight == nil || newWeight < oldWeight! {
 						weights[stateHash] = newWeight
 
-						priorityQueue.push(.init(equippedState: nextEquippedState, position: neighbor, weight: newWeight))
+						priorityQueue.insert(.init(equippedState: nextEquippedState, position: neighbor, weight: newWeight))
 					}
 				}
 			}
@@ -167,7 +167,7 @@ final class Day22Solver: DaySolver {
 		// twice the size in each direction, assuming this is enough (must be, right?!)
 		let size = Size(width: input.target.x * 2 + 1, height: input.target.y * 2 + 1)
 
-		let grid = createGridWithSize(size, depth: input.depth)
+		let grid = createGridWithSize(size, depth: input.depth, target: input.target)
 
 		let startState = State(equippedState: .torch, position: .zero)
 

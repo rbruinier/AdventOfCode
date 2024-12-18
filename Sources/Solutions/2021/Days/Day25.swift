@@ -11,7 +11,7 @@ final class Day25Solver: DaySolver {
 		let height: Int
 	}
 
-	private enum Cell {
+	enum Cell {
 		case empty
 		case southbound
 		case eastbound

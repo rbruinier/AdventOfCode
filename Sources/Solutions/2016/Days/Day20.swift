@@ -10,7 +10,7 @@ final class Day20Solver: DaySolver {
 
 	// By collapsing all the ranges into continuous ranges we can much easier find the gaps between them
 	private func collapseRanges(_ ranges: [ClosedRange<UInt32>]) -> [ClosedRange<UInt32>] {
-		let sortedRanges = input.ranges.sorted(by: { lhs, rhs in
+		let sortedRanges = ranges.sorted(by: { lhs, rhs in
 			lhs.lowerBound < rhs.lowerBound
 		})
 

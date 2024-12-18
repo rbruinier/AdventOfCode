@@ -9,7 +9,7 @@ final class Day15Solver: DaySolver {
 		let discs: [Disc]
 	}
 
-	private struct Disc {
+	struct Disc {
 		let nrOfPositions: Int
 		var position: Int
 	}

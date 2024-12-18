@@ -42,11 +42,11 @@ public extension Dijkstra {
 
 		weights[a] = 0
 
-		var priorityQueue = PriorityQueue<Node>(isAscending: true)
+		var priorityQueue = PriorityQueue<Node>() //(isAscending: true)
 
-		priorityQueue.push(.init(index: a, weight: 0))
+		priorityQueue.insert(.init(index: a, weight: 0))
 
-		queueLoop: while let node = priorityQueue.pop() {
+		queueLoop: while let node = priorityQueue.popMin() {
 			guard let weight = weights[node.index] else {
 				preconditionFailure()
 			}
@@ -64,7 +64,7 @@ public extension Dijkstra {
 					weights[edge.b] = combinedWeight
 					pathsByIndex[edge.b] = .init(a: edge.a, b: edge.b, weight: edge.weight, combinedWeight: combinedWeight)
 
-					priorityQueue.push(.init(index: edge.b, weight: combinedWeight))
+					priorityQueue.insert(.init(index: edge.b, weight: combinedWeight))
 				}
 			}
 		}
@@ -95,11 +95,11 @@ public extension Dijkstra {
 
 		weights[a] = 0
 
-		var priorityQueue = PriorityQueue<Node>(isAscending: true)
+		var priorityQueue = PriorityQueue<Node>()
 
-		priorityQueue.push(.init(index: a, weight: 0))
+		priorityQueue.insert(.init(index: a, weight: 0))
 
-		queueLoop: while let node = priorityQueue.pop() {
+		queueLoop: while let node = priorityQueue.popMin() {
 			guard let weight = weights[node.index] else {
 				preconditionFailure()
 			}
@@ -117,7 +117,7 @@ public extension Dijkstra {
 					weights[edge.b] = combinedWeight
 					pathsByIndex[edge.b] = .init(a: edge.a, b: edge.b, weight: 1, combinedWeight: combinedWeight)
 
-					priorityQueue.push(.init(index: edge.b, weight: combinedWeight))
+					priorityQueue.insert(.init(index: edge.b, weight: combinedWeight))
 				}
 			}
 		}

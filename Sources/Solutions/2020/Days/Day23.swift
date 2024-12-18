@@ -39,8 +39,8 @@ final class Day23Solver: DaySolver {
 		currentCupValue = currentCupNode.next!.value
 	}
 
-	private func play(moves: Int, with cups: LoopedLinkedListSet<Int>, maxValue: Int) -> Int {
-		var currentCupValue = input.cups.first!
+	private func play(moves: Int, with cups: LoopedLinkedListSet<Int>, originalCups: [Int], maxValue: Int) -> Int {
+		var currentCupValue = originalCups.first!
 
 		for moveID in 1 ... moves {
 			playRoundLinkedList(cups: cups, currentCupValue: &currentCupValue, maxCupValue: maxValue, moveID: moveID)
@@ -50,7 +50,7 @@ final class Day23Solver: DaySolver {
 
 		var finalResult = 0
 
-		for _ in 0 ..< input.cups.count - 1 {
+		for _ in 0 ..< originalCups.count - 1 {
 			currentNode = currentNode.next!
 
 			finalResult *= 10
@@ -63,7 +63,7 @@ final class Day23Solver: DaySolver {
 	func solvePart1(withInput input: Input) -> Int {
 		let cups = LoopedLinkedListSet<Int>(values: input.cups)
 
-		return play(moves: 100, with: cups, maxValue: 9)
+		return play(moves: 100, with: cups, originalCups: input.cups, maxValue: 9)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
@@ -75,7 +75,7 @@ final class Day23Solver: DaySolver {
 
 		let cups = LoopedLinkedListSet(values: cupValues)
 
-		_ = play(moves: 10_000_000, with: cups, maxValue: 1_000_000)
+		_ = play(moves: 10_000_000, with: cups, originalCups: input.cups, maxValue: 1_000_000)
 
 		let currentNode = cups.findNode(for: 1)!
 

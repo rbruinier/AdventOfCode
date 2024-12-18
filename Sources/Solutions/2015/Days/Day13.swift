@@ -8,7 +8,7 @@ final class Day13Solver: DaySolver {
 		let pairs: [String: [Pair]]
 	}
 
-	private struct Pair {
+	struct Pair {
 		let a: String
 		let b: String
 

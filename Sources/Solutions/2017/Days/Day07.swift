@@ -8,7 +8,7 @@ final class Day07Solver: DaySolver {
 		let programs: [String: Program]
 	}
 
-	private struct Program {
+	struct Program {
 		let id: String
 		let weight: Int
 		let holding: [String]

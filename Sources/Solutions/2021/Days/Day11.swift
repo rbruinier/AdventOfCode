@@ -11,7 +11,7 @@ final class Day11Solver: DaySolver {
 		let height: Int
 	}
 
-	fileprivate struct Octopus {
+	struct Octopus {
 		var energyLevel: Int
 	}
 
@@ -42,23 +42,23 @@ final class Day11Solver: DaySolver {
 		let level: Int
 	}
 
-	private func executeStep(octopi: inout [Octopus]) -> Int {
+	private func executeStep(octopi: inout [Octopus], size: Size) -> Int {
 		// phase 1 is incrementing
-		for y in 0 ..< input.height {
-			for x in 0 ..< input.width {
-				incrementAt(y: y, x: x, width: input.width, height: input.height, octopi: &octopi)
+		for y in 0 ..< size.height {
+			for x in 0 ..< size.width {
+				incrementAt(y: y, x: x, width: size.width, height: size.height, octopi: &octopi)
 			}
 		}
 
 		var numberOfFlashes = 0
 
 		// phase 2 is flashing and resetting
-		for y in 0 ..< input.height {
-			for x in 0 ..< input.width {
-				if octopi[(y * input.width) + x].energyLevel >= 10 {
+		for y in 0 ..< size.height {
+			for x in 0 ..< size.width {
+				if octopi[(y * size.width) + x].energyLevel >= 10 {
 					numberOfFlashes += 1
 
-					octopi[(y * input.width) + x].energyLevel = 0
+					octopi[(y * size.width) + x].energyLevel = 0
 				}
 			}
 		}
@@ -72,7 +72,7 @@ final class Day11Solver: DaySolver {
 		var totalNumberOfFlashes = 0
 
 		for _ in 0 ..< 100 {
-			totalNumberOfFlashes += executeStep(octopi: &octopi)
+			totalNumberOfFlashes += executeStep(octopi: &octopi, size: .init(width: input.width, height: input.height))
 		}
 
 		return totalNumberOfFlashes
@@ -82,7 +82,7 @@ final class Day11Solver: DaySolver {
 		var octopi = input.octopi
 
 		for step in 0 ..< Int.max {
-			let numberOfFlashes = executeStep(octopi: &octopi)
+			let numberOfFlashes = executeStep(octopi: &octopi, size: .init(width: input.width, height: input.height))
 
 			if numberOfFlashes == input.octopi.count {
 				return step + 1

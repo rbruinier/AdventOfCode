@@ -8,7 +8,7 @@ final class Day18Solver: DaySolver {
 		let firstRow: [Cell]
 	}
 
-	private enum Cell: CustomStringConvertible {
+	enum Cell: CustomStringConvertible {
 		case safe
 		case trap
 
@@ -64,8 +64,8 @@ final class Day18Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(Input(firstRow: rawString.allLines().first!.map {
+		return .init(firstRow: rawString.allLines().first!.map {
 			$0 == "." ? .safe : .trap
-		}))
+		})
 	}
 }

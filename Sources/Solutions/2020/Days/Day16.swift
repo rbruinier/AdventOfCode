@@ -12,7 +12,7 @@ final class Day16Solver: DaySolver {
 		let nearbyTickets: [[Int]]
 	}
 
-	private struct Field {
+	struct Field {
 		let name: String
 		let ranges: [ClosedRange<Int>]
 

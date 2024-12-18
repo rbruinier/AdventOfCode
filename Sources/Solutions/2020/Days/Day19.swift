@@ -10,7 +10,7 @@ final class Day19Solver: DaySolver {
 		let strings: [String]
 	}
 
-	private enum Rule {
+	enum Rule {
 		case literal(character: String)
 		case rule(groups: [[Int]])
 	}

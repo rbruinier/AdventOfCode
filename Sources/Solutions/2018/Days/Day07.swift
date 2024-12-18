@@ -10,8 +10,8 @@ final class Day07Solver: DaySolver {
 	}
 
 	/// Resolves open start nodes and adds them to the relations.
-	private func allRelationsAndEndNode(relations: [String: Set<String>]) -> [String: Set<String>] {
-		var relations = input.relations
+	private func allRelationsAndEndNode(relations: [String: Set<String>], originalRelations: [String: Set<String>]) -> [String: Set<String>] {
+		var relations = originalRelations
 
 		// collect all letters
 		var allLetters: Set<String> = []
@@ -120,13 +120,13 @@ final class Day07Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> String {
-		let relations = allRelationsAndEndNode(relations: input.relations)
+		let relations = allRelationsAndEndNode(relations: input.relations, originalRelations: input.relations)
 
 		return processNodesForPart1(relations: relations)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
-		let relations = allRelationsAndEndNode(relations: input.relations)
+		let relations = allRelationsAndEndNode(relations: input.relations, originalRelations: input.relations)
 
 		return processNodesForPart2(relations: relations, nrOfWorkers: 5, extraTime: 60)
 	}

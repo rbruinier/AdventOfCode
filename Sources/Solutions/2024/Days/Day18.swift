@@ -14,7 +14,7 @@ final class Day18Solver: DaySolver {
 			var position: Point2D
 			var cost: Int
 			var history: Set<Point2D>
-
+			
 			static func < (lhs: Node, rhs: Node) -> Bool {
 				lhs.cost < rhs.cost
 			}
@@ -23,15 +23,15 @@ final class Day18Solver: DaySolver {
 		let start = Point2D(x: 0, y: 0)
 		let end = Point2D(x: 70, y: 70)
 
-		var priorityQueue = PriorityQueue<Node>(isAscending: true)
+		var priorityQueue = PriorityQueue<Node>()
 
-		priorityQueue.push(Node(position: start, cost: 0, history: [start]))
+		priorityQueue.insert(Node(position: start, cost: 0, history: [start]))
 
 		var costs: [Point2D: Int] = [
 			start: 0,
 		]
 
-		while let node = priorityQueue.pop() {
+		while let node = priorityQueue.popMin() {
 			if node.position == end {
 				return (path: node.history, cost: node.cost)
 			}
@@ -52,7 +52,7 @@ final class Day18Solver: DaySolver {
 				if oldCost == nil || newCost < oldCost! {
 					costs[neighbor] = newCost
 
-					priorityQueue.push(.init(position: neighbor, cost: newCost, history: node.history.union([neighbor])))
+					priorityQueue.insert(.init(position: neighbor, cost: newCost, history: node.history.union([neighbor])))
 				}
 			}
 		}
@@ -72,7 +72,7 @@ final class Day18Solver: DaySolver {
 
 			// in case the new byte is not in the way of the current path the shortest route will stay exactly the same, so skip
 			if currentPath.isNotEmpty, !currentPath.contains(currentMaxByte) {
-				continue
+//				continue
 			}
 
 			let walls: Set<Point2D> = Set(input.bytes[0 ... maxBytes])

@@ -8,7 +8,7 @@ final class Day02Solver: DaySolver {
 		let lines: [[Step]]
 	}
 
-	private enum Step: String {
+	enum Step: String {
 		case up = "U"
 		case right = "R"
 		case down = "D"

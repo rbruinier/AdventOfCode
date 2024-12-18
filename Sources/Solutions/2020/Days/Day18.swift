@@ -8,17 +8,17 @@ final class Day18Solver: DaySolver {
 		let equations: [Equation]
 	}
 
-	private enum Operand {
+	enum Operand {
 		case value(_: Int)
 		case equation(_: Equation)
 	}
 
-	private enum Operation {
+	enum Operation {
 		case add
 		case product
 	}
 
-	private struct Equation {
+	struct Equation {
 		let operands: [Operand]
 		let operations: [Operation]
 	}

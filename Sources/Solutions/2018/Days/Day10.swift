@@ -10,7 +10,7 @@ final class Day10Solver: DaySolver {
 		let lights: [Light]
 	}
 
-	private struct Light {
+	struct Light {
 		var position: Point2D
 		var velocity: Point2D
 	}

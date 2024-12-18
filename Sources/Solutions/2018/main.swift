@@ -29,4 +29,4 @@ yearSolver.addSolver(Day23Solver())
 yearSolver.addSolver(Day24Solver())
 yearSolver.addSolver(Day25Solver())
 
-await solveYear(yearSolver, bundle: .module)
+await solveYear(yearSolver, dayNumber: nil, bundle: .module)

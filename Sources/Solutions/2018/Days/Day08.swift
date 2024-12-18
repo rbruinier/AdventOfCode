@@ -8,7 +8,7 @@ final class Day08Solver: DaySolver {
 		let node: Node
 	}
 
-	private final class Node {
+	final class Node {
 		var childNodes: [Node] = []
 		var metadataEntries: [Int] = []
 

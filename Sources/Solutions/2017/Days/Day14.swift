@@ -114,7 +114,7 @@ final class Day14Solver: DaySolver {
 		var sum = 0
 
 		for row in 0 ..< 128 {
-			let return input.key + "-" + String(row)
+			let input = input.key + "-" + String(row)
 
 			let hash = knotHash(for: input)
 			let bits = bitArray(of: hash)

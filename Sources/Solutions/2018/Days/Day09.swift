@@ -42,6 +42,6 @@ final class Day09Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(Input(numberOfPlayers: 411, lastMarbleWorth: 71170))
+		return .init(numberOfPlayers: 411, lastMarbleWorth: 71170)
 	}
 }

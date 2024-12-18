@@ -8,7 +8,7 @@ final class Day06Solver: DaySolver {
 		let groups: [Group]
 	}
 
-	private struct Group {
+	struct Group {
 		let answers: [[String]]
 
 		var uniqueAnswers: [String] {

@@ -8,7 +8,7 @@ final class Day25Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case cpy(value: Value, targetRegisterID: String)
 		case inc(registerID: String)
 		case dec(registerID: String)
@@ -16,7 +16,7 @@ final class Day25Solver: DaySolver {
 		case out(value: Value)
 	}
 
-	private enum Value {
+	enum Value {
 		case value(value: Int)
 		case register(id: String)
 	}

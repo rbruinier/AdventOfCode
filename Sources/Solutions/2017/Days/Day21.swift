@@ -17,7 +17,7 @@ final class Day21Solver: DaySolver {
 		let output: Set<Point2D>
 	}
 
-	private func solve(tiles: [Point2D], iterations: Int) -> [Point2D] {
+	private func solve(tiles: [Point2D], iterations: Int, sizeTwoMappings: [Int: Set<Point2D>], sizeThreeMappings: [Int: Set<Point2D>]) -> [Point2D] {
 		var tiles = tiles
 
 		var size = 3
@@ -44,7 +44,7 @@ final class Day21Solver: DaySolver {
 							Point2D(x: point.x - minX, y: point.y - minY)
 						})
 
-						guard let output = input.sizeTwoMappings[translatedPoints.hashValue] else {
+						guard let output = sizeTwoMappings[translatedPoints.hashValue] else {
 							fatalError()
 						}
 
@@ -75,7 +75,7 @@ final class Day21Solver: DaySolver {
 							Point2D(x: point.x - minX, y: point.y - minY)
 						})
 
-						guard let output = input.sizeThreeMappings[translatedPoints.hashValue] else {
+						guard let output = sizeThreeMappings[translatedPoints.hashValue] else {
 							fatalError()
 						}
 
@@ -95,7 +95,7 @@ final class Day21Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> Int {
-		solve(tiles: Array(input.tiles), iterations: 5).count
+		solve(tiles: Array(input.tiles), iterations: 5, sizeTwoMappings: input.sizeTwoMappings, sizeThreeMappings: input.sizeThreeMappings).count
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
@@ -108,7 +108,7 @@ final class Day21Solver: DaySolver {
 			var newGroups: [[Point2D]] = []
 
 			for group in groups {
-				let newTiles = solve(tiles: Array(group), iterations: cycleSize)
+				let newTiles = solve(tiles: Array(group), iterations: cycleSize, sizeTwoMappings: input.sizeTwoMappings, sizeThreeMappings: input.sizeThreeMappings)
 
 				// split in 3 x 3 groups of 3 x 3 tiles
 

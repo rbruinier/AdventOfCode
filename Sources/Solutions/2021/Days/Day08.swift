@@ -8,7 +8,7 @@ final class Day08Solver: DaySolver {
 		let entries: [Entry]
 	}
 
-	private enum Segment: String, CaseIterable, Equatable, CustomDebugStringConvertible {
+	 enum Segment: String, CaseIterable, Equatable, CustomDebugStringConvertible {
 		case a
 		case b
 		case c
@@ -22,7 +22,7 @@ final class Day08Solver: DaySolver {
 		}
 	}
 
-	private struct Digit: Equatable {
+	struct Digit: Equatable {
 		let segments: Set<Segment>
 
 		var nrOfSegments: Int {
@@ -34,7 +34,7 @@ final class Day08Solver: DaySolver {
 		}
 	}
 
-	private struct Entry {
+	struct Entry {
 		let uniqueDigits: [Digit]
 		let outputDigits: [Digit]
 	}
@@ -168,7 +168,7 @@ final class Day08Solver: DaySolver {
 		for rawLine in rawLines {
 			let lineComponents = rawLine.components(separatedBy: " | ")
 
-			let uniqueDigitsreturn lineComponents[0].components(separatedBy: CharacterSet.whitespaces)
+			let uniqueDigitsInput = lineComponents[0].components(separatedBy: CharacterSet.whitespaces)
 			let fourDigitOuput = lineComponents[1].components(separatedBy: CharacterSet.whitespaces)
 
 			let uniqueDigits: [Digit] = uniqueDigitsInput.map { digits in

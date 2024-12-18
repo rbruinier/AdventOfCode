@@ -9,12 +9,12 @@ final class Day19Solver: DaySolver {
 		let ip: Int
 	}
 
-	private struct Instruction {
+	struct Instruction {
 		let operation: Operation
 		let operands: [Int]
 	}
 
-	private enum Operation: String, RawRepresentable {
+	enum Operation: String, RawRepresentable {
 		case addr
 		case addi
 		case mulr

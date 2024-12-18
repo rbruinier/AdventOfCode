@@ -12,10 +12,10 @@ final class Day06Solver: DaySolver {
 		var nrOfFish: Int = 0
 	}
 
-	private func runFor(iterations: Int) -> Int {
+	private func runFor(iterations: Int, initialTimers: [Int]) -> Int {
 		var ageGroups: [AgeGroup] = Array(repeating: .init(), count: 9)
 
-		for input in input.initialTimers {
+		for input in initialTimers {
 			ageGroups[input].nrOfFish += 1
 		}
 
@@ -40,11 +40,11 @@ final class Day06Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> Int {
-		runFor(iterations: 80)
+		runFor(iterations: 80, initialTimers: input.initialTimers)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
-		runFor(iterations: 256)
+		runFor(iterations: 256, initialTimers: input.initialTimers)
 	}
 
 	func parseInput(rawString: String) -> Input {

@@ -8,7 +8,7 @@ final class Day25Solver: DaySolver {
 		let points: [Point4D]
 	}
 	
-	private struct Point4D: Hashable {
+	struct Point4D: Hashable {
 		let x: Int
 		let y: Int
 		let z: Int

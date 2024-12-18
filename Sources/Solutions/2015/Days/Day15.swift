@@ -8,7 +8,7 @@ final class Day15Solver: DaySolver {
 		let ingredients: [Ingredient]
 	}
 
-	private struct Ingredient {
+	struct Ingredient {
 		let name: String
 
 		let capacity: Int

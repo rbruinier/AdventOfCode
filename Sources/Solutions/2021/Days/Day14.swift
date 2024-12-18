@@ -10,7 +10,7 @@ final class Day14Solver: DaySolver {
 		let insertionRules: [InsertionRule]
 	}
 
-	private struct InsertionRule {
+	struct InsertionRule {
 		let elements: [Character]
 		let result: Character
 	}
@@ -20,13 +20,13 @@ final class Day14Solver: DaySolver {
 		let b: Character
 	}
 
-	private func solveForSteps(_ steps: Int) -> Int {
+	private func solveForSteps(_ steps: Int, polymerTemplate: [Character], insertionRules: [InsertionRule]) -> Int {
 		var currentPairs: [Pair: Int] = [:]
-		var letterCount: [Character: Int] = [input.polymerTemplate[0]: 1]
+		var letterCount: [Character: Int] = [polymerTemplate[0]: 1]
 
-		for characterIndex in 0 ..< input.polymerTemplate.count - 1 {
-			let a = input.polymerTemplate[characterIndex]
-			let b = input.polymerTemplate[characterIndex + 1]
+		for characterIndex in 0 ..< polymerTemplate.count - 1 {
+			let a = polymerTemplate[characterIndex]
+			let b = polymerTemplate[characterIndex + 1]
 
 			let pair = Pair(a: a, b: b)
 
@@ -35,7 +35,7 @@ final class Day14Solver: DaySolver {
 			letterCount[b, default: 0] += 1
 		}
 
-		let insertionRules: [Pair: [Pair]] = input.insertionRules.reduce(into: [Pair: [Pair]]()) { result, item in
+		let insertionRules: [Pair: [Pair]] = insertionRules.reduce(into: [Pair: [Pair]]()) { result, item in
 			result[Pair(a: item.elements[0], b: item.elements[1])] = [
 				Pair(a: item.elements[0], b: item.result),
 				Pair(a: item.result, b: item.elements[1]),
@@ -67,11 +67,11 @@ final class Day14Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> Int {
-		solveForSteps(10)
+		solveForSteps(10, polymerTemplate: input.polymerTemplate, insertionRules: input.insertionRules)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
-		solveForSteps(40)
+		solveForSteps(40, polymerTemplate: input.polymerTemplate, insertionRules: input.insertionRules)
 	}
 
 	func parseInput(rawString: String) -> Input {

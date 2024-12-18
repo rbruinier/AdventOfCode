@@ -7,13 +7,13 @@ import Tools
 final class Day24Solver: DaySolver {
 	let dayNumber: Int = 24
 
-	private typealias Grid = [Point2D: Node]
+	typealias Grid = [Point2D: Node]
 
 	struct Input {
 		let grid: Grid
 	}
 
-	private enum Node: Equatable {
+	enum Node: Equatable {
 		case wall
 		case free
 		case position(number: Int)
@@ -45,7 +45,7 @@ final class Day24Solver: DaySolver {
 			}
 		}
 
-		let bfsGrid = GridWrapper(grid: input.grid)
+		let bfsGrid = GridWrapper(grid: grid)
 
 		return BFS.shortestPathInGrid(bfsGrid, from: pointA, to: pointB)!.steps
 	}

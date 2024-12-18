@@ -9,7 +9,7 @@ final class Day04Solver: DaySolver {
 		let boards: [Board]
 	}
 
-	private struct Board {
+	struct Board {
 		struct Item {
 			var value: Int
 			var checked: Bool = false

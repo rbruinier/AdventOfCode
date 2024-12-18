@@ -9,7 +9,7 @@ final class Day24Solver: DaySolver {
 		let infectionArmy: Army
 	}
 
-	private enum AttackType: String, CustomStringConvertible {
+	enum AttackType: String, CustomStringConvertible {
 		case slashing
 		case bludgeoning
 		case fire
@@ -22,7 +22,7 @@ final class Day24Solver: DaySolver {
 	}
 
 	// class as we need we need to update values in realtime when handling the unit loss in a loop
-	private final class Group: Hashable {
+	final class Group: Hashable {
 		let id: Int
 
 		let hitPoints: Int
@@ -69,7 +69,7 @@ final class Day24Solver: DaySolver {
 		}
 	}
 
-	private struct Army {
+	struct Army {
 		var groups: Set<Group>
 	}
 

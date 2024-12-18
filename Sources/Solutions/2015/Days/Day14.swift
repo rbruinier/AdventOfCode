@@ -8,7 +8,7 @@ final class Day14Solver: DaySolver {
 		let reindeer: [Reindeer]
 	}
 
-	private struct Reindeer {
+	struct Reindeer {
 		let name: String
 		let speed: Int
 		let duration: Int

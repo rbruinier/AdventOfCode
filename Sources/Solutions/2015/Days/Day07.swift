@@ -8,12 +8,12 @@ final class Day07Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Operand {
+	enum Operand {
 		case constant(value: Int)
 		case register(id: String)
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case mov(value: Operand, targetRegisterID: String)
 		case and(lhs: Operand, rhs: Operand, targetRegisterID: String)
 		case or(lhs: Operand, rhs: Operand, targetRegisterID: String)

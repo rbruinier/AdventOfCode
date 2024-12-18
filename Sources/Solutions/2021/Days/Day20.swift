@@ -11,7 +11,7 @@ final class Day20Solver: DaySolver {
 		let nrOfSteps = 50
 	}
 
-	private struct Bitmap: CustomStringConvertible {
+	struct Bitmap: CustomStringConvertible {
 		var pixels: [Int]
 
 		let width: Int
@@ -61,8 +61,8 @@ final class Day20Solver: DaySolver {
 		}
 	}
 
-	private func solve(steps: Int) -> Int {
-		var originalBitmap = input.bitmap
+	private func solve(steps: Int, bitmap: Bitmap, enhancementMapping: [Int]) -> Int {
+		var originalBitmap = bitmap
 
 		for stepIndex in 0 ..< steps {
 			var targetBitmap = Bitmap(width: originalBitmap.width + 2, height: originalBitmap.height + 2)
@@ -91,7 +91,7 @@ final class Day20Solver: DaySolver {
 						hash = (hash << 1) | pixels[index]
 					}
 
-					targetBitmap[y, x] = input.enhancementMapping[hash]
+					targetBitmap[y, x] = enhancementMapping[hash]
 				}
 			}
 
@@ -102,11 +102,11 @@ final class Day20Solver: DaySolver {
 	}
 
 	func solvePart1(withInput input: Input) -> Int {
-		solve(steps: 2)
+		solve(steps: 2, bitmap: input.bitmap, enhancementMapping: input.enhancementMapping)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
-		solve(steps: 50)
+		solve(steps: 50, bitmap: input.bitmap, enhancementMapping: input.enhancementMapping)
 	}
 
 	func parseInput(rawString: String) -> Input {

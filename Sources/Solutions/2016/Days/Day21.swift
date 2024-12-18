@@ -10,7 +10,7 @@ final class Day21Solver: DaySolver {
 		let operations: [Operation]
 	}
 
-	private enum Operation {
+	enum Operation {
 		case swapPosition(x: Int, positionY: Int) // swap position 6 with position 3
 		case swapLetter(x: AsciiCharacter, letterY: AsciiCharacter) // swap letter g with letter b
 		case rotateLeft(steps: Int) // rotate left 2 steps

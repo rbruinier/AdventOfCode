@@ -8,7 +8,7 @@ final class Day14Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private struct Instruction {
+	struct Instruction {
 		let memoryID: Int
 
 		let mask: Int64

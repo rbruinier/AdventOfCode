@@ -9,7 +9,7 @@ final class Day09Solver: DaySolver {
 		let routes: [Route]
 	}
 
-	private struct Route {
+	struct Route {
 		let a: String
 		let b: String
 		let distance: Int

@@ -8,12 +8,12 @@ final class Day22Solver: DaySolver {
 		let steps: [Step]
 	}
 
-	private struct Step {
+	struct Step {
 		let box: Box
 		let isOn: Bool
 	}
 
-	private struct Point {
+	struct Point {
 		var x: Int
 		var y: Int
 		var z: Int
@@ -25,7 +25,7 @@ final class Day22Solver: DaySolver {
 	 Instead of subdividing actual cubes and getting tons of little cubes and having to deal with edge cases instead the overlapping part
 	 will be negating cube. The original will also be added so the overlapping part will be subtracted resulting in correct number of cubes.
 	 */
-	private struct Box {
+	struct Box {
 		let minPoint: Point
 		let maxPoint: Point
 

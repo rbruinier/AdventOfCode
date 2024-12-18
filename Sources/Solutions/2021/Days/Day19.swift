@@ -52,7 +52,7 @@ final class Day19Solver: DaySolver {
 		let scanners: [Scanner]
 	}
 
-	private struct Vector: Equatable, Hashable {
+	struct Vector: Equatable, Hashable {
 		var x: Int
 		var y: Int
 		var z: Int
@@ -86,10 +86,10 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	private typealias Point = Vector
-	private typealias Beacon = Point
+	typealias Point = Vector
+	typealias Beacon = Point
 
-	private struct Matrix: Equatable, Hashable {
+	struct Matrix: Equatable, Hashable {
 		var rows: [[Int]] = Array(repeating: Array(repeating: 0, count: 3), count: 3)
 
 		static func * (lhs: Matrix, rhs: Matrix) -> Matrix {
@@ -108,7 +108,7 @@ final class Day19Solver: DaySolver {
 		}
 	}
 
-	private struct Scanner {
+	struct Scanner {
 		let name: String
 		let beacons: [Beacon]
 	}

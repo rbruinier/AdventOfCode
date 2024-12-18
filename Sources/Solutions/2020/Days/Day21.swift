@@ -8,7 +8,7 @@ final class Day21Solver: DaySolver {
 		let foods: [Food]
 	}
 
-	private struct Food {
+	struct Food {
 		let ingredients: [String]
 		let allergens: [String]
 	}
@@ -19,7 +19,7 @@ final class Day21Solver: DaySolver {
 		var remainingIngredients: Set<String> = Set()
 		var matches: [String: String] = [:]
 
-		for food in input.foods {
+		for food in foods {
 			for allergen in food.allergens {
 				if let existingIngredientsForAllergen = ingredientsPerAllergen[allergen] {
 					ingredientsPerAllergen[allergen] = existingIngredientsForAllergen.intersection(food.ingredients)

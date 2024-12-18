@@ -9,7 +9,7 @@ final class Day16Solver: DaySolver {
 		let programLines: [[Int]]
 	}
 
-	private struct Sample {
+	struct Sample {
 		let beforeRegisterValues: [Int]
 		let afterRegisterValues: [Int]
 

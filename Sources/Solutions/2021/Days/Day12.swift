@@ -15,7 +15,7 @@ final class Day12Solver: DaySolver {
 		let b: Node
 	}
 
-	private final class Node: CustomDebugStringConvertible, Equatable, Hashable {
+	final class Node: CustomDebugStringConvertible, Equatable, Hashable {
 		let name: String
 		let isBig: Bool
 		var canVisitTwice: Bool = false

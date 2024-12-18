@@ -8,7 +8,7 @@ final class Day02Solver: DaySolver {
 		let movements: [(direction: Direction, count: Int)]
 	}
 
-	private enum Direction: String {
+	enum Direction: String {
 		case forward
 		case down
 		case up

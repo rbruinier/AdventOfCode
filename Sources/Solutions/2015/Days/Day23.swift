@@ -13,7 +13,7 @@ final class Day23Solver: DaySolver {
 		case register(id: String)
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case half(registerID: String)
 		case triple(registerID: String)
 		case inc(registerID: String)

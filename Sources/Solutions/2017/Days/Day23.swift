@@ -23,7 +23,7 @@ final class Day23Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Operand {
+	enum Operand {
 		case value(Int)
 		case register(id: String)
 
@@ -37,7 +37,7 @@ final class Day23Solver: DaySolver {
 		}
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case set(a: Operand, b: Operand)
 		case sub(a: Operand, b: Operand)
 		case mul(a: Operand, b: Operand)

@@ -8,7 +8,7 @@ final class Day03Solver: DaySolver {
 		let claims: [Claim]
 	}
 
-	private struct Claim {
+	struct Claim {
 		let id: Int
 		let area: Rect
 	}

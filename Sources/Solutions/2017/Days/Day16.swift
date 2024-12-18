@@ -9,7 +9,7 @@ final class Day16Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case spin(size: Int)
 		case swapByIndex(a: Int, b: Int)
 		case swapByProgram(a: String, b: String)

@@ -15,14 +15,14 @@ final class Day21Solver: DaySolver {
 		let computer = Player(hitPoints: 103, damageScore: 9, armorScore: 2)
 	}
 
-	private struct Item {
+	struct Item {
 		let name: String
 		let cost: Int
 		let damage: Int
 		let armor: Int
 	}
 
-	private struct Player {
+	struct Player {
 		var hitPoints: Int = 100
 
 		var damageScore: Int

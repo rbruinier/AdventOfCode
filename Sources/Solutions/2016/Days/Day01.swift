@@ -8,7 +8,7 @@ final class Day01Solver: DaySolver {
 		let steps: [Step]
 	}
 
-	private enum Step {
+	enum Step {
 		case left(count: Int)
 		case right(count: Int)
 	}

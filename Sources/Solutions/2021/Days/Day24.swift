@@ -14,7 +14,7 @@ final class Day24Solver: DaySolver {
 	  track of is z.
 	 */
 
-	private struct Step {
+	struct Step {
 		let operandA: Int
 		let operandB: Int
 		let operandC: Int

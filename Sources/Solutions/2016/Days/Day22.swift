@@ -8,7 +8,7 @@ final class Day22Solver: DaySolver {
 		let nodes: [Point2D: Node]
 	}
 
-	private struct Node: Equatable {
+	struct Node: Equatable {
 		let size: Int
 		var used: Int
 
@@ -17,14 +17,14 @@ final class Day22Solver: DaySolver {
 		}
 	}
 
-	private func availableTargetNodes(for nodeA: Node, at pointA: Point2D) -> [Point2D: Node] {
+	private func availableTargetNodes(for nodeA: Node, at pointA: Point2D, nodes: [Point2D: Node]) -> [Point2D: Node] {
 		if nodeA.used == 0 {
 			return [:]
 		}
 
 		var viableTargets: [Point2D: Node] = [:]
 
-		for (pointB, nodeB) in input.nodes where pointA != pointB && nodeA.used <= nodeB.available {
+		for (pointB, nodeB) in nodes where pointA != pointB && nodeA.used <= nodeB.available {
 			viableTargets[pointB] = nodeB
 		}
 
@@ -35,7 +35,7 @@ final class Day22Solver: DaySolver {
 		var viablePairs = 0
 
 		for (pointA, nodeA) in input.nodes where nodeA.used > 0 {
-			viablePairs += availableTargetNodes(for: nodeA, at: pointA).count
+			viablePairs += availableTargetNodes(for: nodeA, at: pointA, nodes: input.nodes).count
 		}
 
 		return viablePairs

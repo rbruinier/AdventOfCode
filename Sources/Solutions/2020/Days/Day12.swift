@@ -8,7 +8,7 @@ final class Day12Solver: DaySolver {
 		let actions: [Action]
 	}
 
-	private enum Action {
+	enum Action {
 		case moveNorth(value: Int)
 		case moveEast(value: Int)
 		case moveSouth(value: Int)

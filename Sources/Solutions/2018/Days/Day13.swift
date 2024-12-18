@@ -9,19 +9,19 @@ final class Day13Solver: DaySolver {
 		let robots: [Point2D: Robot]
 	}
 
-	private enum CornerDirection {
+	enum CornerDirection {
 		case left
 		case right
 	}
 
-	private enum Segment {
+	enum Segment {
 		case horizontal
 		case vertical
 		case corner(direction: CornerDirection)
 		case intersection
 	}
 
-	private struct Robot {
+	struct Robot {
 		let direction: Direction
 		let nextTurn: Point2D.Degrees
 	}

@@ -13,12 +13,12 @@ final class Day13Solver: DaySolver {
 		let height: Int
 	}
 
-	private enum Fold {
+	enum Fold {
 		case horizontal(y: Int)
 		case vertical(x: Int)
 	}
 
-	private struct Coordinate {
+	struct Coordinate {
 		let x: Int
 		let y: Int
 	}

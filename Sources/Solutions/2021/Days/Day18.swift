@@ -8,14 +8,14 @@ final class Day18Solver: DaySolver {
 		let lines: [Line]
 	}
 
-	private struct Line: CustomStringConvertible {
+	struct Line: CustomStringConvertible {
 		var segments: [Segment]
 
 		public var description: String {
 			segments.map(\.description).joined()
 		}
 
-		var nextExplodingPair: Block? {
+		fileprivate var nextExplodingPair: Block? {
 			var nestingLevel = 0
 
 			var index = 0
@@ -95,7 +95,7 @@ final class Day18Solver: DaySolver {
 			return false
 		}
 
-		mutating func replaceBlockWithZero(_ block: Block) {
+		fileprivate mutating func replaceBlockWithZero(_ block: Block) {
 			segments.removeSubrange(block.startIndex ..< block.endIndex)
 			segments.insert(.number(number: 0), at: block.startIndex)
 		}
@@ -108,7 +108,7 @@ final class Day18Solver: DaySolver {
 		}
 	}
 
-	private struct Block: CustomStringConvertible {
+	fileprivate struct Block: CustomStringConvertible {
 		let startIndex: Int
 		let endIndex: Int
 		let segments: [Segment]
@@ -136,7 +136,7 @@ final class Day18Solver: DaySolver {
 		}
 	}
 
-	private enum Segment: Equatable, CustomStringConvertible {
+	enum Segment: Equatable, CustomStringConvertible {
 		case openBracket
 		case closeBracket
 		case comma

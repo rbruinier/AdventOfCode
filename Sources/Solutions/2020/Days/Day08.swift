@@ -8,7 +8,7 @@ final class Day08Solver: DaySolver {
 		var program: [Instruction]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case accumulator(value: Int)
 		case jump(offset: Int)
 		case noOperation(value: Int)

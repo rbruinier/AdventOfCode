@@ -8,7 +8,7 @@ final class Day08Solver: DaySolver {
 		let instructions: [Instruction]
 	}
 
-	private enum Instruction {
+	enum Instruction {
 		case inc(register: String, amount: Int, conditionRegister: String, conditionConstant: Int, conditional: (_ a: Int, _ b: Int) -> Bool)
 		case dec(register: String, amount: Int, conditionRegister: String, conditionConstant: Int, conditional: (_ a: Int, _ b: Int) -> Bool)
 	}

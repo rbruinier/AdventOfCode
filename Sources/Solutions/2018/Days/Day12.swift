@@ -101,7 +101,7 @@ final class Day12Solver: DaySolver {
 			}
 		}
 
-		return .init(.init(
+		return .init(
 			plants: allLines[0].compactMap { mapCharToBool($0) },
 			instructions: allLines[1 ..< allLines.count].reduce(into: [[Bool]: Bool]()) { result, line in
 				let components: [String] = String(line).components(separatedBy: " => ")
@@ -110,7 +110,6 @@ final class Day12Solver: DaySolver {
 
 				result[key] = mapCharToBool(components[1].first!)
 			}
-		)
 		)
 	}
 }

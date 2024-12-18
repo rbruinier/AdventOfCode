@@ -11,7 +11,7 @@ final class Day11Solver: DaySolver {
 		let height: Int
 	}
 
-	private enum State {
+	enum State {
 		case floor
 		case empty
 		case occupied

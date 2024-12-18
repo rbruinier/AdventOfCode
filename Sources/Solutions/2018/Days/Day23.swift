@@ -8,7 +8,7 @@ final class Day23Solver: DaySolver {
 		let bots: [Nanobot]
 	}
 
-	private struct Nanobot {
+	struct Nanobot {
 		let position: Point3D
 		let radius: Int
 	}
@@ -136,15 +136,15 @@ final class Day23Solver: DaySolver {
 			}
 		}
 
-		var queue: PriorityQueue<Node> = .init(initialValues: [.init(cube: uberCube, numberOfOverlap: bots.count)])
+		var queue: PriorityQueue<Node> = .init([.init(cube: uberCube, numberOfOverlap: bots.count)])
 
-		while let node = queue.pop() {
+		while let node = queue.popMax() {
 			if node.cube.size == 1 {
 				return node.cube.position.manhattanDistance(from: .zero)
 			}
 			
 			for subCube in node.cube.subdivide() {
-				queue.push(.init(cube: subCube, numberOfOverlap: subCube.numberOfOverlaps(with: bots)))
+				queue.insert(.init(cube: subCube, numberOfOverlap: subCube.numberOfOverlaps(with: bots)))
 			}
 		}
 		

@@ -16,7 +16,7 @@ final class Day09Solver: DaySolver {
 		var sum = 0
 		var nrOfCancelled = 0
 
-		for character in input.text {
+		for character in text {
 			if inGarbage {
 				if character == ">" {
 					if nextIsNegative {

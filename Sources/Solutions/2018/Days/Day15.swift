@@ -13,7 +13,7 @@ final class Day15Solver: DaySolver {
 		let elves: [Point2D]
 	}
 
-	private struct Grid {
+	struct Grid {
 		let walls: Set<Point2D>
 		let size: Size
 	}

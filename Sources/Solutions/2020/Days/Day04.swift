@@ -8,7 +8,7 @@ final class Day04Solver: DaySolver {
 		let passports: [Passport]
 	}
 
-	private struct Passport {
+	struct Passport {
 		enum Item: String, RawRepresentable {
 			case ecl
 			case pid
