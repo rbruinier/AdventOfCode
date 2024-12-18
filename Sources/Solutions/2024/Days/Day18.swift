@@ -72,7 +72,7 @@ final class Day18Solver: DaySolver {
 
 			// in case the new byte is not in the way of the current path the shortest route will stay exactly the same, so skip
 			if currentPath.isNotEmpty, !currentPath.contains(currentMaxByte) {
-//				continue
+				continue
 			}
 
 			let walls: Set<Point2D> = Set(input.bytes[0 ... maxBytes])
