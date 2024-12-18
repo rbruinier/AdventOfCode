@@ -58,6 +58,12 @@ final class Day17Solver: DaySolver {
 			"""
 		}
 
+		mutating func runTillHalt() -> [Int] {
+			while runCycle() {}
+
+			return output
+		}
+
 		mutating func runCycle() -> Bool {
 			guard let operation = program[safe: ip] else {
 				return false
@@ -85,7 +91,7 @@ final class Day17Solver: DaySolver {
 				operand = parseComboOperand(operand)
 
 				let numerator = a
-				let denominator = Int(pow(Double(2), Double(operand)))
+				let denominator = 2 << (operand - 1)
 
 				a = numerator / denominator
 
@@ -110,7 +116,7 @@ final class Day17Solver: DaySolver {
 				operand = parseComboOperand(operand)
 
 				let numerator = a
-				let denominator = Int(pow(Double(2), Double(operand)))
+				let denominator = 2 << (operand - 1)
 
 				b = numerator / denominator
 
@@ -118,7 +124,7 @@ final class Day17Solver: DaySolver {
 				operand = parseComboOperand(operand)
 
 				let numerator = a
-				let denominator = Int(pow(Double(2), Double(operand)))
+				let denominator = 2 << (operand - 1)
 
 				c = numerator / denominator
 			}
@@ -133,18 +139,42 @@ final class Day17Solver: DaySolver {
 		}
 	}
 
+	func findAForOutput(for a: Int, currentDigitID: Int, program: [Operation], expectedOutput: [Int]) -> Int? {
+		var results: [Int] = []
+
+		for newA in a ..< a + 8 {
+			var cpu = CPU(a: newA, b: 0, c: 0, program: program)
+
+			let output = cpu.runTillHalt()
+
+			// We run from right to left
+			if Array(expectedOutput[(expectedOutput.count - currentDigitID - 1)...]) == output {
+				if currentDigitID == 15 {
+					results.append(newA)
+				} else if let result = findAForOutput(for: newA << 3, currentDigitID: currentDigitID + 1, program: program, expectedOutput: expectedOutput) {
+					results.append(result)
+				}
+			}
+		}
+
+		return results.min()
+	}
+
 	func solvePart1(withInput input: Input) -> String {
 		var cpu = CPU(a: input.a, b: input.b, c: input.c, program: input.program)
 
-		while cpu.runCycle() {}
+		let output = cpu.runTillHalt()
 
-		return cpu.output.map(String.init).joined(separator: ",")
+		return output.map(String.init).joined(separator: ",")
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
 		// Notes:
-		//  * register A influences the output in REVERSE
-		//  * thus the least significant values of A influence the end of the program output
+		//  * noticed that each power of 8 in A a new digit appears
+		//  * looked at the patters and detected:
+		//   -> register A influences the output in REVERSE
+		//   -> thus the least significant values of A influence the end of the program output
+		//   -> its a 3 bit system so only 8 values need to be tested for each output digit
 		//
 		// Reverse engineered program:
 		//  while a != 0 {
@@ -157,28 +187,7 @@ final class Day17Solver: DaySolver {
 		//	 output.append(b % 8)
 		//  }
 
-		var currentMatchingA = 0
-		let rawInstructions = input.rawInstructions
-
-		for _ in 0 ... 15 {
-			currentMatchingA <<= 3
-
-			for a in currentMatchingA ... Int.max {
-				var cpu = CPU(a: a, b: 0, c: 0, program: input.program)
-
-				while cpu.runCycle() {}
-
-				let output = cpu.output
-
-				if Array(rawInstructions[(rawInstructions.count - output.count)...]) == output {
-					currentMatchingA = a
-
-					break
-				}
-			}
-		}
-
-		return currentMatchingA
+		findAForOutput(for: 0, currentDigitID: 0, program: input.program, expectedOutput: input.rawInstructions) ?? 0
 	}
 
 	func parseInput(rawString: String) -> Input {
