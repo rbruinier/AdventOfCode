@@ -21,7 +21,8 @@ final class Day19Solver: DaySolver {
 		let designs: [[Color]]
 	}
 
-	/// Use hash value of (remaining) design as key and value is the number of valid (sub) combinations of patterns
+	/// Use hash value of (remaining) design as key and value is the number of valid (sub) combinations of patterns. Shared between part
+	/// 1 and 2 making part 1 slower than needed but the results for part 2 are directly available
 	private var memoization: [Int: Int] = [:]
 
 	private func numberOfPossibleCombinations(design: [Color], patterns: [[Color]]) -> Int {
