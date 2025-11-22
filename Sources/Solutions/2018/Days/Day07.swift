@@ -132,7 +132,7 @@ final class Day07Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(relations: rawString.allLines().reduce(into: [String: Set<String>]()) { result, line in
+		.init(relations: rawString.allLines().reduce(into: [String: Set<String>]()) { result, line in
 			let arguments = line.getCapturedValues(pattern: #"Step ([A-Z]*) must be finished before step ([A-Z]*) can begin."#)!
 
 			result[arguments[1], default: []].insert(arguments[0])

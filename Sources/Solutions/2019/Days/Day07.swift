@@ -72,6 +72,6 @@ final class Day07Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(program: rawString.parseCommaSeparatedInts())
+		.init(program: rawString.parseCommaSeparatedInts())
 	}
 }

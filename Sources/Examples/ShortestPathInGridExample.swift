@@ -8,7 +8,7 @@ final class ShortestPathInGridExample: DaySolver {
 		"ShortestPathInGridExample"
 	}
 
-	private typealias Grid = Grid2D<Tile>
+	typealias Grid = Grid2D<Tile>
 
 	struct Input {
 		let grid: Grid
@@ -35,7 +35,7 @@ final class ShortestPathInGridExample: DaySolver {
 		}
 	}
 
-	private enum Tile: Hashable, CustomStringConvertible {
+	enum Tile: Hashable, CustomStringConvertible {
 		case start
 		case end
 		case land(height: Int)
@@ -79,7 +79,7 @@ final class ShortestPathInGridExample: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(grid: rawString.parseGrid2D { character, _ in
+		.init(grid: rawString.parseGrid2D { character, _ in
 			switch character {
 			case "S": .start
 			case "E": .end

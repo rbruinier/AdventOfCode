@@ -72,7 +72,7 @@ final class Day18Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(points: Set(rawString.allLines().map { line in
+		.init(points: Set(rawString.allLines().map { line in
 			Point3D(commaSeparatedString: line)
 		}))
 	}

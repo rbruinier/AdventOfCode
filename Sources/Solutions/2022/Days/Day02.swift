@@ -84,7 +84,7 @@ final class Day02Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(games: rawString.allLines().map { line in
+		.init(games: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			let a: Hand

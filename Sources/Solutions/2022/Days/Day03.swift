@@ -68,7 +68,7 @@ final class Day03Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(rucksacks: rawString.allLines().map { line in
+		.init(rucksacks: rawString.allLines().map { line in
 			let lineA = String(line[0 ..< line.count / 2])
 			let lineB = String(line[line.count / 2 ..< line.count])
 

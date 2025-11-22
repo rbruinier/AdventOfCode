@@ -38,6 +38,6 @@ final class Day17Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(steps: 359)
+		.init(steps: 359)
 	}
 }

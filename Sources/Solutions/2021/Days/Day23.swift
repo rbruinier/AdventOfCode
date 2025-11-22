@@ -351,7 +351,7 @@ final class Day23Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(rooms: [
+		.init(rooms: [
 			.init(amphipod: .amber, cells: [.amber, .desert]),
 			.init(amphipod: .bronze, cells: [.copper, .desert]),
 			.init(amphipod: .copper, cells: [.bronze, .bronze]),
@@ -360,7 +360,7 @@ final class Day23Solver: DaySolver {
 	}
 }
 
-//extension Day23Solver {
+// extension Day23Solver {
 //	func createVisualizer() -> Visualizer? {
 //		StepsVisualizer(solver: self)
 //	}
@@ -537,4 +537,4 @@ final class Day23Solver: DaySolver {
 //			}
 //		}
 //	}
-//}
+// }

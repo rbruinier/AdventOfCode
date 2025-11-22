@@ -32,7 +32,7 @@ final class Day04Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(pairs: rawString.allLines().map { line in
+		.init(pairs: rawString.allLines().map { line in
 			let elves = line.components(separatedBy: ",")
 
 			let a = elves[0].components(separatedBy: "-")

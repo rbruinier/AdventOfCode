@@ -49,6 +49,6 @@ final class Day19Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(numberOfElves: 3012210)
+		.init(numberOfElves: 3012210)
 	}
 }

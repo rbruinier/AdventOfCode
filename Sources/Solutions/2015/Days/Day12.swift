@@ -41,6 +41,6 @@ final class Day12Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(json: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+		.init(json: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

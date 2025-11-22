@@ -65,7 +65,7 @@ final class Day15Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(discs: [
+		.init(discs: [
 			.init(nrOfPositions: 13, position: 1),
 			.init(nrOfPositions: 19, position: 10),
 			.init(nrOfPositions: 3, position: 2),

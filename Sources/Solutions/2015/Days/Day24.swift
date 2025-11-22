@@ -51,6 +51,6 @@ final class Day24Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(weights: rawString.allLines().map { Int($0)! })
+		.init(weights: rawString.allLines().map { Int($0)! })
 	}
 }

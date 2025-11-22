@@ -105,7 +105,7 @@ final class Day11Solver: DaySolver {
 	}
 }
 
-//extension Day11Solver {
+// extension Day11Solver {
 //	func createVisualizer() -> Visualizer? {
 //		StepsVisualizer(solver: self)
 //	}
@@ -253,4 +253,4 @@ final class Day11Solver: DaySolver {
 //			}
 //		}
 //	}
-//}
+// }

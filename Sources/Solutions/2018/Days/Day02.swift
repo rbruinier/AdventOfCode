@@ -61,6 +61,6 @@ final class Day02Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(boxIDs: rawString.allLines())
+		.init(boxIDs: rawString.allLines())
 	}
 }

@@ -104,7 +104,7 @@ final class Day06Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(
+		.init(
 			points: Set(rawString.allLines().map { line in
 				Point2D(commaSeparatedString: line.replacingOccurrences(of: " ", with: ""))
 			}),

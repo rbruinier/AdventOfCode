@@ -65,6 +65,6 @@ final class Day15Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(a: 512, b: 191)
+		.init(a: 512, b: 191)
 	}
 }

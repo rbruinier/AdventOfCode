@@ -57,7 +57,7 @@ final class Day16Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(
+		.init(
 			values: "11100010111110100".map { $0 == "1" ? true : false },
 			desiredLengthPart1: 272,
 			desiredLengthPart2: 35651584

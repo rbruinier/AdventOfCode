@@ -130,6 +130,6 @@ final class Day14Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init()
+		.init()
 	}
 }

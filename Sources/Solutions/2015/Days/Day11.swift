@@ -99,6 +99,6 @@ final class Day11Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(password: rawString.allLines().first!)
+		.init(password: rawString.allLines().first!)
 	}
 }

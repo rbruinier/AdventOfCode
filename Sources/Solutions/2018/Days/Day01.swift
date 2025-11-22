@@ -30,6 +30,6 @@ final class Day01Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(frequencies: rawString.allLines().map { Int($0)! })
+		.init(frequencies: rawString.allLines().map { Int($0)! })
 	}
 }

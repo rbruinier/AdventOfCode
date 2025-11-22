@@ -91,7 +91,7 @@ final class Day24Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(steps: [
+		.init(steps: [
 			.init(operandA: 1, operandB: 10, operandC: 12),
 			.init(operandA: 1, operandB: 10, operandC: 10),
 			.init(operandA: 1, operandB: 12, operandC: 8),

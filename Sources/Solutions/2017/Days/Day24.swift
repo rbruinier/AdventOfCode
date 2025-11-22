@@ -121,7 +121,7 @@ final class Day24Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(ports: rawString.allLines().map { line in
+		.init(ports: rawString.allLines().map { line in
 			let components = line.components(separatedBy: "/")
 
 			return Port(a: Int(components[0])!, b: Int(components[1])!)

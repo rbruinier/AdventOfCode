@@ -58,6 +58,6 @@ final class Day25Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(cardPublicKey: 6929599, doorPublicKey: 2448427)
+		.init(cardPublicKey: 6929599, doorPublicKey: 2448427)
 	}
 }

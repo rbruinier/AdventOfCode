@@ -214,7 +214,7 @@ final class Day16Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(valves: rawString.allLines().map { line in
+		.init(valves: rawString.allLines().map { line in
 			let splittedLine = line.components(separatedBy: "; ")
 
 			let valveArguments = splittedLine[0].getCapturedValues(pattern: #"Valve ([A-Z]*) has flow rate=([0-9]*)"#)!

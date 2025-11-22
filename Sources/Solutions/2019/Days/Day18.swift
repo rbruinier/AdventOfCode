@@ -4,7 +4,7 @@ import Tools
 
 final class Day18Solver: DaySolver {
 	let dayNumber: Int = 18
-	
+
 	struct Input {
 		let tiles: [Point2D: Tile]
 	}

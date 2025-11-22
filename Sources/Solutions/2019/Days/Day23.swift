@@ -151,6 +151,6 @@ final class Day23Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(program: rawString.parseCommaSeparatedInts())
+		.init(program: rawString.parseCommaSeparatedInts())
 	}
 }

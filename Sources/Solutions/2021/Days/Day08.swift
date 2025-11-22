@@ -8,7 +8,7 @@ final class Day08Solver: DaySolver {
 		let entries: [Entry]
 	}
 
-	 enum Segment: String, CaseIterable, Equatable, CustomDebugStringConvertible {
+	enum Segment: String, CaseIterable, Equatable, CustomDebugStringConvertible {
 		case a
 		case b
 		case c

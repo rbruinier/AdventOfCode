@@ -32,7 +32,7 @@ final class Day11Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(steps: rawString.allLines().first!.components(separatedBy: ",").compactMap { raw in
+		.init(steps: rawString.allLines().first!.components(separatedBy: ",").compactMap { raw in
 			HexDirection(raw)
 		})
 	}

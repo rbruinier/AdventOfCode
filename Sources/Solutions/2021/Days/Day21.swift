@@ -140,6 +140,6 @@ final class Day21Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(startPosition1: 3, startPosition2: 10)
+		.init(startPosition1: 3, startPosition2: 10)
 	}
 }

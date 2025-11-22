@@ -53,6 +53,6 @@ final class Day04Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init()
+		.init()
 	}
 }

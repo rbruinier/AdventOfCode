@@ -55,6 +55,6 @@ final class Day05Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(jumps: rawString.allLines().map { Int($0)! })
+		.init(jumps: rawString.allLines().map { Int($0)! })
 	}
 }

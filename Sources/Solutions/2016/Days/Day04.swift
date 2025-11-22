@@ -67,7 +67,7 @@ final class Day04Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(entries: rawString.allLines().map { line in
+		.init(entries: rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: #"([a-z-]*)\-([0-9]*)\[([a-z]*)\]"#)!
 
 			let name = values[0] // .replacingOccurrences(of: "-", with: "")

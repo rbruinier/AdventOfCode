@@ -71,7 +71,7 @@ final class Day16Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(instructions: rawString.allLines().first!.components(separatedBy: ",").map { part in
+		.init(instructions: rawString.allLines().first!.components(separatedBy: ",").map { part in
 			if let values = part.getCapturedValues(pattern: #"s([0-9]*)"#) {
 				.spin(size: Int(values[0])!)
 			} else if let values = part.getCapturedValues(pattern: #"x([0-9]*)\/([0-9]*)"#) {

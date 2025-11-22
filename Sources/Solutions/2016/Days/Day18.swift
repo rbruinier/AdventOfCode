@@ -64,7 +64,7 @@ final class Day18Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(firstRow: rawString.allLines().first!.map {
+		.init(firstRow: rawString.allLines().first!.map {
 			$0 == "." ? .safe : .trap
 		})
 	}

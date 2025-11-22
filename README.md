@@ -4,18 +4,19 @@ Why not join the fun 🎄
 
 Links to the solutions:
 
- * [2024](Sources/Solutions/2024/Days): in progress
- * [2023](Sources/Solutions/2023/Days): 50 ⭐️ finished on 25-12-2023 (runs in 6.85 seconds)
- * [2022](Sources/Solutions/2022/Days): 50 ⭐️ finished on 25-12-2022 (runs in 114.11 seconds)
- * [2021](Sources/Solutions/2021/Days): 50 ⭐️ finished on 25-12-2021 (runs in 30.01 seconds)
- * [2020](Sources/Solutions/2020/Days): 50 ⭐️ finished on 15-01-2022 (runs in 12.29 seconds)
- * [2019](Sources/Solutions/2019/Days): 50 ⭐️ finished on 02-02-2022 (runs in 4.71 seconds)
- * [2018](Sources/Solutions/2018/Days): 50 ⭐️ finished on 18-01-2024 (runs in 22.57 seconds)
- * [2017](Sources/Solutions/2017/Days): 50 ⭐️ finished on 31-12-2022 (runs in 18.89 seconds)
- * [2016](Sources/Solutions/2016/Days): 50 ⭐️ finished on 20-11-2022 (runs in 83.53 seconds)
- * [2015](Sources/Solutions/2015/Days): 50 ⭐️ finished on 20-02-2022 (runs in 4.99 seconds)
+ * [2024](Sources/Solutions/2025/Days): work in progress
+ * [2024](Sources/Solutions/2024/Days): 50 ⭐️ finished on 25-12-2023 (runs in 1.69 seconds)
+ * [2023](Sources/Solutions/2023/Days): 50 ⭐️ finished on 25-12-2023 (runs in 3.13 seconds)
+ * [2022](Sources/Solutions/2022/Days): 50 ⭐️ finished on 25-12-2022 (runs in 55.55 seconds)
+ * [2021](Sources/Solutions/2021/Days): 50 ⭐️ finished on 25-12-2021 (runs in 18.58 seconds)
+ * [2020](Sources/Solutions/2020/Days): 50 ⭐️ finished on 15-01-2022 (runs in 7.37 seconds)
+ * [2019](Sources/Solutions/2019/Days): 50 ⭐️ finished on 02-02-2022 (runs in 2.38 seconds)
+ * [2018](Sources/Solutions/2018/Days): 50 ⭐️ finished on 18-01-2024 (runs in 13.71 seconds)
+ * [2017](Sources/Solutions/2017/Days): 50 ⭐️ finished on 31-12-2022 (runs in 5.60 seconds)
+ * [2016](Sources/Solutions/2016/Days): 50 ⭐️ finished on 20-11-2022 (runs in 60.04 seconds)
+ * [2015](Sources/Solutions/2015/Days): 50 ⭐️ finished on 20-02-2022 (runs in 2.67 seconds)
  
- Timing is done on a 2021 M1 Pro with 32 GB RAM.
+ Timing is done on a 2024 M4 Pro with 48 GB RAM.
  
  # Excluded Assets
  

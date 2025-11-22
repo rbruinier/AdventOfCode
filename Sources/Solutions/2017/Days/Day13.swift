@@ -50,7 +50,7 @@ final class Day13Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(layers: rawString.allLines().reduce(into: [Int: Int]()) { result, line in
+		.init(layers: rawString.allLines().reduce(into: [Int: Int]()) { result, line in
 			let components = line.components(separatedBy: ": ")
 
 			result[Int(components[0])!] = Int(components[1])!

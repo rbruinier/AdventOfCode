@@ -13,11 +13,11 @@ public protocol Visualizer {
 	func renderFrame(with context: VisualizationContext)
 }
 
-//public extension Visualizer {
+// public extension Visualizer {
 //	var title: String {
 //		"AoC Day \(solver.dayNumber) of \(solver.year)"
 //	}
-//}
+// }
 
 public func visualize(solver: any DaySolver, year: Int, rootPath: URL) {
 	let year = year

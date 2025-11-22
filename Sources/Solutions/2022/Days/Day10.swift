@@ -116,7 +116,7 @@ final class Day10Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(instructions: rawString.allLines().map { line in
+		.init(instructions: rawString.allLines().map { line in
 			if line == "noop" {
 				.noop
 			} else if let values = line.getCapturedValues(pattern: #"addx (-?[0-9]*)"#) {

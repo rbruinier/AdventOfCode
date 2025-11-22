@@ -66,7 +66,7 @@ final class Day15Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(steps: rawString.components(separatedBy: ",").map { rawStep in
+		.init(steps: rawString.components(separatedBy: ",").map { rawStep in
 			rawStep.trimmingCharacters(in: .whitespacesAndNewlines)
 		})
 	}

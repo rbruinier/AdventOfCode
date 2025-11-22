@@ -40,6 +40,6 @@ final class Day17Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(containers: rawString.allLines().map { Int($0)! })
+		.init(containers: rawString.allLines().map { Int($0)! })
 	}
 }

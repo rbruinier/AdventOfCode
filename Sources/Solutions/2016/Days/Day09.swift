@@ -62,6 +62,6 @@ final class Day09Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(string: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+		.init(string: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

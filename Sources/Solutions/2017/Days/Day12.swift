@@ -46,7 +46,7 @@ final class Day12Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
+		.init(pipes: rawString.allLines().reduce(into: [Int: [Int]]()) { result, line in
 			let components = line.components(separatedBy: " <-> ")
 
 			let start = Int(components[0])!

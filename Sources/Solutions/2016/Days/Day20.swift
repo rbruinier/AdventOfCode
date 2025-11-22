@@ -60,7 +60,7 @@ final class Day20Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(ranges: rawString.allLines().map {
+		.init(ranges: rawString.allLines().map {
 			let components = $0.components(separatedBy: "-")
 
 			return UInt32(components[0])! ... UInt32(components[1])!

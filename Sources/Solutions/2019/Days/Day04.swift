@@ -73,6 +73,6 @@ final class Day04Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(range: 307237 ... 769058)
+		.init(range: 307237 ... 769058)
 	}
 }

@@ -61,6 +61,6 @@ final class Day20Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(digits: rawString.allLines().enumerated().map { .init(index: $0, digit: Int($1)!) })
+		.init(digits: rawString.allLines().enumerated().map { .init(index: $0, digit: Int($1)!) })
 	}
 }

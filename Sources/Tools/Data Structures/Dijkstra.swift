@@ -42,7 +42,7 @@ public extension Dijkstra {
 
 		weights[a] = 0
 
-		var priorityQueue = PriorityQueue<Node>() //(isAscending: true)
+		var priorityQueue = PriorityQueue<Node>() // (isAscending: true)
 
 		priorityQueue.insert(.init(index: a, weight: 0))
 

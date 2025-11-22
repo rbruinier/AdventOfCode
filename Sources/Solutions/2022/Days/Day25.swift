@@ -70,6 +70,6 @@ final class Day25Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(numbers: rawString.allLines())
+		.init(numbers: rawString.allLines())
 	}
 }

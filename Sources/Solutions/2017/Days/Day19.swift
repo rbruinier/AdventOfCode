@@ -8,7 +8,7 @@ final class Day19Solver: DaySolver {
 		var tiles: [Point2D: String] = [:]
 	}
 
-	private func walkPath(tiles : [Point2D: String]) -> (encounteredLetters: String, steps: Int) {
+	private func walkPath(tiles: [Point2D: String]) -> (encounteredLetters: String, steps: Int) {
 		var currentDirection = Direction.south
 		var currentPoint = tiles.keys.filter { $0.y == 0 }.first!
 

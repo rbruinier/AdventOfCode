@@ -43,7 +43,7 @@ final class Day18Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(moves: rawString.allLines().map { line in
+		.init(moves: rawString.allLines().map { line in
 			let components = line.components(separatedBy: .whitespaces)
 
 			let direction: Direction

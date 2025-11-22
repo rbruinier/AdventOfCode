@@ -14,7 +14,7 @@ final class Day18Solver: DaySolver {
 			var position: Point2D
 			var cost: Int
 			var history: Set<Point2D>
-			
+
 			static func < (lhs: Node, rhs: Node) -> Bool {
 				lhs.cost < rhs.cost
 			}

@@ -55,6 +55,6 @@ final class Day03Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(memory: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+		.init(memory: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

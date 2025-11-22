@@ -52,6 +52,6 @@ final class Day05Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(polymer: rawString.allLines().first!.map { AsciiCharacter($0)! })
+		.init(polymer: rawString.allLines().first!.map { AsciiCharacter($0)! })
 	}
 }

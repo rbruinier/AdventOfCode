@@ -57,6 +57,6 @@ final class Day17Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(passcode: "qljzarfv")
+		.init(passcode: "qljzarfv")
 	}
 }

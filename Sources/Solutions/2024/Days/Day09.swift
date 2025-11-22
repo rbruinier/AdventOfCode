@@ -96,7 +96,7 @@ final class Day09Solver: DaySolver {
 
 		// by keeping track of previous index of last length space we can save time by skipping previously checked items
 		var previousIndexByLength: [Int: Int] = [:]
-		
+
 		identifierLoop: for identifier in identifiers.reversed() {
 			let originalIndex = dataBlocks.firstIndex(where: {
 				guard case .file(let id) = $0.blockType else {
@@ -107,13 +107,13 @@ final class Day09Solver: DaySolver {
 			})!
 
 			let fileDataBlock = dataBlocks[originalIndex]
-			
+
 			let startIndex: Int = previousIndexByLength[fileDataBlock.size, default: 0]
 
 			guard startIndex < originalIndex else {
 				continue identifierLoop
 			}
-			
+
 			for newIndex in startIndex ..< originalIndex {
 				let newIndexDataBlock = dataBlocks[newIndex]
 
@@ -135,7 +135,7 @@ final class Day09Solver: DaySolver {
 					}
 
 					previousIndexByLength[fileDataBlock.size] = newIndex + 1
-					
+
 					continue identifierLoop
 				case .file:
 					continue

@@ -78,7 +78,7 @@ final class Day25Solver: DaySolver {
 		//		)
 //
 		// real input
-		return .init(
+		.init(
 			beginState: .a,
 			steps: 12861455,
 			instructions: [

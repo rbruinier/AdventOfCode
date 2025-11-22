@@ -77,7 +77,7 @@ final class Day09Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(moves: rawString.allLines().map { line in
+		.init(moves: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			switch components[0] {

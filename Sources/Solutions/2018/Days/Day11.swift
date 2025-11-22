@@ -110,6 +110,6 @@ final class Day11Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(serialNumber: 9424)
+		.init(serialNumber: 9424)
 	}
 }

@@ -126,7 +126,7 @@ final class Day23Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(instructions: rawString.allLines().map { line in
+		.init(instructions: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			let operandA: Operand

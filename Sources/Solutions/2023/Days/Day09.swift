@@ -40,6 +40,6 @@ final class Day09Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(sequences: rawString.allLines().map { $0.components(separatedBy: " ").compactMap(Int.init) })
+		.init(sequences: rawString.allLines().map { $0.components(separatedBy: " ").compactMap(Int.init) })
 	}
 }

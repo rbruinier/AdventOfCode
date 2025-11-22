@@ -91,7 +91,7 @@ final class Day15Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(ingredients: rawString.allLines().map { line in
+		.init(ingredients: rawString.allLines().map { line in
 			guard let parameters = line.getCapturedValues(pattern: #"([a-zA-Z]*): capacity (-?[0-9]*), durability (-?[0-9]*), flavor (-?[0-9]*), texture (-?[0-9]*), calories (-?[0-9]*)"#) else {
 				fatalError()
 			}

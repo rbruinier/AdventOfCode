@@ -29,6 +29,6 @@ final class Day06Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(buffer: rawString.allLines().first!)
+		.init(buffer: rawString.allLines().first!)
 	}
 }

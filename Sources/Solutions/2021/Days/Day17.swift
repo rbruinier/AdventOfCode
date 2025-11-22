@@ -86,6 +86,6 @@ final class Day17Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(targetArea: [217, 240, -126, -69])
+		.init(targetArea: [217, 240, -126, -69])
 	}
 }

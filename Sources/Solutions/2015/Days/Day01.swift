@@ -30,6 +30,6 @@ final class Day01Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(line: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
+		.init(line: rawString.trimmingCharacters(in: .whitespacesAndNewlines))
 	}
 }

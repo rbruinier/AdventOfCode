@@ -131,7 +131,7 @@ final class Day12Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(rows: rawString.allLines().map { line in
+		.init(rows: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " ")
 
 			let states: [State] = components[0].map {

@@ -1,10 +1,14 @@
 import Foundation
 
+public typealias CustomInputReader = (_ day: any DaySolver, _ bundle: Bundle) -> String
+
 public protocol DaySolver {
 	associatedtype Part1Result: Equatable
 	associatedtype Part2Result: Equatable
 
 	associatedtype Input: Any
+
+	var numberOfParts: Int { get }
 
 	var customFilename: String? { get }
 
@@ -12,12 +16,26 @@ public protocol DaySolver {
 
 	func parseInput(rawString: String) async -> Input
 
-	func parseExpectedResults(rawString: String) async -> ExpectedResults
-
 	func solvePart1(withInput input: Input) async -> Part1Result
 	func solvePart2(withInput input: Input) async -> Part2Result
 
 	func createVisualizer() -> Visualizer?
+
+	func solvePart(_ part: Int, withInput input: Input) async -> any Equatable
+}
+
+public extension DaySolver {
+	var numberOfParts: Int {
+		2
+	}
+
+	func solvePart(_ part: Int, withInput input: Input) async -> any Equatable {
+		switch part {
+		case 1: await solvePart1(withInput: input)
+		case 2: await solvePart2(withInput: input)
+		default: fatalError()
+		}
+	}
 }
 
 public struct YearSolver {
@@ -34,11 +52,11 @@ public struct YearSolver {
 		self.year = year
 	}
 
-	public mutating func addSolver(_ daySolver: some DaySolver) {
+	public mutating func addSolver(_ daySolver: some DaySolver, customInputReader: CustomInputReader? = nil) {
 		solvers.append(.init(
 			dayNumber: daySolver.dayNumber,
 			solve: { [year] bundle in
-				await solveDay(daySolver, year: year, bundle: bundle)
+				await solveMultiPartDay(daySolver, year: year, bundle: bundle, customInputReader: customInputReader)
 			}
 		))
 	}
@@ -52,36 +70,20 @@ public extension DaySolver {
 	}
 }
 
-public extension DaySolver {
-	func parseExpectedResults(rawString: String) async -> ExpectedResults {
-		let lines = rawString.allLines()
-
-		guard lines.count == 2 else {
-			preconditionFailure()
+func parseExpectedResults(rawString: String) async -> ExpectedResults {
+	ExpectedResults(
+		parts: rawString.allLines().map { line in
+			if line.count >= 2, String(line.first!) == "\"", String(line.last!) == "\"" {
+				String(line[1 ..< line.count - 1])
+			} else {
+				Int(line) ?? line
+			}
 		}
-
-		let result1: any Equatable
-		let result2: any Equatable
-
-		if lines[0].count >= 2, String(lines[0].first!) == "\"", String(lines[0].last!) == "\"" {
-			result1 = String(lines[0][1 ..< lines[0].count - 1])
-		} else {
-			result1 = Int(lines[0]) ?? lines[0]
-		}
-
-		if lines[1].count >= 2, String(lines[1].first!) == "\"", String(lines[1].last!) == "\"" {
-			result2 = String(lines[1][1 ..< lines[1].count - 1])
-		} else {
-			result2 = Int(lines[1]) ?? lines[1]
-		}
-
-		return ExpectedResults(part1: result1, part2: result2)
-	}
+	)
 }
 
 public struct ExpectedResults {
-	let part1: any Equatable
-	let part2: any Equatable
+	let parts: [any Equatable]
 }
 
 private func == (_ lhs: some Equatable, _ rhs: some Equatable) -> Bool {
@@ -102,58 +104,53 @@ private func != (_ lhs: some Equatable, _ rhs: some Equatable) -> Bool {
 }
 
 private struct Result {
-	let part1Correct: Bool
-	let part2Correct: Bool
+	let partsCorrect: [Bool]
 }
 
-private func solveDay(_ solver: some DaySolver, year: Int, bundle: Bundle) async -> Result {
+private func solveMultiPartDay(_ solver: some DaySolver, year: Int, bundle: Bundle, customInputReader: CustomInputReader? = nil) async -> Result {
 	print("Solving day \(solver.dayNumber):")
 
 	print(" - parsing input and expected results")
 
-	let input = await solver.parseInput(rawString: getRawInputStringFor(day: solver.dayNumber, year: year, in: bundle))
-	let expectedResults = await solver.parseExpectedResults(rawString: getRawExpectedResultsStringFor(day: solver.dayNumber, year: year, in: bundle))
+	let rawString: String
 
-	// part 1
-	var startTime = mach_absolute_time()
-
-	let result1 = await solver.solvePart1(withInput: input)
-
-	var formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
-
-	let correctResult1 = expectedResults.part1 == result1
-
-	print(" - part 1:")
-	print("   -> result: \(result1) \(correctResult1 ? "✅" : "⛔")")
-
-	if !correctResult1 {
-		print("   -> expected result is: \(expectedResults.part1)")
+	if let customInputReader {
+		rawString = customInputReader(solver, bundle)
+	} else {
+		rawString = getRawInputStringFor(day: solver.dayNumber, year: year, in: bundle)
 	}
 
-	print("   -> duration: \(formattedDuration) seconds")
+	let input = await solver.parseInput(rawString: rawString)
+	let expectedResults = await parseExpectedResults(rawString: getRawExpectedResultsStringFor(day: solver.dayNumber, year: year, in: bundle))
 
-	// part 2
-	startTime = mach_absolute_time()
+	var partsCorrect: [Bool] = []
 
-	let result2 = await solver.solvePart2(withInput: input)
+	for partIndex in 1 ... solver.numberOfParts {
+		guard let expectedResult = expectedResults.parts[safe: partIndex - 1] else {
+			preconditionFailure("Missing expected result for part \(partIndex)")
+		}
 
-	formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
+		let startTime = mach_absolute_time()
 
-	let correctResult2 = expectedResults.part2 == result2
+		let result = await solver.solvePart(partIndex, withInput: input)
 
-	print(" - part 2:")
-	print("   -> result: \(result2) \(correctResult2 ? "✅" : "⛔")")
+		let formattedDuration = String(format: "%.5f", getSecondsFromMachTimer(duration: mach_absolute_time() - startTime))
 
-	if !correctResult2 {
-		print(" -> ⛔️ part 2 expected result is: \(expectedResults.part2)")
+		let correctResult = result == expectedResult
+
+		print(" - part 1:")
+		print("   -> result: \(result) \(correctResult ? "✅" : "⛔")")
+
+		if !correctResult {
+			print("   -> expected result is: \(expectedResult)")
+		}
+
+		partsCorrect.append(correctResult)
+
+		print("   -> duration: \(formattedDuration) seconds")
 	}
 
-	print("   -> duration: \(formattedDuration) seconds")
-
-	return .init(
-		part1Correct: correctResult1,
-		part2Correct: correctResult2
-	)
+	return Result(partsCorrect: partsCorrect)
 }
 
 public func solveYear(_ yearSolver: YearSolver, dayNumber: Int? = nil, bundle: Bundle) async {
@@ -173,7 +170,7 @@ public func solveYear(_ yearSolver: YearSolver, dayNumber: Int? = nil, bundle: B
 
 		timesPerDay[daySolver.dayNumber] = getSecondsFromMachTimer(duration: mach_absolute_time() - dayStartTime)
 
-		if result.part1Correct == false || result.part2Correct == false {
+		if result.partsCorrect.contains(false) {
 			incorrectDays.append(daySolver.dayNumber)
 		}
 	}

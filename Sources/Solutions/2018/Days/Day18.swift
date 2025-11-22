@@ -113,6 +113,6 @@ final class Day18Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(grid: rawString.parseGrid2D())
+		.init(grid: rawString.parseGrid2D())
 	}
 }

@@ -147,7 +147,7 @@ final class Day24Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(hailstones: rawString.allLines().map { line in
+		.init(hailstones: rawString.allLines().map { line in
 			let components = line.components(separatedBy: " @ ")
 
 			return .init(

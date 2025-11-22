@@ -144,7 +144,7 @@ final class Day14Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(paths: rawString.allLines().map { line in
+		.init(paths: rawString.allLines().map { line in
 			Path(points: line.components(separatedBy: " -> ").map { components in
 				Point2D(commaSeparatedString: components)
 			})

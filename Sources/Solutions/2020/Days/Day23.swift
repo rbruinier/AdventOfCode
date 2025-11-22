@@ -83,6 +83,6 @@ final class Day23Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(cups: [2, 8, 4, 5, 7, 3, 9, 6, 1])
+		.init(cups: [2, 8, 4, 5, 7, 3, 9, 6, 1])
 	}
 }

@@ -82,7 +82,7 @@ final class Day15Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(sensors: rawString.allLines().map { line in
+		.init(sensors: rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: #"Sensor at x=(-?[0-9]*), y=(-?[0-9]*): closest beacon is at x=(-?[0-9]*), y=(-?[0-9]*)"#)!
 
 			return Sensor(position: .init(x: Int(values[0])!, y: Int(values[1])!), closestBeaconPosition: .init(x: Int(values[2])!, y: Int(values[3])!))

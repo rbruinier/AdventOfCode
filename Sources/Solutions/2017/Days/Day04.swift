@@ -45,6 +45,6 @@ final class Day04Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(passphrases: rawString.allLines())
+		.init(passphrases: rawString.allLines())
 	}
 }

@@ -3,17 +3,6 @@ import Tools
 
 print("Examples 🎄")
 
-extension DaySolver {
-	var year: Int {
-		0
-	}
-}
-
-let days: [any DaySolver] = [
-	GridExample(),
-	ShortestPathInGridExample()
-]
-
 func customLoader(day: any DaySolver, bundle: Bundle) -> String {
 	guard let customFilename = day.customFilename else {
 		fatalError()
@@ -21,7 +10,15 @@ func customLoader(day: any DaySolver, bundle: Bundle) -> String {
 
 	let fileURL = bundle.url(forResource: customFilename, withExtension: "txt", subdirectory: "Input")!
 
-	return try! String(contentsOf: fileURL)
+	return try! String(contentsOf: fileURL, encoding: .utf8)
 }
 
-await solveDays(days, bundle: .module, customInputLoader: customLoader)
+import Foundation
+import Tools
+
+var yearSolver = YearSolver(year: 2025)
+
+yearSolver.addSolver(GridExample(), customInputReader: customLoader)
+yearSolver.addSolver(ShortestPathInGridExample(), customInputReader: customLoader)
+
+await solveYear(yearSolver, dayNumber: nil, bundle: .module)

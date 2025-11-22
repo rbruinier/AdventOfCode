@@ -46,7 +46,7 @@ final class Day03Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(claims: rawString.allLines().map { line in
+		.init(claims: rawString.allLines().map { line in
 			let lineComponents = line.components(separatedBy: " @ ")
 
 			let id = Int(lineComponents[0].replacingOccurrences(of: "#", with: ""))!

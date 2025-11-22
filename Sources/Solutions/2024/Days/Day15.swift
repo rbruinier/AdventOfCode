@@ -77,18 +77,18 @@ final class Day15Solver: DaySolver {
 		boxes.map { $0.y * 100 + $0.x }.reduce(0, +)
 	}
 
-	private func verticallyMovableBoxIds(at point: Point2D, direction: Direction, boxes: [Int: Box], walls: Set<Point2D>) -> Set<Int> {
+	private func verticallyMovableBoxIDs(at point: Point2D, direction: Direction, boxes: [Int: Box], walls: Set<Point2D>) -> Set<Int> {
 		guard let box = boxAt(point, boxes: boxes) else {
 			return []
 		}
 
-		var boxIdsToCheck: Deque<Int> = [box.id]
-		var movedBoxesIds: Set<Int> = []
+		var boxIDsToCheck: Deque<Int> = [box.id]
+		var movedBoxesIDs: Set<Int> = []
 
-		while let boxIdToCheck = boxIdsToCheck.popFirst() {
-			let boxToCheck = boxes[boxIdToCheck]!
+		while let boxIDToCheck = boxIDsToCheck.popFirst() {
+			let boxToCheck = boxes[boxIDToCheck]!
 
-			movedBoxesIds.insert(boxToCheck.id)
+			movedBoxesIDs.insert(boxToCheck.id)
 
 			for x in boxToCheck.horizontalRange {
 				let boxPoint = Point2D(x: x, y: boxToCheck.position.moved(to: direction).y)
@@ -97,27 +97,27 @@ final class Day15Solver: DaySolver {
 					return []
 				}
 
-				if let nextBox = boxAt(boxPoint, boxes: boxes), !movedBoxesIds.contains(nextBox.id) {
-					boxIdsToCheck.append(nextBox.id)
+				if let nextBox = boxAt(boxPoint, boxes: boxes), !movedBoxesIDs.contains(nextBox.id) {
+					boxIDsToCheck.append(nextBox.id)
 				}
 			}
 		}
 
-		return movedBoxesIds
+		return movedBoxesIDs
 	}
 
-	private func horizontallyMovableBoxIds(at point: Point2D, direction: Direction, boxes: [Int: Box], walls: Set<Point2D>) -> Set<Int> {
+	private func horizontallyMovableBoxIDs(at point: Point2D, direction: Direction, boxes: [Int: Box], walls: Set<Point2D>) -> Set<Int> {
 		guard let box = boxAt(point, boxes: boxes) else {
 			return []
 		}
 
-		var boxIdsToCheck: Deque<Int> = [box.id]
-		var movedBoxesIds: Set<Int> = []
+		var boxIDsToCheck: Deque<Int> = [box.id]
+		var movedBoxesIDs: Set<Int> = []
 
-		while let boxIdToCheck = boxIdsToCheck.popFirst() {
-			let boxToCheck = boxes[boxIdToCheck]!
+		while let boxIDToCheck = boxIDsToCheck.popFirst() {
+			let boxToCheck = boxes[boxIDToCheck]!
 
-			movedBoxesIds.insert(boxToCheck.id)
+			movedBoxesIDs.insert(boxToCheck.id)
 
 			var boxPoint = Point2D(x: boxToCheck.position.moved(to: direction).x, y: boxToCheck.position.y)
 
@@ -129,12 +129,12 @@ final class Day15Solver: DaySolver {
 				return []
 			}
 
-			if let nextBox = boxAt(boxPoint, boxes: boxes), !movedBoxesIds.contains(nextBox.id) {
-				boxIdsToCheck.append(nextBox.id)
+			if let nextBox = boxAt(boxPoint, boxes: boxes), !movedBoxesIDs.contains(nextBox.id) {
+				boxIDsToCheck.append(nextBox.id)
 			}
 		}
 
-		return movedBoxesIds
+		return movedBoxesIDs
 	}
 
 	private func solveFor(startPosition: Point2D, boxes originalBoxes: [Int: Box], walls: Set<Point2D>, instructions: [Direction]) -> Int {
@@ -152,13 +152,13 @@ final class Day15Solver: DaySolver {
 				let boxesToMove: Set<Int>
 
 				if instruction.isHorizontal {
-					boxesToMove = horizontallyMovableBoxIds(at: nextPosition, direction: instruction, boxes: boxes, walls: walls)
+					boxesToMove = horizontallyMovableBoxIDs(at: nextPosition, direction: instruction, boxes: boxes, walls: walls)
 				} else {
-					boxesToMove = verticallyMovableBoxIds(at: nextPosition, direction: instruction, boxes: boxes, walls: walls)
+					boxesToMove = verticallyMovableBoxIDs(at: nextPosition, direction: instruction, boxes: boxes, walls: walls)
 				}
 
-				for boxIdToMove in boxesToMove {
-					boxes[boxIdToMove]!.position.move(to: instruction)
+				for boxIDToMove in boxesToMove {
+					boxes[boxIDToMove]!.position.move(to: instruction)
 				}
 
 				if boxesToMove.isNotEmpty {

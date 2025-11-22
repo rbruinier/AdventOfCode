@@ -320,7 +320,7 @@ final class Day19Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(blueprints: rawString.allLines().map { line in
+		.init(blueprints: rawString.allLines().map { line in
 			let values = line.getCapturedValues(pattern: #"Blueprint ([0-9]*): Each ore robot costs ([0-9]*) ore. Each clay robot costs ([0-9]*) ore. Each obsidian robot costs ([0-9]*) ore and ([0-9]*) clay. Each geode robot costs ([0-9]*) ore and ([0-9]*) obsidian."#)!
 
 			return Blueprint(

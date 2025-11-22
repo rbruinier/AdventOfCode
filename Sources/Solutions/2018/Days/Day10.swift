@@ -79,7 +79,7 @@ final class Day10Solver: DaySolver {
 
 	func parseInput(rawString: String) -> Input {
 		// position=<-30822, -30933> velocity=< 3,  3>
-		return .init(lights: rawString.allLines().map { line in
+		.init(lights: rawString.allLines().map { line in
 			let positionComponents = line[10 ..< 24].components(separatedBy: ", ").map { $0.trimmingCharacters(in: .whitespaces) }
 			let velocityComponents = line[36 ..< 42].components(separatedBy: ", ").map { $0.trimmingCharacters(in: .whitespaces) }
 

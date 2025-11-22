@@ -147,7 +147,7 @@ final class Day22Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(bricks: rawString.allLines().enumerated().map { line in
+		.init(bricks: rawString.allLines().enumerated().map { line in
 			let components = line.element.components(separatedBy: "~")
 
 			return Brick(

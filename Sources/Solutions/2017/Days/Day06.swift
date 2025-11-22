@@ -64,6 +64,6 @@ final class Day06Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(banks: rawString.allLines().first!.components(separatedBy: "\t").map { Int($0)! })
+		.init(banks: rawString.allLines().first!.components(separatedBy: "\t").map { Int($0)! })
 	}
 }

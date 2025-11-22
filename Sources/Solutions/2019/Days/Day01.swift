@@ -39,6 +39,6 @@ final class Day01Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		return .init(masses: rawString.allLines().map { Int($0)! })
+		.init(masses: rawString.allLines().map { Int($0)! })
 	}
 }
