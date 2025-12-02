@@ -138,7 +138,7 @@ private func solveMultiPartDay(_ solver: some DaySolver, year: Int, bundle: Bund
 
 		let correctResult = result == expectedResult
 
-		print(" - part 1:")
+		print(" - part \(partIndex):")
 		print("   -> result: \(result) \(correctResult ? "✅" : "⛔")")
 
 		if !correctResult {

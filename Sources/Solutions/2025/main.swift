@@ -3,8 +3,8 @@ import Tools
 
 var yearSolver = YearSolver(year: 2025)
 
-yearSolver.addSolver(Day01Solver())
-//yearSolver.addSolver(Day02Solver())
+//yearSolver.addSolver(Day01Solver())
+yearSolver.addSolver(Day02Solver())
 //yearSolver.addSolver(Day03Solver())
 //yearSolver.addSolver(Day04Solver())
 //yearSolver.addSolver(Day05Solver())
