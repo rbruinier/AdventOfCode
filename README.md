@@ -4,7 +4,7 @@ Why not join the fun 🎄
 
 Links to the solutions:
 
- * [2024](Sources/Solutions/2025/Days): work in progress
+ * [2025](Sources/Solutions/2025/Days): work in progress
  * [2024](Sources/Solutions/2024/Days): 50 ⭐️ finished on 25-12-2023 (runs in 1.69 seconds)
  * [2023](Sources/Solutions/2023/Days): 50 ⭐️ finished on 25-12-2023 (runs in 3.13 seconds)
  * [2022](Sources/Solutions/2022/Days): 50 ⭐️ finished on 25-12-2022 (runs in 55.55 seconds)
