@@ -18,15 +18,33 @@ public struct Grid2D<Tile: Hashable & Sendable>: Hashable, Sendable {
 	}
 
 	public subscript(y: Int, x: Int) -> Tile {
-		tiles[y][x]
+		get {
+			tiles[y][x]
+		}
+		set {
+			tiles[y][x] = newValue
+		}
 	}
 
 	public subscript(point: Point2D) -> Tile {
-		tiles[point.y][point.x]
+		get {
+			tiles[point.y][point.x]
+		}
+		set {
+			tiles[point.y][point.x] = newValue
+		}
 	}
 
 	public subscript(safe point: Point2D) -> Tile? {
 		tiles[safe: point.y]?[safe: point.x]
+	}
+
+	public func safeNeighbors(at position: Point2D, includingDiagonals: Bool = false) -> [Point2D] {
+		let neighbors: [Point2D] = position.neighbors(includingDiagonals: includingDiagonals)
+
+		return neighbors.filter {
+			isSafe(position: $0)
+		}
 	}
 }
 

@@ -2,22 +2,77 @@ import Foundation
 import Tools
 
 final class Day04Solver: DaySolver {
-    let dayNumber: Int = 4
+	let dayNumber: Int = 4
 
-    private var input: Input!
+	private var input: Input!
 
-    struct Input {
-    }
+	enum Tile: String, Hashable, CustomStringConvertible {
+		case empty = "."
+		case roll = "@"
 
-    func solvePart1(withInput input: Input) -> Int {
-        return 0
-    }
+		var description: String {
+			rawValue
+		}
+	}
 
-    func solvePart2(withInput input: Input) -> Int {
-        return 0
-    }
+	typealias Grid = Grid2D<Tile>
 
-    func parseInput(rawString: String) -> Input {
-        return .init()
-    }
+	struct Input {
+		let grid: Grid
+	}
+
+	private func removeRolls(in grid: Grid) -> (count: Int, newGrid: Grid) {
+		var newGrid = grid
+		var sum = 0
+
+		for y in 0 ..< grid.dimensions.height {
+			for x in 0 ..< grid.dimensions.width {
+				let position = Point2D(x: x, y: y)
+
+				guard grid[position] == .roll else {
+					continue
+				}
+
+				let nrOfRolls = grid
+					.safeNeighbors(at: position, includingDiagonals: true)
+					.count(where: { grid[$0] == .roll })
+
+				if nrOfRolls < 4 {
+					newGrid[position] = .empty
+
+					sum += 1
+				}
+			}
+		}
+
+		return (count: sum, newGrid: newGrid)
+	}
+
+	func solvePart1(withInput input: Input) -> Int {
+		removeRolls(in: input.grid).count
+	}
+
+	func solvePart2(withInput input: Input) -> Int {
+		var grid = input.grid
+
+		var sum = 0
+
+		while true {
+			let (count, newGrid) = removeRolls(in: grid)
+
+			if newGrid == grid {
+				break
+			}
+
+			sum += count
+
+			grid = newGrid
+		}
+
+		return sum
+	}
+
+	func parseInput(rawString: String) -> Input {
+		.init(grid: rawString.parseGrid2D())
+	}
 }
