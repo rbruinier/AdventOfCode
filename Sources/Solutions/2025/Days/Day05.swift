@@ -22,30 +22,16 @@ final class Day05Solver: DaySolver {
 	func solvePart2(withInput input: Input) -> Int {
 		var combinedRanges: [ClosedRange<Int>] = []
 
-		for range in input.freshRanges {
-			// keep them sorted by lowerbound
-			combinedRanges.sort(by: {
-				$0.lowerBound < $1.lowerBound
-			})
+		let sortedRanges = input.freshRanges.sorted(by: {
+			$0.lowerBound < $1.lowerBound
+		})
 
-			// all ranges that are contained within this range should be removed first
-			combinedRanges.removeAll(where: { $0.lowerBound > range.lowerBound && $0.upperBound < range.upperBound })
-
-			let lowerBoundIndex = combinedRanges.firstIndex(where: { $0.contains(range.lowerBound) })
-			let upperBoundIndex = combinedRanges.firstIndex(where: { $0.contains(range.upperBound) })
-
-			switch (lowerBoundIndex, upperBoundIndex) {
-			case (.none, .none):
+		for range in sortedRanges {
+			if let last = combinedRanges.last, range.lowerBound <= last.upperBound {
+				combinedRanges.removeLast()
+				combinedRanges.append(last.lowerBound ... max(last.upperBound, range.upperBound))
+			} else {
 				combinedRanges.append(range)
-			case (.some(let lowerBoundIndex), .none):
-				combinedRanges[lowerBoundIndex] = combinedRanges[lowerBoundIndex].lowerBound ... range.upperBound
-			case (.none, .some(let upperBoundIndex)):
-				combinedRanges[upperBoundIndex] = range.lowerBound ... combinedRanges[upperBoundIndex].upperBound
-			case (.some(let lowerBoundIndex), .some(let upperBoundIndex)):
-				if lowerBoundIndex != upperBoundIndex {
-					combinedRanges[lowerBoundIndex] = combinedRanges[lowerBoundIndex].lowerBound ... combinedRanges[upperBoundIndex].upperBound
-					combinedRanges.remove(at: upperBoundIndex)
-				}
 			}
 		}
 
