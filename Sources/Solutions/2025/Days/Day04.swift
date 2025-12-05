@@ -60,7 +60,7 @@ final class Day04Solver: DaySolver {
 		while true {
 			let (count, newGrid) = removeRolls(in: grid)
 
-			if newGrid == grid {
+			if count == 0 {
 				break
 			}
 
