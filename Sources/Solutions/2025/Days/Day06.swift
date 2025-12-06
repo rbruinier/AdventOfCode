@@ -70,42 +70,20 @@ final class Day06Solver: DaySolver {
 
 		var equations: [Equation] = []
 
-		var cursorPosition = 0
+		var currentOperands: [Int] = []
 
-		while cursorPosition < maxLength {
-			guard let operation = Operation(rawValue: operationsLine[cursorPosition]) else {
-				break
+		for cursorIndex in (0 ..< maxLength).reversed() {
+			let operandAsString = operandLines.map { $0[cursorIndex] }.filter { $0 != " " }.joined()
+
+			if let operand = Int(operandAsString) {
+				currentOperands.append(operand)
 			}
 
-			let previousCursorPosition = cursorPosition
+			if let operation = Operation(rawValue: operationsLine[cursorIndex]) {
+				equations.append(Equation(operands: currentOperands, operation: operation))
 
-			cursorPosition += 1
-
-			while cursorPosition < maxLength - 1, operationsLine[cursorPosition] == " " {
-				cursorPosition += 1
+				currentOperands = []
 			}
-
-			var nrOfDigits = cursorPosition - previousCursorPosition - 1
-
-			if cursorPosition == maxLength - 1 {
-				nrOfDigits += 2
-			}
-
-			var operands: [Int] = []
-
-			for digitIndex in 0 ..< nrOfDigits {
-				var combinedDigits = ""
-
-				for operandLine in operandLines {
-					if operandLine[previousCursorPosition + digitIndex] != " " {
-						combinedDigits += operandLine[previousCursorPosition + digitIndex]
-					}
-				}
-
-				operands.append(Int(combinedDigits)!)
-			}
-
-			equations.append(Equation(operands: operands, operation: operation))
 		}
 
 		return equations
