@@ -22,10 +22,6 @@ final class Day07Solver: DaySolver {
 		let grid: Grid
 	}
 
-	private struct BeamPath: Hashable {
-		let position: Point2D
-	}
-
 	private func solveBeam(from position: Point2D, grid: Grid, memoization: inout [Int: Int]) -> Int {
 		let hash = position.hashValue
 
