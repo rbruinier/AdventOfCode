@@ -17,6 +17,18 @@ public struct Grid2D<Tile: Hashable & Sendable>: Hashable, Sendable {
 		(0 ..< dimensions.height).contains(position.y) && (0 ..< dimensions.width).contains(position.x)
 	}
 
+	public func findFirst(tile: Tile) -> Point2D? {
+		for y in 0 ..< dimensions.height {
+			for x in 0 ..< dimensions.width {
+				if tiles[y][x] == tile {
+					return Point2D(x: x, y: y)
+				}
+			}
+		}
+
+		return nil
+	}
+
 	public subscript(y: Int, x: Int) -> Tile {
 		get {
 			tiles[y][x]
