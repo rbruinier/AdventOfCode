@@ -7,12 +7,7 @@ final class Day08Solver: DaySolver {
 	private var input: Input!
 
 	struct Input {
-		let boxes: [Box]
-	}
-
-	struct Box {
-		let id: Int
-		let position: Point3D
+		let boxes: [Point3D]
 	}
 
 	struct Line: Hashable {
@@ -27,20 +22,19 @@ final class Day08Solver: DaySolver {
 	/// we calculate this in part 1 and reuse it in part 2
 	private var cachedSortedConnections: [Line] = []
 
-	private func allConnectionsSortedByDistance(in boxes: [Box]) -> [Line] {
-		var distances: [Line: Int] = [:]
+	private func allConnectionsSortedByDistance(in boxes: [Point3D]) -> [Line] {
+		let numberOfEntries = boxes.count * (boxes.count - 1) / 2
+		
+		var distances: [Line: Int] = Dictionary(minimumCapacity: numberOfEntries)
 
 		for i in 0 ..< boxes.count {
 			for j in i + 1 ..< boxes.count {
-				let a = boxes[i]
-				let b = boxes[j]
-
-				let delta = b.position - a.position
+				let delta = boxes[j] - boxes[i]
 
 				// no sqrt as we don't need the actual distance anywhere, just relative to other connections
 				let distance = (delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z)
 
-				distances[Line(a: a.id, b: b.id)] = distance
+				distances[Line(a: i, b: j)] = distance
 			}
 		}
 
@@ -76,16 +70,11 @@ final class Day08Solver: DaySolver {
 	func solvePart1(withInput input: Input) -> Int {
 		cachedSortedConnections = allConnectionsSortedByDistance(in: input.boxes)
 
-		var sortedConnections = cachedSortedConnections
+		var sortedConnections = Array(cachedSortedConnections.suffix(1000))
 
 		var circuits: [Circuit] = []
 
-		var counter = 0
-		while sortedConnections.isNotEmpty, counter < 1000 {
-			defer {
-				counter += 1
-			}
-
+		while sortedConnections.isNotEmpty {
 			solveNextConnection(with: &sortedConnections, circuits: &circuits)
 		}
 
@@ -108,7 +97,7 @@ final class Day08Solver: DaySolver {
 				let a = input.boxes[shortest.a]
 				let b = input.boxes[shortest.b]
 
-				return a.position.x * b.position.x
+				return a.x * b.x
 			}
 		}
 
@@ -116,12 +105,8 @@ final class Day08Solver: DaySolver {
 	}
 
 	func parseInput(rawString: String) -> Input {
-		let positions: [Point3D] = rawString.allLines().map { line in
+		let boxes: [Point3D] = rawString.allLines().map { line in
 			Point3D(commaSeparatedString: line)
-		}
-
-		let boxes: [Box] = positions.enumerated().map {
-			Box(id: $0, position: $1)
 		}
 
 		return .init(boxes: boxes)
