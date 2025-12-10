@@ -22,89 +22,93 @@ final class Day10Solver: DaySolver {
 		let instructions: [Instructions]
 	}
 
-	func solvePart1(withInput input: Input) -> Int {
-		var sum = 0
+	func solvePart1(withInput input: Input) async -> Int {
+		await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
+			for instructions in input.instructions {
+				taskGroup.addTask {
+					let desiredState = instructions.lights
 
-		for instructions in input.instructions {
-			let desiredState = instructions.lights
-
-			struct State {
-				let lights: [Bool]
-				var numberOfButtonPresses: Int
-			}
-
-			// BFS
-			var queue: Deque<State> = [State(lights: [Bool](repeating: false, count: instructions.numberOfLights), numberOfButtonPresses: 0)]
-
-			var lowestNumberOfButtonPresses = Int.max
-
-			var hashCache: [Int: Int] = [:]
-
-			while let state = queue.popFirst() {
-				for button in instructions.buttons {
-					var lights: [Bool] = state.lights
-
-					for lightIndex in button {
-						lights[lightIndex].toggle()
+					struct State {
+						let lights: [Bool]
+						var numberOfButtonPresses: Int
 					}
 
-					let hash = lights.hashValue
+					// BFS
+					var queue: Deque<State> = [State(lights: [Bool](repeating: false, count: instructions.numberOfLights), numberOfButtonPresses: 0)]
 
-					let newState = State(lights: lights, numberOfButtonPresses: state.numberOfButtonPresses + 1)
+					var lowestNumberOfButtonPresses = Int.max
 
-					if let existingValue = hashCache[hash], newState.numberOfButtonPresses >= existingValue {
-						continue
-					}
+					var hashCache: [Int: Int] = [:]
 
-					hashCache[hash] = newState.numberOfButtonPresses
+					while let state = queue.popFirst() {
+						for button in instructions.buttons {
+							var lights: [Bool] = state.lights
 
-					if lights == desiredState {
-						if newState.numberOfButtonPresses < lowestNumberOfButtonPresses {
-							lowestNumberOfButtonPresses = newState.numberOfButtonPresses
+							for lightIndex in button {
+								lights[lightIndex].toggle()
+							}
+
+							let hash = lights.hashValue
+
+							let newState = State(lights: lights, numberOfButtonPresses: state.numberOfButtonPresses + 1)
+
+							if let existingValue = hashCache[hash], newState.numberOfButtonPresses >= existingValue {
+								continue
+							}
+
+							hashCache[hash] = newState.numberOfButtonPresses
+
+							if lights == desiredState {
+								if newState.numberOfButtonPresses < lowestNumberOfButtonPresses {
+									lowestNumberOfButtonPresses = newState.numberOfButtonPresses
+								}
+							} else {
+								if newState.lights.count >= lowestNumberOfButtonPresses {
+									continue
+								}
+
+								queue.append(newState)
+							}
 						}
-					} else {
-						if newState.lights.count >= lowestNumberOfButtonPresses {
-							continue
-						}
-
-						queue.append(newState)
 					}
+
+					return lowestNumberOfButtonPresses
 				}
 			}
 
-			sum += lowestNumberOfButtonPresses
+			return await taskGroup.reduce(into: 0) { $0 += $1 }
 		}
-
-		return sum
 	}
 
-	func solvePart2(withInput input: Input) -> Int {
-		var sum = 0
+	func solvePart2(withInput input: Input) async -> Int {
+		await withTaskGroup(of: Int.self, returning: Int.self) { taskGroup in
+			for instructions in input.instructions {
+				taskGroup.addTask {
+					// Build the matrix (each row is a counter, each column is a button)
+					// matrix[counter][button] = 1 if button increments that counter, else 0
+					// Note: The ILP solver is written by Claude Code
+					var matrix: [[Int]] = Array(
+						repeating: Array(repeating: 0, count: instructions.buttons.count),
+						count: instructions.joltage.count
+					)
 
-		for instructions in input.instructions {
-			// Build the matrix (each row is a counter, each column is a button)
-			// matrix[counter][button] = 1 if button increments that counter, else 0
-			// Note: The ILP solver is written by Claude Code
-			var matrix: [[Int]] = Array(
-				repeating: Array(repeating: 0, count: instructions.buttons.count),
-				count: instructions.joltage.count
-			)
+					for (buttonIndex, button) in instructions.buttons.enumerated() {
+						for counterIndex in button {
+							matrix[counterIndex][buttonIndex] = 1
+						}
+					}
 
-			for (buttonIndex, button) in instructions.buttons.enumerated() {
-				for counterIndex in button {
-					matrix[counterIndex][buttonIndex] = 1
+					// Solve using ILP solver
+					guard let solution = ILPSolver.solve(matrix: matrix, targets: instructions.joltage) else {
+						preconditionFailure()
+					}
+
+					return solution.reduce(0, +)
 				}
 			}
 
-			// Solve using ILP solver
-			guard let solution = ILPSolver.solve(matrix: matrix, targets: instructions.joltage) else {
-				preconditionFailure()
-			}
-
-			sum += solution.reduce(0, +)
+			return await taskGroup.reduce(into: 0) { $0 += $1 }
 		}
-
-		return sum
 	}
 
 	func parseInput(rawString: String) -> Input {
