@@ -15,58 +15,28 @@ final class Day11Solver: DaySolver {
 		let nodes: [Node]
 	}
 
-	private let fftHash = "fft".hashValue
-	private let dacHash = "dac".hashValue
-
-	private func countPathsIn(
-		nodes: [Int: Node],
-		currentNode: Int,
-		endNode: Int,
-		passedDAC: Bool,
-		passedFFT: Bool,
-		needsToPassIntermediates: Bool,
-		memoization: inout [Int: Int]
-	)
-	-> Int {
-		struct State: Hashable {
-			let currentNode: Int
-			let passedDAC: Bool
-			let passedFFT: Bool
-		}
-
-		let stateHash = State(
-			currentNode: currentNode,
-			passedDAC: passedDAC,
-			passedFFT: passedFFT
-		).hashValue
+	private func countPathsIn(nodes: [Int: Node], currentNode: Int, endNode: Int, memoization: inout [Int: Int]) -> Int {
+		let stateHash = currentNode.hashValue
 
 		if let knownState = memoization[stateHash] {
 			return knownState
 		}
 
 		if currentNode == endNode {
-			if needsToPassIntermediates {
-				return (passedDAC && passedFFT) ? 1 : 0
-			} else {
-				return 1
-			}
+			return 1
 		}
 
-		let node = nodes[currentNode]!
+		guard let node = nodes[currentNode] else {
+			return 0
+		}
 
 		var sum = 0
 
 		for output in node.outputs {
-			let passedDac = passedDAC || output == dacHash
-			let passedFft = passedFFT || output == fftHash
-
 			let result = countPathsIn(
 				nodes: nodes,
 				currentNode: output,
 				endNode: endNode,
-				passedDAC: passedDac,
-				passedFFT: passedFft,
-				needsToPassIntermediates: needsToPassIntermediates,
 				memoization: &memoization
 			)
 
@@ -78,46 +48,49 @@ final class Day11Solver: DaySolver {
 		return sum
 	}
 
+	private func solveRoute(with path: [String], nodes: [Int: Node]) -> Int {
+		var memoization: [Int: Int] = [:]
+
+		var result = 1
+
+		for i in 0 ..< path.count - 1 {
+			memoization.removeAll()
+
+			let a = path[i]
+			let b = path[i + 1]
+
+			result *= countPathsIn(nodes: nodes, currentNode: a.hashValue, endNode: b.hashValue, memoization: &memoization)
+		}
+
+		return result
+	}
+
 	func solvePart1(withInput input: Input) -> Int {
-		let startNode = "you".hashValue
-		let endNode = "out".hashValue
+		let startNode = "you"
+		let endNode = "out"
 
 		let nodes = input.nodes.reduce(into: [Int: Node]()) { result, node in
 			result[node.id] = node
 		}
 
-		var memoization: [Int: Int] = [:]
-
-		return countPathsIn(
-			nodes: nodes,
-			currentNode: startNode,
-			endNode: endNode,
-			passedDAC: false,
-			passedFFT: false,
-			needsToPassIntermediates: false,
-			memoization: &memoization
-		)
+		return solveRoute(with: [startNode, endNode], nodes: nodes)
 	}
 
 	func solvePart2(withInput input: Input) -> Int {
-		let startNode = "svr".hashValue
-		let endNode = "out".hashValue
+		let startNode = "svr"
+		let endNode = "out"
+
+		let stop1 = "fft"
+		let stop2 = "dac"
 
 		let nodes = input.nodes.reduce(into: [Int: Node]()) { result, node in
 			result[node.id] = node
 		}
 
-		var memoization: [Int: Int] = [:]
+		let r1 = solveRoute(with: [startNode, stop1, stop2, endNode], nodes: nodes)
+		let r2 = solveRoute(with: [startNode, stop2, stop1, endNode], nodes: nodes)
 
-		return countPathsIn(
-			nodes: nodes,
-			currentNode: startNode,
-			endNode: endNode,
-			passedDAC: false,
-			passedFFT: false,
-			needsToPassIntermediates: true,
-			memoization: &memoization
-		)
+		return r1 + r2
 	}
 
 	func parseInput(rawString: String) -> Input {
