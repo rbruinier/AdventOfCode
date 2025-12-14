@@ -1,5 +1,15 @@
 import Foundation
 
+@inlinable
+public func min<T>(_ x: T?, _ y: T) -> T where T: Comparable {
+	if let x {
+		min(x, y)
+	} else {
+		y
+	}
+}
+
+@inlinable
 public func mod(_ a: Int, _ n: Int) -> Int {
 	let r = a % n
 
@@ -7,6 +17,7 @@ public func mod(_ a: Int, _ n: Int) -> Int {
 }
 
 public extension Int {
+	@inlinable
 	var sign: Int {
 		if self < 0 {
 			return -1
@@ -85,11 +96,11 @@ public enum Math {
 		a / greatestCommonFactor(a, b) * b
 	}
 
-	/// Finds the Least Common Multiple (LCM) for an array of integers.
-	///
-	///	The Least Common Multiple (LCM) is a mathematical concept that refers to the smallest positive integer that is divisible
-	/// by two or more numbers without leaving a remainder. It is also known as the Lowest Common Multiple or Smallest Common
-	/// Multiple.
+	// Finds the Least Common Multiple (LCM) for an array of integers.
+	//
+	//	The Least Common Multiple (LCM) is a mathematical concept that refers to the smallest positive integer that is divisible
+	// by two or more numbers without leaving a remainder. It is also known as the Lowest Common Multiple or Smallest Common
+	// Multiple.
 
 	/// - Parameters:
 	/// 	- values: An array of integers for which the LCM needs to be calculated.
