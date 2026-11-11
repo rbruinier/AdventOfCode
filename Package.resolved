@@ -1,5 +1,5 @@
 {
-  "originHash" : "af4957cb4d7275e42edd56ba04e75a4c61b134d6e3cdcb9f2caf0d1f8503eaf9",
+  "originHash" : "4536cf0aba7f7660cee57ba542302cc93ae9b6bc49d700e2eaa5151d05bbdfbb",
   "pins" : [
     {
       "identity" : "swift-bigint",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/mkrd/Swift-BigInt.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d09d98b6819e2860160d4f0a909ce7f4925d8926"
+        "revision" : "e3550843fed908ee3759ee37553cc8a83d9ea3b8"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "671108c96644956dddcd89dd59c203dcdb36cec7",
-        "version" : "1.1.4"
+        "revision" : "88754449ab766a739610b660e117762115fabc9c",
+        "version" : "1.7.6"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/SwiftFormat",
       "state" : {
-        "revision" : "cac06079ce883170ab44cb021faad298daeec2a5",
-        "version" : "0.52.10"
+        "revision" : "1bd6e843cfeb89b42088f663d9ae4c7ebcb3c143",
+        "version" : "0.64.6"
       }
     },
     {

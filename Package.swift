@@ -1,4 +1,4 @@
-// swift-tools-version:6.2
+// swift-tools-version:6.4
 
 import Foundation
 import PackageDescription
@@ -24,6 +24,7 @@ var package = Package(
 		.executable(name: "Solutions2023", targets: ["Solutions2023"]),
 		.executable(name: "Solutions2024", targets: ["Solutions2024"]),
 		.executable(name: "Solutions2025", targets: ["Solutions2025"]),
+		.executable(name: "Solutions2026", targets: ["Solutions2026"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0")),
@@ -222,6 +223,20 @@ var package = Package(
 			path: "Sources/Solutions/2025",
 			resources: [
 				.copy("../../Assets/2025"),
+			],
+			swiftSettings: [
+				.define("Ounchecked", .when(configuration: .release)),
+				.define("SWIFT_DISABLE_SAFETY_CHECKS", .when(configuration: .release)),
+			]
+		),
+		.executableTarget(
+			name: "Solutions2026",
+			dependencies: [
+				"Tools"
+			],
+			path: "Sources/Solutions/2026",
+			resources: [
+				.copy("../../Assets/2026"),
 			],
 			swiftSettings: [
 				.define("Ounchecked", .when(configuration: .release)),
